@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         strengthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mp.start();
+               // mp.start();
+                startActivity(new Intent(MainActivity.this, ExerciseActivity.class));
 
             }
         });
