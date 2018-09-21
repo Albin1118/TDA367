@@ -1,8 +1,12 @@
 package com.example.ziggy.trainingtracker;
 
 public class Exercise {
+
     private String name;
     private String description;
+    private int measure;
+    private String unit;
+    private boolean hasWeight;
 
 
     public Exercise(String name, String description) {
@@ -16,5 +20,9 @@ public class Exercise {
 
     public String getDescription() {
         return description;
+    }
+
+    public void edit(){
+
     }
 }
