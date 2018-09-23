@@ -7,14 +7,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CreateExerciseActivity extends AppCompatActivity {
+
+    public ArrayList<Exercise> customExercises = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_exercise);
 
-        Button createExerciseButton = (Button) findViewById(R.id.createExerciseButton);
+        final Button createExerciseButton = (Button) findViewById(R.id.createExerciseButton);
         final TextView testTextView = (TextView) findViewById(R.id.testTextView);
         final EditText exerciseNameEditText = (EditText) findViewById(R.id.exerciseNameEditText);
         final EditText exerciseDescriptionEditText = (EditText) findViewById(R.id.exerciseDescriptionEditText);
@@ -24,14 +28,17 @@ public class CreateExerciseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText name = (EditText) findViewById(R.id.exerciseNameEditText);
                 EditText description = (EditText) findViewById(R.id.exerciseDescriptionEditText);
-                Exercise e = new Exercise(name.getText().toString(), description.getText().toString());
+                createExercise(name.getText().toString(), description.getText().toString());
 
-                testTextView.setText(e.getName() + e.getDescription());
-                //finish();
+                testTextView.setText(customExercises.get(0).getName());
+                finish();
             }
         });
 
     }
 
+    public void createExercise(String name, String description) {
+        customExercises.add(new Exercise(name, description));
+    }
 
 }

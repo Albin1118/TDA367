@@ -8,6 +8,8 @@ import android.widget.Button;
 
 public class ExerciseActivity extends AppCompatActivity {
 
+    CreateExerciseActivity createExerciseActivity = new CreateExerciseActivity();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,7 @@ public class ExerciseActivity extends AppCompatActivity {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ExerciseActivity.this, CreateExerciseActivity.class));
+                startActivity(new Intent(ExerciseActivity.this, createExerciseActivity.getClass()));
             }
         });
 
