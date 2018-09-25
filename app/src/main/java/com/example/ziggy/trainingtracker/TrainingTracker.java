@@ -21,7 +21,7 @@ public class TrainingTracker {
     private void loadExercises() {
         System.out.println("loading exercises...");
         try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("app/src/main/res/raw/exercises.txt"), "UTF-8"))
+                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/res/raw/exercises.txt"), "UTF-8"))
         ){
             String line;
             while((line = reader.readLine()) != null) {
