@@ -18,7 +18,7 @@ public class StartPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_start_page, container, false);
-        strengthButton = (Button) view.findViewById(R.id.strengthButton);
+      /*  strengthButton = (Button) view.findViewById(R.id.strengthButton);
 
 
         strengthButton.setOnClickListener(new View.OnClickListener() {
@@ -26,7 +26,8 @@ public class StartPageFragment extends Fragment {
             public void onClick(View v) {
                 ((MainActivity)getActivity()).setViewPager(1);
             }
-        });
+        });*/
+
 
         return view;
     }
