@@ -1,35 +1,40 @@
 package com.example.ziggy.trainingtracker;
 
-import android.content.Intent;
-import android.media.MediaPlayer;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 
+
 public class MainActivity extends AppCompatActivity {
+
+    private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
+    private ViewPager mViewPager;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.rick);
 
-        Button strengthButton = (Button) findViewById(R.id.strengthButton);
+        mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(R.id.containter);
 
+        setupViewPager(mViewPager);
+    }
 
+    public void setupViewPager(ViewPager viewpager) {
+        SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new StartPageFragment());
+        adapter.addFragment(new ExercisesFragment());
+        adapter.addFragment(new CreateExerciseFragment());
+        viewpager.setAdapter(adapter);
+    }
 
-        strengthButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // mp.start();
-                startActivity(new Intent(MainActivity.this, ExerciseActivity.class));
-
-            }
-        });
-
-
-
+    public void setViewPager(int fragmentNumber){
+        mViewPager.setCurrentItem(fragmentNumber);
     }
 }
