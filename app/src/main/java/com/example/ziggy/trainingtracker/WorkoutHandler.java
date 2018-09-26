@@ -11,7 +11,7 @@ public class WorkoutHandler {
     }
 
     private void createWorkout(List<Exercise>exercises){
-        Workout example = new Workout("name", exercises);
+        Workout example = new Workout("name", "description", exercises);
         workouts.add(example);
     }
 
