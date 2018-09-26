@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
+    private MainViewModel mainViewModel;
 
 
 
