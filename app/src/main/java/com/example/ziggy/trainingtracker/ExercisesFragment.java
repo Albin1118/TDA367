@@ -38,7 +38,7 @@ public class ExercisesFragment extends Fragment {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).setViewPager(2);
+                ((MainActivity)getActivity()).setViewPager(4);
             }
         });
 

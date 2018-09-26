@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ExercisesFragment());
         adapter.addFragment(new SettingsFragment());
         adapter.addFragment(new CreateExerciseFragment());
+        adapter.addFragment(new WorkoutCreatorFragment());
         viewpager.setAdapter(adapter);
     }
 

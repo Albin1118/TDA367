@@ -46,15 +46,15 @@ public class WorkoutTabFragment extends Fragment {
         ArrayAdapter<Workout> adapter = new ArrayAdapter<Workout>(getContext(), android.R.layout.simple_list_item_1, workouts);
 
         workoutList.setAdapter(adapter);
+        //
 
 
-        /*
         addWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).setViewPager(0);
+                ((MainActivity)getActivity()).setViewPager(2);
             }
-        });*/
+        });
 
 
         return view;
