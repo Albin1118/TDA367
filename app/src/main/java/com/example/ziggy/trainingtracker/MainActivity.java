@@ -39,23 +39,29 @@ public class MainActivity extends AppCompatActivity {
             Fragment currentFragment = null;
 
             switch (menuItem.getItemId()){
-                case R.id.nav_exercises:
-                    currentFragment = new ExercisesFragment();
-                    break;
                 case R.id.nav_dashboard:
-                    currentFragment = new StartPageFragment();
+                    //currentFragment = new StartPageFragment();
+                    setViewPager(0);
                     break;
                 case R.id.nav_workouts:
-                    currentFragment = new WorkoutTabFragment();
+                    //currentFragment = new WorkoutTabFragment();
+                    setViewPager(1);
                     break;
-                /*case R.id.nav_settings:
-                    currentFragment = new StartPageFragment();
+                case R.id.nav_exercises:
+                    //currentFragment = new ExercisesFragment();
+                    setViewPager(2);
                     break;
-                    */
+
+                case R.id.nav_settings:
+                    //currentFragment = new StartPageFragment();
+                    setViewPager(3);
+                    break;
+
 
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    currentFragment).commit();
+
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+             //       currentFragment).commit();
             return true;
         }
     };
@@ -63,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
     public void setupViewPager(ViewPager viewpager) {
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new StartPageFragment());
+        adapter.addFragment(new WorkoutTabFragment());
         adapter.addFragment(new ExercisesFragment());
+        adapter.addFragment(new SettingsFragment());
         adapter.addFragment(new CreateExerciseFragment());
         viewpager.setAdapter(adapter);
     }
