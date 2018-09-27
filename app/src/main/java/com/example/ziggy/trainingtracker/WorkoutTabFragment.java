@@ -52,7 +52,7 @@ public class WorkoutTabFragment extends Fragment {
         addWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).setViewPager(2);
+                ((MainActivity)getActivity()).setViewPager(5);
             }
         });
 

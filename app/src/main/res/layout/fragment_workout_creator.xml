@@ -46,7 +46,6 @@
         tools:hint="Name" />
 
     <TextView
-        android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -62,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="85dp"
-        android:layout_marginStart="84dp"
+        android:layout_marginStart="85dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Short description"
@@ -72,7 +71,6 @@
         app:layout_constraintTop_toBottomOf="@+id/workoutNameEditText" />
 
     <TextView
-        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -85,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/workoutDescriptionEditText" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/createWorkoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"

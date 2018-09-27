@@ -24,7 +24,7 @@ public class WorkoutCreatorFragment extends Fragment {
 
         workoutNameEditText = (EditText) view.findViewById(R.id.workoutNameEditText);
         workoutDescriptionEditText = (EditText) view.findViewById(R.id.workoutDescriptionEditText);
-        createWorkoutButton = (Button) view.findViewById(R.id.addWorkoutButton);
+        createWorkoutButton = (Button) view.findViewById(R.id.createWorkoutButton);
 
         createWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
