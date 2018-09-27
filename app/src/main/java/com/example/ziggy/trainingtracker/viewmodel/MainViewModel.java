@@ -7,7 +7,7 @@ import com.example.ziggy.trainingtracker.model.TrainingTracker;
 public class MainViewModel extends ViewModel {
     private TrainingTracker trainingTracker;
 
-    MainViewModel() {
+    public MainViewModel() {
         trainingTracker = new TrainingTracker();
     }
 }

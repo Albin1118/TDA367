@@ -15,7 +15,7 @@ public class TrainingTracker {
     private Map<String, Exercise> exercises = new HashMap<>();
 
     public TrainingTracker() {
-        loadExercises();
+        //loadExercises();
     }
 
     private void loadExercises() {
