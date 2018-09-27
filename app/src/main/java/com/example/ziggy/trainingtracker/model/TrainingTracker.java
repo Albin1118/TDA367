@@ -1,4 +1,4 @@
-package com.example.ziggy.trainingtracker;
+package com.example.ziggy.trainingtracker.model;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

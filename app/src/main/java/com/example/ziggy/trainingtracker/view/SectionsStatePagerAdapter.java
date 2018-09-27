@@ -1,4 +1,4 @@
-package com.example.ziggy.trainingtracker;
+package com.example.ziggy.trainingtracker.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -1,4 +1,4 @@
-package com.example.ziggy.trainingtracker;
+package com.example.ziggy.trainingtracker.view;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,9 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
+import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
+import com.example.ziggy.trainingtracker.R;
 
 
 public class MainActivity extends AppCompatActivity {
