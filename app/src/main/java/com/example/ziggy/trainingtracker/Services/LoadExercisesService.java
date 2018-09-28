@@ -18,7 +18,6 @@ public class LoadExercisesService {
      * @return the list of exercises decoded from the text file
      */
     public List<Exercise> loadExercises() {
-        System.out.println("Loading exercises...");
         try (
             BufferedReader reader = new BufferedReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("res/raw/exercises.txt"), "UTF-8"))
         ){

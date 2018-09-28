@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
-    private MainViewModel mainViewModel;
+    MainViewModel viewModel;
 
 
 
@@ -32,7 +33,11 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         setupViewPager(mViewPager);
-        mainViewModel = new MainViewModel();
+        initDataBinding();
+    }
+
+    private void initDataBinding() {
+        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

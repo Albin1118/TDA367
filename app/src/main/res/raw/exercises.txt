@@ -1,1 +1,10 @@
 Exercise1;This is a test exercise description.
+Exercise2;This is another test exercise description.
+Exercise3;test test test
+Exercise4;description
+Exercise5;description
+Exercise6;description
+Exercise7;description
+Exercise8;description
+Exercise9;description
+Exercise10;description
