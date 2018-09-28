@@ -15,6 +15,10 @@ public class MainViewModel extends ViewModel {
         trainingTracker = new TrainingTracker();
         loadExercises();
     }
+
+    /**
+     * Loads a list of base exercises from a text file into the TrainingTracker.
+     */
     private void loadExercises() {
         LoadExercisesService les = new LoadExercisesService();
         List<Exercise> loadedExercises = les.loadExercises();

@@ -12,6 +12,11 @@ public class LoadExercisesService {
 
     private List<Exercise> exercises = new ArrayList<>();
 
+    /**
+     * Reads res/raw/exercises.txt line for line decoding the Strings into Exercise objects
+     * and adds them to the list of Exercises that gets returned.
+     * @return the list of exercises decoded from the text file
+     */
     public List<Exercise> loadExercises() {
         System.out.println("Loading exercises...");
         try (
@@ -27,6 +32,11 @@ public class LoadExercisesService {
         return exercises;
     }
 
+    /**
+     * Decodes a line representing an Exercise in String format and adds it to the list of Exercises.
+     * Format: name;description
+     * @param line a line representing an Exercise in String format
+     */
     private void parseExerciseLine(String line) {
         String[] tokens = line.split("\\s*;\\s*");
         if (tokens.length == 2) {
