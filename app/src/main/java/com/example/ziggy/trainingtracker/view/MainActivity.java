@@ -72,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
         SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new StartPageFragment());
         adapter.addFragment(new WorkoutTabFragment());
-        adapter.addFragment(new ExercisesFragment());
+        adapter.addFragment(new ExerciseTabFragment());
         adapter.addFragment(new SettingsFragment());
-        adapter.addFragment(new CreateExerciseFragment());
+        adapter.addFragment(new ExerciseCreatorFragment());
         adapter.addFragment(new WorkoutCreatorFragment());
         viewpager.setAdapter(adapter);
     }

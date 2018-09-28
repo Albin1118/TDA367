@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.example.ziggy.trainingtracker.R;
 
-public class ExercisesFragment extends Fragment {
+public class ExerciseTabFragment extends Fragment {
 
     private Button addExerciseButton;
     private Button exerciseBackButton;
@@ -19,7 +19,7 @@ public class ExercisesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_exercises, container, false);
+        view  = inflater.inflate(R.layout.fragment_exercise_tab, container, false);
         addExerciseButton = (Button) view.findViewById(R.id.addExerciseButton);
         exerciseBackButton = (Button) view.findViewById(R.id.exerciseBackButton);
 
