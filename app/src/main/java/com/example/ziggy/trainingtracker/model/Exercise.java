@@ -25,4 +25,9 @@ public class Exercise {
     public void edit(){
 
     }
+
+    @Override
+    public String toString(){
+        return name + " - " + description;
+    }
 }
