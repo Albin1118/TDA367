@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/btm_navigation"
-        android:background="?android:attr/windowBackground"/>/>
+        android:background="?android:attr/windowBackground"
+        app:labelVisibilityMode="labeled"
+        />
 
     <FrameLayout
         android:id="@+id/fragment_container"
