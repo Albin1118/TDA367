@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Workout;
+import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,16 @@ public class WorkoutTabFragment extends Fragment {
         List <Workout> workouts = new ArrayList<>();
 
         for (int i = 0; i < 10; i++){
-            workouts.add(new Workout("Pre-made workout", "This is a pre-made workout", exercises));
+            Workout w = new Workout("Pre-made workout");
+            w.setDescription("This is a pre-made workout");
+            WorkoutBlock block = new WorkoutBlock();
+            for (Exercise e : exercises) {
+                block.addExercise(e, 10);
+            }
+            List<WorkoutBlock> blocks = new ArrayList<>();
+            blocks.add(block);
+            w.setBlocks(blocks);
+            workouts.add(w);
         }
 
         ArrayAdapter<Workout> adapter = new ArrayAdapter<Workout>(getContext(), android.R.layout.simple_list_item_1, workouts);

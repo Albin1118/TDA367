@@ -4,7 +4,6 @@ public class Exercise {
 
     private String name;
     private String description;
-    private int measure;
     private String unit;
     private boolean hasWeight;
 
@@ -17,13 +16,8 @@ public class Exercise {
     public String getName() {
         return name;
     }
-
     public String getDescription() {
         return description;
-    }
-
-    public void edit(){
-
     }
 
     @Override
