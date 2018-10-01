@@ -43,7 +43,7 @@ public class ExerciseCreatorFragment extends Fragment {
                 ((MainActivity)getActivity()).setViewPager(1);
                 Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
                 parentActivity.setViewPager(1);
-                parentActivity.viewModel.addCustomExercise(name.getText().toString(), description.getText().toString());
+                parentActivity.viewModel.addCustomExercise(name.getText().toString(), description.getText().toString(), "reps"); //TODO: allow choosing unit
             }
         });
 

@@ -37,7 +37,7 @@ public class ReadWorkoutsFromXMLService {
     /**
      * Read res/raw/workouts.xml using the elements and their contents to create Workout objects
      * and add them to the map of Workouts that gets returned.
-     * @return A list of Workouts loaded from the XML
+     * @return A list of Workouts loaded from the XML.
      */
     public List<Workout> readWorkouts() {
         parseXMLFile();
@@ -78,7 +78,7 @@ public class ReadWorkoutsFromXMLService {
                     workouts.put(w.getName(), w);
                 } catch (IllegalArgumentException iae) {
                     iae.printStackTrace();
-                    System.out.println("** XML error, workout: \"" + element.getAttribute("name") + "\"");
+                    System.out.println("** workouts.xml error, workout: \"" + element.getAttribute("name") + "\"");
                     System.out.println(" " + iae.getMessage());
                 }
             }
@@ -87,13 +87,13 @@ public class ReadWorkoutsFromXMLService {
 
     /**
      * Take a workout element, read the values in, create a Workout and return it.
-     * @param workoutElement A workout element
+     * @param workoutElement A workout element.
      * @return A new Workout object.
      */
     private Workout getWorkout(Element workoutElement) throws IllegalArgumentException {
         String name = workoutElement.getAttribute("name");
         if (name.trim().equals("") || workouts.containsKey(name))
-            throw new IllegalArgumentException("A workout cannot have an empty or duplicate name");
+            throw new IllegalArgumentException("A workout cannot have an empty or duplicate name.");
 
         String description = getTextValue(workoutElement, "description");
         if (description == null)
@@ -120,7 +120,7 @@ public class ReadWorkoutsFromXMLService {
 
     /**
      * Take a block element, read the values in, create a WorkoutBlock and return it.
-     * @param blockElement A block element
+     * @param blockElement A block element.
      * @return A new WorkoutBlock object.
      */
     private WorkoutBlock getBlock(Element blockElement) throws IllegalArgumentException {
@@ -128,7 +128,7 @@ public class ReadWorkoutsFromXMLService {
         try {
             multiplier = Integer.parseInt(blockElement.getAttribute("x"));
             if (multiplier < 1)
-                throw new IllegalArgumentException("Attribute n can not be less than 1");
+                throw new IllegalArgumentException("Attribute n can not be less than 1.");
         } catch (NumberFormatException e) { //If the attribute x is missing use the default multiplier = 1
             multiplier = 1;
         }
@@ -147,7 +147,7 @@ public class ReadWorkoutsFromXMLService {
                 try {
                     amount = Integer.parseInt(element.getAttribute("n"));
                 } catch (NumberFormatException ex) { //If the attribute n is missing
-                    throw new IllegalArgumentException("Missing attribute n in the Exercise: \"" + e.getName() + "\"");
+                    throw new IllegalArgumentException("Missing attribute n in the Exercise: \"" + e.getName() + "\".");
                 }
                 //add it to block
                 block.addExercise(e, amount);
@@ -159,14 +159,14 @@ public class ReadWorkoutsFromXMLService {
 
     /**
      * Take an exercise element, read the values in, create an Exercise and return it.
-     * @param exerciseElement An exercise element
+     * @param exerciseElement An exercise element.
      * @return A new Exercise object.
      */
     private Exercise getExercise(Element exerciseElement) {
         String name = exerciseElement.getTextContent();
         Exercise e = this.exercises.get(name);
         if (e == null)
-            throw new IllegalArgumentException("Cannot find Exercise: \"" + name + "\"");
+            throw new IllegalArgumentException("Cannot find Exercise: \"" + name + "\".");
         return e;
     }
 
@@ -174,8 +174,8 @@ public class ReadWorkoutsFromXMLService {
      * Take an XML element and a tag name, look for the tag and get the text content.
      * I.e for <workout><description>Example description</description></workout>, if
      * the Element points to a workout node and tagName is 'description' it will return "Example description".
-     * @param element An element that contains a tagName element
-     * @param tagName A String that represents the element to get the text value from
+     * @param element An element that contains a tagName element.
+     * @param tagName A String that represents the element to get the text value from.
      * @return The String content in the "tagName"-element.
      */
     private String getTextValue(Element element, String tagName) {
@@ -190,8 +190,8 @@ public class ReadWorkoutsFromXMLService {
 
     /**
      * Call getTextValue and return it as an int.
-     * @param element An element that contains a tagName element
-     * @param tagName A String that represents the element to get the int value from
+     * @param element An element that contains a tagName element.
+     * @param tagName A String that represents the element to get the int value from.
      * @return The int value of getTextValue.
      */
     private int getIntValue(Element element, String tagName) {

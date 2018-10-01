@@ -3,30 +3,30 @@
     <workout name="ExampleWorkout1">
         <description>This is an example description.</description>
         <block x="1">
-            <exercise n="10">Pushups</exercise>
+            <exercise n="10">Push-ups</exercise>
             <exercise n="1000">Running</exercise>
         </block>
         <block x="3">
-            <exercise n="20">Pushups</exercise>
+            <exercise n="20">Push-ups</exercise>
         </block>
     </workout>
     <workout name="ExampleWorkout2">
         <block x="1">
-            <exercise n="10">Pushups</exercise>
+            <exercise n="10">Push-ups</exercise>
             <exercise n="1000">Running</exercise>
         </block>
         <block x="3">
-            <exercise n="20">Pushups</exercise>
+            <exercise n="20">Push-ups</exercise>
         </block>
     </workout>
     <workout name="ExampleWorkout3">
         <description>This is an example description.</description>
         <block x="1">
-            <exercise n="10">Pushups</exercise>
+            <exercise n="10">Push-ups</exercise>
             <exercise n="1000">Running</exercise>
         </block>
         <block x="3">
-            <exercise n="20">Pushups</exercise>
+            <exercise n="20">Push-ups</exercise>
         </block>
     </workout>
 </workouts>

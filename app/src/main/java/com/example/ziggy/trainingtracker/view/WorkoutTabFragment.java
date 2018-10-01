@@ -39,7 +39,7 @@ public class WorkoutTabFragment extends Fragment {
         List <Exercise> exercises = new ArrayList<>();
 
         for(int i = 0; i < 10; i++){
-            exercises.add(new Exercise("Pre-made exercise", "This is a pre-made exercise"));
+            exercises.add(new Exercise("Pre-made exercise", "This is a pre-made exercise", "unit"));
         }
 
         final List <Workout> workouts = new ArrayList<>();

@@ -10,14 +10,14 @@ public class MainViewModelTest {
 
     @Test
     public void addCustomExercise_isCorrect() {
-        viewModel.addCustomExercise("BenchPress", "Hardcore");
+        viewModel.addCustomExercise("BenchPress", "Hardcore", "reps");
         assertEquals( viewModel.getTrainingTracker().getUser().getCustomExercises().get(0).getName(), "BenchPress");
     }
 
     @Test
     public void removeCustomExercise_isCorrect() {
-        viewModel.addCustomExercise("Pullups", "Hardcore");
-        viewModel.addCustomExercise("Pullups", "Hardcore");
+        viewModel.addCustomExercise("Pullups", "Hardcore", "reps");
+        viewModel.addCustomExercise("Pullups", "Hardcore", "reps");
         viewModel.removeCustomExercise(0);
         assertEquals( viewModel.getTrainingTracker().getUser().getCustomExercises().size(), 1);
     }
@@ -26,8 +26,8 @@ public class MainViewModelTest {
     @Test
     public void editCustomExercise_isCorrect() {
         int index = 0;
-        viewModel.addCustomExercise("Pullups", "Hardcore");
-        viewModel.editCustomExercise(index, "PullupsChanged", "HardCore");
+        viewModel.addCustomExercise("Pullups", "Hardcore", "reps");
+        viewModel.editCustomExercise(index, "PullupsChanged", "HardCore", "reps");
         assertEquals( viewModel.getTrainingTracker().getUser().getCustomExercises().get(index).getName(), "PullupsChanged");
     }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<exercises>
+    <exercise name="Push-ups">
+        <description>This is an example description for a push-up.</description>
+        <unit>reps</unit>
+    </exercise>
+    <exercise name="Running">
+        <description>This is an example description for running.</description>
+        <unit>meters</unit>
+    </exercise>
+</exercises>

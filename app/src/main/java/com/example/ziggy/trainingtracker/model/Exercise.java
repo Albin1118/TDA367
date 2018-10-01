@@ -8,9 +8,10 @@ public class Exercise {
     private boolean hasWeight;
 
 
-    public Exercise(String name, String description) {
+    public Exercise(String name, String description, String unit) {
         this.name = name;
         this.description = description;
+        this.unit = unit;
     }
 
     public String getName() {
@@ -18,6 +19,9 @@ public class Exercise {
     }
     public String getDescription() {
         return description;
+    }
+    public String getUnit() {
+        return unit;
     }
 
     @Override
