@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,6 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
@@ -35,11 +38,14 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.viewPagerContainer);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void initListeners() {
-        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        mViewPager.setOnTouchListener(new View.OnTouchListener()
+        {
             @Override
-            public void onPageSelected(int position) {
-                bottomNavigationView.getMenu().getItem(position).setChecked(true);
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                return true;
             }
         });
 
@@ -56,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_exercises:
                         setViewPager(2);
                         break;
-
                     case R.id.nav_settings:
                         setViewPager(3);
                         break;
