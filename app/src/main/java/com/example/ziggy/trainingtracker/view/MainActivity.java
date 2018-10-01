@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
     MainViewModel viewModel;
-
+    BottomNavigationView bottomNavigationView;
+    MenuItem prevMenuItem;
 
 
     @Override
@@ -28,17 +29,48 @@ public class MainActivity extends AppCompatActivity {
 
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.viewPagerContainer);
+        mViewPager.addOnPageChangeListener(viewPageListener);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
+        bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         setupViewPager(mViewPager);
+
         initDataBinding();
+
     }
 
     private void initDataBinding() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
     }
+
+   private  ViewPager.OnPageChangeListener viewPageListener = new ViewPager.OnPageChangeListener() {
+       @Override
+       public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+       }
+
+       @Override
+       public void onPageSelected(int position) {
+           if (prevMenuItem != null) {
+               prevMenuItem.setChecked(false);
+           }
+           else
+           {
+               bottomNavigationView.getMenu().getItem(0).setChecked(false);
+           }
+
+           bottomNavigationView.getMenu().getItem(position).setChecked(true);
+           prevMenuItem = bottomNavigationView.getMenu().getItem(position);
+
+       }
+
+       @Override
+       public void onPageScrollStateChanged(int state) {
+
+       }
+   };
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
