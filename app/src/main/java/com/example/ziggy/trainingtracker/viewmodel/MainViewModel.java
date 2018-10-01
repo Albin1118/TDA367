@@ -39,4 +39,16 @@ public class MainViewModel extends ViewModel {
     public List<Exercise> getExercises() {
         return trainingTracker.getExercises();
     }
+
+    private void addCustomExercise(String name, String description) {
+        trainingTracker.getUser().getCustomExercises().add(new Exercise(name, description));
+    }
+
+    public void removeCustomExercise(int index) {
+        trainingTracker.getUser().getCustomExercises().remove(index);
+    }
+
+    public  void editCustomExercise(int index, String name, String description) {
+        trainingTracker.getUser().getCustomExercises().set(index, new Exercise(name, description));
+    }
 }

@@ -18,4 +18,8 @@ public class TrainingTracker {
     public List<Exercise> getExercises() {
         return exercises;
     }
+
+    public User getUser() {
+        return user;
+    }
 }
