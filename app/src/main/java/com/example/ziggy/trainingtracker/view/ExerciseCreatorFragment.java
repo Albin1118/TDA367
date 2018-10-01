@@ -21,11 +21,13 @@ public class ExerciseCreatorFragment extends Fragment {
     private EditText exerciseNameEditText;
     private EditText exerciseDescriptionEditText;
     private View view;
+    private MainActivity parentActivity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_exercise_creator, container, false);
+        parentActivity =  ((MainActivity)getActivity());
 
         createExerciseButton = (Button) view.findViewById(R.id.createExerciseButton);
         testTextView = (TextView) view.findViewById(R.id.testTextView);
@@ -40,6 +42,8 @@ public class ExerciseCreatorFragment extends Fragment {
                 EditText description = (EditText) view.findViewById(R.id.exerciseDescriptionEditText);
                 ((MainActivity)getActivity()).setViewPager(1);
                 Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
+                parentActivity.setViewPager(1);
+                parentActivity.viewModel.addCustomExercise(name.getText().toString(), description.getText().toString());
             }
         });
 

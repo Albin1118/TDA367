@@ -40,7 +40,10 @@ public class MainViewModel extends ViewModel {
         return trainingTracker.getExercises();
     }
 
-    private void addCustomExercise(String name, String description) {
+
+    // Methods for adding removing and editing custom Exercises
+    
+    public void addCustomExercise(String name, String description) {
         trainingTracker.getUser().getCustomExercises().add(new Exercise(name, description));
     }
 
