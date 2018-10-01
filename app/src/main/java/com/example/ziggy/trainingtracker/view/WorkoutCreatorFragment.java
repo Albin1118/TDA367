@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 
@@ -32,6 +33,8 @@ public class WorkoutCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).setViewPager(1);
+                Toast.makeText(getContext(), "New workout created!", Toast.LENGTH_SHORT).show();
+
             }
         });
 
