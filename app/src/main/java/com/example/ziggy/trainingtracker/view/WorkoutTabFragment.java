@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.R;
@@ -40,7 +42,7 @@ public class WorkoutTabFragment extends Fragment {
             exercises.add(new Exercise("Pre-made exercise", "This is a pre-made exercise"));
         }
 
-        List <Workout> workouts = new ArrayList<>();
+        final List <Workout> workouts = new ArrayList<>();
 
         for (int i = 0; i < 10; i++){
             Workout w = new Workout("Pre-made workout");
@@ -58,7 +60,14 @@ public class WorkoutTabFragment extends Fragment {
         ArrayAdapter<Workout> adapter = new ArrayAdapter<Workout>(getContext(), android.R.layout.simple_list_item_1, workouts);
 
         workoutList.setAdapter(adapter);
-        //
+        workoutList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(), workouts.get(position).toString(), Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).setWorkoutDetailView(workouts.get(position));
+                ((MainActivity)getActivity()).setViewPager(6);
+            }
+        });
 
 
         addWorkoutButton.setOnClickListener(new View.OnClickListener() {

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     MainViewModel viewModel;
+    SectionsStatePagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +84,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setupViewPager(ViewPager viewpager) {
-        SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+        adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new StartPageFragment());
         adapter.addFragment(new WorkoutTabFragment());
         adapter.addFragment(new ExerciseTabFragment());
         adapter.addFragment(new SettingsFragment());
         adapter.addFragment(new ExerciseCreatorFragment());
         adapter.addFragment(new WorkoutCreatorFragment());
+        adapter.addFragment(new WorkoutDetailViewFragment());
         viewpager.setAdapter(adapter);
+    }
+
+    public void setWorkoutDetailView(Workout w){
+        WorkoutDetailViewFragment fragment = (WorkoutDetailViewFragment)adapter.getItem(6);
+        fragment.setWorkoutNameTextView(w.getName());
+        fragment.setWorkoutDescriptionTextView(w.getDescription());
     }
 }

@@ -2,6 +2,8 @@
     <string name="app_name">TrainingTracker</string>
     <string name="workout_tab">Workouts</string>
     <string name="workout_creator">Create custom workout</string>
+    <string name="workout_detail_view">Workout name</string>
+    <string name="workout_detail_view_button">Start workout</string>
     <string name="exercises_tab">Exercises</string>
     <string name="exercise_creator">Create custom exercise</string>
     <string name="settings_tab">Settings</string>
