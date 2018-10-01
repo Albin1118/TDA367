@@ -3,7 +3,6 @@ package com.example.ziggy.trainingtracker.view;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private ViewPager mViewPager;
-    private MenuItem prevMenuItem;
 
     MainViewModel viewModel;
 
@@ -38,62 +36,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if (prevMenuItem != null) {
-                    prevMenuItem.setChecked(false);
-                }
-                else
-                {
-                    bottomNavigationView.getMenu().getItem(0).setChecked(false);
-                }
-
                 bottomNavigationView.getMenu().getItem(position).setChecked(true);
-                prevMenuItem = bottomNavigationView.getMenu().getItem(position);
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
             }
         });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment currentFragment = null;
-
                 switch (menuItem.getItemId()){
                     case R.id.nav_dashboard:
-                        //currentFragment = new StartPageFragment();
                         setViewPager(0);
                         break;
                     case R.id.nav_workouts:
-                        //currentFragment = new WorkoutTabFragment();
                         setViewPager(1);
                         break;
                     case R.id.nav_exercises:
-                        //currentFragment = new ExercisesFragment();
                         setViewPager(2);
                         break;
 
                     case R.id.nav_settings:
-                        //currentFragment = new StartPageFragment();
                         setViewPager(3);
                         break;
 
 
                 }
-
-                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                //       currentFragment).commit();
                 return true;
             }
         });
