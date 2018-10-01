@@ -1,6 +1,5 @@
 package com.example.ziggy.trainingtracker;
 
-import android.widget.EditText;
 
 import org.junit.Test;
 
@@ -17,12 +16,5 @@ public class ExampleUnitTest {
     }
 
 
-    @Test
-    public void addExercise_isCorrect() {
-        CreateExerciseActivity c = new CreateExerciseActivity();
-        String nameTest = "Name";
-        String descriptionTest = "Description";
-        c.createExercise(nameTest, descriptionTest);
-        assertEquals(c.customExercises.get(0).getName(), nameTest);
-    }
+
 }

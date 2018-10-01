@@ -15,8 +15,8 @@ public class MainViewModel extends ViewModel {
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
-        loadExercises();
-        loadWorkouts();
+        //loadExercises();
+        //loadWorkouts();
     }
 
     /**
@@ -40,6 +40,9 @@ public class MainViewModel extends ViewModel {
         return trainingTracker.getExercises();
     }
 
+    public TrainingTracker getTrainingTracker() {
+        return trainingTracker;
+    }
 
     // Methods for adding removing and editing custom Exercises
     
