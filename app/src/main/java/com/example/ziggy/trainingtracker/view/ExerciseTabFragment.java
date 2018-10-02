@@ -1,5 +1,7 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -15,10 +17,13 @@ import android.widget.Toast;
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
 
+import java.util.List;
+
 public class ExerciseTabFragment extends Fragment {
 
     private FloatingActionButton addExerciseButton;
     private ListView exerciseListView;
+    private ArrayAdapter<Exercise> adapter;
 
     private MainActivity parentActivity;
     private View view;
@@ -30,7 +35,7 @@ public class ExerciseTabFragment extends Fragment {
         view  = inflater.inflate(R.layout.fragment_exercise_tab, container, false);
         initViews();
         initListeners();
-        ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, parentActivity.viewModel.getExercises());
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, parentActivity.viewModel.getExercises());
         exerciseListView.setAdapter(adapter);
 
 
@@ -55,6 +60,16 @@ public class ExerciseTabFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(), parentActivity.viewModel.getExercises().get(position).toString(), Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).setViewPager(7);
+            }
+        });
+    }
+
+    private void customExerciseAdded() {
+        parentActivity.viewModel.getNewCustomExercise().observe(this, new Observer<Exercise>() {
+            @Override
+            public void onChanged(@Nullable Exercise exercises) {
+                adapter.clear();
+                adapter.addAll(parentActivity.viewModel.getExercises());
             }
         });
     }
