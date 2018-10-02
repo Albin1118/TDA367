@@ -2,6 +2,7 @@ package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
+import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.Exercise;
@@ -38,6 +39,10 @@ public class MainViewModel extends ViewModel {
 
     public List<Exercise> getExercises() {
         return trainingTracker.getExercises();
+    }
+
+    public List<Workout> getWorkouts() {
+        return trainingTracker.getWorkouts();
     }
 
     public TrainingTracker getTrainingTracker() { //TODO: remove this method, TrainingTracker should not be visible outside this object
