@@ -94,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new WorkoutTabFragment());
         adapter.addFragment(new ExerciseTabFragment());
         adapter.addFragment(new SettingsFragment());
+        adapter.addFragment(new ExerciseCreatorFragment());
+        adapter.addFragment(new WorkoutCreatorFragment());
+        adapter.addFragment(new WorkoutDetailViewFragment());
         viewpager.setAdapter(adapter);
     }
 
