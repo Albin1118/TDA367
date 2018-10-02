@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
@@ -31,6 +33,7 @@ public class ExerciseTabFragment extends Fragment {
         ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, parentActivity.viewModel.getExercises());
         exerciseListView.setAdapter(adapter);
 
+
         return view;
     }
 
@@ -44,6 +47,14 @@ public class ExerciseTabFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 parentActivity.setViewPager(4);
+            }
+        });
+
+        exerciseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(), parentActivity.viewModel.getExercises().get(position).toString(), Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).setViewPager(7);
             }
         });
     }

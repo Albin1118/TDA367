@@ -11,21 +11,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.ziggy.trainingtracker.R;
 
-public class WorkoutDetailViewFragment extends Fragment {
+public class ExerciseDetailViewFragment extends Fragment {
 
-    private  TextView workoutNameTextView;
-    private  TextView workoutDescriptionTextView;
-    private Button startWorkoutButton;
+    private TextView exerciseNameTextView;
+    private  TextView exerciseDescriptionTextView;
 
     private View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_workout_detail_view, container, false);
+        view  = inflater.inflate(R.layout.fragment_exercise_detail_view, container, false);
         initViews();
         initListeners();
 
@@ -33,18 +31,12 @@ public class WorkoutDetailViewFragment extends Fragment {
     }
 
     private void initViews() {
-        workoutNameTextView = view.findViewById(R.id.workoutNameTextView);
-        workoutDescriptionTextView = view.findViewById(R.id.workoutDescriptionTextView);
-        startWorkoutButton = view.findViewById(R.id.startWorkoutButton);
+        exerciseNameTextView = view.findViewById(R.id.exerciseNameTextView);
+        exerciseDescriptionTextView = view.findViewById(R.id.exerciseDescriptionTextView);
     }
 
     private void initListeners() {
-        startWorkoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Workout started!", Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
 
     @Override
@@ -61,11 +53,11 @@ public class WorkoutDetailViewFragment extends Fragment {
         }
     }
 
-    public void setWorkoutNameTextView(String workoutName) {
-        this.workoutNameTextView.setText(workoutName);
+    public void setExerciseNameTextView(String workoutName) {
+        this.exerciseNameTextView.setText(workoutName);
     }
 
-    public void setWorkoutDescriptionTextView(String workoutDescription) {
-        this.workoutDescriptionTextView.setText(workoutDescription);
+    public void setExerciseDescriptionTextView(String workoutDescription) {
+        this.exerciseDescriptionTextView.setText(workoutDescription);
     }
 }

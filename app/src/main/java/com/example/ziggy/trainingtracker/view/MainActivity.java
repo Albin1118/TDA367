@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ExerciseCreatorFragment());
         adapter.addFragment(new WorkoutCreatorFragment());
         adapter.addFragment(new WorkoutDetailViewFragment());
+        adapter.addFragment(new ExerciseDetailViewFragment());
         viewpager.setAdapter(adapter);
     }
 
@@ -115,5 +116,11 @@ public class MainActivity extends AppCompatActivity {
         WorkoutDetailViewFragment fragment = (WorkoutDetailViewFragment)adapter.getItem(6);
         fragment.setWorkoutNameTextView(w.getName());
         fragment.setWorkoutDescriptionTextView(w.getDescription());
+        onResume();
+    }
+
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 }

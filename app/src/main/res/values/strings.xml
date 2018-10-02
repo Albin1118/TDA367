@@ -6,5 +6,7 @@
     <string name="workout_detail_view_button">Start workout</string>
     <string name="exercises_tab">Exercises</string>
     <string name="exercise_creator">Create custom exercise</string>
+    <string name="exercise_detail_view">Exercise name</string>
     <string name="settings_tab">Settings</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id tortor condimentum, tincidunt nunc eu, pellentesque metus. Sed et viverra lacus. Aliquam quis urna vel nisi aliquet aliquam quis quis magna.</string>
 </resources>
