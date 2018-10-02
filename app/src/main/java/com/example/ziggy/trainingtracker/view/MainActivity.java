@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
 
+import java.util.Map;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     MainViewModel viewModel;
     SectionsStatePagerAdapter adapter;
 
+    Map<String, Fragment> fragmentMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initListeners();
         initDataBinding();
+        //initFragmentMap();
         setupViewPager(mViewPager);
     }
 
@@ -45,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                bottomNavigationView.getMenu().getItem(position).setChecked(true);
+                if (position <=3) { //The amount of items on the navbar
+                    bottomNavigationView.getMenu().getItem(position).setChecked(true);
+                }
             }
     });
 
@@ -65,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_settings:
                         setViewPager(3);
                         break;
-
 
                 }
                 return true;
@@ -87,10 +94,18 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new WorkoutTabFragment());
         adapter.addFragment(new ExerciseTabFragment());
         adapter.addFragment(new SettingsFragment());
-        adapter.addFragment(new ExerciseCreatorFragment());
-        adapter.addFragment(new WorkoutCreatorFragment());
-        adapter.addFragment(new WorkoutDetailViewFragment());
         viewpager.setAdapter(adapter);
+    }
+
+   /* public void initFragmentMap(){ //tmp,
+        fragmentMap.put("ExerciseCreator", new ExerciseCreatorFragment());
+        fragmentMap.put("WorkoutCreator", new WorkoutCreatorFragment());
+        fragmentMap.put("WorkoutDetailView)", new WorkoutDetailViewFragment());
+    }*/
+
+    public void setFragmentContainerContent(Fragment f){
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f)
+                .commit();
     }
 
     public void setWorkoutDetailView(Workout w){
