@@ -10,7 +10,8 @@ public class User {
     //Add achievements and goals
     private ActiveWorkout activeWorkout;
     private List<Workout> finishedWorkouts;
-    private List<Exercise> customExercises = new ArrayList<Exercise>();
+    private List<Exercise> customExercises = new ArrayList<>();
+    public MutableLiveData<Exercise> newCustomExercise = new MutableLiveData<>();
     private List<Exercise> customWorkouts = new ArrayList<Exercise>();
 
     private String username;
@@ -53,9 +54,6 @@ public class User {
     public List<Exercise> getCustomWorkouts() {
         return customWorkouts;
     }
-    private List<Exercise> customExercises = new ArrayList<>();
-    public MutableLiveData<Exercise> newCustomExercise = new MutableLiveData<>();
-
 
     public List<Exercise> getCustomExercises() {
         return customExercises;
