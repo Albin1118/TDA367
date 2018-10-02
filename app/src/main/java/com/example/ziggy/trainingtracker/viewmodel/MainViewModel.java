@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.viewmodel;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.ziggy.trainingtracker.model.Workout;
@@ -8,6 +9,7 @@ import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
@@ -38,7 +40,10 @@ public class MainViewModel extends ViewModel {
     }
 
     public List<Exercise> getExercises() {
-        return trainingTracker.getExercises();
+        List<Exercise> allExercises = new ArrayList<>();
+        allExercises.addAll(trainingTracker.getExercises());
+        allExercises.addAll(trainingTracker.getUser().getCustomExercises());
+        return allExercises;
     }
 
     public List<Workout> getWorkouts() {
@@ -52,7 +57,8 @@ public class MainViewModel extends ViewModel {
     // Methods for adding removing and editing custom Exercises
     
     public void addCustomExercise(String name, String description, String unit) {
-        trainingTracker.getUser().getCustomExercises().add(new Exercise(name, description, unit));
+      trainingTracker.getUser().getCustomExercises().add(new Exercise(name, description, unit));
+      trainingTracker.getUser().getNewCustomExercise().setValue(new Exercise(name, description, unit));
     }
 
     public void removeCustomExercise(int index) {
@@ -61,5 +67,9 @@ public class MainViewModel extends ViewModel {
 
     public  void editCustomExercise(int index, String name, String description, String unit) {
         trainingTracker.getUser().getCustomExercises().set(index, new Exercise(name, description, unit));
+    }
+
+    public LiveData<Exercise> getNewCustomExercise() {
+      return trainingTracker.getUser().getNewCustomExercise();
     }
 }

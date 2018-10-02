@@ -1,5 +1,7 @@
 package com.example.ziggy.trainingtracker.model;
 
+import android.arch.lifecycle.MutableLiveData;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,9 +53,16 @@ public class User {
     public List<Exercise> getCustomWorkouts() {
         return customWorkouts;
     }
+    private List<Exercise> customExercises = new ArrayList<>();
+    public MutableLiveData<Exercise> newCustomExercise = new MutableLiveData<>();
+
 
     public List<Exercise> getCustomExercises() {
         return customExercises;
+    }
+
+    public MutableLiveData<Exercise> getNewCustomExercise() {
+        return newCustomExercise;
     }
 
     //Weight might change
