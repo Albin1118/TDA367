@@ -20,33 +20,38 @@ public class ExerciseCreatorFragment extends Fragment {
     private TextView testTextView;
     private EditText exerciseNameEditText;
     private EditText exerciseDescriptionEditText;
-    private View view;
+
     private MainActivity parentActivity;
+    private View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_exercise_creator, container, false);
         parentActivity =  ((MainActivity)getActivity());
+        view  = inflater.inflate(R.layout.fragment_exercise_creator, container, false);
+        initViews();
+        initListeners();
 
-        createExerciseButton = (Button) view.findViewById(R.id.createExerciseButton);
-        testTextView = (TextView) view.findViewById(R.id.testTextView);
-        exerciseNameEditText = (EditText) view.findViewById(R.id.exerciseNameEditText);
-        exerciseDescriptionEditText = (EditText) view.findViewById(R.id.exerciseDescriptionEditText);
+        return view;
+    }
 
+    private void initViews() {
+        createExerciseButton = view.findViewById(R.id.createExerciseButton);
+        testTextView = view.findViewById(R.id.testTextView);
+        exerciseNameEditText = view.findViewById(R.id.exerciseNameEditText);
+        exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);
+    }
 
+    private void initListeners() {
         createExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText name = (EditText) view.findViewById(R.id.exerciseNameEditText);
-                EditText description = (EditText) view.findViewById(R.id.exerciseDescriptionEditText);
-                ((MainActivity)getActivity()).setViewPager(1);
-                Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
-                parentActivity.setViewPager(1);
+                EditText name = view.findViewById(R.id.exerciseNameEditText);
+                EditText description = view.findViewById(R.id.exerciseDescriptionEditText);
                 parentActivity.viewModel.addCustomExercise(name.getText().toString(), description.getText().toString(), "reps"); //TODO: allow choosing unit
+                parentActivity.setViewPager(2);
+                Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return view;
     }
 }

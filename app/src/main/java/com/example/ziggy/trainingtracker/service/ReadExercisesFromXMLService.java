@@ -1,4 +1,4 @@
-package com.example.ziggy.trainingtracker.Services;
+package com.example.ziggy.trainingtracker.service;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
 

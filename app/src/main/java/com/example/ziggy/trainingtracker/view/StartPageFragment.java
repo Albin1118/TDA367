@@ -12,7 +12,6 @@ import com.example.ziggy.trainingtracker.R;
 
 public class StartPageFragment extends Fragment {
 
-    private Button strengthButton;
     private View view;
 
 
@@ -20,16 +19,6 @@ public class StartPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_start_page, container, false);
-      /*  strengthButton = (Button) view.findViewById(R.id.strengthButton);
-
-
-        strengthButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity)getActivity()).setViewPager(1);
-            }
-        });*/
-
 
         return view;
     }

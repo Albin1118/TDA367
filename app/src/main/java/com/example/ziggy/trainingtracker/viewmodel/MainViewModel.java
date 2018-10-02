@@ -2,8 +2,8 @@ package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
-import com.example.ziggy.trainingtracker.Services.ReadExercisesFromXMLService;
-import com.example.ziggy.trainingtracker.Services.ReadWorkoutsFromXMLService;
+import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
+import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
 
@@ -14,8 +14,8 @@ public class MainViewModel extends ViewModel {
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
-        //loadExercises();
-        //loadWorkouts();
+        loadExercises();
+        loadWorkouts();
     }
 
     /**

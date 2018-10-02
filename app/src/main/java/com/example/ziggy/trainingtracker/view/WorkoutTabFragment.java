@@ -31,9 +31,10 @@ public class WorkoutTabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_workout_tab, container, false);
+        initViews();
+        initListeners();
 
-        addWorkoutButton = (FloatingActionButton) view.findViewById(R.id.addWorkoutButton);
-        workoutList = (ListView) view.findViewById(R.id.workoutList);
+
 
         //Used for testing
         List <Exercise> exercises = new ArrayList<>();
@@ -77,8 +78,16 @@ public class WorkoutTabFragment extends Fragment {
             }
         });
 
-
         return view;
+    }
+
+    private void initViews() {
+        addWorkoutButton = view.findViewById(R.id.addWorkoutButton);
+        workoutList = view.findViewById(R.id.workoutList);
+    }
+
+    private void initListeners() {
+
     }
 
 }

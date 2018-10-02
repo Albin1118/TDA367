@@ -26,21 +26,25 @@ public class ExerciseTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         parentActivity = ((MainActivity)getActivity());
         view  = inflater.inflate(R.layout.fragment_exercise_tab, container, false);
-
-        addExerciseButton = (FloatingActionButton) view.findViewById(R.id.addExerciseButton);
-        exerciseListView = (ListView) view.findViewById(R.id.exerciseList);
-
+        initViews();
+        initListeners();
         ArrayAdapter<Exercise> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, parentActivity.viewModel.getExercises());
         exerciseListView.setAdapter(adapter);
 
+        return view;
+    }
+
+    private void initViews() {
+        addExerciseButton = view.findViewById(R.id.addExerciseButton);
+        exerciseListView = view.findViewById(R.id.exerciseList);
+    }
+
+    private void initListeners() {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 parentActivity.setViewPager(4);
             }
         });
-
-
-        return view;
     }
 }

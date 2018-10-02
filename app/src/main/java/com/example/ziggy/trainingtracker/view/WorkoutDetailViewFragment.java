@@ -25,19 +25,25 @@ public class WorkoutDetailViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_workout_detail_view, container, false);
+        initViews();
+        initListeners();
 
-        workoutNameTextView = (TextView)view.findViewById(R.id.workoutNameTextView);
-        workoutDescriptionTextView = (TextView)view.findViewById(R.id.workoutDescriptionTextView);
-        startWorkoutButton = (Button)view.findViewById(R.id.startWorkoutButton);
+        return view;
+    }
 
+    private void initViews() {
+        workoutNameTextView = view.findViewById(R.id.workoutNameTextView);
+        workoutDescriptionTextView = view.findViewById(R.id.workoutDescriptionTextView);
+        startWorkoutButton = view.findViewById(R.id.startWorkoutButton);
+    }
+
+    private void initListeners() {
         startWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Workout started!", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return view;
     }
 
     public void setWorkoutNameTextView(String workoutName) {

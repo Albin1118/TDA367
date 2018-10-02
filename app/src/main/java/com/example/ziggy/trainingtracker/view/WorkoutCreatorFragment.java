@@ -18,27 +18,33 @@ public class WorkoutCreatorFragment extends Fragment {
     private EditText workoutDescriptionEditText;
     private Button createWorkoutButton;
 
+    private MainActivity parentActivity;
     private View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
+        parentActivity = (MainActivity)getActivity();
         view  = inflater.inflate(R.layout.fragment_workout_creator, container, false);
+        initViews();
+        initListeners();
 
-        workoutNameEditText = (EditText) view.findViewById(R.id.workoutNameEditText);
-        workoutDescriptionEditText = (EditText) view.findViewById(R.id.workoutDescriptionEditText);
-        createWorkoutButton = (Button) view.findViewById(R.id.createWorkoutButton);
+        return view;
+    }
 
+    private void initViews() {
+        workoutNameEditText = view.findViewById(R.id.workoutNameEditText);
+        workoutDescriptionEditText = view.findViewById(R.id.workoutDescriptionEditText);
+        createWorkoutButton = view.findViewById(R.id.createWorkoutButton);
+    }
+
+    private void initListeners() {
         createWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).setViewPager(1);
+                parentActivity.setViewPager(1);
                 Toast.makeText(getContext(), "New workout created!", Toast.LENGTH_SHORT).show();
-
             }
         });
-
-
-        return view;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.ziggy.trainingtracker.Services;
+package com.example.ziggy.trainingtracker.service;
 
 
 import org.w3c.dom.Document;
