@@ -15,6 +15,9 @@ import com.example.ziggy.trainingtracker.R;
 
 public class ExerciseDetailViewFragment extends Fragment {
 
+    private String exerciseName = "Exercise name";
+    private String exerciseDescription = "Exercise description";
+
     private TextView exerciseNameTextView;
     private  TextView exerciseDescriptionTextView;
 
@@ -32,7 +35,10 @@ public class ExerciseDetailViewFragment extends Fragment {
 
     private void initViews() {
         exerciseNameTextView = view.findViewById(R.id.exerciseNameTextView);
+        exerciseNameTextView.setText(exerciseName);
+
         exerciseDescriptionTextView = view.findViewById(R.id.exerciseDescriptionTextView);
+        exerciseDescriptionTextView.setText(exerciseDescription);
     }
 
     private void initListeners() {
@@ -53,11 +59,16 @@ public class ExerciseDetailViewFragment extends Fragment {
         }
     }
 
-    public void setExerciseNameTextView(String workoutName) {
-        this.exerciseNameTextView.setText(workoutName);
+    public void setExerciseDetailViewComponents(String exerciseName, String exerciseDescription){
+        this.exerciseName = exerciseName;
+        this.exerciseDescription = exerciseDescription;
     }
 
-    public void setExerciseDescriptionTextView(String workoutDescription) {
-        this.exerciseDescriptionTextView.setText(workoutDescription);
+    public void setExerciseNameTextView(String exerciseName) {
+        this.exerciseName = exerciseName;
+    }
+
+    public void setExerciseDescriptionTextView(String exerciseDescription) {
+        this.exerciseDescription = exerciseDescription;
     }
 }

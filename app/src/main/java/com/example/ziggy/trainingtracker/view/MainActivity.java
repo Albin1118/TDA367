@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
@@ -114,9 +115,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void setWorkoutDetailView(Workout w){
         WorkoutDetailViewFragment fragment = (WorkoutDetailViewFragment)adapter.getItem(6);
-        fragment.setWorkoutNameTextView(w.getName());
-        fragment.setWorkoutDescriptionTextView(w.getDescription());
+        fragment.setWorkoutDetailViewComponents(w.getName(),w.getDescription(), w.getBlocks());
+        //fragment.setWorkoutNameTextView(w.getName());
+        //fragment.setWorkoutDescriptionTextView(w.getDescription());
         onResume();
+    }
+
+    public void setExerciseDetailView(Exercise e){
+        ExerciseDetailViewFragment fragment = (ExerciseDetailViewFragment)adapter.getItem(7);
+        fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription());
     }
 
     protected void onResume() {

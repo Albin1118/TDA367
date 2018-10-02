@@ -13,11 +13,20 @@ import android.widget.Toast;
 
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.WorkoutBlock;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorkoutDetailViewFragment extends Fragment {
 
-    private  TextView workoutNameTextView;
-    private  TextView workoutDescriptionTextView;
+    private String workoutName = "Workout name1";
+    private String workoutDescription = "Workout description";
+    private List<WorkoutBlock>workoutBlocks = new ArrayList<>();
+
+    private TextView workoutNameTextView;
+    private TextView workoutDescriptionTextView;
     private Button startWorkoutButton;
 
     private View view;
@@ -34,7 +43,11 @@ public class WorkoutDetailViewFragment extends Fragment {
 
     private void initViews() {
         workoutNameTextView = view.findViewById(R.id.workoutNameTextView);
+        workoutNameTextView.setText(workoutName);
+
         workoutDescriptionTextView = view.findViewById(R.id.workoutDescriptionTextView);
+        workoutDescriptionTextView.setText(workoutDescription);
+
         startWorkoutButton = view.findViewById(R.id.startWorkoutButton);
     }
 
@@ -61,11 +74,17 @@ public class WorkoutDetailViewFragment extends Fragment {
         }
     }
 
+    public void setWorkoutDetailViewComponents(String workoutName, String workoutDescription, List<WorkoutBlock>workoutBlocks){
+        this.workoutName = workoutName;
+        this.workoutDescription = workoutDescription;
+        this.workoutBlocks = workoutBlocks;
+    }
+
     public void setWorkoutNameTextView(String workoutName) {
-        this.workoutNameTextView.setText(workoutName);
+        this.workoutName = workoutName;
     }
 
     public void setWorkoutDescriptionTextView(String workoutDescription) {
-        this.workoutDescriptionTextView.setText(workoutDescription);
+        this.workoutDescription = workoutDescription;
     }
 }

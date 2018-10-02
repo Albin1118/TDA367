@@ -27,15 +27,18 @@ public class ExerciseTabFragment extends Fragment {
 
     private MainActivity parentActivity;
     private View view;
+    private List<Exercise>exercises;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         parentActivity = ((MainActivity)getActivity());
         view  = inflater.inflate(R.layout.fragment_exercise_tab, container, false);
+        exercises = parentActivity.viewModel.getExercises();
+
         initViews();
         initListeners();
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, parentActivity.viewModel.getExercises());
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, exercises);
         exerciseListView.setAdapter(adapter);
 
 
@@ -59,7 +62,8 @@ public class ExerciseTabFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(), parentActivity.viewModel.getExercises().get(position).toString(), Toast.LENGTH_SHORT).show();
-                ((MainActivity)getActivity()).setViewPager(7);
+                parentActivity.setExerciseDetailView(exercises.get(position));
+                parentActivity.setViewPager(7);
             }
         });
     }
