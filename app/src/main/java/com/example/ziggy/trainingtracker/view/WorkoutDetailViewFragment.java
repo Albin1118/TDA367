@@ -19,9 +19,12 @@ import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragment representing a view displaying contents of a selected workout
+ */
 public class WorkoutDetailViewFragment extends Fragment {
 
-    private String workoutName = "Workout name1";
+    private String workoutName = "Workout name";
     private String workoutDescription = "Workout description";
     private List<WorkoutBlock>workoutBlocks = new ArrayList<>();
 
@@ -64,16 +67,21 @@ public class WorkoutDetailViewFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            // Refresh fragment
+            // Refreshes the fragment if it's currently visible to the user
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setReorderingAllowed(false);
             ft.detach(this).attach(this).commit();
-            /*FragmentTransaction transaction = ((MainActivity)getActivity()).getSupportFragmentManager().beginTransaction();
-            transaction.setReorderingAllowed(false);
-            transaction.detach(this).attach(this).commit();*/
+
         }
     }
 
+    /**
+     * The method is called from the mainActivity and sets the instance variables of the detailView
+     * so that the fragment's contents will be updated next time onCreate() is called.
+     * @param workoutName name of the selected workout
+     * @param workoutDescription description of the selected workout
+     * @param workoutBlocks the list of workoutBlocks from the selected workout
+     */
     public void setWorkoutDetailViewComponents(String workoutName, String workoutDescription, List<WorkoutBlock>workoutBlocks){
         this.workoutName = workoutName;
         this.workoutDescription = workoutDescription;

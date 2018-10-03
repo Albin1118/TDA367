@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 
+/**
+ * Fragment representing a view where the user can create custom workouts
+ */
 public class WorkoutCreatorFragment extends Fragment {
 
     private EditText workoutNameEditText;

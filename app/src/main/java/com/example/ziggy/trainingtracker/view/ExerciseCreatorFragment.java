@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 
+/**
+ * Fragment representing a view where the user can create custom exercises
+ */
 public class ExerciseCreatorFragment extends Fragment {
 
 

@@ -19,6 +19,9 @@ import com.example.ziggy.trainingtracker.model.Exercise;
 
 import java.util.List;
 
+/**
+ * Fragment representing the exercise-tab, where the list of exercises is displayed
+ */
 public class ExerciseTabFragment extends Fragment {
 
     private FloatingActionButton addExerciseButton;

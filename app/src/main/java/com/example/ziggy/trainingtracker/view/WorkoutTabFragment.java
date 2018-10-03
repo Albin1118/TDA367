@@ -20,6 +20,9 @@ import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragment representing the workout-tab, where the list of workouts is displayed
+ */
 public class WorkoutTabFragment extends Fragment {
 
     private FloatingActionButton addWorkoutButton;

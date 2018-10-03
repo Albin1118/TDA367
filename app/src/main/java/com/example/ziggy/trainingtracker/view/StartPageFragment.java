@@ -10,6 +10,9 @@ import android.widget.Button;
 
 import com.example.ziggy.trainingtracker.R;
 
+/**
+ * Fragment representing the startPage-tab
+ */
 public class StartPageFragment extends Fragment {
 
     private View view;

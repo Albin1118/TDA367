@@ -13,13 +13,16 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 
+/**
+ * Fragment representing a view displaying contents of a selected exercise
+ */
 public class ExerciseDetailViewFragment extends Fragment {
 
     private String exerciseName = "Exercise name";
     private String exerciseDescription = "Exercise description";
 
     private TextView exerciseNameTextView;
-    private  TextView exerciseDescriptionTextView;
+    private TextView exerciseDescriptionTextView;
 
     private View view;
 
@@ -49,16 +52,19 @@ public class ExerciseDetailViewFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            // Refresh fragment
+            // Refreshes the fragment if it's currently visible to the user
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setReorderingAllowed(false);
             ft.detach(this).attach(this).commit();
-            /*FragmentTransaction transaction = ((MainActivity)getActivity()).getSupportFragmentManager().beginTransaction();
-            transaction.setReorderingAllowed(false);
-            transaction.detach(this).attach(this).commit();*/
         }
     }
 
+    /**
+     * The method is called from the mainActivity and sets the instance variables of the detailView
+     * so that the fragment's contents will be updated next time onCreate() is called.
+     * @param exerciseName name of the selected exercise
+     * @param exerciseDescription description of the selected exercise
+     */
     public void setExerciseDetailViewComponents(String exerciseName, String exerciseDescription){
         this.exerciseName = exerciseName;
         this.exerciseDescription = exerciseDescription;
