@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     bottomNavigationView.getMenu().getItem(position).setChecked(true);
                 }
             }
-    });
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
