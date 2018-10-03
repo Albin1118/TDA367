@@ -22,7 +22,9 @@ public class Exercise {
     public String getDescription() {
         return description;
     }
-    public String getInstructions() {return instructions;}
+    public String getInstructions() {
+        return instructions;
+    }
     public String getUnit() {
         return unit;
     }

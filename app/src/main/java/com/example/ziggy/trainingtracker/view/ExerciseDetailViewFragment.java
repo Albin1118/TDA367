@@ -20,9 +20,11 @@ public class ExerciseDetailViewFragment extends Fragment {
 
     private String exerciseName = "Exercise name";
     private String exerciseDescription = "Exercise description";
+    private String exerciseInstructions = "Exercise instructions";
 
     private TextView exerciseNameTextView;
     private TextView exerciseDescriptionTextView;
+    private TextView exerciseInstructionsTextView;
 
     private View view;
 
@@ -42,6 +44,9 @@ public class ExerciseDetailViewFragment extends Fragment {
 
         exerciseDescriptionTextView = view.findViewById(R.id.exerciseDescriptionTextView);
         exerciseDescriptionTextView.setText(exerciseDescription);
+
+        exerciseInstructionsTextView = view.findViewById(R.id.exerciseInstructionsTextView);
+        exerciseInstructionsTextView.setText(exerciseInstructions);
     }
 
     private void initListeners() {
@@ -64,10 +69,12 @@ public class ExerciseDetailViewFragment extends Fragment {
      * so that the fragment's contents will be updated next time onCreate() is called.
      * @param exerciseName name of the selected exercise
      * @param exerciseDescription description of the selected exercise
+     * @param exerciseInstructions instructions for the selected exercise
      */
-    public void setExerciseDetailViewComponents(String exerciseName, String exerciseDescription){
+    public void setExerciseDetailViewComponents(String exerciseName, String exerciseDescription, String exerciseInstructions){
         this.exerciseName = exerciseName;
         this.exerciseDescription = exerciseDescription;
+        this.exerciseInstructions = exerciseInstructions;
     }
 
     public void setExerciseNameTextView(String exerciseName) {

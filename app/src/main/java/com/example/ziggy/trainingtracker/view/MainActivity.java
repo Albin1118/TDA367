@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setExerciseDetailView(Exercise e){
         ExerciseDetailViewFragment fragment = (ExerciseDetailViewFragment)adapter.getItem(7);
-        fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription());
+        fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
     }
 
     protected void onResume() {
