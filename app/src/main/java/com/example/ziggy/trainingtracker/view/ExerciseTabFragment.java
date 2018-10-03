@@ -65,8 +65,14 @@ public class ExerciseTabFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(), parentActivity.viewModel.getExercises().get(position).toString(), Toast.LENGTH_SHORT).show();
-                parentActivity.setExerciseDetailView(exercises.get(position));
-                parentActivity.setViewPager(7);
+                if(parentActivity.viewModel.getCustomExercises() != null && parentActivity.viewModel.preMadeExercises.contains(exercises.get(position))) {
+
+                    parentActivity.setExerciseDetailView(exercises.get(position));
+                    parentActivity.setViewPager(8);
+                } else if (parentActivity.viewModel.getCustomExercises() != null && parentActivity.viewModel.getCustomExercises().contains(exercises.get(position))){
+                    parentActivity.setCustomExerciseDetailView(exercises.get(position), position);
+                    parentActivity.setViewPager(7);
+                }
             }
         });
     }

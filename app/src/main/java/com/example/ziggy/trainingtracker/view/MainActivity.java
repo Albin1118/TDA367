@@ -98,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ExerciseCreatorFragment());
         adapter.addFragment(new WorkoutCreatorFragment());
         adapter.addFragment(new WorkoutDetailViewFragment());
+        adapter.addFragment(new CustomExerciseDetailViewFragment());
         adapter.addFragment(new ExerciseDetailViewFragment());
+
         viewpager.setAdapter(adapter);
     }
 
@@ -121,8 +123,14 @@ public class MainActivity extends AppCompatActivity {
         onResume();
     }
 
+    public void setCustomExerciseDetailView(Exercise e, int index){
+        CustomExerciseDetailViewFragment fragment = (CustomExerciseDetailViewFragment)adapter.getItem(7);
+        fragment.getCurrentExerciseIndex(viewModel.getCustomExercises().indexOf(e));
+        fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
+    }
+
     public void setExerciseDetailView(Exercise e){
-        ExerciseDetailViewFragment fragment = (ExerciseDetailViewFragment)adapter.getItem(7);
+        ExerciseDetailViewFragment fragment = (ExerciseDetailViewFragment)adapter.getItem(8);
         fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
     }
 

@@ -7,9 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 
@@ -17,6 +15,8 @@ import com.example.ziggy.trainingtracker.R;
  * Fragment representing a view displaying contents of a selected exercise
  */
 public class ExerciseDetailViewFragment extends Fragment {
+
+    private MainActivity parentActivity;
 
     private String exerciseName = "Exercise name";
     private String exerciseDescription = "Exercise description";
@@ -32,6 +32,7 @@ public class ExerciseDetailViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_exercise_detail_view, container, false);
+        parentActivity = ((MainActivity)getActivity());
         initViews();
         initListeners();
 

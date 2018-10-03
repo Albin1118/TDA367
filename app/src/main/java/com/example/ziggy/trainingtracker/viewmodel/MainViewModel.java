@@ -14,9 +14,14 @@ import java.util.List;
 
 public class MainViewModel extends ViewModel {
     private TrainingTracker trainingTracker;
+    private List<Exercise> customExercises;
+    public List<Exercise> preMadeExercises;
+    private List<Exercise> allExercises;
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
+        customExercises = trainingTracker.getUser().getCustomExercises();
+        preMadeExercises = trainingTracker.getExercises();
         loadExercises();
         loadWorkouts();
     }
@@ -40,7 +45,7 @@ public class MainViewModel extends ViewModel {
     }
 
     public List<Exercise> getExercises() {
-        List<Exercise> allExercises = new ArrayList<>();
+        allExercises = new ArrayList<>();
         allExercises.addAll(trainingTracker.getExercises());
         allExercises.addAll(trainingTracker.getUser().getCustomExercises());
         return allExercises;
@@ -71,5 +76,9 @@ public class MainViewModel extends ViewModel {
 
     public LiveData<Exercise> getNewCustomExercise() {
       return trainingTracker.getUser().getNewCustomExercise();
+    }
+
+    public List<Exercise> getCustomExercises() {
+        return customExercises;
     }
 }
