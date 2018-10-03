@@ -51,7 +51,8 @@ public class ExerciseCreatorFragment extends Fragment {
             public void onClick(View v) {
                 EditText name = view.findViewById(R.id.exerciseNameEditText);
                 EditText description = view.findViewById(R.id.exerciseDescriptionEditText);
-                parentActivity.viewModel.addCustomExercise(name.getText().toString(), description.getText().toString(), "reps"); //TODO: allow choosing unit
+                String instructions = "instructions";
+                parentActivity.viewModel.addCustomExercise(name.getText().toString(), description.getText().toString(), instructions, "reps"); //TODO: allow choosing unit
                 parentActivity.setViewPager(2);
                 Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
             }

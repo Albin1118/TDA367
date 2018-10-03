@@ -56,17 +56,17 @@ public class MainViewModel extends ViewModel {
 
     // Methods for adding removing and editing custom Exercises
     
-    public void addCustomExercise(String name, String description, String unit) {
-      trainingTracker.getUser().getCustomExercises().add(new Exercise(name, description, unit));
-      trainingTracker.getUser().getNewCustomExercise().setValue(new Exercise(name, description, unit));
+    public void addCustomExercise(String name, String description, String instructions, String unit) {
+      trainingTracker.getUser().getCustomExercises().add(new Exercise(name, description, instructions, unit));
+      trainingTracker.getUser().getNewCustomExercise().setValue(new Exercise(name, description, instructions, unit));
     }
 
     public void removeCustomExercise(int index) {
         trainingTracker.getUser().getCustomExercises().remove(index);
     }
 
-    public  void editCustomExercise(int index, String name, String description, String unit) {
-        trainingTracker.getUser().getCustomExercises().set(index, new Exercise(name, description, unit));
+    public  void editCustomExercise(int index, String name, String description, String instructions, String unit) {
+        trainingTracker.getUser().getCustomExercises().set(index, new Exercise(name, description, instructions, unit));
     }
 
     public LiveData<Exercise> getNewCustomExercise() {

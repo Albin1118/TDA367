@@ -91,11 +91,15 @@ public class ReadExercisesFromXMLService {
         if (description == null)
             description = "-no description-";
 
+        String instructions = getTextValue(exerciseElement, "instructions");
+        if (instructions == null)
+            instructions = "-no instructions-";
+
         String unit = getTextValue(exerciseElement, "unit");
         if (unit == null || unit.trim().equals(""))
             throw new IllegalArgumentException("An exercise needs a unit.");
 
-        return new Exercise(name, description, unit);
+        return new Exercise(name, description, instructions, unit);
     }
 
     /**

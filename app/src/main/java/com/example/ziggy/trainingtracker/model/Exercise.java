@@ -4,13 +4,15 @@ public class Exercise {
 
     private String name;
     private String description;
+    private String instructions;
     private String unit;
     private boolean hasWeight;
 
 
-    public Exercise(String name, String description, String unit) {
+    public Exercise(String name, String description, String instructions, String unit) {
         this.name = name;
         this.description = description;
+        this.instructions = instructions;
         this.unit = unit;
     }
 
@@ -20,6 +22,7 @@ public class Exercise {
     public String getDescription() {
         return description;
     }
+    public String getInstructions() {return instructions;}
     public String getUnit() {
         return unit;
     }

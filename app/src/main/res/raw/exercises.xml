@@ -2,10 +2,12 @@
 <exercises>
     <exercise name="Push-ups">
         <description>This is an example description for a push-up.</description>
+        <instructions>This is the example instructions for a push-up</instructions>
         <unit>reps</unit>
     </exercise>
     <exercise name="Running">
         <description>This is an example description for running.</description>
+        <instructions>This is the example instructions for running</instructions>
         <unit>meters</unit>
     </exercise>
 </exercises>
