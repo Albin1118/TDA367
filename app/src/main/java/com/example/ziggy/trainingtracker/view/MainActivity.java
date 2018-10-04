@@ -109,9 +109,13 @@ public class MainActivity extends AppCompatActivity {
         ExerciseDetailViewFragment fragment = (ExerciseDetailViewFragment)adapter.getItem(8);
         fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
     }
-    
+
+
+    /* //disabled for now
     protected void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
     }
+    */
+
 }
