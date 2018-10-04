@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
+    private BottomNavigationView mBottomNavBar;
 
     MainViewModel viewModel;
     SectionsStatePagerAdapter adapter;
@@ -33,14 +33,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initViews();
+        initComponents();
+        initStartingView();
         initListeners();
         initDataBinding();
 
     }
 
-    private void initViews() {
-        bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
+    private void initComponents() {
+        mBottomNavBar = findViewById(R.id.bottom_navigation_bar);
 
     }
 
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private void initListeners() {
 
         //Listener for the presses on the NavBar
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mBottomNavBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment currentFragment = null;
@@ -80,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
     }
 
+    private void initStartingView(){
+        setFragmentContainerContent(new StartPageFragment());
+    }
+
 
     public void setFragmentContainerContent(Fragment f){
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f)
@@ -104,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         ExerciseDetailViewFragment fragment = (ExerciseDetailViewFragment)adapter.getItem(8);
         fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
     }
-
+    
     protected void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();

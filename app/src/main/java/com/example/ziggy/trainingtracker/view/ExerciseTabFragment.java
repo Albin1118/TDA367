@@ -57,7 +57,7 @@ public class ExerciseTabFragment extends Fragment {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.setViewPager(4);
+                parentActivity.setFragmentContainerContent(new ExerciseCreatorFragment());
             }
         });
 
@@ -68,10 +68,10 @@ public class ExerciseTabFragment extends Fragment {
                 if(parentActivity.viewModel.getCustomExercises() != null && parentActivity.viewModel.preMadeExercises.contains(exercises.get(position))) {
 
                     parentActivity.setExerciseDetailView(exercises.get(position));
-                    parentActivity.setViewPager(8);
+                    //parentActivity.setViewPager(8); //TODO
                 } else if (parentActivity.viewModel.getCustomExercises() != null && parentActivity.viewModel.getCustomExercises().contains(exercises.get(position))){
                     parentActivity.setCustomExerciseDetailView(exercises.get(position), position);
-                    parentActivity.setViewPager(7);
+                    //parentActivity.setViewPager(7);
                 }
             }
         });

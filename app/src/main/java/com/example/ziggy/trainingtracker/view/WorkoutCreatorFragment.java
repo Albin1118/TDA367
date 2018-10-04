@@ -45,7 +45,8 @@ public class WorkoutCreatorFragment extends Fragment {
         createWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.setViewPager(1);
+
+                parentActivity.setFragmentContainerContent(new WorkoutTabFragment());
                 Toast.makeText(getContext(), "New workout created!", Toast.LENGTH_SHORT).show();
             }
         });

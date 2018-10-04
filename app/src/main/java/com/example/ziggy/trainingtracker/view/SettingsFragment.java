@@ -18,6 +18,7 @@ import java.util.ArrayList;
 /**
  * Fragment representing the settings-tab where the user can change the app settings
  */
+
 public class SettingsFragment extends Fragment {
 
 
