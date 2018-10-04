@@ -23,12 +23,10 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    private ViewPager mViewPager;
 
     MainViewModel viewModel;
     SectionsStatePagerAdapter adapter;
 
-    Map<String, Fragment> fragmentMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,77 +36,50 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initListeners();
         initDataBinding();
-        //initFragmentMap();
-        setupViewPager(mViewPager);
+
     }
 
     private void initViews() {
         bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
-        mViewPager = findViewById(R.id.viewPagerContainer);
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void initListeners() {
-        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                if (position <=3) { //The amount of items on the navbar
-                    bottomNavigationView.getMenu().getItem(position).setChecked(true);
-                }
-            }
-        });
 
+        //Listener for the presses on the NavBar
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment currentFragment = null;
+
                 switch (menuItem.getItemId()){
                     case R.id.nav_dashboard:
-                        setViewPager(0);
+                        currentFragment = new StartPageFragment();
                         break;
                     case R.id.nav_workouts:
-                        setViewPager(1);
+                        currentFragment = new WorkoutTabFragment();
                         break;
                     case R.id.nav_exercises:
-                        setViewPager(2);
+                        currentFragment = new ExerciseTabFragment();
                         break;
                     case R.id.nav_settings:
-                        setViewPager(3);
+                        currentFragment = new SettingsFragment();
                         break;
 
                 }
+
+                setFragmentContainerContent(currentFragment);
                 return true;
             }
         });
     }
 
-    public void setViewPager(int fragmentNumber){
-        mViewPager.setCurrentItem(fragmentNumber);
-    }
 
     private void initDataBinding() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
     }
 
-    public void setupViewPager(ViewPager viewpager) {
-        adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StartPageFragment());
-        adapter.addFragment(new WorkoutTabFragment());
-        adapter.addFragment(new ExerciseTabFragment());
-        adapter.addFragment(new SettingsFragment());
-        adapter.addFragment(new ExerciseCreatorFragment());
-        adapter.addFragment(new WorkoutCreatorFragment());
-        adapter.addFragment(new WorkoutDetailViewFragment());
-        adapter.addFragment(new CustomExerciseDetailViewFragment());
-        adapter.addFragment(new ExerciseDetailViewFragment());
-
-        viewpager.setAdapter(adapter);
-    }
-
-   /* public void initFragmentMap(){ //tmp,
-        fragmentMap.put("ExerciseCreator", new ExerciseCreatorFragment());
-        fragmentMap.put("WorkoutCreator", new WorkoutCreatorFragment());
-        fragmentMap.put("WorkoutDetailView)", new WorkoutDetailViewFragment());
-    }*/
 
     public void setFragmentContainerContent(Fragment f){
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f)
