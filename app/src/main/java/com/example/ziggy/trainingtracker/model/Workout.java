@@ -11,6 +11,7 @@ public class Workout {
 
     public Workout(String name) {
         this.name = name;
+        this.description = "description";
     }
 
     @Override

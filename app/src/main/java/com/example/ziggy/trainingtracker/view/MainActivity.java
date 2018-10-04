@@ -14,9 +14,11 @@ import android.view.View;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.Workout;
+import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -91,15 +93,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupViewPager(ViewPager viewpager) {
         adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StartPageFragment());
-        adapter.addFragment(new WorkoutTabFragment());
-        adapter.addFragment(new ExerciseTabFragment());
-        adapter.addFragment(new SettingsFragment());
-        adapter.addFragment(new ExerciseCreatorFragment());
-        adapter.addFragment(new WorkoutCreatorFragment());
-        adapter.addFragment(new WorkoutDetailViewFragment());
-        adapter.addFragment(new CustomExerciseDetailViewFragment());
-        adapter.addFragment(new ExerciseDetailViewFragment());
+        adapter.addFragment(new StartPageFragment()); //0
+        adapter.addFragment(new WorkoutTabFragment()); //1
+        adapter.addFragment(new ExerciseTabFragment()); //2
+        adapter.addFragment(new SettingsFragment()); //3
+        adapter.addFragment(new ExerciseCreatorFragment()); //4
+        adapter.addFragment(new WorkoutCreatorFragment()); //5
+        adapter.addFragment(new WorkoutDetailViewFragment()); //6
+        adapter.addFragment(new CustomExerciseDetailViewFragment()); //7
+        adapter.addFragment(new ExerciseDetailViewFragment()); //8
+        adapter.addFragment(new WorkoutBlockCreatorFragment()); // 9
 
         viewpager.setAdapter(adapter);
     }
@@ -121,6 +124,11 @@ public class MainActivity extends AppCompatActivity {
         //fragment.setWorkoutNameTextView(w.getName());
         //fragment.setWorkoutDescriptionTextView(w.getDescription());
         onResume();
+    }
+
+    public void setWorkoutCreatorFragment(WorkoutBlock workoutBlock){
+        WorkoutCreatorFragment fragment = (WorkoutCreatorFragment)adapter.getItem(5);
+        fragment.addWorkoutBlock(workoutBlock);
     }
 
     public void setCustomExerciseDetailView(Exercise e, int index){

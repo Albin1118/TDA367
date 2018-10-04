@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.ziggy.trainingtracker.model.Workout;
+import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.Exercise;
@@ -17,6 +18,7 @@ public class MainViewModel extends ViewModel {
     private List<Exercise> customExercises;
     public List<Exercise> preMadeExercises;
     private List<Exercise> allExercises;
+    private List<Workout> allWorkouts;
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
@@ -52,7 +54,10 @@ public class MainViewModel extends ViewModel {
     }
 
     public List<Workout> getWorkouts() {
-        return trainingTracker.getWorkouts();
+        allWorkouts = new ArrayList<>();
+        allWorkouts.addAll(trainingTracker.getWorkouts());
+        allWorkouts.addAll(trainingTracker.getUser().getCustomWorkouts());
+        return allWorkouts;
     }
 
     public TrainingTracker getTrainingTracker() { //TODO: remove this method, TrainingTracker should not be visible outside this object
@@ -80,5 +85,13 @@ public class MainViewModel extends ViewModel {
 
     public List<Exercise> getCustomExercises() {
         return customExercises;
+    }
+
+
+    //Method for adding a custom workout
+
+    public void addCustomWorkout(String name, String description, List<WorkoutBlock>workoutBlocks){
+        trainingTracker.getUser().getCustomWorkouts().add(new Workout(name));
+        trainingTracker.getUser().getNewCustomWorkout().setValue(new Workout(name));
     }
 }

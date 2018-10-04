@@ -27,6 +27,7 @@ public class WorkoutTabFragment extends Fragment {
 
     private FloatingActionButton addWorkoutButton;
     private ListView workoutList;
+    private ArrayAdapter<Workout>adapter;
 
     private MainActivity parentActivity;
     private View view;
@@ -40,7 +41,8 @@ public class WorkoutTabFragment extends Fragment {
         workouts = parentActivity.viewModel.getWorkouts();
         initViews();
         initListeners();
-        ArrayAdapter<Workout> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, workouts);
+
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, workouts);
         workoutList.setAdapter(adapter);
 
         return view;

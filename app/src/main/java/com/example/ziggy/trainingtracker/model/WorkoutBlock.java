@@ -37,4 +37,13 @@ public class WorkoutBlock {
     public int getMultiplier() {
         return multiplier;
     }
+
+    @Override
+    public String toString() {
+        return "WorkoutBlock{" +
+                "exercises=" + exercises +
+                ", amounts=" + amounts +
+                ", multiplier=" + multiplier +
+                '}';
+    }
 }

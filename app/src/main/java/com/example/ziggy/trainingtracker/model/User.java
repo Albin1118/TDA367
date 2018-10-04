@@ -12,7 +12,8 @@ public class User {
     private List<Workout> finishedWorkouts;
     private List<Exercise> customExercises = new ArrayList<>();
     private MutableLiveData<Exercise> newCustomExercise = new MutableLiveData<>();
-    private List<Exercise> customWorkouts = new ArrayList<Exercise>();
+    private List<Workout> customWorkouts = new ArrayList<>();
+    private MutableLiveData<Workout>newCustomWorkout = new MutableLiveData<>();
 
     private String username;
 
@@ -51,7 +52,7 @@ public class User {
         return finishedWorkouts;
     }
 
-    public List<Exercise> getCustomWorkouts() {
+    public List<Workout> getCustomWorkouts() {
         return customWorkouts;
     }
 
@@ -61,6 +62,10 @@ public class User {
 
     public MutableLiveData<Exercise> getNewCustomExercise() {
         return newCustomExercise;
+    }
+
+    public MutableLiveData<Workout> getNewCustomWorkout(){
+        return newCustomWorkout;
     }
 
     //Weight might change
