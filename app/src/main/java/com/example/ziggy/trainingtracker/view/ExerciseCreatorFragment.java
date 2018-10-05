@@ -53,7 +53,7 @@ public class ExerciseCreatorFragment extends Fragment {
                 EditText description = view.findViewById(R.id.exerciseDescriptionEditText);
                 String instructions = "instructions";
                 parentActivity.viewModel.addCustomExercise(name.getText().toString(), description.getText().toString(), instructions, "reps"); //TODO: allow choosing unit
-                parentActivity.setViewPager(2);
+                parentActivity.setFragmentContainerContent(new ExerciseTabFragment());
                 Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
             }
         });

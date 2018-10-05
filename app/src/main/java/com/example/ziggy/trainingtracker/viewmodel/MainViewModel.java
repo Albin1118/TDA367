@@ -83,6 +83,10 @@ public class MainViewModel extends ViewModel {
       return trainingTracker.getUser().getNewCustomExercise();
     }
 
+    public void updateUserWeight(double weight){
+        trainingTracker.getUser().setWeight(weight);
+    }
+
     public List<Exercise> getCustomExercises() {
         return customExercises;
     }

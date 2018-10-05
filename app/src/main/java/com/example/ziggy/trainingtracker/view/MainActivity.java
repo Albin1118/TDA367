@@ -24,126 +24,81 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
-    private ViewPager mViewPager;
+    private BottomNavigationView mBottomNavBar;
 
     MainViewModel viewModel;
-    SectionsStatePagerAdapter adapter;
 
-    Map<String, Fragment> fragmentMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initViews();
+        initComponents();
+        initStartingView();
         initListeners();
         initDataBinding();
-        //initFragmentMap();
-        setupViewPager(mViewPager);
+
     }
 
-    private void initViews() {
-        bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
-        mViewPager = findViewById(R.id.viewPagerContainer);
+    private void initComponents() {
+        mBottomNavBar = findViewById(R.id.bottom_navigation_bar);
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void initListeners() {
-        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                if (position <=3) { //The amount of items on the navbar
-                    bottomNavigationView.getMenu().getItem(position).setChecked(true);
-                }
-            }
-        });
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        //Listener for the presses on the NavBar
+        mBottomNavBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment currentFragment = null;
+
                 switch (menuItem.getItemId()){
                     case R.id.nav_dashboard:
-                        setViewPager(0);
+                        currentFragment = new StartPageFragment();
                         break;
                     case R.id.nav_workouts:
-                        setViewPager(1);
+                        currentFragment = new WorkoutTabFragment();
                         break;
                     case R.id.nav_exercises:
-                        setViewPager(2);
+                        currentFragment = new ExerciseTabFragment();
                         break;
                     case R.id.nav_settings:
-                        setViewPager(3);
+                        currentFragment = new SettingsFragment();
                         break;
 
                 }
+
+                setFragmentContainerContentFromTab(currentFragment);
                 return true;
             }
         });
     }
 
-    public void setViewPager(int fragmentNumber){
-        mViewPager.setCurrentItem(fragmentNumber);
-    }
 
     private void initDataBinding() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
     }
 
-    public void setupViewPager(ViewPager viewpager) {
-        adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StartPageFragment()); //0
-        adapter.addFragment(new WorkoutTabFragment()); //1
-        adapter.addFragment(new ExerciseTabFragment()); //2
-        adapter.addFragment(new SettingsFragment()); //3
-        adapter.addFragment(new ExerciseCreatorFragment()); //4
-        adapter.addFragment(new WorkoutCreatorFragment()); //5
-        adapter.addFragment(new WorkoutDetailViewFragment()); //6
-        adapter.addFragment(new CustomExerciseDetailViewFragment()); //7
-        adapter.addFragment(new ExerciseDetailViewFragment()); //8
-        adapter.addFragment(new WorkoutBlockCreatorFragment()); // 9
-
-        viewpager.setAdapter(adapter);
+    private void initStartingView(){
+        setFragmentContainerContent(new StartPageFragment());
     }
 
-   /* public void initFragmentMap(){ //tmp,
-        fragmentMap.put("ExerciseCreator", new ExerciseCreatorFragment());
-        fragmentMap.put("WorkoutCreator", new WorkoutCreatorFragment());
-        fragmentMap.put("WorkoutDetailView)", new WorkoutDetailViewFragment());
-    }*/
-
-    public void setFragmentContainerContent(Fragment f){
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f)
+    public void setFragmentContainerContentFromTab(Fragment f){
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
+                .replace(R.id.fragment_container, f)
                 .commit();
     }
 
-    public void setWorkoutDetailView(Workout w){
-        WorkoutDetailViewFragment fragment = (WorkoutDetailViewFragment)adapter.getItem(6);
-        fragment.setWorkoutDetailViewComponents(w.getName(),w.getDescription(), w.getBlocks());
-        //fragment.setWorkoutNameTextView(w.getName());
-        //fragment.setWorkoutDescriptionTextView(w.getDescription());
-        onResume();
+    public void setFragmentContainerContent(Fragment f){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, f)
+                //.setCustomAnimations(R.anim.enter_from_bottom, R.anim.exit_from_top, R.anim.enter_from_bottom, R.anim.exit_from_top) //not available right now
+                .addToBackStack(null)
+                .commit();
     }
 
-    public void setWorkoutCreatorFragment(WorkoutBlock workoutBlock){
-        WorkoutCreatorFragment fragment = (WorkoutCreatorFragment)adapter.getItem(5);
-        fragment.addWorkoutBlock(workoutBlock);
-    }
-
-    public void setCustomExerciseDetailView(Exercise e, int index){
-        CustomExerciseDetailViewFragment fragment = (CustomExerciseDetailViewFragment)adapter.getItem(7);
-        fragment.getCurrentExerciseIndex(viewModel.getCustomExercises().indexOf(e));
-        fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
-    }
-
-    public void setExerciseDetailView(Exercise e){
-        ExerciseDetailViewFragment fragment = (ExerciseDetailViewFragment)adapter.getItem(8);
-        fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
-    }
-
-    protected void onResume() {
-        super.onResume();
-        adapter.notifyDataSetChanged();
-    }
 }
