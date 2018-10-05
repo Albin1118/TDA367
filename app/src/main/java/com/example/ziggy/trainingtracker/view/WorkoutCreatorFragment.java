@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class WorkoutCreatorFragment extends Fragment {
 
-    private List<WorkoutBlock>workoutBlocks= new ArrayList<>();
+    private static List<WorkoutBlock>workoutBlocks= new ArrayList<>();
 
     private EditText workoutNameEditText;
     private EditText workoutDescriptionEditText;
@@ -74,6 +74,7 @@ public class WorkoutCreatorFragment extends Fragment {
                 EditText description = view.findViewById(R.id.workoutDescriptionEditText);
                 parentActivity.viewModel.addCustomWorkout(name.getText().toString(), description.getText().toString(), workoutBlocks);
 
+                workoutBlocks.clear();
                 parentActivity.setFragmentContainerContent(new WorkoutTabFragment());
                 Toast.makeText(getContext(), "New workout created!", Toast.LENGTH_SHORT).show();
             }
@@ -83,7 +84,7 @@ public class WorkoutCreatorFragment extends Fragment {
 
     public void addWorkoutBlock(WorkoutBlock workoutBlock){
         workoutBlocks.add(workoutBlock);
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
 
 
