@@ -62,7 +62,7 @@ public class WorkoutCreatorFragment extends Fragment {
         addWorkoutBlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.setViewPager(9);
+                parentActivity.setFragmentContainerContent(new WorkoutBlockCreatorFragment());
             }
         });
 
