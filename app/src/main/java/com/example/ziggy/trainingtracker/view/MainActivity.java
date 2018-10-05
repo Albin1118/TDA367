@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNavBar;
 
     MainViewModel viewModel;
-    SectionsStatePagerAdapter adapter;
 
 
     @Override
@@ -99,32 +98,5 @@ public class MainActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
     }
-
-    public void setWorkoutDetailView(Workout w){
-        WorkoutDetailViewFragment fragment = (WorkoutDetailViewFragment)adapter.getItem(6);
-        fragment.setWorkoutDetailViewComponents(w.getName(),w.getDescription(), w.getBlocks());
-        //fragment.setWorkoutNameTextView(w.getName());
-        //fragment.setWorkoutDescriptionTextView(w.getDescription());
-        onResume();
-    }
-
-    public void setCustomExerciseDetailView(Exercise e, int index){
-        CustomExerciseDetailViewFragment fragment = (CustomExerciseDetailViewFragment)adapter.getItem(7);
-        fragment.getCurrentExerciseIndex(viewModel.getCustomExercises().indexOf(e));
-        fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
-    }
-
-    public void setExerciseDetailView(Exercise e){
-        ExerciseDetailViewFragment fragment = (ExerciseDetailViewFragment)adapter.getItem(8);
-        fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
-    }
-
-
-    /* //disabled for now
-    protected void onResume() {
-        super.onResume();
-        adapter.notifyDataSetChanged();
-    }
-    */
 
 }
