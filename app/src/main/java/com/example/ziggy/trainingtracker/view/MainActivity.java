@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-                setFragmentContainerContent(currentFragment);
+                setFragmentContainerContentFromTab(currentFragment);
                 return true;
             }
         });
@@ -85,9 +85,16 @@ public class MainActivity extends AppCompatActivity {
         setFragmentContainerContent(new StartPageFragment());
     }
 
+    public void setFragmentContainerContentFromTab(Fragment f){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, f)
+                .commit();
+    }
 
     public void setFragmentContainerContent(Fragment f){
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f)
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, f)
+                .addToBackStack(null)
                 .commit();
     }
 
