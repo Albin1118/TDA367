@@ -65,7 +65,7 @@ public class ExerciseDetailViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 parentActivity.viewModel.removeCustomExercise(exercise);
-                parentActivity.setViewPager(2);
+                parentActivity.setFragmentContainerContent(new ExerciseTabFragment());
             }
         });
     }
