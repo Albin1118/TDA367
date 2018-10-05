@@ -1,34 +1,63 @@
 package com.example.ziggy.trainingtracker.viewmodel;
 
+import com.example.ziggy.trainingtracker.model.Exercise;
+
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class MainViewModelTest {
-    MainViewModel viewModel = new MainViewModel();
+    private MainViewModel viewModel = new MainViewModel();
 
 
     @Test
     public void addCustomExercise_isCorrect() {
-        viewModel.addCustomExercise("BenchPress", "Hardcore", "reps");
-        assertEquals( viewModel.getTrainingTracker().getUser().getCustomExercises().get(0).getName(), "BenchPress");
+        String name = "MyBenchPressExercise", description = "Hardcore", instructions = "Bench the press", unit = "reps";
+        viewModel.addCustomExercise(name, description, instructions, unit);
+        assertEquals(viewModel.getCustomExercises().get(viewModel.getCustomExercises().size()-1).getName(), name);
+        assertEquals(viewModel.getCustomExercises().get(viewModel.getCustomExercises().size()-1).getDescription(), description);
+        assertEquals(viewModel.getCustomExercises().get(viewModel.getCustomExercises().size()-1).getInstructions(), instructions);
+        assertEquals(viewModel.getCustomExercises().get(viewModel.getCustomExercises().size()-1).getUnit(), unit);
     }
 
     @Test
     public void removeCustomExercise_isCorrect() {
-        viewModel.addCustomExercise("Pullups", "Hardcore", "reps");
-        viewModel.addCustomExercise("Pullups", "Hardcore", "reps");
-        viewModel.removeCustomExercise(0);
-        assertEquals( viewModel.getTrainingTracker().getUser().getCustomExercises().size(), 1);
+        String name = "Pull-Ups", description = "Hardcore", instructions = "Pull the ups", unit = "reps";
+        List<Exercise> customExercises = viewModel.getCustomExercises();
+        int originalListSize = customExercises.size();
+        viewModel.addCustomExercise(name, description, instructions, unit);
+        assertEquals(customExercises.size(), originalListSize + 1);
+        Exercise exerciseToRemove = null;
+        for (Exercise e : customExercises) {
+            if (e.getName().equals(name))
+                exerciseToRemove = e;
+        }
+        assertNotNull(exerciseToRemove);
+        viewModel.removeCustomExercise(exerciseToRemove);
+        assertEquals( customExercises.size(), originalListSize);
     }
 
 
     @Test
     public void editCustomExercise_isCorrect() {
-        int index = 0;
-        viewModel.addCustomExercise("Pullups", "Hardcore", "reps");
-        viewModel.editCustomExercise(index, "PullupsChanged", "HardCore", "reps");
-        assertEquals( viewModel.getTrainingTracker().getUser().getCustomExercises().get(index).getName(), "PullupsChanged");
+        String name = "Pull-Ups", description = "Hardcore", instructions = "Pull the ups", unit = "reps";
+        String newName = "Pull-UpsChanged", newDescription = "HardcoreChanged", newInstructions = "Pull the ups Changed", newUnit = "repsChanged";
+        viewModel.addCustomExercise(name, description, instructions, unit);
+        Exercise exercise = null;
+        for (Exercise e : viewModel.getCustomExercises()) {
+            if (e.getName().equals(name))
+                exercise = e;
+        }
+        assertNotNull(exercise);
+        viewModel.editCustomExercise(exercise, newName, newDescription, newInstructions, newUnit);
+        assertEquals(exercise.getName(), newName);
+        assertEquals(exercise.getDescription(), newDescription);
+        assertEquals(exercise.getInstructions(), newInstructions);
+        assertEquals(exercise.getUnit(), newUnit);
     }
 }
 
