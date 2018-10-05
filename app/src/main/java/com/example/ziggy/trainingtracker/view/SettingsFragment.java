@@ -53,7 +53,9 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                parentActivity.viewModel.updateUserWeight(Double.parseDouble(weightEditText.getText().toString()));
+                double weight = Double.parseDouble(weightEditText.getText().toString());
+
+                parentActivity.viewModel.updateUserWeight(weight);
                 Toast.makeText(getContext(), "Settings updated!", Toast.LENGTH_SHORT).show();
             }
         });
