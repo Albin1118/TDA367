@@ -65,34 +65,9 @@ public class ExerciseTabFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(), parentActivity.viewModel.getExercises().get(position).toString(), Toast.LENGTH_SHORT).show();
-                if(parentActivity.viewModel.getCustomExercises() != null && parentActivity.viewModel.preMadeExercises.contains(exercises.get(position))) {
-                    Exercise e = exercises.get(position);
-
-                    ExerciseDetailViewFragment fragment = new ExerciseDetailViewFragment();
-                    fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
-
-                    parentActivity.setFragmentContainerContent(fragment);
-
-
-                } else if (parentActivity.viewModel.getCustomExercises() != null && parentActivity.viewModel.getCustomExercises().contains(exercises.get(position))){
-                    Exercise e = exercises.get(position);
-
-                    CustomExerciseDetailViewFragment fragment = new CustomExerciseDetailViewFragment();
-                    fragment.setExerciseDetailViewComponents(e.getName(), e.getDescription(), e.getInstructions());
-
-                    parentActivity.setFragmentContainerContent(fragment);
-
-                }
-            }
-        });
-    }
-
-    private void customExerciseAdded() {
-        parentActivity.viewModel.getNewCustomExercise().observe(this, new Observer<Exercise>() {
-            @Override
-            public void onChanged(@Nullable Exercise exercises) {
-                adapter.clear();
-                adapter.addAll(parentActivity.viewModel.getExercises());
+                ExerciseDetailViewFragment fragment = new ExerciseDetailViewFragment();
+                fragment.setExercise(exercises.get(position));
+                parentActivity.setFragmentContainerContent(fragment);
             }
         });
     }

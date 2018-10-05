@@ -7,11 +7,12 @@ public class Workout {
 
     private String name;
     private String description;
-    private List<WorkoutBlock> blocks = new ArrayList<>();;
+    private List<WorkoutBlock> blocks;
 
-    public Workout(String name) {
+    public Workout(String name, String description, List<WorkoutBlock> blocks) {
         this.name = name;
-        this.description = "description";
+        this.description = description;
+        this.blocks = blocks;
     }
 
     @Override

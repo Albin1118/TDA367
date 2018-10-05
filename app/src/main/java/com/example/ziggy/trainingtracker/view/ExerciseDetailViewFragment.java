@@ -7,9 +7,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.Exercise;
 
 /**
  * Fragment representing a view displaying contents of a selected exercise
@@ -26,7 +28,11 @@ public class ExerciseDetailViewFragment extends Fragment {
     private TextView exerciseDescriptionTextView;
     private TextView exerciseInstructionsTextView;
 
+    private Button removeExerciseButton;
+    private Button editExerciseButton;
+
     private View view;
+    private Exercise exercise = new Exercise("name", "description", "instructions", "unit");
 
     @Nullable
     @Override
@@ -41,17 +47,27 @@ public class ExerciseDetailViewFragment extends Fragment {
 
     private void initViews() {
         exerciseNameTextView = view.findViewById(R.id.exerciseNameTextView);
-        exerciseNameTextView.setText(exerciseName);
+        exerciseNameTextView.setText(exercise.getName());
 
         exerciseDescriptionTextView = view.findViewById(R.id.exerciseDescriptionTextView);
-        exerciseDescriptionTextView.setText(exerciseDescription);
+        exerciseDescriptionTextView.setText(exercise.getDescription());
 
         exerciseInstructionsTextView = view.findViewById(R.id.exerciseInstructionsTextView);
-        exerciseInstructionsTextView.setText(exerciseInstructions);
+        exerciseInstructionsTextView.setText(exercise.getInstructions());
+
+        //TODO: hide these if it is not a custom Exercise
+        removeExerciseButton = view.findViewById(R.id.removeExerciseButton);
+        editExerciseButton = view.findViewById(R.id.editExerciseButton);
     }
 
     private void initListeners() {
-
+        removeExerciseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parentActivity.viewModel.removeCustomExercise(exercise);
+                parentActivity.setViewPager(2);
+            }
+        });
     }
 
     @Override
@@ -66,23 +82,11 @@ public class ExerciseDetailViewFragment extends Fragment {
     }
 
     /**
-     * The method is called from the mainActivity and sets the instance variables of the detailView
-     * so that the fragment's contents will be updated next time onCreate() is called.
-     * @param exerciseName name of the selected exercise
-     * @param exerciseDescription description of the selected exercise
-     * @param exerciseInstructions instructions for the selected exercise
+     * Set Exercise to be displayed.
+     * This method needs to be called before creating the view or there will be a NullPointerException in initViews.
+     * @param e The Exercise to be displayed
      */
-    public void setExerciseDetailViewComponents(String exerciseName, String exerciseDescription, String exerciseInstructions){
-        this.exerciseName = exerciseName;
-        this.exerciseDescription = exerciseDescription;
-        this.exerciseInstructions = exerciseInstructions;
-    }
-
-    public void setExerciseNameTextView(String exerciseName) {
-        this.exerciseName = exerciseName;
-    }
-
-    public void setExerciseDescriptionTextView(String exerciseDescription) {
-        this.exerciseDescription = exerciseDescription;
+    public void setExercise(Exercise e) {
+        this.exercise = e;
     }
 }

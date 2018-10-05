@@ -29,6 +29,19 @@ public class Exercise {
         return unit;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
     @Override
     public String toString(){
         return name + " - " + description;
