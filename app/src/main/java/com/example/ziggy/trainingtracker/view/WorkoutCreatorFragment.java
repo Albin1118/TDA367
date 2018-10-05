@@ -62,18 +62,19 @@ public class WorkoutCreatorFragment extends Fragment {
         addWorkoutBlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.setViewPager(9);
+                parentActivity.setFragmentContainerContent(new WorkoutBlockCreatorFragment());
             }
         });
 
         createWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 EditText name = view.findViewById(R.id.workoutNameEditText);
                 EditText description = view.findViewById(R.id.workoutDescriptionEditText);
                 parentActivity.viewModel.addCustomWorkout(name.getText().toString(), description.getText().toString(), workoutBlocks);
 
-                parentActivity.setViewPager(1);
+                parentActivity.setFragmentContainerContent(new WorkoutTabFragment());
                 Toast.makeText(getContext(), "New workout created!", Toast.LENGTH_SHORT).show();
             }
         });

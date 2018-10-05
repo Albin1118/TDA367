@@ -58,15 +58,22 @@ public class WorkoutTabFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(), workouts.get(position).toString(), Toast.LENGTH_SHORT).show();
-                parentActivity.setWorkoutDetailView(workouts.get(position));
-                parentActivity.setViewPager(6);
+
+                Workout w = workouts.get(position);
+
+                WorkoutDetailViewFragment fragment = new WorkoutDetailViewFragment();
+                fragment.setWorkoutDetailViewComponents(w.getName(),w.getDescription(), w.getBlocks());
+                fragment.setWorkoutNameTextView(w.getName());
+                fragment.setWorkoutDescriptionTextView(w.getDescription());
+
+                parentActivity.setFragmentContainerContent(fragment);
             }
         });
 
         addWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.setViewPager(5);
+                parentActivity.setFragmentContainerContent(new WorkoutCreatorFragment());
             }
         });
     }
