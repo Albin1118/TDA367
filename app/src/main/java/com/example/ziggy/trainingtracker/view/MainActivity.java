@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setFragmentContainerContentFromTab(Fragment f){
         getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
                 .replace(R.id.fragment_container, f)
                 .commit();
     }
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
     public void setFragmentContainerContent(Fragment f){
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, f)
+                //.setCustomAnimations(R.anim.enter_from_bottom, R.anim.exit_from_top, R.anim.enter_from_bottom, R.anim.exit_from_top) //not available right now
                 .addToBackStack(null)
                 .commit();
     }
