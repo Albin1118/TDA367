@@ -33,12 +33,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
         initComponents();
         initStartingView();
         initListeners();
-        initDataBinding();
-
     }
 
     private void initComponents() {
@@ -77,10 +76,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    private void initDataBinding() {
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-    }
 
     private void initStartingView(){
         setFragmentContainerContent(new StartPageFragment());

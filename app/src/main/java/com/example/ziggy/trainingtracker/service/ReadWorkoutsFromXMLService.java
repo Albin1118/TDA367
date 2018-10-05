@@ -112,10 +112,7 @@ public class ReadWorkoutsFromXMLService {
             }
         }
 
-        Workout w = new Workout(name);
-        w.setDescription(description);
-        w.setBlocks(blocks);
-        return w;
+        return new Workout(name, description, blocks);
     }
 
     /**
