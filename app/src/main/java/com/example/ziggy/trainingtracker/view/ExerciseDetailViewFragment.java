@@ -55,9 +55,12 @@ public class ExerciseDetailViewFragment extends Fragment {
         exerciseInstructionsTextView = view.findViewById(R.id.exerciseInstructionsTextView);
         exerciseInstructionsTextView.setText(exercise.getInstructions());
 
-        //TODO: hide these if it is not a custom Exercise
         removeExerciseButton = view.findViewById(R.id.removeExerciseButton);
         editExerciseButton = view.findViewById(R.id.editExerciseButton);
+        if (!parentActivity.viewModel.getCustomExercises().contains(exercise)) {
+            removeExerciseButton.setVisibility(View.GONE);
+            editExerciseButton.setVisibility(View.GONE);
+        }
     }
 
     private void initListeners() {
