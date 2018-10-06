@@ -22,7 +22,9 @@ public class ExerciseCreatorFragment extends Fragment {
     private Button createExerciseButton;
     private TextView testTextView;
     private EditText exerciseNameEditText;
+    private EditText exerciseUnitEditText;
     private EditText exerciseDescriptionEditText;
+    private EditText exerciseInstructionsEditText;
 
     private MainActivity parentActivity;
     private View view;
@@ -42,20 +44,27 @@ public class ExerciseCreatorFragment extends Fragment {
         createExerciseButton = view.findViewById(R.id.createExerciseButton);
         testTextView = view.findViewById(R.id.testTextView);
         exerciseNameEditText = view.findViewById(R.id.exerciseNameEditText);
+        exerciseUnitEditText = view.findViewById(R.id.exerciseUnitEditText);
         exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);
+        exerciseInstructionsEditText = view.findViewById(R.id.exerciseInstructionsEditText);
     }
 
     private void initListeners() {
         createExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText name = view.findViewById(R.id.exerciseNameEditText);
-                EditText description = view.findViewById(R.id.exerciseDescriptionEditText);
-                String instructions = "instructions";
-                parentActivity.viewModel.addCustomExercise(name.getText().toString(), description.getText().toString(), instructions, "reps"); //TODO: allow choosing unit
+                createExercise();
                 parentActivity.setFragmentContainerContent(new ExerciseTabFragment());
                 Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void createExercise() {
+        String name = exerciseNameEditText.getText().toString();
+        String unit = exerciseUnitEditText.getText().toString();
+        String description = exerciseDescriptionEditText.getText().toString();
+        String instructions = exerciseInstructionsEditText.getText().toString();
+        parentActivity.viewModel.addCustomExercise(name, description, instructions, unit);
     }
 }
