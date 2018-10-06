@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
@@ -20,16 +21,20 @@ public class ExerciseDetailViewFragment extends Fragment {
 
     private MainActivity parentActivity;
 
-    private String exerciseName = "Exercise name";
-    private String exerciseDescription = "Exercise description";
-    private String exerciseInstructions = "Exercise instructions";
-
     private TextView exerciseNameTextView;
+    private TextView exerciseUnitTextView;
     private TextView exerciseDescriptionTextView;
     private TextView exerciseInstructionsTextView;
 
+    private EditText exerciseNameEditText;
+    private EditText exerciseUnitEditText;
+    private EditText exerciseDescriptionEditText;
+    private EditText exerciseInstructionsEditText;
+
     private Button removeExerciseButton;
     private Button editExerciseButton;
+    private Button cancelEditExerciseButton;
+    private Button saveExerciseButton;
 
     private View view;
     private Exercise exercise = new Exercise("name", "description", "instructions", "unit");
@@ -47,20 +52,19 @@ public class ExerciseDetailViewFragment extends Fragment {
 
     private void initViews() {
         exerciseNameTextView = view.findViewById(R.id.exerciseNameTextView);
-        exerciseNameTextView.setText(exercise.getName());
-
+        exerciseUnitTextView = view.findViewById(R.id.exerciseUnitTextView);
         exerciseDescriptionTextView = view.findViewById(R.id.exerciseDescriptionTextView);
-        exerciseDescriptionTextView.setText(exercise.getDescription());
-
         exerciseInstructionsTextView = view.findViewById(R.id.exerciseInstructionsTextView);
-        exerciseInstructionsTextView.setText(exercise.getInstructions());
-
+        exerciseNameEditText = view.findViewById(R.id.exerciseNameEditText);
+        exerciseUnitEditText = view.findViewById(R.id.exerciseUnitEditText);
+        exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);
+        exerciseInstructionsEditText = view.findViewById(R.id.exerciseInstructionsEditText);
         removeExerciseButton = view.findViewById(R.id.removeExerciseButton);
         editExerciseButton = view.findViewById(R.id.editExerciseButton);
-        if (!parentActivity.viewModel.getCustomExercises().contains(exercise)) {
-            removeExerciseButton.setVisibility(View.GONE);
-            editExerciseButton.setVisibility(View.GONE);
-        }
+        cancelEditExerciseButton = view.findViewById(R.id.cancelEditExerciseButton);
+        saveExerciseButton = view.findViewById(R.id.saveExerciseButton);
+
+        showExerciseInfo();
     }
 
     private void initListeners() {
@@ -71,6 +75,77 @@ public class ExerciseDetailViewFragment extends Fragment {
                 parentActivity.setFragmentContainerContent(new ExerciseTabFragment());
             }
         });
+
+        editExerciseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEditableExerciseInfo();
+            }
+        });
+
+        cancelEditExerciseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showExerciseInfo();
+            }
+        });
+
+        saveExerciseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveExercise();
+                showExerciseInfo();
+            }
+        });
+    }
+
+    private void showExerciseInfo() {
+        exerciseNameTextView.setText(exercise.getName());
+        exerciseUnitTextView.setText(exercise.getUnit());
+        exerciseDescriptionTextView.setText(exercise.getDescription());
+        exerciseInstructionsTextView.setText(exercise.getInstructions());
+
+        exerciseNameEditText.setVisibility(View.GONE);
+        exerciseUnitEditText.setVisibility(View.GONE);
+        exerciseDescriptionEditText.setVisibility(View.GONE);
+        exerciseInstructionsEditText.setVisibility(View.GONE);
+        cancelEditExerciseButton.setVisibility(View.GONE);
+        saveExerciseButton.setVisibility(View.GONE);
+        exerciseNameTextView.setVisibility(View.VISIBLE);
+        exerciseUnitTextView.setVisibility(View.VISIBLE);
+        exerciseDescriptionTextView.setVisibility(View.VISIBLE);
+        exerciseInstructionsTextView.setVisibility(View.VISIBLE);
+        if (parentActivity.viewModel.getCustomExercises().contains(exercise)) {
+            removeExerciseButton.setVisibility(View.VISIBLE);
+            editExerciseButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void showEditableExerciseInfo() {
+        exerciseNameEditText.setText(exercise.getName());
+        exerciseUnitEditText.setText(exercise.getUnit());
+        exerciseDescriptionEditText.setText(exercise.getDescription());
+        exerciseInstructionsEditText.setText(exercise.getInstructions());
+
+        exerciseNameTextView.setVisibility(View.GONE);
+        exerciseUnitTextView.setVisibility(View.GONE);
+        exerciseDescriptionTextView.setVisibility(View.GONE);
+        exerciseInstructionsTextView.setVisibility(View.GONE);
+        editExerciseButton.setVisibility(View.GONE);
+        exerciseNameEditText.setVisibility(View.VISIBLE);
+        exerciseUnitEditText.setVisibility(View.VISIBLE);
+        exerciseDescriptionEditText.setVisibility(View.VISIBLE);
+        exerciseInstructionsEditText.setVisibility(View.VISIBLE);
+        cancelEditExerciseButton.setVisibility(View.VISIBLE);
+        saveExerciseButton.setVisibility(View.VISIBLE);
+    }
+
+    private void saveExercise() {
+        String name = exerciseNameEditText.getText().toString();
+        String unit = exerciseUnitEditText.getText().toString();
+        String description = exerciseDescriptionEditText.getText().toString();
+        String instructions = exerciseInstructionsEditText.getText().toString();
+        parentActivity.viewModel.editCustomExercise(exercise, name, description, instructions, unit);
     }
 
     @Override
