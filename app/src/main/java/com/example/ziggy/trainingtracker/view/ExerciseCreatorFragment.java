@@ -20,7 +20,6 @@ public class ExerciseCreatorFragment extends Fragment {
 
 
     private Button createExerciseButton;
-    private TextView testTextView;
     private EditText exerciseNameEditText;
     private EditText exerciseUnitEditText;
     private EditText exerciseDescriptionEditText;
@@ -42,7 +41,6 @@ public class ExerciseCreatorFragment extends Fragment {
 
     private void initViews() {
         createExerciseButton = view.findViewById(R.id.createExerciseButton);
-        testTextView = view.findViewById(R.id.testTextView);
         exerciseNameEditText = view.findViewById(R.id.exerciseNameEditText);
         exerciseUnitEditText = view.findViewById(R.id.exerciseUnitEditText);
         exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);

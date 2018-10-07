@@ -7,11 +7,11 @@
     tools:context=".view.ExerciseCreatorFragment">
 
     <TextView
+        android:text="@string/exercise_creator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="@string/exercise_creator"
         android:textColor="@color/colorAccent"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -20,11 +20,11 @@
 
     <EditText
         android:id="@+id/exerciseNameEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="85dp"
         android:layout_marginStart="85dp"
-        android:layout_marginTop="61dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginTop="60dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textCapWords"
@@ -34,11 +34,11 @@
 
     <EditText
         android:id="@+id/exerciseUnitEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="85dp"
         android:layout_marginStart="85dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:hint="reps, meters, seconds..."
         android:inputType="text"
@@ -46,13 +46,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseNameEditText" />
 
+    <TextView
+        android:text="Description:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/exerciseDescriptionEditText" />
+
     <EditText
         android:id="@+id/exerciseDescriptionEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="30dp"
         android:background="@color/colorTextArea"
         android:gravity="start"
         android:ems="10"
@@ -63,13 +72,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseUnitEditText" />
 
+    <TextView
+        android:text="Instructions:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/exerciseInstructionsEditText" />
+
     <EditText
         android:id="@+id/exerciseInstructionsEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="30dp"
         android:background="@color/colorTextArea"
         android:gravity="start"
         android:ems="10"
@@ -79,17 +97,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseDescriptionEditText" />
-
-    <TextView
-        android:id="@+id/testTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="22dp"
-        android:gravity="center"
-        android:text="TestTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exerciseInstructionsEditText" />
 
     <Button
         android:id="@+id/createExerciseButton"

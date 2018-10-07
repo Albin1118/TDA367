@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,9 @@ public class ExerciseDetailViewFragment extends Fragment {
         exerciseNameTextView = view.findViewById(R.id.exerciseNameTextView);
         exerciseUnitTextView = view.findViewById(R.id.exerciseUnitTextView);
         exerciseDescriptionTextView = view.findViewById(R.id.exerciseDescriptionTextView);
+        exerciseDescriptionTextView.setMovementMethod(new ScrollingMovementMethod());
         exerciseInstructionsTextView = view.findViewById(R.id.exerciseInstructionsTextView);
+        exerciseInstructionsTextView.setMovementMethod(new ScrollingMovementMethod());
         exerciseNameEditText = view.findViewById(R.id.exerciseNameEditText);
         exerciseUnitEditText = view.findViewById(R.id.exerciseUnitEditText);
         exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);
