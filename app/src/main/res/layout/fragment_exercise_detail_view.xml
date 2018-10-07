@@ -91,12 +91,13 @@
         android:layout_height="136dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="22dp"
-        android:background="#F2F2F2"
+        android:background="@color/colorTextArea"
         android:gravity="start"
         android:hint="Description"
         android:textSize="18sp"
         android:textStyle="bold"
         android:inputType="textCapSentences|textMultiLine"
+        android:scrollbars="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseUnitEditText" />
 
@@ -107,12 +108,13 @@
         android:layout_height="136dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="22dp"
-        android:background="#F2F2F2"
+        android:background="@color/colorTextArea"
         android:gravity="start"
         android:hint="Instructions"
         android:textSize="18sp"
         android:textStyle="bold"
         android:inputType="textCapSentences|textMultiLine"
+        android:scrollbars="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseDescriptionEditText" />
 
