@@ -15,6 +15,7 @@ import com.example.ziggy.trainingtracker.R;
  */
 public class StartPageFragment extends Fragment {
 
+    private MainActivity parentActivity;
     private View view;
 
 
@@ -22,6 +23,8 @@ public class StartPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_start_page, container, false);
+        parentActivity = (MainActivity)getActivity();
+        parentActivity.setNavBarState(R.id.nav_dashboard);
 
         return view;
     }
