@@ -52,25 +52,26 @@ public class MainActivity extends AppCompatActivity {
         mBottomNavBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment currentFragment = null;
+                if (mBottomNavBar.getSelectedItemId() != menuItem.getItemId()) {
+                    Fragment selectedFragment = null;
+                    switch (menuItem.getItemId()) {
+                        case R.id.nav_dashboard:
+                            selectedFragment = new StartPageFragment();
+                            break;
+                        case R.id.nav_workouts:
+                            selectedFragment = new WorkoutTabFragment();
+                            break;
+                        case R.id.nav_exercises:
+                            selectedFragment = new ExerciseTabFragment();
+                            break;
+                        case R.id.nav_settings:
+                            selectedFragment = new SettingsFragment();
+                            break;
 
-                switch (menuItem.getItemId()){
-                    case R.id.nav_dashboard:
-                        currentFragment = new StartPageFragment();
-                        break;
-                    case R.id.nav_workouts:
-                        currentFragment = new WorkoutTabFragment();
-                        break;
-                    case R.id.nav_exercises:
-                        currentFragment = new ExerciseTabFragment();
-                        break;
-                    case R.id.nav_settings:
-                        currentFragment = new SettingsFragment();
-                        break;
-
+                    }
+                    setFragmentContainerContentFromTab(selectedFragment);
                 }
 
-                setFragmentContainerContentFromTab(currentFragment);
                 return true;
             }
         });
