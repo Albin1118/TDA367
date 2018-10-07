@@ -52,6 +52,7 @@ public class ExerciseCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createExercise();
+                parentActivity.popBackStack();
                 parentActivity.setFragmentContainerContent(new ExerciseTabFragment());
                 Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
             }

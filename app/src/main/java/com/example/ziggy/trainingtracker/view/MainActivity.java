@@ -58,28 +58,26 @@ public class MainActivity extends AppCompatActivity {
         mBottomNavBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (mBottomNavBar.getSelectedItemId() != menuItem.getItemId()) {
-                    Fragment selectedFragment = null;
-                    switch (menuItem.getItemId()) {
-                        case R.id.nav_dashboard:
-                            popBackStack();
-                            return true;
-                        case R.id.nav_workouts:
-                            popBackStack();
-                            selectedFragment = new WorkoutTabFragment();
-                            break;
-                        case R.id.nav_exercises:
-                            popBackStack();
-                            selectedFragment = new ExerciseTabFragment();
-                            break;
-                        case R.id.nav_settings:
-                            popBackStack();
-                            selectedFragment = new SettingsFragment();
-                            break;
+                Fragment selectedFragment = null;
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_dashboard:
+                        popBackStack();
+                        return true;
+                    case R.id.nav_workouts:
+                        popBackStack();
+                        selectedFragment = new WorkoutTabFragment();
+                        break;
+                    case R.id.nav_exercises:
+                        popBackStack();
+                        selectedFragment = new ExerciseTabFragment();
+                        break;
+                    case R.id.nav_settings:
+                        popBackStack();
+                        selectedFragment = new SettingsFragment();
+                        break;
 
-                    }
-                    setFragmentContainerContentFromTab(selectedFragment);
                 }
+                setFragmentContainerContentFromTab(selectedFragment);
 
                 return true;
             }
@@ -89,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Clear the back stack, back to the start page.
      */
-    private void popBackStack() {
+    public void popBackStack() {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
