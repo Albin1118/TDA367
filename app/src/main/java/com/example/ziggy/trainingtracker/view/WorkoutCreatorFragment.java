@@ -43,7 +43,8 @@ public class WorkoutCreatorFragment extends Fragment {
         initViews();
         initListeners();
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, workoutBlocks);
+        //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, workoutBlocks);
+        adapter = new WorkoutBlockListAdapter(getContext(), workoutBlocks);
         workoutBlocksListView.setAdapter(adapter);
 
         return view;
