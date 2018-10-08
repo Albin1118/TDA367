@@ -108,10 +108,14 @@ public class WorkoutDetailViewFragment extends Fragment {
         });
     }
 
-    private void showWorkoutInfo() {
-
+    private void setWorkoutInfo() {
         workoutNameTextView.setText(workoutName);
         workoutDescriptionTextView.setText(workoutDescription);
+    }
+
+    private void showWorkoutInfo() {
+        setWorkoutInfo();
+
         workoutDescriptionTextView.setVisibility(View.VISIBLE);
         workoutNameTextView.setVisibility(View.VISIBLE);
         startWorkoutButton.setVisibility(View.VISIBLE);
@@ -122,6 +126,15 @@ public class WorkoutDetailViewFragment extends Fragment {
             removeWorkoutButton.setVisibility(View.VISIBLE);
             editWorkoutButton.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void showEditableWorkoutInfo() {
+        setWorkoutInfo();
+        workoutDescriptionTextView.setVisibility(View.GONE);
+        workoutNameTextView.setVisibility(View.GONE);
+        startWorkoutButton.setVisibility(View.GONE);
+        cancelEditWorkoutButton.setVisibility(View.VISIBLE);
+        saveWorkoutButton.setVisibility(View.VISIBLE);
     }
 
     @Override
