@@ -6,21 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 
-import com.example.ziggy.trainingtracker.model.Exercise;
-import com.example.ziggy.trainingtracker.model.Workout;
-import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
 
-import java.util.List;
-import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -67,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
                         popBackStack();
                         selectedFragment = new WorkoutTabFragment();
                         break;
+                    case R.id.nav_active_workout:
+                        popBackStack();
+                        selectedFragment = new ActiveWorkoutFragment();
+                        break;
                     case R.id.nav_exercises:
                         popBackStack();
                         selectedFragment = new ExerciseTabFragment();
@@ -101,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
         mBottomNavBar.getMenu().findItem(id).setChecked(true);
     }
 
+    /**
+     * Sets the current displayed Fragment/content in the Fragment Container.
+     * @param f The fragment to set as the displayed fragment
+     */
+
     public void setFragmentContainerContentFromTab(Fragment f){
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right)
@@ -113,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_bottom, R.anim.exit_from_top)
                 .replace(R.id.fragment_container, f)
-                //not available right now
                 .addToBackStack(null)
                 .commit();
     }
