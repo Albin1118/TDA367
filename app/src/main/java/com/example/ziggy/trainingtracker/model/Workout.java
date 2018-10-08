@@ -29,6 +29,9 @@ public class Workout {
     public List<WorkoutBlock> getBlocks() {
         return blocks;
     }
+    public String getNumberofBlocks(){
+        return blocks.size() + " blocks";
+    }
 
     public void setName(String name) {
         this.name = name;

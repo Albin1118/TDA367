@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+
+    <TextView
+        android:id="@+id/workoutNameTextView"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Text"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/workoutDescriptionTextView"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/workoutNameTextView"
+        android:layout_alignStart="@id/workoutNameTextView"
+        android:text="Text"
+        android:textAppearance="?attr/textAppearanceListItemSecondary"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/workoutBlocksTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="34dp"
+        android:text="5 blocks" />
+
+</RelativeLayout>
