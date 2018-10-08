@@ -51,13 +51,61 @@
 
     <Button
         android:id="@+id/startWorkoutButton"
-        android:layout_width="113dp"
+        android:layout_width="88dp"
         android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:background="?android:attr/colorAccent"
         android:text="@string/workout_detail_view_button"
         android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/removeWorkoutButton"
+        android:layout_width="88dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="148dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="Remove"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/editWorkoutButton"
+        android:layout_width="88dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="280dp"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:text="Edit"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/cancelEditWorkoutButton"
+        android:layout_width="88dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:text="Cancel"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/saveWorkoutButton"
+        android:layout_width="88dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="148dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:text="Save"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

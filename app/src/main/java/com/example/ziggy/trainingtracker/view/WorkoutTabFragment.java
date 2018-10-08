@@ -82,6 +82,7 @@ public class WorkoutTabFragment extends Fragment {
                 fragment.setWorkoutDetailViewComponents(w.getName(),w.getDescription(), w.getBlocks());
                 fragment.setWorkoutNameTextView(w.getName());
                 fragment.setWorkoutDescriptionTextView(w.getDescription());
+                fragment.setWorkout(w);
 
                 parentActivity.setFragmentContainerContent(fragment);
             }
