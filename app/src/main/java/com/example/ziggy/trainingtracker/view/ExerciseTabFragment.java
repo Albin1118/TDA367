@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
@@ -42,7 +43,21 @@ public class ExerciseTabFragment extends Fragment {
 
         initViews();
         initListeners();
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, exercises);
+
+        //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, exercises);
+        ArrayAdapter adapter = new ArrayAdapter(getContext(), R.layout.exercise_list_item, R.id.exerciseNameTextView, exercises) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView exerciseNameTextView = (TextView) view.findViewById(R.id.exerciseNameTextView);
+                TextView exerciseDescriptionTextView = (TextView) view.findViewById(R.id.exerciseDescriptionTextView);
+
+                exerciseNameTextView.setText(exercises.get(position).getName());
+                exerciseDescriptionTextView.setText(exercises.get(position).getDescription());
+                return view;
+            }
+        };
+
         exerciseListView.setAdapter(adapter);
 
 
