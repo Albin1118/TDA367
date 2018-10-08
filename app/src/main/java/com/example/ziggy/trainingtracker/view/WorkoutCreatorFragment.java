@@ -70,9 +70,15 @@ public class WorkoutCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                EditText name = view.findViewById(R.id.workoutNameEditText);
-                EditText description = view.findViewById(R.id.workoutDescriptionEditText);
-                parentActivity.viewModel.addCustomWorkout(name.getText().toString(), description.getText().toString(), workoutBlocks);
+                EditText nameEditText = view.findViewById(R.id.workoutNameEditText);
+                EditText descriptionEditText = view.findViewById(R.id.workoutDescriptionEditText);
+
+                String name = nameEditText.getText().toString();
+                String description = descriptionEditText.getText().toString();
+                List<WorkoutBlock>newWorkoutBlocks = new ArrayList<>();
+                newWorkoutBlocks.addAll(workoutBlocks);
+
+                parentActivity.viewModel.addCustomWorkout(name, description, newWorkoutBlocks);
 
                 workoutBlocks.clear();
                 parentActivity.setFragmentContainerContent(new WorkoutTabFragment());
