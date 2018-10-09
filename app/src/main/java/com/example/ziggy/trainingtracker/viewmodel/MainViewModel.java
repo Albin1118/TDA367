@@ -2,6 +2,7 @@ package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
+import android.os.Bundle;
 
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
@@ -9,6 +10,7 @@ import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -16,11 +18,22 @@ public class MainViewModel extends ViewModel {
     private TrainingTracker trainingTracker;
     private List<Exercise> exercises;
     private List<Workout> workouts;
+    private Gson gson;
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
+        gson = new Gson();
     }
 
+
+
+    public String convertUserToJson(){
+        String json = gson.toJson(trainingTracker.getUser());
+
+        return json;
+    }
+
+    
     public List<Exercise> getExercises() {
         if (exercises == null) {
             exercises = trainingTracker.getExercises();
