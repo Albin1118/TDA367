@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +43,12 @@ public class WorkoutDetailViewFragment extends Fragment {
     private Button saveWorkoutButton;
     private Button removeWorkoutButton;
 
-    private Workout workout;
+    private EditText workoutNameEditText;
+    private EditText workoutDescriptionEditText;
+
+
+    List<WorkoutBlock> w = new ArrayList<WorkoutBlock>();
+    private Workout workout = new Workout("Name", "Description", w);
 
     private View view;
 
@@ -66,6 +73,8 @@ public class WorkoutDetailViewFragment extends Fragment {
         cancelEditWorkoutButton = view.findViewById(R.id.cancelEditWorkoutButton);
         saveWorkoutButton = view.findViewById(R.id.saveWorkoutButton);
         removeWorkoutButton = view.findViewById(R.id.removeWorkoutButton);
+        workoutNameEditText = view.findViewById(R.id.workoutNameEditText);
+        workoutDescriptionEditText = view.findViewById(R.id.workoutDescriptionEditText);
 
         showWorkoutInfo();
     }
@@ -81,21 +90,22 @@ public class WorkoutDetailViewFragment extends Fragment {
         editWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showEditableWorkoutInfo();
             }
         });
 
         cancelEditWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showWorkoutInfo();
             }
         });
 
         saveWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                saveWorkout();
+                showWorkoutInfo();
             }
         });
 
@@ -109,18 +119,20 @@ public class WorkoutDetailViewFragment extends Fragment {
     }
 
     private void setWorkoutInfo() {
-        workoutNameTextView.setText(workoutName);
-        workoutDescriptionTextView.setText(workoutDescription);
+        workoutNameTextView.setText(workout.getName());
+        workoutDescriptionTextView.setText(workout.getDescription());
     }
 
     private void showWorkoutInfo() {
         setWorkoutInfo();
-
         workoutDescriptionTextView.setVisibility(View.VISIBLE);
         workoutNameTextView.setVisibility(View.VISIBLE);
         startWorkoutButton.setVisibility(View.VISIBLE);
+
         cancelEditWorkoutButton.setVisibility(View.GONE);
         saveWorkoutButton.setVisibility(View.GONE);
+        workoutNameEditText.setVisibility(View.GONE);
+        workoutDescriptionEditText.setVisibility(View.GONE);
 
         if(parentActivity.viewModel.getCustomWorkouts().contains(workout)) {
             removeWorkoutButton.setVisibility(View.VISIBLE);
@@ -132,9 +144,16 @@ public class WorkoutDetailViewFragment extends Fragment {
         setWorkoutInfo();
         workoutDescriptionTextView.setVisibility(View.GONE);
         workoutNameTextView.setVisibility(View.GONE);
-        startWorkoutButton.setVisibility(View.GONE);
+
+        workoutNameEditText.setVisibility(View.VISIBLE);
+        workoutDescriptionEditText.setVisibility(View.VISIBLE);
+
         cancelEditWorkoutButton.setVisibility(View.VISIBLE);
         saveWorkoutButton.setVisibility(View.VISIBLE);
+
+        startWorkoutButton.setVisibility(View.GONE);
+        removeWorkoutButton.setVisibility(View.GONE);
+        editWorkoutButton.setVisibility(View.GONE);
     }
 
     @Override
@@ -172,5 +191,11 @@ public class WorkoutDetailViewFragment extends Fragment {
 
     public void setWorkout(Workout workout) {
         this.workout = workout;
+    }
+
+    private void saveWorkout() {
+        String name = workoutDescriptionEditText.getText().toString();
+        String description = workoutDescriptionEditText.getText().toString();
+        parentActivity.viewModel.editCustomWorkout(workout, name, description, this.workoutBlocks);
     }
 }

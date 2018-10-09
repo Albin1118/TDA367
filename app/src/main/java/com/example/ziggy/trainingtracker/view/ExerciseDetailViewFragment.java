@@ -135,6 +135,7 @@ public class ExerciseDetailViewFragment extends Fragment {
         exerciseUnitTextView.setVisibility(View.GONE);
         exerciseDescriptionTextView.setVisibility(View.GONE);
         exerciseInstructionsTextView.setVisibility(View.GONE);
+        removeExerciseButton.setVisibility(View.GONE);
         editExerciseButton.setVisibility(View.GONE);
         exerciseNameEditText.setVisibility(View.VISIBLE);
         exerciseUnitEditText.setVisibility(View.VISIBLE);
