@@ -1,6 +1,8 @@
 package com.example.ziggy.trainingtracker.viewmodel;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.User;
+import com.google.gson.Gson;
 
 import org.junit.Test;
 
@@ -12,6 +14,26 @@ import static org.junit.Assert.*;
 
 public class MainViewModelTest {
     private MainViewModel viewModel = new MainViewModel();
+
+    // First draft of json tests
+    @Test
+    public void convertToJson_isCorrect() {
+        String expected = "{\"customExercises\":[],\"customWorkouts\":[],\"username\":\"Test\",\"name\":\"Mr Test\",\"weight\":98.5,\"height\":210,\"age\":0}";
+        String j = viewModel.convertUserToJson();
+        assertEquals(expected, j);
+
+    }
+
+
+    @Test
+    public void deSerialization_isCorrect() {
+        Gson gson = new Gson();
+        User u = new User("Ree", "Pepe", 1337.0, 190);
+        String json = gson.toJson(u);
+        User nu = gson.fromJson(json, User.class);
+        assertEquals(u.getHeight(), nu.getHeight());
+
+    }
 
 
     @Test
