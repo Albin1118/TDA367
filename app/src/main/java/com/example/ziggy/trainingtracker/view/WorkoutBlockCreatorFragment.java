@@ -95,7 +95,6 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 WorkoutCreatorFragment fragment = new WorkoutCreatorFragment();
                 fragment.addWorkoutBlock(workoutBlock);
                 parentActivity.setFragmentContainerContent(fragment);
-
             }
         });
     }

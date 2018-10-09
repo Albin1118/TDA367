@@ -46,6 +46,8 @@ public class WorkoutDetailViewFragment extends Fragment {
     private EditText workoutNameEditText;
     private EditText workoutDescriptionEditText;
 
+    private Button addWorkoutBlockButton;
+
 
     List<WorkoutBlock> w = new ArrayList<WorkoutBlock>();
     private Workout workout = new Workout("Name", "Description", w);
@@ -75,6 +77,7 @@ public class WorkoutDetailViewFragment extends Fragment {
         removeWorkoutButton = view.findViewById(R.id.removeWorkoutButton);
         workoutNameEditText = view.findViewById(R.id.workoutNameEditText);
         workoutDescriptionEditText = view.findViewById(R.id.workoutDescriptionEditText);
+        addWorkoutBlockButton = view.findViewById(R.id.addWorkoutBlockButton);
 
         showWorkoutInfo();
     }
@@ -116,6 +119,13 @@ public class WorkoutDetailViewFragment extends Fragment {
                 parentActivity.setFragmentContainerContent(new WorkoutTabFragment());
             }
         });
+
+        addWorkoutBlockButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void setWorkoutInfo() {
@@ -133,6 +143,8 @@ public class WorkoutDetailViewFragment extends Fragment {
         saveWorkoutButton.setVisibility(View.GONE);
         workoutNameEditText.setVisibility(View.GONE);
         workoutDescriptionEditText.setVisibility(View.GONE);
+        addWorkoutBlockButton.setVisibility(View.GONE);
+
 
         if(parentActivity.viewModel.getCustomWorkouts().contains(workout)) {
             removeWorkoutButton.setVisibility(View.VISIBLE);
@@ -150,6 +162,7 @@ public class WorkoutDetailViewFragment extends Fragment {
 
         cancelEditWorkoutButton.setVisibility(View.VISIBLE);
         saveWorkoutButton.setVisibility(View.VISIBLE);
+        addWorkoutBlockButton.setVisibility(View.VISIBLE);
 
         startWorkoutButton.setVisibility(View.GONE);
         removeWorkoutButton.setVisibility(View.GONE);
