@@ -74,7 +74,7 @@ public class WorkoutCreatorFragment extends Fragment {
                 } else {
                     a = new DropDownAnim(workoutDescriptionLayout, 0);
                 } descriptionClosed = !descriptionClosed;
-                a.setDuration(500);
+                a.setDuration(300);
                 workoutDescriptionLayout.startAnimation(a);
             }
         });
