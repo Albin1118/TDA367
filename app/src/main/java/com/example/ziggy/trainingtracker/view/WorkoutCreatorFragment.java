@@ -37,6 +37,8 @@ public class WorkoutCreatorFragment extends Fragment {
     private ArrayAdapter<WorkoutBlock> adapter;
     private MainActivity parentActivity;
     private View view;
+    private View header;
+    private View footer;
     private boolean descriptionClosed = true;
 
     @Nullable
@@ -44,6 +46,8 @@ public class WorkoutCreatorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         parentActivity = (MainActivity)getActivity();
         view  = inflater.inflate(R.layout.fragment_workout_creator, container, false);
+        header = inflater.inflate(R.layout.workout_block_list_header, null);
+        footer = inflater.inflate(R.layout.workout_block_list_footer, null);
         initViews();
         initListeners();
 
@@ -55,13 +59,15 @@ public class WorkoutCreatorFragment extends Fragment {
     }
 
     private void initViews() {
-        workoutNameEditText = view.findViewById(R.id.workoutNameEditText);
-        workoutDescriptionButton = view.findViewById(R.id.workoutDescriptionButton);
-        workoutDescriptionLayout = view.findViewById(R.id.workoutDescriptionLayout);
-        workoutDescriptionEditText = view.findViewById(R.id.workoutDescriptionEditText);
-        addWorkoutBlockButton = view.findViewById(R.id.addWorkoutBlockButton);
+        workoutNameEditText = header.findViewById(R.id.workoutNameEditText);
+        workoutDescriptionButton = header.findViewById(R.id.workoutDescriptionButton);
+        workoutDescriptionLayout = header.findViewById(R.id.workoutDescriptionLayout);
+        workoutDescriptionEditText = header.findViewById(R.id.workoutDescriptionEditText);
+        addWorkoutBlockButton = footer.findViewById(R.id.addWorkoutBlockButton);
         workoutBlocksListView = view.findViewById(R.id.workoutBlocksListView);
         createWorkoutButton = view.findViewById(R.id.createWorkoutButton);
+        workoutBlocksListView.addHeaderView(header);
+        workoutBlocksListView.addFooterView(footer);
     }
 
     private void initListeners() {
