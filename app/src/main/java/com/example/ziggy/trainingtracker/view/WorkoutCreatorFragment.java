@@ -2,6 +2,7 @@ package com.example.ziggy.trainingtracker.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,8 @@ public class WorkoutCreatorFragment extends Fragment {
     private static List<WorkoutBlock>workoutBlocks= new ArrayList<>();
 
     private EditText workoutNameEditText;
+    private Button workoutDescriptionButton;
+    private ConstraintLayout workoutDescriptionLayout;
     private EditText workoutDescriptionEditText;
     private Button addWorkoutBlockButton;
     private ListView workoutBlocksListView;
@@ -34,6 +37,7 @@ public class WorkoutCreatorFragment extends Fragment {
     private ArrayAdapter<WorkoutBlock> adapter;
     private MainActivity parentActivity;
     private View view;
+    private boolean descriptionClosed = true;
 
     @Nullable
     @Override
@@ -52,6 +56,8 @@ public class WorkoutCreatorFragment extends Fragment {
 
     private void initViews() {
         workoutNameEditText = view.findViewById(R.id.workoutNameEditText);
+        workoutDescriptionButton = view.findViewById(R.id.workoutDescriptionButton);
+        workoutDescriptionLayout = view.findViewById(R.id.workoutDescriptionLayout);
         workoutDescriptionEditText = view.findViewById(R.id.workoutDescriptionEditText);
         addWorkoutBlockButton = view.findViewById(R.id.addWorkoutBlockButton);
         workoutBlocksListView = view.findViewById(R.id.workoutBlocksListView);
@@ -59,6 +65,19 @@ public class WorkoutCreatorFragment extends Fragment {
     }
 
     private void initListeners() {
+        workoutDescriptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DropDownAnim a;
+                if (descriptionClosed) {
+                    a = new DropDownAnim(workoutDescriptionLayout, workoutDescriptionEditText.getLayoutParams().height + 40);
+                } else {
+                    a = new DropDownAnim(workoutDescriptionLayout, 0);
+                } descriptionClosed = !descriptionClosed;
+                a.setDuration(500);
+                workoutDescriptionLayout.startAnimation(a);
+            }
+        });
 
         addWorkoutBlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
