@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#838383</color>
     <color name="colorAccent">#0300be</color>
     <color name="colorTextArea">#f0f0f0</color>
+    <color name="selectedListItem">#8335ff2e</color>
+
 </resources>
