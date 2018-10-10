@@ -61,7 +61,14 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_active_workout:
                         popBackStack();
-                        selectedFragment = new ActiveWorkoutFragment();
+
+                        if (onGoingActiveWorkout()) {
+                            selectedFragment = new ActiveWorkoutFragment();
+                        }
+                        else {
+                            selectedFragment = new PreActiveWorkoutFragment();
+                        }
+
                         break;
                     case R.id.nav_exercises:
                         popBackStack();
@@ -80,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    public boolean onGoingActiveWorkout(){
+        return viewModel.checkActiveWorkoutStatus();
+    }
     /**
      * Clear the back stack, back to the start page.
      */

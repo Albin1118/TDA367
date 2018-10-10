@@ -18,12 +18,15 @@ public class MainViewModel extends ViewModel {
     private TrainingTracker trainingTracker;
     private List<Exercise> exercises;
     private List<Workout> workouts;
+    private boolean activeWorkoutStatus;
     private Gson gson;
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
         gson = new Gson();
+        activeWorkoutStatus = false;
     }
+
 
 
 
@@ -33,7 +36,14 @@ public class MainViewModel extends ViewModel {
         return json;
     }
 
-    
+    public boolean checkActiveWorkoutStatus() {
+        return activeWorkoutStatus;
+    }
+
+    public void setActiveWorkoutStatus(boolean ongoingWorkout) {
+        this.activeWorkoutStatus = activeWorkoutStatus;
+    }
+
     public List<Exercise> getExercises() {
         if (exercises == null) {
             exercises = trainingTracker.getExercises();
