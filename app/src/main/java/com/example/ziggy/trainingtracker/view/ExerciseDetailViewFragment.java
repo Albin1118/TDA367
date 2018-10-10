@@ -102,11 +102,15 @@ public class ExerciseDetailViewFragment extends Fragment {
         });
     }
 
-    private void showExerciseInfo() {
+    private void setExerciseInfo() {
         exerciseNameTextView.setText(exercise.getName());
         exerciseUnitTextView.setText(exercise.getUnit());
         exerciseDescriptionTextView.setText(exercise.getDescription());
         exerciseInstructionsTextView.setText(exercise.getInstructions());
+    }
+
+    private void showExerciseInfo() {
+        setExerciseInfo();
 
         exerciseNameEditText.setVisibility(View.GONE);
         exerciseUnitEditText.setVisibility(View.GONE);
@@ -125,15 +129,13 @@ public class ExerciseDetailViewFragment extends Fragment {
     }
 
     private void showEditableExerciseInfo() {
-        exerciseNameEditText.setText(exercise.getName());
-        exerciseUnitEditText.setText(exercise.getUnit());
-        exerciseDescriptionEditText.setText(exercise.getDescription());
-        exerciseInstructionsEditText.setText(exercise.getInstructions());
+        setExerciseInfo();
 
         exerciseNameTextView.setVisibility(View.GONE);
         exerciseUnitTextView.setVisibility(View.GONE);
         exerciseDescriptionTextView.setVisibility(View.GONE);
         exerciseInstructionsTextView.setVisibility(View.GONE);
+        removeExerciseButton.setVisibility(View.GONE);
         editExerciseButton.setVisibility(View.GONE);
         exerciseNameEditText.setVisibility(View.VISIBLE);
         exerciseUnitEditText.setVisibility(View.VISIBLE);
