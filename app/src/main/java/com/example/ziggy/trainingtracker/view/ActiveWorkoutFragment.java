@@ -12,14 +12,16 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
-
+import com.example.ziggy.trainingtracker.model.Workout;
 
 
 public class ActiveWorkoutFragment extends Fragment {
 
     private Button startButton;
     private Button pauseButton;
-    private TextView timeTextView;
+    private TextView currentWorkoutName;
+
+    private Workout currentWorkout;
 
     private MainActivity parentActivity;
     private View view;
@@ -38,6 +40,10 @@ public class ActiveWorkoutFragment extends Fragment {
         initViews();
         initListeners();
 
+        //currentWorkoutName.setText(currentWorkout.getName());
+
+        pauseButton.setVisibility(View.INVISIBLE);
+
         return view;
     }
 
@@ -45,9 +51,9 @@ public class ActiveWorkoutFragment extends Fragment {
     private void initViews() {
         startButton = view.findViewById(R.id.begin_workout_button);
         pauseButton = view.findViewById(R.id.pause_workout_button);
-        mChronometer = view.findViewById(R.id.chronometer);
+        currentWorkoutName = view.findViewById(R.id.current_workout_name);
 
-        pauseButton.setVisibility(View.INVISIBLE);
+        mChronometer = view.findViewById(R.id.chronometer);
 
     }
 
@@ -84,6 +90,9 @@ public class ActiveWorkoutFragment extends Fragment {
     }
 
 
+    public void setCurrentWorkout(Workout currentWorkout) {
+        this.currentWorkout = currentWorkout;
+    }
 }
 
 
