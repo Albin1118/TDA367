@@ -1,15 +1,44 @@
 <resources>
     <string name="app_name">TrainingTracker</string>
+
+    //Workout strings
     <string name="workout_tab">Workouts</string>
+
     <string name="workout_creator">Create custom workout</string>
+    <string name="workout_creator_button1">Create new workout</string>
+    <string name="workout_creator_button2">Save</string>
+    <string name="workout_creator_button3">Cancel</string>
+
     <string name="workout_block_creator">Create a workout block</string>
     <string name="workout_block_list">Select exercises</string>
     <string name="workout_block_button">Add block to workout</string>
+
     <string name="workout_detail_view">Workout name</string>
     <string name="workout_detail_view_button">Start workout</string>
+    <string name="workout_detail_view_button2">Edit</string>
+    <string name="workout_detail_view_button3">Remove</string>
+
+    <string name="workout_list_item_name">Workout name</string>
+    <string name="workout_list_item_description">Workout description</string>
+    <string name="workout_list_item_blocks">n blocks</string>
+
+    //Exercise strings
     <string name="exercises_tab">Exercises</string>
+
     <string name="exercise_creator">Create custom exercise</string>
+    <string name="exercise_creator_name">Name</string>
+    <string name="exercise_creator_unit">reps, meters, seconds...</string>
+    <string name="exercise_creator_description1">Description:</string>
+    <string name="exercise_creator_description2">Description</string>
+    <string name="exercise_creator_instructions1">Instructions:</string>
+    <string name="exercise_creator_instructions2">Instructions</string>
+    <string name="exercise_creator_button">Create new exercise</string>
+
     <string name="exercise_detail_view">Exercise name</string>
+
+    <string name="exercise_list_item_name">Exercise name</string>
+    <string name="exercise_list_item_description">Exercise description</string>
+
     <string name="settings_tab">Settings</string>
     <string name="achievements_tab">Achievements</string>
     <string name="pre_active_workout_tab">Select a workout</string>

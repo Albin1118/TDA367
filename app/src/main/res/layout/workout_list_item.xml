@@ -13,7 +13,7 @@
         android:layout_width="265dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Text"
+        android:text="@string/workout_list_item_name"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/workoutNameTextView"
         android:layout_alignStart="@id/workoutNameTextView"
-        android:text="Text"
+        android:text="@string/workout_list_item_description"
         android:textAppearance="?attr/textAppearanceListItemSecondary"
         android:textSize="16sp" />
 
@@ -35,6 +35,6 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="34dp"
-        android:text="5 blocks" />
+        android:text="@string/workout_list_item_blocks" />
 
 </RelativeLayout>

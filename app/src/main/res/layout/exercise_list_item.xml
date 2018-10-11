@@ -11,7 +11,7 @@
         android:layout_width="265dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Text"
+        android:text="@string/exercise_list_item_name"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/exerciseNameTextView"
         android:layout_alignStart="@id/exerciseNameTextView"
-        android:text="Text"
+        android:text="@string/exercise_list_item_description"
         android:textAppearance="?attr/textAppearanceListItemSecondary"
         android:textSize="16sp" />
 
