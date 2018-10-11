@@ -77,13 +77,8 @@ public class WorkoutTabFragment extends Fragment {
                 Toast.makeText(getContext(), workouts.get(position).toString(), Toast.LENGTH_SHORT).show();
 
                 Workout w = workouts.get(position);
-
                 WorkoutDetailViewFragment fragment = new WorkoutDetailViewFragment();
-                fragment.setWorkoutDetailViewComponents(w.getName(),w.getDescription(), w.getBlocks());
-                fragment.setWorkoutNameTextView(w.getName());
-                fragment.setWorkoutDescriptionTextView(w.getDescription());
                 fragment.setWorkout(w);
-
                 parentActivity.setFragmentContainerContent(fragment);
             }
         });

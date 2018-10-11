@@ -47,6 +47,7 @@ public class WorkoutCreatorFragment extends Fragment {
     private boolean descriptionClosed = true;
 
     private Workout editableWorkout;
+    private Workout originalWorkout;
 
     @Nullable
     @Override
@@ -110,6 +111,7 @@ public class WorkoutCreatorFragment extends Fragment {
                 if(editableWorkout != null) {
                     editableWorkout.setName(workoutNameEditText.getText().toString());
                     editableWorkout.setDescription(workoutDescriptionEditText.getText().toString());
+                    workoutBlockCreatorFragment.setOriginalWorkout(originalWorkout);
                     workoutBlockCreatorFragment.setEditableWorkout(editableWorkout);
                     workoutBlocks.clear();
                 }
@@ -153,8 +155,10 @@ public class WorkoutCreatorFragment extends Fragment {
         cancelEditedWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WorkoutDetailViewFragment fragment = new WorkoutDetailViewFragment();
                 workoutBlocks.clear();
+                WorkoutDetailViewFragment fragment = new WorkoutDetailViewFragment();
+                fragment.setWorkout(originalWorkout);
+                fragment.setWorkoutDetailViewComponents(originalWorkout.getName(), originalWorkout.getDescription(), originalWorkout.getBlocks());
                 parentActivity.setFragmentContainerContent(fragment);
             }
         });
@@ -180,4 +184,7 @@ public class WorkoutCreatorFragment extends Fragment {
         this.editableWorkout = editableWorkout;
     }
 
+    public void setOriginalWorkout(Workout originalWorkout) {
+        this.originalWorkout = originalWorkout;
+    }
 }

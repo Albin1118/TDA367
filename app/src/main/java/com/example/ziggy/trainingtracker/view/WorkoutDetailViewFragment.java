@@ -47,7 +47,6 @@ public class WorkoutDetailViewFragment extends Fragment {
 
     private ArrayAdapter<WorkoutBlock> adapter;
 
-    List<WorkoutBlock> w = new ArrayList<WorkoutBlock>();
     private Workout workout = new Workout("Name", "Description", workoutBlocks);
 
     private View view;
@@ -59,7 +58,7 @@ public class WorkoutDetailViewFragment extends Fragment {
         parentActivity = ((MainActivity)getActivity());
         initViews();
         initListeners();
-
+        setWorkoutDetailViewComponents(workout.getName(), workout.getDescription(), workout.getBlocks());
         adapter = new WorkoutBlockListAdapter(getContext(), workoutBlocks);
         workoutBlocksListView.setAdapter(adapter);
 
@@ -94,9 +93,10 @@ public class WorkoutDetailViewFragment extends Fragment {
         editWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WorkoutCreatorFragment w = new WorkoutCreatorFragment();
-                w.setEditableWorkout(workout);
-                parentActivity.setFragmentContainerContent(w);
+                WorkoutCreatorFragment fragment = new WorkoutCreatorFragment();
+                fragment.setEditableWorkout(workout);
+                fragment.setOriginalWorkout(workout);
+                parentActivity.setFragmentContainerContent(fragment);
             }
         });
 
