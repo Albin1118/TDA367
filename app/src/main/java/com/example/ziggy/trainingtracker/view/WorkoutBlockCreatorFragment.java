@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
     private MainActivity parentActivity;
     private ArrayAdapter<Exercise> adapter;
 
+    private Workout editableWorkout;
 
 
     @Nullable
@@ -93,11 +95,17 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 }
 
                 WorkoutCreatorFragment fragment = new WorkoutCreatorFragment();
+                if(editableWorkout != null) {
+                    fragment.setEditableWorkout(editableWorkout);
+                }
                 fragment.addWorkoutBlock(workoutBlock);
                 parentActivity.setFragmentContainerContent(fragment);
             }
         });
     }
 
-   
+    public void setEditableWorkout(Workout editableWorkout) {
+        this.editableWorkout = editableWorkout;
+    }
+
 }
