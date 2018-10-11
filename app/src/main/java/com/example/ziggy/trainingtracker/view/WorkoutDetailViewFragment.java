@@ -8,8 +8,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,15 +39,16 @@ public class WorkoutDetailViewFragment extends Fragment {
 
     private TextView workoutNameTextView;
     private TextView workoutDescriptionTextView;
+    private ListView workoutBlocksListView;
     private Button startWorkoutButton;
 
     private Button editWorkoutButton;
     private Button removeWorkoutButton;
 
-
+    private ArrayAdapter<WorkoutBlock> adapter;
 
     List<WorkoutBlock> w = new ArrayList<WorkoutBlock>();
-    private Workout workout = new Workout("Name", "Description", w);
+    private Workout workout = new Workout("Name", "Description", workoutBlocks);
 
     private View view;
 
@@ -56,14 +60,21 @@ public class WorkoutDetailViewFragment extends Fragment {
         initViews();
         initListeners();
 
+        adapter = new WorkoutBlockListAdapter(getContext(), workoutBlocks);
+        workoutBlocksListView.setAdapter(adapter);
+
         return view;
     }
 
     private void initViews() {
         workoutNameTextView = view.findViewById(R.id.workoutNameTextView);
         workoutNameTextView.setText(workoutName);
+
         workoutDescriptionTextView = view.findViewById(R.id.workoutDescriptionTextView);
         workoutDescriptionTextView.setText(workoutDescription);
+
+        workoutBlocksListView = view.findViewById(R.id.workoutBlocksListView);
+
         startWorkoutButton = view.findViewById(R.id.startWorkoutButton);
         editWorkoutButton = view.findViewById(R.id.editWorkoutButton);
         removeWorkoutButton = view.findViewById(R.id.removeWorkoutButton);
