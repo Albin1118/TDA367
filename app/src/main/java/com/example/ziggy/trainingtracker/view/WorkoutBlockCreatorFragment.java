@@ -35,8 +35,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
     private MainActivity parentActivity;
     private ArrayAdapter<Exercise> adapter;
 
-    private Workout editableWorkout;
-    private Workout originalWorkout;
+    private Workout editableWorkout = null;
 
 
     @Nullable
@@ -96,11 +95,9 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 }
 
                 WorkoutCreatorFragment fragment = new WorkoutCreatorFragment();
-                if(editableWorkout != null) {
-                    fragment.setEditableWorkout(editableWorkout);
-                    fragment.setOriginalWorkout(originalWorkout);
-                }
-                fragment.addWorkoutBlock(workoutBlock);
+
+                fragment.setEditableWorkout(editableWorkout);
+                parentActivity.viewModel.getBuildWorkout().getBlocks().add(workoutBlock);
                 parentActivity.setFragmentContainerContent(fragment);
             }
         });
@@ -108,9 +105,5 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
     public void setEditableWorkout(Workout editableWorkout) {
         this.editableWorkout = editableWorkout;
-    }
-
-    public void setOriginalWorkout(Workout originalWorkout) {
-        this.originalWorkout = originalWorkout;
     }
 }

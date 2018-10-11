@@ -12,6 +12,7 @@ import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
@@ -19,6 +20,8 @@ public class MainViewModel extends ViewModel {
     private List<Exercise> exercises;
     private List<Workout> workouts;
     private boolean activeWorkoutStatus;
+    List<WorkoutBlock>workoutBlocks= new ArrayList<>();
+    private Workout buildWorkout = new Workout("", "" , workoutBlocks);
     private Gson gson;
 
     public MainViewModel() {
@@ -123,5 +126,13 @@ public class MainViewModel extends ViewModel {
 
     public void updateUserWeight(double weight){
         trainingTracker.getUser().setWeight(weight);
+    }
+
+    public void setBuildWorkout(Workout buildWorkout) {
+        this.buildWorkout = buildWorkout;
+    }
+
+    public Workout getBuildWorkout() {
+        return buildWorkout;
     }
 }

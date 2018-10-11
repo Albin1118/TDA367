@@ -59,9 +59,8 @@ public class WorkoutDetailViewFragment extends Fragment {
         initViews();
         initListeners();
         setWorkoutDetailViewComponents(workout.getName(), workout.getDescription(), workout.getBlocks());
-        adapter = new WorkoutBlockListAdapter(getContext(), workoutBlocks);
+        adapter = new WorkoutBlockListAdapter(getContext(), workout.getBlocks());
         workoutBlocksListView.setAdapter(adapter);
-
         return view;
     }
 
@@ -95,7 +94,6 @@ public class WorkoutDetailViewFragment extends Fragment {
             public void onClick(View v) {
                 WorkoutCreatorFragment fragment = new WorkoutCreatorFragment();
                 fragment.setEditableWorkout(workout);
-                fragment.setOriginalWorkout(workout);
                 parentActivity.setFragmentContainerContent(fragment);
             }
         });
