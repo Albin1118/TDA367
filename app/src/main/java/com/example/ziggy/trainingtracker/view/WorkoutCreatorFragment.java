@@ -52,8 +52,8 @@ public class WorkoutCreatorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         parentActivity = (MainActivity)getActivity();
         view  = inflater.inflate(R.layout.fragment_workout_creator, container, false);
-        header = inflater.inflate(R.layout.workout_block_list_header, null);
-        footer = inflater.inflate(R.layout.workout_block_list_footer, null);
+        header = inflater.inflate(R.layout.fragment_workout_creator_list_header, null);
+        footer = inflater.inflate(R.layout.fragment_workout_creator_list_footer, null);
         initViews();
         initListeners();
 
