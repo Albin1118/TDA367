@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
+import android.widget.TextView;
 
 
 import com.example.ziggy.trainingtracker.R;
@@ -46,7 +46,21 @@ public class PreActiveWorkoutFragment extends Fragment {
         initViews();
         initListeners();
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_activated_1, workouts);
+        //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_activated_1, workouts);
+        adapter = new ArrayAdapter(getContext(), R.layout.workout_list_item, R.id.workoutNameTextView, workouts) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView workoutNameTextView = (TextView) view.findViewById(R.id.workoutNameTextView);
+                TextView workoutDescriptionTextView = (TextView) view.findViewById(R.id.workoutDescriptionTextView);
+                TextView workoutBlocksTextView = (TextView) view.findViewById(R.id.workoutBlocksTextView);
+
+                workoutNameTextView.setText(workouts.get(position).getName());
+                workoutDescriptionTextView.setText(workouts.get(position).getDescription());
+                workoutBlocksTextView.setText(workouts.get(position).getNumberofBlocks());
+                return view;
+            }
+        };
 
         preActiveWorkoutListView.setAdapter(adapter);
         return view;
