@@ -36,15 +36,10 @@ public class WorkoutCreatorFragment extends Fragment {
     private Button saveEditedWorkoutButton;
     private Button cancelEditedWorkoutButton;
 
-
-    private ArrayAdapter<WorkoutBlock> adapter;
     private MainActivity parentActivity;
     private View view;
-    private View header;
-    private View footer;
+
     private boolean descriptionClosed = true;
-
-
     private Workout editableWorkout = null;
 
     @Override
@@ -83,8 +78,8 @@ public class WorkoutCreatorFragment extends Fragment {
 
     private void initViews() {
         workoutBlocksListView = view.findViewById(R.id.workoutBlocksListView);
-        header = getLayoutInflater().inflate(R.layout.fragment_workout_creator_list_header, workoutBlocksListView, false);
-        footer = getLayoutInflater().inflate(R.layout.fragment_workout_creator_list_footer, workoutBlocksListView, false);
+        View header = getLayoutInflater().inflate(R.layout.fragment_workout_creator_header, workoutBlocksListView, false);
+        View footer = getLayoutInflater().inflate(R.layout.fragment_workout_creator_footer, workoutBlocksListView, false);
         workoutNameEditText = header.findViewById(R.id.workoutNameEditText);
         workoutDescriptionButton = header.findViewById(R.id.workoutDescriptionButton);
         workoutDescriptionLayout = header.findViewById(R.id.workoutDescriptionLayout);
@@ -101,7 +96,7 @@ public class WorkoutCreatorFragment extends Fragment {
         }
         workoutNameEditText.setText(parentActivity.viewModel.buildWorkout.getName());
         workoutDescriptionEditText.setText(parentActivity.viewModel.buildWorkout.getDescription());
-        adapter = new WorkoutBlockListAdapter(getContext(), parentActivity.viewModel.buildWorkout.getBlocks());
+        ArrayAdapter<WorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), parentActivity.viewModel.buildWorkout.getBlocks());
         workoutBlocksListView.setAdapter(adapter);
     }
 

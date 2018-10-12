@@ -3,6 +3,7 @@ package com.example.ziggy.trainingtracker.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -30,14 +31,13 @@ import java.util.List;
  */
 public class WorkoutDetailViewFragment extends Fragment {
 
-
-    private MainActivity parentActivity;
-
     private String workoutName = "Workout name";
     private String workoutDescription = "Workout description";
     private List<WorkoutBlock>workoutBlocks = new ArrayList<>();
 
     private TextView workoutNameTextView;
+    private Button workoutDescriptionButton;
+    private ConstraintLayout workoutDescriptionLayout;
     private TextView workoutDescriptionTextView;
     private ListView workoutBlocksListView;
     private Button startWorkoutButton;
@@ -45,11 +45,11 @@ public class WorkoutDetailViewFragment extends Fragment {
     private Button editWorkoutButton;
     private Button removeWorkoutButton;
 
-    private ArrayAdapter<WorkoutBlock> adapter;
-
-    private Workout workout = new Workout("Name", "Description", workoutBlocks);
-
+    private MainActivity parentActivity;
     private View view;
+
+    private boolean descriptionClosed = true;
+    private Workout workout = new Workout("Name", "Description", workoutBlocks);
 
     @Nullable
     @Override
@@ -59,29 +59,44 @@ public class WorkoutDetailViewFragment extends Fragment {
         initViews();
         initListeners();
         setWorkoutDetailViewComponents(workout.getName(), workout.getDescription(), workout.getBlocks());
-        adapter = new WorkoutBlockListAdapter(getContext(), workout.getBlocks());
+        ArrayAdapter<WorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), workout.getBlocks());
         workoutBlocksListView.setAdapter(adapter);
         return view;
     }
 
     private void initViews() {
-        workoutNameTextView = view.findViewById(R.id.workoutNameTextView);
-        workoutNameTextView.setText(workoutName);
-
-        workoutDescriptionTextView = view.findViewById(R.id.workoutDescriptionTextView);
-        workoutDescriptionTextView.setText(workoutDescription);
-
         workoutBlocksListView = view.findViewById(R.id.workoutBlocksListView);
-
+        View header = getLayoutInflater().inflate(R.layout.fragment_workout_detail_view_header, workoutBlocksListView, false);
+        workoutNameTextView = header.findViewById(R.id.workoutNameTextView);
+        workoutDescriptionButton = header.findViewById(R.id.workoutDescriptionButton);
+        workoutDescriptionLayout = header.findViewById(R.id.workoutDescriptionLayout);
+        workoutDescriptionTextView = header.findViewById(R.id.workoutDescriptionTextView);
         startWorkoutButton = view.findViewById(R.id.startWorkoutButton);
         editWorkoutButton = view.findViewById(R.id.editWorkoutButton);
         removeWorkoutButton = view.findViewById(R.id.removeWorkoutButton);
+        workoutBlocksListView.addHeaderView(header);
+
+        workoutNameTextView.setText(workoutName);
+        workoutDescriptionTextView.setText(workoutDescription);
 
 
         showWorkoutInfo();
     }
 
     private void initListeners() {
+        workoutDescriptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DropDownAnim a;
+                if (descriptionClosed) {
+                    a = new DropDownAnim(workoutDescriptionLayout, workoutDescriptionTextView.getLayoutParams().height + 40);
+                } else {
+                    a = new DropDownAnim(workoutDescriptionLayout, 0);
+                } descriptionClosed = !descriptionClosed;
+                a.setDuration(300);
+                workoutDescriptionLayout.startAnimation(a);
+            }
+        });
         startWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
