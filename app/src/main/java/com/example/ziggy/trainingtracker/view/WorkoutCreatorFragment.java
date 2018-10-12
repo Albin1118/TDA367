@@ -58,8 +58,6 @@ public class WorkoutCreatorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_workout_creator, container, false);
-        header = inflater.inflate(R.layout.fragment_workout_creator_list_header, null);
-        footer = inflater.inflate(R.layout.fragment_workout_creator_list_footer, null);
         initViews();
         initListeners();
 
@@ -84,12 +82,14 @@ public class WorkoutCreatorFragment extends Fragment {
     }
 
     private void initViews() {
+        workoutBlocksListView = view.findViewById(R.id.workoutBlocksListView);
+        header = getLayoutInflater().inflate(R.layout.fragment_workout_creator_list_header, workoutBlocksListView, false);
+        footer = getLayoutInflater().inflate(R.layout.fragment_workout_creator_list_footer, workoutBlocksListView, false);
         workoutNameEditText = header.findViewById(R.id.workoutNameEditText);
         workoutDescriptionButton = header.findViewById(R.id.workoutDescriptionButton);
         workoutDescriptionLayout = header.findViewById(R.id.workoutDescriptionLayout);
         workoutDescriptionEditText = header.findViewById(R.id.workoutDescriptionEditText);
         addWorkoutBlockButton = footer.findViewById(R.id.addWorkoutBlockButton);
-        workoutBlocksListView = view.findViewById(R.id.workoutBlocksListView);
         createWorkoutButton = view.findViewById(R.id.createWorkoutButton);
         saveEditedWorkoutButton = view.findViewById(R.id.saveEditedWorkoutButton);
         cancelEditedWorkoutButton = view.findViewById(R.id.cancelEditedWorkoutButton);
