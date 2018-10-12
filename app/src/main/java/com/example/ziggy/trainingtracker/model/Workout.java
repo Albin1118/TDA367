@@ -20,6 +20,10 @@ public class Workout {
         return name + " - " + description + " - " + blocks.size() + " blocks";
     }
 
+    public void addBlock(WorkoutBlock block) {
+        blocks.add(block);
+    }
+
     public String getName() {
         return name;
     }

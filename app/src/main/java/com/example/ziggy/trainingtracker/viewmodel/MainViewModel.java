@@ -21,7 +21,7 @@ public class MainViewModel extends ViewModel {
     private List<Workout> workouts;
     private boolean activeWorkoutStatus;
     List<WorkoutBlock>workoutBlocks= new ArrayList<>();
-    private Workout buildWorkout = new Workout("", "" , workoutBlocks);
+    public Workout buildWorkout;
     private Gson gson;
 
     public MainViewModel() {
@@ -93,6 +93,10 @@ public class MainViewModel extends ViewModel {
 
     public void addCustomWorkout(String name, String description, List<WorkoutBlock> blocks){
         Workout w = new Workout(name, description, blocks);
+        trainingTracker.addCustomWorkout(w);
+    }
+
+    public void addCustomWorkout(Workout w){
         trainingTracker.addCustomWorkout(w);
     }
 
