@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
@@ -62,12 +63,15 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_active_workout:
                         popBackStack();
 
+                        /*
                         if (onGoingActiveWorkout()) {
                             selectedFragment = new ActiveWorkoutFragment();
                         }
                         else {
                             selectedFragment = new PreActiveWorkoutFragment();
-                        }
+                        }*/
+
+                        selectedFragment = new PreActiveWorkoutFragment();
 
                         break;
                     case R.id.nav_exercises:
@@ -87,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    public void hideBottomNavigationBar(){
+        mBottomNavBar.setVisibility(View.INVISIBLE);
+    }
+
+    public void showBottomNavigationBar(){
+        mBottomNavBar.setVisibility(View.VISIBLE);
+    }
 
     public boolean onGoingActiveWorkout(){
         return viewModel.checkActiveWorkoutStatus();

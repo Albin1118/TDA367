@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.ziggy.trainingtracker.R;
@@ -46,11 +47,13 @@ public class PreActiveWorkoutFragment extends Fragment {
         initViews();
         initListeners();
 
-        //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_activated_1, workouts);
+
+
         adapter = new ArrayAdapter(getContext(), R.layout.workout_list_item, R.id.workoutNameTextView, workouts) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
+
                 TextView workoutNameTextView = (TextView) view.findViewById(R.id.workoutNameTextView);
                 TextView workoutDescriptionTextView = (TextView) view.findViewById(R.id.workoutDescriptionTextView);
                 TextView workoutBlocksTextView = (TextView) view.findViewById(R.id.workoutBlocksTextView);
@@ -68,16 +71,23 @@ public class PreActiveWorkoutFragment extends Fragment {
 
 
     private void startActiveWorkout(){
-        parentActivity.viewModel.setActiveWorkoutStatus(true);
-        Fragment f = new ActiveWorkoutFragment();
-        ((ActiveWorkoutFragment) f).setCurrentWorkout(selectedWorkout);
-        parentActivity.setFragmentContainerContentFromTab(new ActiveWorkoutFragment());
+        if (selectedWorkout != null) {
+            parentActivity.viewModel.setActiveWorkoutStatus(true);
+            Fragment f = new ActiveWorkoutFragment();
+            ((ActiveWorkoutFragment) f).setCurrentWorkout(selectedWorkout);
+            parentActivity.setFragmentContainerContentFromTab(f);
+        }
+        else{
+            Toast.makeText(getContext(), "You need to select a workout first", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void initViews() {
         beginWorkoutButton = view.findViewById(R.id.pre_workout_start_button);
         preActiveWorkoutListView = view.findViewById(R.id.pre_workout_list);
-        preActiveWorkoutListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        //preActiveWorkoutListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        preActiveWorkoutListView.setSelector(R.color.selectedListItem);
 
     }
 
@@ -92,7 +102,7 @@ public class PreActiveWorkoutFragment extends Fragment {
         preActiveWorkoutListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                view.setSelected(true); // Will fix color usage soon
+                view.setSelected(true);
                 selectedWorkout = workouts.get(position);
 
             }

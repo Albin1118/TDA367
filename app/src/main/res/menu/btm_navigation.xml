@@ -14,8 +14,7 @@
     <item
         android:id="@+id/nav_active_workout"
         android:icon="@drawable/ic_wb_incandescent_black_24dp"
-        android:title="Active Workout"
-        android:titleCondensed="Active"/>
+        android:title="Workout Mode"/>
 
     <item
         android:id="@+id/nav_exercises"
