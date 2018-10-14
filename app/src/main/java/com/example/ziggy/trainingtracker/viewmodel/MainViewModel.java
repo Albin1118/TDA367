@@ -10,7 +10,6 @@ import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,28 +21,17 @@ public class MainViewModel extends ViewModel {
     private boolean activeWorkoutStatus;
     List<WorkoutBlock>workoutBlocks= new ArrayList<>();
     public Workout buildWorkout;
-    private Gson gson;
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
-        gson = new Gson();
         activeWorkoutStatus = false;
-    }
-
-
-
-
-    public String convertUserToJson(){
-        String json = gson.toJson(trainingTracker.getUser());
-
-        return json;
     }
 
     public boolean checkActiveWorkoutStatus() {
         return activeWorkoutStatus;
     }
 
-    public void setActiveWorkoutStatus(boolean ongoingWorkout) {
+    public void setActiveWorkoutStatus(boolean activeWorkoutStatus) {
         this.activeWorkoutStatus = activeWorkoutStatus;
     }
 
