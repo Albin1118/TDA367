@@ -7,12 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Workout;
+import com.example.ziggy.trainingtracker.model.WorkoutBlock;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ActiveWorkoutFragment extends Fragment {
@@ -20,11 +27,15 @@ public class ActiveWorkoutFragment extends Fragment {
     private Button startButton;
     private Button pauseButton;
     private TextView currentWorkoutName;
+    private ListView currentWorkoutBlockListView;
 
     private Workout currentWorkout;
+    private List<WorkoutBlock> currentWorkoutBlocks;
 
     private MainActivity parentActivity;
     private View view;
+
+    private ArrayAdapter<WorkoutBlock> adapter;
 
     private long lastPause;
 
@@ -39,10 +50,15 @@ public class ActiveWorkoutFragment extends Fragment {
 
         initViews();
         initListeners();
+        showStartButton();
 
-        //currentWorkoutName.setText(currentWorkout.getName());
+        parentActivity.hideBottomNavigationBar();
 
-        pauseButton.setVisibility(View.INVISIBLE);
+        currentWorkoutName.setText(currentWorkout.getName());
+
+
+        ArrayAdapter<WorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), currentWorkout.getBlocks());
+        currentWorkoutBlockListView.setAdapter(adapter);
 
         return view;
     }
@@ -52,8 +68,11 @@ public class ActiveWorkoutFragment extends Fragment {
         startButton = view.findViewById(R.id.begin_workout_button);
         pauseButton = view.findViewById(R.id.pause_workout_button);
         currentWorkoutName = view.findViewById(R.id.current_workout_name);
-
+        currentWorkoutBlockListView = view.findViewById(R.id.active_workout_exercise_list_view);
         mChronometer = view.findViewById(R.id.chronometer);
+
+        currentWorkoutBlockListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
 
     }
 
@@ -72,8 +91,7 @@ public class ActiveWorkoutFragment extends Fragment {
                 }
 
                 mChronometer.start();
-                startButton.setVisibility(View.INVISIBLE);
-                pauseButton.setVisibility(View.VISIBLE);
+                showPauseButton();
             }
         });
 
@@ -82,11 +100,29 @@ public class ActiveWorkoutFragment extends Fragment {
             public void onClick(View view) {
                 lastPause = SystemClock.elapsedRealtime();
                 mChronometer.stop();
-                startButton.setVisibility(View.VISIBLE);
-                pauseButton.setVisibility(View.INVISIBLE);
+                showStartButton();
             }
         });
 
+        currentWorkoutBlockListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                view.setSelected(true);
+            }
+        });
+
+    }
+
+
+    private void showPauseButton(){
+        startButton.setVisibility(View.INVISIBLE);
+        pauseButton.setVisibility(View.VISIBLE);
+    }
+
+
+    private void showStartButton(){
+        startButton.setVisibility(View.VISIBLE);
+        pauseButton.setVisibility(View.INVISIBLE);
     }
 
 

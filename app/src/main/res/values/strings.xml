@@ -42,11 +42,10 @@
     <string name="settings_tab">Settings</string>
     <string name="achievements_tab">Achievements</string>
     <string name="pre_active_workout_tab">Select a workout</string>
+    <string name="active_workout_tab">Current workout</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Donec id tortor condimentum, tincidunt nunc eu, pellentesque metus. Sed et viverra lacus.
         Aliquam quis urna vel nisi aliquet aliquam quis quis magna.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
 </resources>
