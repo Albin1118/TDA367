@@ -83,11 +83,13 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 WorkoutBlock workoutBlock = new WorkoutBlock();
 
                 SparseBooleanArray checkedItems = selectExerciseListView.getCheckedItemPositions();
+
                 if (checkedItems != null) {
                     for (int i=0; i<checkedItems.size(); i++) {
                         if (checkedItems.valueAt(i)) {
                             //Exercise checkedExercise = (Exercise) selectExerciseListView.getAdapter().getItem(i);
-                            workoutBlock.addExercise(exercises.get(i), 1);
+                            int position = checkedItems.keyAt(i);
+                            workoutBlock.addExercise(exercises.get(position), 1);
                         }
                     }
                 }
