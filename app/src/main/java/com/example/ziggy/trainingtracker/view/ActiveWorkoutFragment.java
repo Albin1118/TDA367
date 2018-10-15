@@ -1,5 +1,7 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Workout;
@@ -101,6 +104,35 @@ public class ActiveWorkoutFragment extends Fragment {
                 lastPause = SystemClock.elapsedRealtime();
                 mChronometer.stop();
                 showStartButton();
+            }
+        });
+
+        pauseButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(R.string.app_name);
+                builder.setMessage("Are you sure you want to stop the current workout?");
+                builder.setIcon(R.drawable.ic_wb_incandescent_black_24dp);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        parentActivity.popBackStack();
+                        parentActivity.showBottomNavigationBar();
+                        Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+                return true;
             }
         });
 
