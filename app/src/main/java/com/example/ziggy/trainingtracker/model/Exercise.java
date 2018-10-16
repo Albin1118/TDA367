@@ -37,6 +37,7 @@ public class Exercise {
     public String getUnit() {
         return unit;
     }
+    public String getCategory() { return category; }
 
     public void setName(String name) {
         this.name = name;

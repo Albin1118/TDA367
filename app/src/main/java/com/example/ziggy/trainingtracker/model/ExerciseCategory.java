@@ -1,6 +1,7 @@
 package com.example.ziggy.trainingtracker.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExerciseCategory {
 
@@ -8,7 +9,7 @@ public class ExerciseCategory {
         ARMS, CHEST, ABS, BACK, LEGS
     }
 
-    private ArrayList<String> allCategoriesToString = new ArrayList<>();
+    private ArrayList<String> allCategoriesToString = new ArrayList<String>();
     private ArrayList<Enum> allCategories = new ArrayList<>();
 
     public ExerciseCategory() {

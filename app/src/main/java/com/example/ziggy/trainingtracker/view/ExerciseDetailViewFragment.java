@@ -25,6 +25,7 @@ public class ExerciseDetailViewFragment extends Fragment {
     private TextView exerciseUnitTextView;
     private TextView exerciseDescriptionTextView;
     private TextView exerciseInstructionsTextView;
+    private TextView exerciseCategoryTextView;
 
     private Button removeExerciseButton;
     private Button editExerciseButton;
