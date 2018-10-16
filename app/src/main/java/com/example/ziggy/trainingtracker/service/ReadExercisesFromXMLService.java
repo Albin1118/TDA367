@@ -45,8 +45,8 @@ public class ReadExercisesFromXMLService {
         try {
             DocumentBuilder db = dbf.newDocumentBuilder();
             dom = db.parse(this.getClass().getClassLoader().getResourceAsStream("res/raw/exercises.xml"));
-        } catch(ParserConfigurationException | SAXException | IOException pce) {
-            pce.printStackTrace();
+        } catch(ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -84,20 +84,20 @@ public class ReadExercisesFromXMLService {
      */
     private Exercise getExercise(Element exerciseElement) throws IllegalArgumentException {
         String name = exerciseElement.getAttribute("name");
-        if (name.trim().equals("") || exercises.containsKey(name))
+        if (name.trim().isEmpty() || exercises.containsKey(name))
             throw new IllegalArgumentException("An exercise cannot have an empty or duplicate name.");
 
         String description = getTextValue(exerciseElement, "description");
-        if (description == null)
+        if (description == null || description.trim().isEmpty())
             description = "-no description-";
 
         String instructions = getTextValue(exerciseElement, "instructions");
-        if (instructions == null)
+        if (instructions == null || instructions.trim().isEmpty())
             instructions = "-no instructions-";
 
         String unit = getTextValue(exerciseElement, "unit");
-        if (unit == null || unit.trim().equals(""))
-            throw new IllegalArgumentException("An exercise needs a unit.");
+            if (unit == null || unit.trim().isEmpty())
+                throw new IllegalArgumentException("An exercise needs a unit.");
 
         return new Exercise(name, description, instructions, unit);
     }
@@ -113,7 +113,11 @@ public class ReadExercisesFromXMLService {
         NodeList nl = element.getElementsByTagName(tagName);
         if(nl != null && nl.getLength() > 0) {
             Element el = (Element)nl.item(0);
-            textVal = el.getFirstChild().getNodeValue();
+            if (el.getFirstChild() != null) {
+                textVal = el.getFirstChild().getNodeValue();
+            } else {
+                textVal = "";
+            }
         }
         return textVal;
     }

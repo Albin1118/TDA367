@@ -96,7 +96,7 @@ public class ReadWorkoutsFromXMLService {
             throw new IllegalArgumentException("A workout cannot have an empty or duplicate name.");
 
         String description = getTextValue(workoutElement, "description");
-        if (description == null)
+        if (description == null || description.trim().isEmpty())
             description = "-no description-";
 
         List<WorkoutBlock> blocks = new ArrayList<>();
@@ -124,8 +124,6 @@ public class ReadWorkoutsFromXMLService {
         int multiplier;
         try {
             multiplier = Integer.parseInt(blockElement.getAttribute("x"));
-            if (multiplier < 1)
-                throw new IllegalArgumentException("Attribute n can not be less than 1.");
         } catch (NumberFormatException e) { //If the attribute x is missing use the default multiplier = 1
             multiplier = 1;
         }
@@ -159,7 +157,7 @@ public class ReadWorkoutsFromXMLService {
      * @param exerciseElement An exercise element.
      * @return A new Exercise object.
      */
-    private Exercise getExercise(Element exerciseElement) {
+    private Exercise getExercise(Element exerciseElement) throws IllegalArgumentException {
         String name = exerciseElement.getTextContent();
         Exercise e = this.exercises.get(name);
         if (e == null)
@@ -180,7 +178,11 @@ public class ReadWorkoutsFromXMLService {
         NodeList nl = element.getElementsByTagName(tagName);
         if(nl != null && nl.getLength() > 0) {
             Element el = (Element)nl.item(0);
-            textVal = el.getFirstChild().getNodeValue();
+            if (el.getFirstChild() != null) {
+                textVal = el.getFirstChild().getNodeValue();
+            } else {
+                textVal = "";
+            }
         }
         return textVal;
     }
