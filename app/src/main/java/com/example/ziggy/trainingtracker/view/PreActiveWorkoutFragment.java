@@ -47,8 +47,6 @@ public class PreActiveWorkoutFragment extends Fragment {
         initViews();
         initListeners();
 
-
-
         adapter = new ArrayAdapter(getContext(), R.layout.workout_list_item, R.id.workoutNameTextView, workouts) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -75,6 +73,7 @@ public class PreActiveWorkoutFragment extends Fragment {
             parentActivity.viewModel.setActiveWorkoutStatus(true);
             Fragment f = new ActiveWorkoutFragment();
             ((ActiveWorkoutFragment) f).setCurrentWorkout(selectedWorkout);
+            parentActivity.clearBackStack();
             parentActivity.setFragmentContainerContentFromTab(f);
         }
         else{
@@ -85,8 +84,6 @@ public class PreActiveWorkoutFragment extends Fragment {
     private void initViews() {
         beginWorkoutButton = view.findViewById(R.id.pre_workout_start_button);
         preActiveWorkoutListView = view.findViewById(R.id.pre_workout_list);
-        //preActiveWorkoutListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
         preActiveWorkoutListView.setSelector(R.color.selectedListItem);
 
     }

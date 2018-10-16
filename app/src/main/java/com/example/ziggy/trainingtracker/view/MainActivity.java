@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /*
     @Override
     public void onStop() {
         super.onStop();
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         viewModel.saveAllData();
     }
+    */
 
     public void hideBottomNavigationBar(){
         mBottomNavBar.setVisibility(View.INVISIBLE);
@@ -128,6 +130,14 @@ public class MainActivity extends AppCompatActivity {
      */
     public void clearBackStack() {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    public void clearBackStack(){
+        FragmentManager fm = getSupportFragmentManager();
+        int count = fm.getBackStackEntryCount();
+        for(int i = 0; i < count; ++i) {
+            fm.popBackStack();
+        }
     }
 
     /**
