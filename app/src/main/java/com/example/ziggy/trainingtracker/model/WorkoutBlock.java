@@ -1,5 +1,7 @@
 package com.example.ziggy.trainingtracker.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,9 @@ import java.util.List;
  */
 public class WorkoutBlock {
 
+    @SerializedName("workout_block_exercises")
     private List<Exercise> exercises = new ArrayList<>();
+    @SerializedName("workout_block_amounts")
     private List<Integer> amounts = new ArrayList<>();
     /**
      * Amount of times to repeat the this block of exercises

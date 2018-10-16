@@ -1,11 +1,16 @@
 package com.example.ziggy.trainingtracker.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TrainingTracker {
+    @SerializedName("trainingtracker_user")
     private User user;
+    @SerializedName("trainingtracker_workouts_list")
     private List<Workout> workouts;
+    @SerializedName("trainingtracker_exercises_list")
     private List<Exercise> exercises;
 
     public TrainingTracker() {

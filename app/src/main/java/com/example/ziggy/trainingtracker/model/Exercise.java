@@ -1,11 +1,18 @@
 package com.example.ziggy.trainingtracker.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Exercise {
 
+    @SerializedName("exercise_name")
     private String name;
+    @SerializedName("exercise_description")
     private String description;
+    @SerializedName("exercise_instructions")
     private String instructions;
+    @SerializedName("exercise_unit")
     private String unit;
+    @SerializedName("exercise_has_weight")
     private boolean hasWeight;
 
 

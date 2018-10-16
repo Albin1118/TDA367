@@ -2,25 +2,32 @@ package com.example.ziggy.trainingtracker.model;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class User {
 
     //Add achievements and goals
+    @SerializedName("user_active_workout")
     private ActiveWorkout activeWorkout;
+    @SerializedName("user_finished_workouts_list")
     private List<Workout> finishedWorkouts;
+    @SerializedName("user_custom_exercises_list")
     private List<Exercise> customExercises = new ArrayList<>();
+    @SerializedName("user_custom_workouts")
     private List<Workout> customWorkouts = new ArrayList<>();
 
     private String username;
 
     //Data related to human qualities of user
+    @SerializedName("user_name")
     private String name;
+    @SerializedName("user_weight")
     private double weight;
+    @SerializedName("user_height")
     private int height;
-    //TODO is age really relevant?
-    private int age;
 
 
     public User(String username, String name, double weight, int height) {
