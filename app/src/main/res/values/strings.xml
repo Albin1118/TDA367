@@ -10,6 +10,8 @@
     <string name="workout_creator_button3">Cancel</string>
 
     <string name="workout_block_creator">Create a workout block</string>
+    <string name="workout_block_sets">Select number of sets</string>
+    <string name="workout_block_sets_hint">Enter a number</string>
     <string name="workout_block_list">Select exercises</string>
     <string name="workout_block_button">Add block to workout</string>
 

@@ -13,6 +13,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
     private List<Exercise> exercises;
 
+    private EditText setsEditText;
     private ListView selectExerciseListView;
     private Button addWorkoutBlockButton;
 
@@ -55,25 +57,12 @@ public class WorkoutBlockCreatorFragment extends Fragment {
     }
 
     private void initViews() {
+        setsEditText = view.findViewById(R.id.setsEditText);
         selectExerciseListView = view.findViewById(R.id.selectExerciseListView);
         addWorkoutBlockButton = view.findViewById(R.id.addWorkoutBlockButton);
     }
 
     private void initListeners() {
-        /*selectExerciseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), parentActivity.viewModel.getExercises().get(position).toString(), Toast.LENGTH_SHORT).show();
-                if(parentActivity.viewModel.getCustomExercises() != null && parentActivity.viewModel.preMadeExercises.contains(exercises.get(position))) {
-
-                    parentActivity.setExerciseDetailView(exercises.get(position));
-                    parentActivity.setViewPager(8);
-                } else if (parentActivity.viewModel.getCustomExercises() != null && parentActivity.viewModel.getCustomExercises().contains(exercises.get(position))){
-                    parentActivity.setCustomExerciseDetailView(exercises.get(position), position);
-                    parentActivity.setViewPager(7);
-                }
-            }
-        });*/
 
         addWorkoutBlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +70,14 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 //int [] checkedItemPositions = selectExerciseListView.getCheckedItemPositions();
                 //List<Exercise> checkedExercises = new ArrayList<>();
                 WorkoutBlock workoutBlock = new WorkoutBlock();
+
+                int sets;
+                if( setsEditText.getText().toString().equals("")){
+                    sets=1;
+                }else{
+                    sets=Integer.parseInt(setsEditText.getText().toString());
+                }
+                workoutBlock.setMultiplier(sets);
 
                 SparseBooleanArray checkedItems = selectExerciseListView.getCheckedItemPositions();
 
