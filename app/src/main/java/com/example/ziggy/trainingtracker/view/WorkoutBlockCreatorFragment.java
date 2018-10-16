@@ -98,34 +98,19 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Get the current WorkoutBlock
-                WorkoutBlock workoutBlock = new WorkoutBlock();
-
-                int sets = Integer.parseInt(setsDisplay.getText().toString());
-                workoutBlock.setMultiplier(sets);
-
-                SparseBooleanArray checkedItems = selectExerciseListView.getCheckedItemPositions();
-
-                if (checkedItems != null) {
-                    for (int i=0; i<checkedItems.size(); i++) {
-                        if (checkedItems.valueAt(i)) {
-                            //Exercise checkedExercise = (Exercise) selectExerciseListView.getAdapter().getItem(i);
-                            int position = checkedItems.keyAt(i);
-                            workoutBlock.addExercise(exercises.get(position), 1);
-                        }
-                    }
-                }
-
-                //WorkoutBlock w = buildWorkoutBlock();
+                WorkoutBlock w = buildWorkoutBlock();
 
                 //Create the dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Preview");
 
+                //Create a ListView to be displayed in the dialog
                 final ListView workoutBlockListView = new ListView(getContext());
 
                 List<WorkoutBlock>blockList = new ArrayList<>();
-                blockList.add(workoutBlock);
+                blockList.add(w);
                 WorkoutBlockListAdapter adapter = new WorkoutBlockListAdapter(getContext(), blockList);
+
                 workoutBlockListView.setAdapter(adapter);
 
                 builder.setView(workoutBlockListView);
@@ -145,24 +130,8 @@ public class WorkoutBlockCreatorFragment extends Fragment {
         addWorkoutBlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //int [] checkedItemPositions = selectExerciseListView.getCheckedItemPositions();
-                //List<Exercise> checkedExercises = new ArrayList<>();
-                WorkoutBlock workoutBlock = new WorkoutBlock();
 
-                int sets = Integer.parseInt(setsDisplay.getText().toString());
-                workoutBlock.setMultiplier(sets);
-
-                SparseBooleanArray checkedItems = selectExerciseListView.getCheckedItemPositions();
-
-                if (checkedItems != null) {
-                    for (int i=0; i<checkedItems.size(); i++) {
-                        if (checkedItems.valueAt(i)) {
-                            //Exercise checkedExercise = (Exercise) selectExerciseListView.getAdapter().getItem(i);
-                            int position = checkedItems.keyAt(i);
-                            workoutBlock.addExercise(exercises.get(position), 1);
-                        }
-                    }
-                }
+                WorkoutBlock workoutBlock = buildWorkoutBlock();
 
                 parentActivity.viewModel.buildWorkout.addBlock(workoutBlock);
                 parentActivity.popBackStack();
