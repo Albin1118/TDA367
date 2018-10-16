@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <exercises>
-    <exercise name="Push-ups">
+    <exercise name="medicine-ball cleans">
+        <description>This is an example description for running.</description>
+        <instructions>This is the example instructions for running</instructions>
+        <unit>reps</unit>
+    </exercise>
+    <exercise name="pull-ups">
+        <description>This is an example description for running.</description>
+        <instructions>This is the example instructions for running</instructions>
+        <unit>reps</unit>
+    </exercise>
+    <exercise name="push-ups">
         <description>This is an example description for a push-up.</description>
         <instructions>This is the example instructions for a push-up</instructions>
         <unit>reps</unit>
     </exercise>
-    <exercise name="Running">
+    <exercise name="running">
+        <description>This is an example description for running.</description>
+        <instructions>This is the example instructions for running</instructions>
+        <unit>meters</unit>
+    </exercise>
+    <exercise name="sit-ups">
+        <description>This is an example description for a push-up.</description>
+        <instructions>This is the example instructions for a push-up</instructions>
+        <unit>reps</unit>
+    </exercise>
+    <exercise name="squats">
+        <description>This is an example description for a push-up.</description>
+        <instructions>This is the example instructions for a push-up</instructions>
+        <unit>reps</unit>
+    </exercise>
+    <exercise name="walking lunges">
         <description>This is an example description for running.</description>
         <instructions>This is the example instructions for running</instructions>
         <unit>meters</unit>
