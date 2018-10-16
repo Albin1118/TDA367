@@ -3,7 +3,9 @@
     <workout name="Angie">
         <description>For time.
 
-If the century mark proves to be too much, scale the pull-ups and push-ups down to 60 reps. Aim to finish in 20 minutes for a respectable mark, according to WODcalculator.com.</description>
+If the century mark proves to be too much, scale the pull-ups and push-ups down to 60 reps.
+
+Aim to finish in 20 minutes for a respectable mark, according to WODcalculator.com.</description>
         <block x="1">
             <exercise n="100">pull-ups</exercise>
             <exercise n="100">push-ups</exercise>
@@ -14,7 +16,7 @@ If the century mark proves to be too much, scale the pull-ups and push-ups down 
     <workout name="Candy">
         <description>For time.
 
-Set a timer and rip through 5 rounds of this workout. Beginners can aim to finish in 30 minutes, according to WODcalculator.com.</description>
+Complete 5 rounds of this workout as fast as possible. Beginners can aim to finish in 30 minutes, according to WODcalculator.com.</description>
         <block x="5">
             <exercise n="20">pull-ups</exercise>
             <exercise n="40">push-ups</exercise>
@@ -63,7 +65,7 @@ EMOM means that you'll perform a round of the exercises at the start of every mi
     <workout name="Lunge Ball Burner">
         <description>For time.
 
-Set a timer and see how quickly you can finish the circuit using proper form. Shoot for a time under 30 minutes, according to feedback from the community on CrossFit.com.</description>
+See how quickly you can finish the circuit using proper form. Shoot for a time under 30 minutes, according to feedback from the community on CrossFit.com.</description>
         <block x="1">
             <exercise n="100">walking lunges</exercise>
             <exercise n="100">push-ups</exercise>
