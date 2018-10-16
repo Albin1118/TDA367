@@ -1,7 +1,11 @@
 package com.example.ziggy.trainingtracker.service;
 
 
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
@@ -16,18 +20,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 
-public class UserDataPersistenceService {
+public class UserDataPersistenceService extends Service {
 
     private Gson gson;
     private TrainingTracker trainingTracker;
+    private TrainingTracker deSerializedTrainingTracker;
     private String jsonData;
-    private Context context;
+
 
     private String fileName;
 
-    public UserDataPersistenceService(TrainingTracker trainingTracker, MainViewModel mainViewModel, Context context) {
-        this.trainingTracker = trainingTracker;
-        this.context = context;
+    public UserDataPersistenceService(TrainingTracker trainingTracker) {
+
 
         fileName = "serialized_data.txt";
         gson = new Gson();
@@ -35,10 +39,17 @@ public class UserDataPersistenceService {
 
 
 
-    private void serializeTrainingTracker(){
+    public void serializeTrainingTrackerLocally(){
         jsonData = gson.toJson(trainingTracker);
+        writeToFile(jsonData, this);
     }
 
+    private void deSerializeTrainingTracker(){
+        String trainingTrackerJsonData = readFromFile(this);
+        System.out.println(trainingTrackerJsonData);
+        deSerializedTrainingTracker = gson.fromJson(trainingTrackerJsonData, TrainingTracker.class);
+
+    }
 
     private void writeToFile(String data, Context context) {
         try {
@@ -79,6 +90,17 @@ public class UserDataPersistenceService {
         }
 
         return jsonString;
+    }
+
+    public TrainingTracker getDeSerializedTrainingTracker() {
+        deSerializeTrainingTracker();
+        return deSerializedTrainingTracker;
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }
 
