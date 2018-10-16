@@ -21,7 +21,7 @@ public class MainViewModel extends ViewModel {
     private boolean activeWorkoutStatus;
     List<WorkoutBlock>workoutBlocks= new ArrayList<>();
     public Workout buildWorkout;
-    private List<Enum> exerciseCategories = new ArrayList<>();
+    private ExerciseCategory exerciseCategories = new ExerciseCategory();
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
@@ -57,6 +57,10 @@ public class MainViewModel extends ViewModel {
         return workouts;
     }
 
+    public ExerciseCategory getExerciseCategories() {
+        return exerciseCategories;
+    }
+
     public List<Exercise> getCustomExercises() {
         return trainingTracker.getCustomExercises();
     }
@@ -66,7 +70,6 @@ public class MainViewModel extends ViewModel {
     }
 
     // Methods for adding removing and editing custom Exercises
-
     public void addCustomExercise(String name, String description, String instructions, String unit, String category) {
 
         Exercise e = new Exercise(name, description, instructions, unit, category);
@@ -86,6 +89,7 @@ public class MainViewModel extends ViewModel {
 
     //Method for adding removing and editing custom Workouts
 
+    public void addCustomWorkout(Workout w){
     public void addCustomWorkout(String name, String description, List<WorkoutBlock> blocks){
         Workout w = new Workout(name, description, new ArrayList<>(blocks));
         trainingTracker.addCustomWorkout(w);

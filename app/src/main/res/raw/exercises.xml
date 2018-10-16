@@ -14,13 +14,13 @@
         <description>This is an example description for a push-up.</description>
         <instructions>This is the example instructions for a push-up</instructions>
         <unit>reps</unit>
-        <category>ARMS</category>
+        <category>Arms</category>
     </exercise>
     <exercise name="running">
         <description>This is an example description for running.</description>
         <instructions>This is the example instructions for running</instructions>
         <unit>meters</unit>
-        <category>LEGS</category>
+        <category>Legs</category>
     </exercise>
     <exercise name="sit-ups">
         <description></description>

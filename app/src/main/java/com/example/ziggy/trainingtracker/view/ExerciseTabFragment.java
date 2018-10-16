@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,10 +29,11 @@ public class ExerciseTabFragment extends Fragment {
 
     private FloatingActionButton addExerciseButton;
     private ListView exerciseListView;
-    private ArrayAdapter<Exercise> adapter;
+    private static ArrayAdapter<Exercise> adapter;
 
     private MainActivity parentActivity;
     private View view;
+    private Spinner exerciseCategorySpinner;
     private List<Exercise>exercises;
 
     @Nullable
@@ -45,7 +48,7 @@ public class ExerciseTabFragment extends Fragment {
         initListeners();
 
         //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, exercises);
-        ArrayAdapter adapter = new ArrayAdapter(getContext(), R.layout.exercise_list_item, R.id.exerciseNameTextView, exercises) {
+        adapter = new ArrayAdapter<Exercise>(getContext(), R.layout.exercise_list_item, R.id.exerciseNameTextView, exercises) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -57,16 +60,28 @@ public class ExerciseTabFragment extends Fragment {
                 return view;
             }
         };
-
         exerciseListView.setAdapter(adapter);
-
 
         return view;
     }
 
     private void initViews() {
+
+        //Initiate visual components by id
         addExerciseButton = view.findViewById(R.id.addExerciseButton);
         exerciseListView = view.findViewById(R.id.exerciseList);
+        exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
+
+       //Style and populate spinner
+        ArrayList<String> categories = parentActivity.viewModel.getExerciseCategories().getAllCategoriesToString();
+        ArrayAdapter<String> spinnerAdapter;
+        spinnerAdapter = new ArrayAdapter<>(this.parentActivity, android.R.layout.simple_spinner_item, categories);
+
+        //Dropdown layout style
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        //Attaching adapter to spinner
+        exerciseCategorySpinner.setAdapter(spinnerAdapter);
     }
 
     private void initListeners() {
@@ -86,5 +101,28 @@ public class ExerciseTabFragment extends Fragment {
                 parentActivity.setFragmentContainerContent(fragment);
             }
         });
+
+        exerciseCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String category = exerciseCategorySpinner.getSelectedItem().toString();
+                List<Exercise> exercisesInCategory = new ArrayList<>();
+                for(int i=0; i<parentActivity.viewModel.getExercises().size(); i++) {
+                    if (parentActivity.viewModel.getExercises().get(i).getCategory().equals(category)) {
+                        exercisesInCategory.add(parentActivity.viewModel.getExercises().get(i));
+                    }
+                }
+                
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
     }
 }

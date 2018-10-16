@@ -66,9 +66,8 @@ public class ExerciseCreatorFragment extends Fragment {
         }
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
 
-        ExerciseCategory e = new ExerciseCategory();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.parentActivity, android.R.layout.simple_spinner_item, e.getAllCategoriesToString());
+        ArrayList<String> categories = parentActivity.viewModel.getExerciseCategories().getAllCategoriesToString();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.parentActivity, android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         exerciseCategorySpinner.setAdapter(adapter);
     }
