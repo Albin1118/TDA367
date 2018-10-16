@@ -4,11 +4,13 @@
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
+        <category>Legs</category>
     </exercise>
     <exercise name="pull-ups">
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
+        <category>Arms</category>
     </exercise>
     <exercise name="push-ups">
         <description>This is an example description for a push-up.</description>
@@ -26,15 +28,18 @@
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
+        <category>Abs</category>
     </exercise>
     <exercise name="squats">
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
+        <category>Legs</category>
     </exercise>
     <exercise name="walking lunges">
         <description></description>
         <instructions></instructions>
         <unit>meters</unit>
+        <category>Legs</category>
     </exercise>
 </exercises>
