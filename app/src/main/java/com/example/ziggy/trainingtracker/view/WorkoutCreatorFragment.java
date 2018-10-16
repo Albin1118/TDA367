@@ -39,7 +39,7 @@ public class WorkoutCreatorFragment extends Fragment {
     private MainActivity parentActivity;
     private View view;
 
-    private boolean descriptionClosed = true;
+    private boolean descriptionClosed;
     private Workout editableWorkout = null;
 
     @Override
@@ -103,6 +103,7 @@ public class WorkoutCreatorFragment extends Fragment {
 
     private void initListeners() {
         final int descriptionLayoutHeight = workoutDescriptionLayout.getLayoutParams().height;
+        descriptionClosed = true;
         workoutDescriptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
