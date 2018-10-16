@@ -132,14 +132,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
-    public void clearBackStack(){
-        FragmentManager fm = getSupportFragmentManager();
-        int count = fm.getBackStackEntryCount();
-        for(int i = 0; i < count; ++i) {
-            fm.popBackStack();
-        }
-    }
-
     /**
      * Set the state of the bottom navigation bar.
      * Gets called in each of the tab fragment's onCreateView methods to set the nav bar to
