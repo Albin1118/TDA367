@@ -25,6 +25,8 @@ android {
 dependencies {
     def nav_version = "1.0.0-alpha06"
     def lifecycle_version = "1.1.1"
+    // Graphs
+    implementation 'com.jjoe64:graphview:4.2.2'
     // Serialization
     implementation 'com.google.code.gson:gson:2.8.5'
     // Navigation

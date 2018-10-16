@@ -25,7 +25,7 @@ public class SettingsFragment extends Fragment {
 
     private View view;
     private EditText weightEditText;
-    private Button applySettingsButton;
+    private Button statisticsButton;
 
     private MainActivity parentActivity;
 
@@ -45,19 +45,15 @@ public class SettingsFragment extends Fragment {
 
     private void initViews() {
         weightEditText = view.findViewById(R.id.weight_edit_text);
-        applySettingsButton = view.findViewById(R.id.apply_button);
+        statisticsButton = view.findViewById(R.id.statistics_button);
     }
 
 
     private void initListeners() {
-        applySettingsButton.setOnClickListener(new View.OnClickListener() {
+        statisticsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                double weight = Double.parseDouble(weightEditText.getText().toString());
-
-                parentActivity.viewModel.updateUserWeight(weight);
-                Toast.makeText(getContext(), "Settings updated!", Toast.LENGTH_SHORT).show();
+                parentActivity.setFragmentContainerContent(new StatisticsFragment());
             }
         });
     }
