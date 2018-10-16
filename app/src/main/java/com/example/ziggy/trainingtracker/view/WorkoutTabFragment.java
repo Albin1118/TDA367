@@ -87,9 +87,6 @@ public class WorkoutTabFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 parentActivity.setFragmentContainerContent(new WorkoutCreatorFragment());
-                List<WorkoutBlock>workoutBlocks= new ArrayList<>();
-                Workout buildWorkout = new Workout("", "" , workoutBlocks);
-                parentActivity.viewModel.setBuildWorkout(buildWorkout);
             }
         });
     }

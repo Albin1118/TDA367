@@ -80,11 +80,7 @@ public class MainViewModel extends ViewModel {
     //Method for adding removing and editing custom Workouts
 
     public void addCustomWorkout(String name, String description, List<WorkoutBlock> blocks){
-        Workout w = new Workout(name, description, blocks);
-        trainingTracker.addCustomWorkout(w);
-    }
-
-    public void addCustomWorkout(Workout w){
+        Workout w = new Workout(name, description, new ArrayList<>(blocks));
         trainingTracker.addCustomWorkout(w);
     }
 
@@ -122,9 +118,5 @@ public class MainViewModel extends ViewModel {
 
     public void setBuildWorkout(Workout buildWorkout) {
         this.buildWorkout = buildWorkout;
-    }
-
-    public Workout getBuildWorkout() {
-        return buildWorkout;
     }
 }

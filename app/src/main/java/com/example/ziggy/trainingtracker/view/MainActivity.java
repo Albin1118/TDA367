@@ -54,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (menuItem.getItemId()) {
                     case R.id.nav_dashboard:
-                        popBackStack();
+                        clearBackStack();
                         return true;
                     case R.id.nav_workouts:
-                        popBackStack();
+                        clearBackStack();
                         selectedFragment = new WorkoutTabFragment();
                         break;
                     case R.id.nav_active_workout:
-                        popBackStack();
+                        clearBackStack();
 
                         /*
                         if (onGoingActiveWorkout()) {
@@ -75,11 +75,11 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.nav_exercises:
-                        popBackStack();
+                        clearBackStack();
                         selectedFragment = new ExerciseTabFragment();
                         break;
                     case R.id.nav_settings:
-                        popBackStack();
+                        clearBackStack();
                         selectedFragment = new SettingsFragment();
                         break;
 
@@ -103,10 +103,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onGoingActiveWorkout(){
         return viewModel.checkActiveWorkoutStatus();
     }
+
+    /**
+     * Pop the fragment at the top of the back stack.
+     */
+    public void popBackStack() {
+        getSupportFragmentManager().popBackStack();
+    }
+
     /**
      * Clear the back stack, back to the start page.
      */
-    public void popBackStack() {
+    public void clearBackStack() {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 

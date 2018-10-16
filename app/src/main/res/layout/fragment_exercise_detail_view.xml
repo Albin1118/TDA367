@@ -61,73 +61,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseDescriptionTextView" />
 
-    <EditText
-        android:id="@+id/exerciseNameEditText"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="16dp"
-        android:hint="Name"
-        android:textColor="@color/colorAccent"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:inputType="textCapWords"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/exerciseUnitEditText"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="22dp"
-        android:hint="reps, meters, seconds..."
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exerciseNameEditText" />
-
-    <EditText
-        android:id="@+id/exerciseDescriptionEditText"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="136dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="22dp"
-        android:background="@color/colorTextArea"
-        android:gravity="start"
-        android:hint="Description"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:inputType="textCapSentences|textMultiLine"
-        android:scrollbars="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exerciseUnitEditText" />
-
-    <EditText
-        android:id="@+id/exerciseInstructionsEditText"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="136dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="22dp"
-        android:background="@color/colorTextArea"
-        android:gravity="start"
-        android:hint="Instructions"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:inputType="textCapSentences|textMultiLine"
-        android:scrollbars="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exerciseDescriptionEditText" />
-
     <Button
         android:id="@+id/removeExerciseButton"
         android:visibility="gone"
@@ -149,30 +82,6 @@
         android:layout_marginEnd="72dp"
         android:backgroundTint="@android:color/holo_orange_light"
         android:text="Edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/cancelEditExerciseButton"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="72dp"
-        android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@android:color/holo_orange_light" />
-
-    <Button
-        android:id="@+id/saveExerciseButton"
-        android:visibility="gone"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="72dp"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

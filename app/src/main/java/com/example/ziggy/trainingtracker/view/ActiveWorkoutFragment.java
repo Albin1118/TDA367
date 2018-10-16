@@ -21,7 +21,6 @@ import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -117,7 +116,7 @@ public class ActiveWorkoutFragment extends Fragment {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
-                        parentActivity.popBackStack();
+                        parentActivity.clearBackStack();
                         parentActivity.showBottomNavigationBar();
                         Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
 

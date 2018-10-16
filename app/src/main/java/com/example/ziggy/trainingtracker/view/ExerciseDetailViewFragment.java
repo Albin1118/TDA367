@@ -27,18 +27,11 @@ public class ExerciseDetailViewFragment extends Fragment {
     private TextView exerciseDescriptionTextView;
     private TextView exerciseInstructionsTextView;
 
-    private EditText exerciseNameEditText;
-    private EditText exerciseUnitEditText;
-    private EditText exerciseDescriptionEditText;
-    private EditText exerciseInstructionsEditText;
-
     private Button removeExerciseButton;
     private Button editExerciseButton;
-    private Button cancelEditExerciseButton;
-    private Button saveExerciseButton;
 
     private View view;
-    private Exercise exercise = new Exercise("name", "description", "instructions", "unit");
+    private Exercise exercise;
 
     @Nullable
     @Override
@@ -58,16 +51,18 @@ public class ExerciseDetailViewFragment extends Fragment {
         exerciseDescriptionTextView.setMovementMethod(new ScrollingMovementMethod());
         exerciseInstructionsTextView = view.findViewById(R.id.exerciseInstructionsTextView);
         exerciseInstructionsTextView.setMovementMethod(new ScrollingMovementMethod());
-        exerciseNameEditText = view.findViewById(R.id.exerciseNameEditText);
-        exerciseUnitEditText = view.findViewById(R.id.exerciseUnitEditText);
-        exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);
-        exerciseInstructionsEditText = view.findViewById(R.id.exerciseInstructionsEditText);
         removeExerciseButton = view.findViewById(R.id.removeExerciseButton);
         editExerciseButton = view.findViewById(R.id.editExerciseButton);
-        cancelEditExerciseButton = view.findViewById(R.id.cancelEditExerciseButton);
-        saveExerciseButton = view.findViewById(R.id.saveExerciseButton);
 
-        showExerciseInfo();
+        exerciseNameTextView.setText(exercise.getName());
+        exerciseUnitTextView.setText(exercise.getUnit());
+        exerciseDescriptionTextView.setText(exercise.getDescription());
+        exerciseInstructionsTextView.setText(exercise.getInstructions());
+
+        if (parentActivity.viewModel.getCustomExercises().contains(exercise)) {
+            removeExerciseButton.setVisibility(View.VISIBLE);
+            editExerciseButton.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initListeners() {
@@ -82,75 +77,11 @@ public class ExerciseDetailViewFragment extends Fragment {
         editExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditableExerciseInfo();
+                ExerciseCreatorFragment fragment = new ExerciseCreatorFragment();
+                fragment.setEditableExercise(exercise);
+                parentActivity.setFragmentContainerContent(fragment);
             }
         });
-
-        cancelEditExerciseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showExerciseInfo();
-            }
-        });
-
-        saveExerciseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveExercise();
-                showExerciseInfo();
-            }
-        });
-    }
-
-    private void setExerciseInfo() {
-        exerciseNameTextView.setText(exercise.getName());
-        exerciseUnitTextView.setText(exercise.getUnit());
-        exerciseDescriptionTextView.setText(exercise.getDescription());
-        exerciseInstructionsTextView.setText(exercise.getInstructions());
-    }
-
-    private void showExerciseInfo() {
-        setExerciseInfo();
-
-        exerciseNameEditText.setVisibility(View.GONE);
-        exerciseUnitEditText.setVisibility(View.GONE);
-        exerciseDescriptionEditText.setVisibility(View.GONE);
-        exerciseInstructionsEditText.setVisibility(View.GONE);
-        cancelEditExerciseButton.setVisibility(View.GONE);
-        saveExerciseButton.setVisibility(View.GONE);
-        exerciseNameTextView.setVisibility(View.VISIBLE);
-        exerciseUnitTextView.setVisibility(View.VISIBLE);
-        exerciseDescriptionTextView.setVisibility(View.VISIBLE);
-        exerciseInstructionsTextView.setVisibility(View.VISIBLE);
-        if (parentActivity.viewModel.getCustomExercises().contains(exercise)) {
-            removeExerciseButton.setVisibility(View.VISIBLE);
-            editExerciseButton.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void showEditableExerciseInfo() {
-        setExerciseInfo();
-
-        exerciseNameTextView.setVisibility(View.GONE);
-        exerciseUnitTextView.setVisibility(View.GONE);
-        exerciseDescriptionTextView.setVisibility(View.GONE);
-        exerciseInstructionsTextView.setVisibility(View.GONE);
-        removeExerciseButton.setVisibility(View.GONE);
-        editExerciseButton.setVisibility(View.GONE);
-        exerciseNameEditText.setVisibility(View.VISIBLE);
-        exerciseUnitEditText.setVisibility(View.VISIBLE);
-        exerciseDescriptionEditText.setVisibility(View.VISIBLE);
-        exerciseInstructionsEditText.setVisibility(View.VISIBLE);
-        cancelEditExerciseButton.setVisibility(View.VISIBLE);
-        saveExerciseButton.setVisibility(View.VISIBLE);
-    }
-
-    private void saveExercise() {
-        String name = exerciseNameEditText.getText().toString();
-        String unit = exerciseUnitEditText.getText().toString();
-        String description = exerciseDescriptionEditText.getText().toString();
-        String instructions = exerciseInstructionsEditText.getText().toString();
-        parentActivity.viewModel.editCustomExercise(exercise, name, description, instructions, unit);
     }
 
     @Override

@@ -112,7 +112,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 }
 
                 parentActivity.viewModel.buildWorkout.addBlock(workoutBlock);
-                parentActivity.getSupportFragmentManager().popBackStack();
+                parentActivity.popBackStack();
             }
         });
     }

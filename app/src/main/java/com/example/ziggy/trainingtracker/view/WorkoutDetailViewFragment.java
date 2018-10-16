@@ -30,9 +30,6 @@ import java.util.List;
  * Fragment representing a view displaying contents of a selected workout
  */
 public class WorkoutDetailViewFragment extends Fragment {
-
-    private String workoutName = "Workout name";
-    private String workoutDescription = "Workout description";
     private List<WorkoutBlock>workoutBlocks = new ArrayList<>();
 
     private TextView workoutNameTextView;
@@ -49,7 +46,7 @@ public class WorkoutDetailViewFragment extends Fragment {
     private View view;
 
     private boolean descriptionClosed = true;
-    private Workout workout = new Workout("Name", "Description", workoutBlocks);
+    private Workout workout;
 
     @Nullable
     @Override
@@ -58,9 +55,6 @@ public class WorkoutDetailViewFragment extends Fragment {
         parentActivity = ((MainActivity)getActivity());
         initViews();
         initListeners();
-        setWorkoutDetailViewComponents(workout.getName(), workout.getDescription(), workout.getBlocks());
-        ArrayAdapter<WorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), workout.getBlocks());
-        workoutBlocksListView.setAdapter(adapter);
         return view;
     }
 
@@ -76,11 +70,15 @@ public class WorkoutDetailViewFragment extends Fragment {
         removeWorkoutButton = view.findViewById(R.id.removeWorkoutButton);
         workoutBlocksListView.addHeaderView(header);
 
-        workoutNameTextView.setText(workoutName);
-        workoutDescriptionTextView.setText(workoutDescription);
+        workoutNameTextView.setText(workout.getName());
+        workoutDescriptionTextView.setText(workout.getDescription());
+        ArrayAdapter<WorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), workout.getBlocks());
+        workoutBlocksListView.setAdapter(adapter);
 
-
-        showWorkoutInfo();
+        if(parentActivity.viewModel.getCustomWorkouts().contains(workout)) {
+            removeWorkoutButton.setVisibility(View.VISIBLE);
+            editWorkoutButton.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initListeners() {
@@ -123,24 +121,6 @@ public class WorkoutDetailViewFragment extends Fragment {
         });
     }
 
-    private void setWorkoutInfo() {
-        workoutNameTextView.setText(workout.getName());
-        workoutDescriptionTextView.setText(workout.getDescription());
-    }
-
-    private void showWorkoutInfo() {
-        setWorkoutInfo();
-        workoutDescriptionTextView.setVisibility(View.VISIBLE);
-        workoutNameTextView.setVisibility(View.VISIBLE);
-        startWorkoutButton.setVisibility(View.VISIBLE);
-
-
-        if(parentActivity.viewModel.getCustomWorkouts().contains(workout)) {
-            removeWorkoutButton.setVisibility(View.VISIBLE);
-            editWorkoutButton.setVisibility(View.VISIBLE);
-        }
-    }
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -151,27 +131,6 @@ public class WorkoutDetailViewFragment extends Fragment {
             ft.detach(this).attach(this).commit();
 
         }
-    }
-
-    /**
-     * The method is called from the mainActivity and sets the instance variables of the detailView
-     * so that the fragment's contents will be updated next time onCreate() is called.
-     * @param workoutName name of the selected workout
-     * @param workoutDescription description of the selected workout
-     * @param workoutBlocks the list of workoutBlocks from the selected workout
-     */
-    public void setWorkoutDetailViewComponents(String workoutName, String workoutDescription, List<WorkoutBlock>workoutBlocks){
-        this.workoutName = workoutName;
-        this.workoutDescription = workoutDescription;
-        this.workoutBlocks = workoutBlocks;
-    }
-
-    public void setWorkoutNameTextView(String workoutName) {
-        this.workoutName = workoutName;
-    }
-
-    public void setWorkoutDescriptionTextView(String workoutDescription) {
-        this.workoutDescription = workoutDescription;
     }
 
     public void setWorkout(Workout workout) {

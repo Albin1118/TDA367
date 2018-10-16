@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.Exercise;
 
 /**
  * Fragment representing a view where the user can create custom exercises
@@ -24,9 +24,13 @@ public class ExerciseCreatorFragment extends Fragment {
     private EditText exerciseUnitEditText;
     private EditText exerciseDescriptionEditText;
     private EditText exerciseInstructionsEditText;
+    private Button saveExerciseButton;
+    private Button cancelEditExerciseButton;
 
     private MainActivity parentActivity;
     private View view;
+
+    private Exercise editableExercise = null;
 
     @Nullable
     @Override
@@ -40,11 +44,17 @@ public class ExerciseCreatorFragment extends Fragment {
     }
 
     private void initViews() {
-        createExerciseButton = view.findViewById(R.id.createExerciseButton);
         exerciseNameEditText = view.findViewById(R.id.exerciseNameEditText);
         exerciseUnitEditText = view.findViewById(R.id.exerciseUnitEditText);
         exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);
         exerciseInstructionsEditText = view.findViewById(R.id.exerciseInstructionsEditText);
+        createExerciseButton = view.findViewById(R.id.createExerciseButton);
+        saveExerciseButton = view.findViewById(R.id.saveExerciseButton);
+        cancelEditExerciseButton = view.findViewById(R.id.cancelEditExerciseButton);
+
+        if (editableExercise != null) {
+            editMode();
+        }
     }
 
     private void initListeners() {
@@ -53,8 +63,22 @@ public class ExerciseCreatorFragment extends Fragment {
             public void onClick(View v) {
                 createExercise();
                 parentActivity.popBackStack();
-                parentActivity.setFragmentContainerContent(new ExerciseTabFragment());
                 Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        saveExerciseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveExercise();
+                parentActivity.popBackStack();
+            }
+        });
+
+        cancelEditExerciseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parentActivity.popBackStack();
             }
         });
     }
@@ -65,5 +89,28 @@ public class ExerciseCreatorFragment extends Fragment {
         String description = exerciseDescriptionEditText.getText().toString();
         String instructions = exerciseInstructionsEditText.getText().toString();
         parentActivity.viewModel.addCustomExercise(name, description, instructions, unit);
+    }
+
+    private void saveExercise() {
+        String name = exerciseNameEditText.getText().toString();
+        String unit = exerciseUnitEditText.getText().toString();
+        String description = exerciseDescriptionEditText.getText().toString();
+        String instructions = exerciseInstructionsEditText.getText().toString();
+        parentActivity.viewModel.editCustomExercise(editableExercise, name, description, instructions, unit);
+    }
+
+    private void editMode() {
+        saveExerciseButton.setVisibility(View.VISIBLE);
+        cancelEditExerciseButton.setVisibility(View.VISIBLE);
+        createExerciseButton.setVisibility(View.GONE);
+
+        exerciseNameEditText.setText(editableExercise.getName());
+        exerciseDescriptionEditText.setText(editableExercise.getDescription());
+        exerciseInstructionsEditText.setText(editableExercise.getInstructions());
+        exerciseUnitEditText.setText(editableExercise.getUnit());
+    }
+
+    public void setEditableExercise(Exercise editableExercise) {
+        this.editableExercise = editableExercise;
     }
 }

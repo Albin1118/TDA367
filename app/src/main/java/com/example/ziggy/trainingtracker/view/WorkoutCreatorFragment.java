@@ -91,13 +91,14 @@ public class WorkoutCreatorFragment extends Fragment {
         workoutBlocksListView.addHeaderView(header);
         workoutBlocksListView.addFooterView(footer);
 
-        if (editableWorkout != null) {
-            editMode();
-        }
         workoutNameEditText.setText(parentActivity.viewModel.buildWorkout.getName());
         workoutDescriptionEditText.setText(parentActivity.viewModel.buildWorkout.getDescription());
         ArrayAdapter<WorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), parentActivity.viewModel.buildWorkout.getBlocks());
         workoutBlocksListView.setAdapter(adapter);
+
+        if (editableWorkout != null) {
+            editMode();
+        }
     }
 
     private void initListeners() {
@@ -127,34 +128,23 @@ public class WorkoutCreatorFragment extends Fragment {
         createWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveBuildWorkout();
-                parentActivity.viewModel.addCustomWorkout(parentActivity.viewModel.buildWorkout);
-
-                parentActivity.setFragmentContainerContent(new WorkoutTabFragment());
+                createWorkout();
+                parentActivity.popBackStack();
                 Toast.makeText(getContext(), "New workout created!", Toast.LENGTH_SHORT).show();
             }
         });
         saveEditedWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveBuildWorkout();
-                String name = parentActivity.viewModel.buildWorkout.getName();
-                String description = parentActivity.viewModel.buildWorkout.getDescription();
-                List<WorkoutBlock> blocks = parentActivity.viewModel.buildWorkout.getBlocks();
-                parentActivity.viewModel.editCustomWorkout(editableWorkout, name, description, blocks);
-
-                WorkoutDetailViewFragment fragment = new WorkoutDetailViewFragment();
-                fragment.setWorkout(editableWorkout);
-                parentActivity.setFragmentContainerContent(fragment);
+                saveWorkout();
+                parentActivity.popBackStack();
             }
         });
 
         cancelEditedWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WorkoutDetailViewFragment fragment = new WorkoutDetailViewFragment();
-                fragment.setWorkout(editableWorkout);
-                parentActivity.setFragmentContainerContent(fragment);
+                parentActivity.popBackStack();
             }
         });
 
@@ -165,12 +155,26 @@ public class WorkoutCreatorFragment extends Fragment {
         parentActivity.viewModel.buildWorkout.setDescription(workoutDescriptionEditText.getText().toString());
     }
 
+    private void createWorkout() {
+        saveBuildWorkout();
+        String name = parentActivity.viewModel.buildWorkout.getName();
+        String description = parentActivity.viewModel.buildWorkout.getDescription();
+        List<WorkoutBlock> blocks = parentActivity.viewModel.buildWorkout.getBlocks();
+        parentActivity.viewModel.addCustomWorkout(name, description, blocks);
+    }
+
+    private void saveWorkout() {
+        saveBuildWorkout();
+        String name = parentActivity.viewModel.buildWorkout.getName();
+        String description = parentActivity.viewModel.buildWorkout.getDescription();
+        List<WorkoutBlock> blocks = parentActivity.viewModel.buildWorkout.getBlocks();
+        parentActivity.viewModel.editCustomWorkout(editableWorkout, name, description, blocks);
+    }
+
     private void editMode() {
         saveEditedWorkoutButton.setVisibility(View.VISIBLE);
         cancelEditedWorkoutButton.setVisibility(View.VISIBLE);
         createWorkoutButton.setVisibility(View.GONE);
-        workoutNameEditText.setText(parentActivity.viewModel.getBuildWorkout().getName());
-        workoutDescriptionEditText.setText(parentActivity.viewModel.getBuildWorkout().getDescription());
     }
 
     public void setEditableWorkout(Workout editableWorkout) {
