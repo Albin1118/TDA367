@@ -1,8 +1,6 @@
 package com.example.ziggy.trainingtracker.viewmodel;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import android.os.Bundle;
 
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;

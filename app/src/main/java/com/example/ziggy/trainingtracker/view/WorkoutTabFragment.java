@@ -13,12 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Workout;
-import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
