@@ -15,6 +15,10 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.List;
 
+/**
+ * Fragment responsible for creating graphs and showing the user statistics
+ */
+
 public class StatisticsFragment extends Fragment {
 
     private MainActivity parentActivity;
@@ -31,7 +35,7 @@ public class StatisticsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_statistics, container, false);
         parentActivity = (MainActivity)getActivity();
-        parentActivity.setNavBarState(R.id.nav_dashboard);
+        parentActivity.setNavBarState(R.id.nav_more);
 
         exercises = parentActivity.viewModel.getExercises();
 

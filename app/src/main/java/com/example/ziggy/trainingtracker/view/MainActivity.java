@@ -78,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
                         clearBackStack();
                         selectedFragment = new ExerciseTabFragment();
                         break;
-                    case R.id.nav_settings:
+                    case R.id.nav_more:
                         clearBackStack();
-                        selectedFragment = new SettingsFragment();
+                        selectedFragment = new MoreTabFragment();
                         break;
 
                 }
