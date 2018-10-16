@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
@@ -29,7 +30,9 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
     private List<Exercise> exercises;
 
-    private EditText setsEditText;
+    private Button decrementSetButton;
+    private TextView setsDisplay;
+    private Button incrementSetButton;
     private ListView selectExerciseListView;
     private Button addWorkoutBlockButton;
 
@@ -57,12 +60,34 @@ public class WorkoutBlockCreatorFragment extends Fragment {
     }
 
     private void initViews() {
-        setsEditText = view.findViewById(R.id.setsEditText);
+        decrementSetButton = view.findViewById(R.id.decrementSetButton);
+        setsDisplay = view.findViewById(R.id.setsdisplay);
+        incrementSetButton = view.findViewById(R.id.incrementSetButton);
         selectExerciseListView = view.findViewById(R.id.selectExerciseListView);
         addWorkoutBlockButton = view.findViewById(R.id.addWorkoutBlockButton);
     }
 
     private void initListeners() {
+
+        decrementSetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int sets = Integer.parseInt(setsDisplay.getText().toString());
+                if(sets > 1){
+                    sets--;
+                }
+                setsDisplay.setText(String.valueOf(sets));
+            }
+        });
+
+        incrementSetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int sets = Integer.parseInt(setsDisplay.getText().toString());
+                sets++;
+                setsDisplay.setText(String.valueOf(sets));
+            }
+        });
 
         addWorkoutBlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +96,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 //List<Exercise> checkedExercises = new ArrayList<>();
                 WorkoutBlock workoutBlock = new WorkoutBlock();
 
-                int sets;
-                if( setsEditText.getText().toString().equals("")){
-                    sets=1;
-                }else{
-                    sets=Integer.parseInt(setsEditText.getText().toString());
-                }
+                int sets = Integer.parseInt(setsDisplay.getText().toString());
                 workoutBlock.setMultiplier(sets);
 
                 SparseBooleanArray checkedItems = selectExerciseListView.getCheckedItemPositions();

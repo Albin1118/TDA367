@@ -11,9 +11,12 @@
 
     <string name="workout_block_creator">Create a workout block</string>
     <string name="workout_block_sets">Select number of sets</string>
+    <string name="workout_block_sets_dec">—</string>
+    <string name="workout_block_sets_inc">+</string>
     <string name="workout_block_sets_hint">Enter a number</string>
     <string name="workout_block_list">Select exercises</string>
     <string name="workout_block_button">Add block to workout</string>
+    <string name="workout_block_button2">Preview Block</string>
 
     <string name="workout_detail_view">Workout name</string>
     <string name="workout_detail_view_button">Start workout</string>
