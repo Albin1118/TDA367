@@ -1,6 +1,8 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +37,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
     private TextView setsDisplay;
     private Button incrementSetButton;
     private ListView selectExerciseListView;
+    private Button previewButton;
     private Button addWorkoutBlockButton;
 
     private View view;
@@ -64,6 +68,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
         setsDisplay = view.findViewById(R.id.setsdisplay);
         incrementSetButton = view.findViewById(R.id.incrementSetButton);
         selectExerciseListView = view.findViewById(R.id.selectExerciseListView);
+        previewButton = view.findViewById(R.id.previewButton);
         addWorkoutBlockButton = view.findViewById(R.id.addWorkoutBlockButton);
     }
 
@@ -86,6 +91,54 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 int sets = Integer.parseInt(setsDisplay.getText().toString());
                 sets++;
                 setsDisplay.setText(String.valueOf(sets));
+            }
+        });
+
+        previewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Get the current WorkoutBlock
+                WorkoutBlock workoutBlock = new WorkoutBlock();
+
+                int sets = Integer.parseInt(setsDisplay.getText().toString());
+                workoutBlock.setMultiplier(sets);
+
+                SparseBooleanArray checkedItems = selectExerciseListView.getCheckedItemPositions();
+
+                if (checkedItems != null) {
+                    for (int i=0; i<checkedItems.size(); i++) {
+                        if (checkedItems.valueAt(i)) {
+                            //Exercise checkedExercise = (Exercise) selectExerciseListView.getAdapter().getItem(i);
+                            int position = checkedItems.keyAt(i);
+                            workoutBlock.addExercise(exercises.get(position), 1);
+                        }
+                    }
+                }
+
+                //WorkoutBlock w = buildWorkoutBlock();
+
+                //Create the dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Preview");
+
+                final ListView workoutBlockListView = new ListView(getContext());
+
+                List<WorkoutBlock>blockList = new ArrayList<>();
+                blockList.add(workoutBlock);
+                WorkoutBlockListAdapter adapter = new WorkoutBlockListAdapter(getContext(), blockList);
+                workoutBlockListView.setAdapter(adapter);
+
+                builder.setView(workoutBlockListView);
+
+                // Set up the button
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
             }
         });
 
@@ -115,5 +168,29 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 parentActivity.popBackStack();
             }
         });
+
+
+    }
+
+    private WorkoutBlock buildWorkoutBlock(){
+
+        WorkoutBlock workoutBlock = new WorkoutBlock();
+
+        int sets = Integer.parseInt(setsDisplay.getText().toString());
+        workoutBlock.setMultiplier(sets);
+
+        SparseBooleanArray checkedItems = selectExerciseListView.getCheckedItemPositions();
+
+        if (checkedItems != null) {
+            for (int i=0; i<checkedItems.size(); i++) {
+                if (checkedItems.valueAt(i)) {
+                    //Exercise checkedExercise = (Exercise) selectExerciseListView.getAdapter().getItem(i);
+                    int position = checkedItems.keyAt(i);
+                    workoutBlock.addExercise(exercises.get(position), 1);
+                }
+            }
+        }
+
+        return workoutBlock;
     }
 }
