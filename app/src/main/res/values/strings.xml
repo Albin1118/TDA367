@@ -30,9 +30,11 @@
     //Exercise strings
     <string name="exercises_tab">Exercises</string>
 
-    <string name="exercise_creator">Create custom exercise</string>
-    <string name="exercise_creator_name">Name</string>
-    <string name="exercise_creator_unit">reps, meters, seconds...</string>
+    <string name="exercise_creator">Custom Exercise</string>
+    <string name="exercise_creator_name1">Name:</string>
+    <string name="exercise_creator_name2">Name</string>
+    <string name="exercise_creator_unit1">Unit:</string>
+    <string name="exercise_creator_unit2">reps, meters, seconds...</string>
     <string name="exercise_creator_description1">Description:</string>
     <string name="exercise_creator_description2">Description</string>
     <string name="exercise_creator_instructions1">Instructions:</string>
