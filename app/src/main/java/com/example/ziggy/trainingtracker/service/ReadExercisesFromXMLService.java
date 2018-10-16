@@ -1,6 +1,7 @@
 package com.example.ziggy.trainingtracker.service;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -99,7 +100,11 @@ public class ReadExercisesFromXMLService {
             if (unit == null || unit.trim().isEmpty())
                 throw new IllegalArgumentException("An exercise needs a unit.");
 
-        return new Exercise(name, description, instructions, unit);
+        String category = getTextValue(exerciseElement, "category");
+        if (category == null)
+            throw new IllegalArgumentException("An exercise needs a category");
+
+        return new Exercise(name, description, instructions, unit, category);
     }
 
     /**

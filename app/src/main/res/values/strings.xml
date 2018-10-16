@@ -55,6 +55,15 @@
 
 
 
+    <string-array name="categories">
+        <item>Arms</item>
+        <item>Chest</item>
+        <item>Abs</item>
+        <item>Back</item>
+        <item>Legs</item>
+    </string-array>
+
+
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Donec id tortor condimentum, tincidunt nunc eu, pellentesque metus. Sed et viverra lacus.
         Aliquam quis urna vel nisi aliquet aliquam quis quis magna.</string>

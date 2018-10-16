@@ -2,6 +2,7 @@ package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
+import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
@@ -20,6 +21,7 @@ public class MainViewModel extends ViewModel {
     private boolean activeWorkoutStatus;
     List<WorkoutBlock>workoutBlocks= new ArrayList<>();
     public Workout buildWorkout;
+    private List<Enum> exerciseCategories = new ArrayList<>();
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
@@ -65,8 +67,9 @@ public class MainViewModel extends ViewModel {
 
     // Methods for adding removing and editing custom Exercises
 
-    public void addCustomExercise(String name, String description, String instructions, String unit) {
-        Exercise e = new Exercise(name, description, instructions, unit);
+    public void addCustomExercise(String name, String description, String instructions, String unit, String category) {
+
+        Exercise e = new Exercise(name, description, instructions, unit, category);
         trainingTracker.addCustomExercise(e);
     }
 

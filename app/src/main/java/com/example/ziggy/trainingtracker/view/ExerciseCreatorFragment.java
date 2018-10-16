@@ -6,11 +6,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.ExerciseCategory;
+
+import java.util.ArrayList;
 import com.example.ziggy.trainingtracker.model.Exercise;
 
 /**
@@ -24,6 +31,7 @@ public class ExerciseCreatorFragment extends Fragment {
     private EditText exerciseUnitEditText;
     private EditText exerciseDescriptionEditText;
     private EditText exerciseInstructionsEditText;
+    private Spinner exerciseCategorySpinner;
     private Button saveExerciseButton;
     private Button cancelEditExerciseButton;
 
@@ -40,6 +48,7 @@ public class ExerciseCreatorFragment extends Fragment {
         initViews();
         initListeners();
 
+
         return view;
     }
 
@@ -55,6 +64,11 @@ public class ExerciseCreatorFragment extends Fragment {
         if (editableExercise != null) {
             editMode();
         }
+        exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.parentActivity, R.array.categories, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        exerciseCategorySpinner.setAdapter(adapter);
     }
 
     private void initListeners() {
@@ -88,7 +102,8 @@ public class ExerciseCreatorFragment extends Fragment {
         String unit = exerciseUnitEditText.getText().toString();
         String description = exerciseDescriptionEditText.getText().toString();
         String instructions = exerciseInstructionsEditText.getText().toString();
-        parentActivity.viewModel.addCustomExercise(name, description, instructions, unit);
+        String category = exerciseCategorySpinner.getSelectedItem().toString();
+        parentActivity.viewModel.addCustomExercise(name, unit, description, instructions, category);
     }
 
     private void saveExercise() {

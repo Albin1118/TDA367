@@ -14,13 +14,15 @@ public class Exercise {
     private String unit;
     @SerializedName("exercise_has_weight")
     private boolean hasWeight;
+    private String category;
 
 
-    public Exercise(String name, String description, String instructions, String unit) {
+    public Exercise(String name, String description, String instructions, String unit, String category) {
         this.name = name;
         this.description = description;
         this.instructions = instructions;
         this.unit = unit;
+        this.category = category;
     }
 
     public String getName() {
