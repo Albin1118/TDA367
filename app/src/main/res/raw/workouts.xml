@@ -3,7 +3,7 @@
     <workout name="Angie">
         <description>For time.
 
-            If the century mark proves to be too much, scale the pull-ups and push-ups down to 60 reps. Aim to finish in 20 minutes for a respectable mark, according to WODcalculator.com.</description>
+If the century mark proves to be too much, scale the pull-ups and push-ups down to 60 reps. Aim to finish in 20 minutes for a respectable mark, according to WODcalculator.com.</description>
         <block x="1">
             <exercise n="100">pull-ups</exercise>
             <exercise n="100">push-ups</exercise>
@@ -14,7 +14,7 @@
     <workout name="Candy">
         <description>For time.
 
-            Set a timer and rip through 5 rounds of this workout. Beginners can aim to finish in 30 minutes, according to WODcalculator.com.</description>
+Set a timer and rip through 5 rounds of this workout. Beginners can aim to finish in 30 minutes, according to WODcalculator.com.</description>
         <block x="5">
             <exercise n="20">pull-ups</exercise>
             <exercise n="40">push-ups</exercise>
@@ -24,7 +24,7 @@
     <workout name="Chelsea">
         <description>Every minute on the minute (EMOM) for 30 minutes.
 
-            EMOM means that you'll perform a round of the exercises at the start of every minute, resting until the start of the next 60 seconds. That will get harder, and eventually you might not have any time to rest.</description>
+EMOM means that you'll perform a round of the exercises at the start of every minute, resting until the start of the next 60 seconds. That will get harder, and eventually you might not have any time to rest.</description>
         <block x="30">
             <exercise n="5">pull-ups</exercise>
             <exercise n="10">push-ups</exercise>
@@ -63,7 +63,7 @@
     <workout name="Lunge Ball Burner">
         <description>For time.
 
-            Set a timer and see how quickly you can finish the circuit using proper form. Shoot for a time under 30 minutes, according to feedback from the community on CrossFit.com.</description>
+Set a timer and see how quickly you can finish the circuit using proper form. Shoot for a time under 30 minutes, according to feedback from the community on CrossFit.com.</description>
         <block x="1">
             <exercise n="100">walking lunges</exercise>
             <exercise n="100">push-ups</exercise>

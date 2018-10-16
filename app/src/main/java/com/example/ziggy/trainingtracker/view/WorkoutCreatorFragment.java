@@ -101,12 +101,13 @@ public class WorkoutCreatorFragment extends Fragment {
     }
 
     private void initListeners() {
+        final int descriptionLayoutHeight = workoutDescriptionLayout.getLayoutParams().height;
         workoutDescriptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DropDownAnim a;
                 if (descriptionClosed) {
-                    a = new DropDownAnim(workoutDescriptionLayout, workoutDescriptionEditText.getLayoutParams().height + 40);
+                    a = new DropDownAnim(workoutDescriptionLayout, descriptionLayoutHeight);
                 } else {
                     a = new DropDownAnim(workoutDescriptionLayout, 0);
                 } descriptionClosed = !descriptionClosed;
