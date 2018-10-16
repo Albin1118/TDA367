@@ -31,8 +31,7 @@ public class UserDataPersistenceService extends Service {
     private String fileName;
 
     public UserDataPersistenceService(TrainingTracker trainingTracker) {
-
-
+        this.trainingTracker = trainingTracker;
         fileName = "serialized_data.txt";
         gson = new Gson();
     }
@@ -93,7 +92,13 @@ public class UserDataPersistenceService extends Service {
     }
 
     public TrainingTracker getDeSerializedTrainingTracker() {
-        deSerializeTrainingTracker();
+        try {
+            deSerializeTrainingTracker();
+        }
+        catch (Exception e) {
+            System.out.println("Could not get deSerializedTrainingTracker");
+            return null;
+        }
         return deSerializedTrainingTracker;
     }
 

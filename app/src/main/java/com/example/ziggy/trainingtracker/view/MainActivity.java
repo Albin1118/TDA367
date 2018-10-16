@@ -91,6 +91,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        viewModel.saveAllData();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        viewModel.saveAllData();
+    }
 
     public void hideBottomNavigationBar(){
         mBottomNavBar.setVisibility(View.INVISIBLE);
