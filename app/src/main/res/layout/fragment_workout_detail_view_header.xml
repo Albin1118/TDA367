@@ -8,15 +8,13 @@
     <TextView
         android:id="@+id/workoutNameTextView"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="@string/workout_detail_view"
-        android:textColor="@color/colorAccent"
-        android:textSize="22sp"
+        android:textSize="34sp"
         android:textStyle="bold"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

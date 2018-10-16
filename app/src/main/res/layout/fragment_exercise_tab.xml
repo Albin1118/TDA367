@@ -6,6 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/ExercisesTabTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exercises_tab"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+    </android.support.v7.widget.Toolbar>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addExerciseButton"
         android:layout_width="wrap_content"
@@ -28,26 +46,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/addExerciseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ExercisesTabTitleTextView">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <ListView
             android:id="@+id/exerciseList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/ExercisesTabTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/exercises_tab"
-        android:textColor="@color/colorAccent"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/exerciseCategorySpinner"
