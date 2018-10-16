@@ -6,13 +6,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.ExerciseStatistic;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,10 +29,12 @@ public class StatisticsFragment extends Fragment {
     private View view;
 
     private String workoutName;
-    private List<Exercise> exercises;
+    private List<ExerciseStatistic> exercises;
     private Exercise chosenExercise;
     private LineGraphSeries<DataPoint> exerciseDataSeries;
+
     private GraphView graph;
+    private Spinner exerciseSpinner;
 
     @Nullable
     @Override
@@ -37,7 +43,7 @@ public class StatisticsFragment extends Fragment {
         parentActivity = (MainActivity)getActivity();
         parentActivity.setNavBarState(R.id.nav_more);
 
-        exercises = parentActivity.viewModel.getExercises();
+        //exercises = parentActivity.viewModel.getExercises();
 
         workoutName = "Deadlift 3x10";
 
@@ -54,17 +60,28 @@ public class StatisticsFragment extends Fragment {
 
     private void initViews(){
        graph = (GraphView) view.findViewById(R.id.graph);
+       graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+       graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
+
+
+       exerciseSpinner = view.findViewById(R.id.exercise_spinner);
+
 
     }
 
     private void initDataSeries(){
          // Currently only sample data is created
+
+        Date date = new Date();
+        Date date2 = new Date();
+
+
         exerciseDataSeries = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
+                new DataPoint(date, 1),
+                new DataPoint(date2, 5),
+                new DataPoint(date2, 3),
+                new DataPoint(date2, 2),
+                new DataPoint(date2, 6)
         });
 
     }

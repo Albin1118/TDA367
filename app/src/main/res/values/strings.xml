@@ -50,6 +50,10 @@
     <string name="achievements_tab">Achievements</string>
     <string name="pre_active_workout_tab">Select a workout</string>
     <string name="active_workout_tab">Current workout</string>
+    <string name="user_statistics_tab">User Statistics</string>
+    <string name="more_tab">More</string>
+
+
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Donec id tortor condimentum, tincidunt nunc eu, pellentesque metus. Sed et viverra lacus.

@@ -12,7 +12,7 @@ import android.widget.EditText;
 import com.example.ziggy.trainingtracker.R;
 
 /**
- * Fragment representing the settings-tab where the user can change the app settings
+ * Fragment representing the "more" tab where the user can access app-wide settings and content
  */
 
 public class MoreTabFragment extends Fragment {
