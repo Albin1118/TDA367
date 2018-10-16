@@ -38,7 +38,7 @@ public class WorkoutBlock {
         return multiplier;
     }
     public String getMultiplierString(){
-        return "X" + multiplier;
+        return "x" + multiplier;
     }
 
     @Override
