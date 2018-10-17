@@ -89,10 +89,6 @@ public class MainViewModel extends ViewModel {
     }
 
 
-    public ExerciseCategory getExerciseCategories() {
-        return exerciseCategories;
-    }
-
     public List<Exercise> getCustomExercises() {
         return trainingTracker.getCustomExercises();
     }
