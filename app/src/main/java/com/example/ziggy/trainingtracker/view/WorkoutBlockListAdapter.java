@@ -51,7 +51,7 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<WorkoutBlock> {
             name.setText(e.getName());
 
             TextView unit = (TextView)child.findViewById(R.id.exerciseUnitTextView);
-            e.setNumberofUnit(50);
+           //e.setNumberofUnit(50);
             unit.setText(e.getAmountofUnit());
 
             exercisesInBlockLinearLayout.addView(child);

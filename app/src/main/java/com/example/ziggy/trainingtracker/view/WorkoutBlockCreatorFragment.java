@@ -3,6 +3,7 @@ package com.example.ziggy.trainingtracker.view;
 import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -91,6 +93,60 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 int sets = Integer.parseInt(setsDisplay.getText().toString());
                 sets++;
                 setsDisplay.setText(String.valueOf(sets));
+            }
+        });
+
+        selectExerciseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if(selectExerciseListView.isItemChecked(position)){
+                    Exercise e = exercises.get(position);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle(e.getName());
+
+                    View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.input_reps_dialog, (ViewGroup) getView(), false);
+
+                    final TextView dialogTitle = viewInflated.findViewById(R.id.dialogTitle);
+                    dialogTitle.setText("Enter amount of " + e.getUnit());
+
+                    final EditText numberofUnitEditText = viewInflated.findViewById(R.id.numberofUnitEditText);
+                    numberofUnitEditText.setTextColor(Color.WHITE);
+
+                    final TextView unitTextView = viewInflated.findViewById(R.id.unitTextView);
+                    unitTextView.setText(e.getUnit());
+
+
+                    //Set the content of the main dialog view
+                    builder.setView(viewInflated);
+
+                    // Set up the button
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            int numberofUnits = Integer.parseInt(numberofUnitEditText.getText().toString());
+                            e.setNumberofUnit(numberofUnits);
+                            dialog.cancel();
+                        }
+                    });
+
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            selectExerciseListView.setItemChecked(position, false);
+                        }
+                    });
+
+                    builder.show();
+                    numberofUnitEditText.requestFocus();
+                }
+
+
+
+
+
             }
         });
 
