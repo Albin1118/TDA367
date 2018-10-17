@@ -35,6 +35,7 @@ public class ExerciseTabFragment extends Fragment {
     private View view;
     private Spinner exerciseCategorySpinner;
     private List<Exercise>exercises;
+    private List<Exercise>customExercises;
 
     @Nullable
     @Override
@@ -43,6 +44,9 @@ public class ExerciseTabFragment extends Fragment {
         parentActivity = ((MainActivity)getActivity());
         parentActivity.setNavBarState(R.id.nav_exercises);
         exercises = parentActivity.viewModel.getExercises();
+        customExercises = parentActivity.viewModel.getCustomExercises();
+
+        exercises.addAll(customExercises);
 
         initViews();
         initListeners();
