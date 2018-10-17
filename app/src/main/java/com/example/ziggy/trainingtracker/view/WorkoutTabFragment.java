@@ -30,6 +30,7 @@ public class WorkoutTabFragment extends Fragment {
     private MainActivity parentActivity;
     private View view;
     private List <Workout> workouts;
+    private List <Workout> customWorkouts;
 
     @Nullable
     @Override
@@ -37,7 +38,14 @@ public class WorkoutTabFragment extends Fragment {
         view  = inflater.inflate(R.layout.fragment_workout_tab, container, false);
         parentActivity = (MainActivity)getActivity();
         parentActivity.setNavBarState(R.id.nav_workouts);
-        workouts = parentActivity.viewModel.getWorkouts();
+
+        workouts = parentActivity.viewModel.getAllWorkouts();
+
+
+
+
+
+
         initViews();
         initListeners();
 

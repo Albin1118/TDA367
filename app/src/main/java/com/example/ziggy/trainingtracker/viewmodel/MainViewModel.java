@@ -1,6 +1,7 @@
 package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
+import android.content.SharedPreferences;
 
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.model.Workout;
@@ -10,28 +11,35 @@ import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
 import com.example.ziggy.trainingtracker.service.UserDataPersistenceService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
     private TrainingTracker trainingTracker;
+
     private List<Exercise> exercises;
     private List<Workout> workouts;
+
+    private List<Exercise> allExercises;
+    private List<Workout> allWorkouts;
+
     private boolean activeWorkoutStatus;
+
     List<WorkoutBlock>workoutBlocks= new ArrayList<>();
+
     public Workout buildWorkout;
     private ExerciseCategory exerciseCategories = new ExerciseCategory();
+
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
         activeWorkoutStatus = false;
     }
 
-    public void saveAllData(){
-        UserDataPersistenceService u = new UserDataPersistenceService(trainingTracker);
-        u.serializeTrainingTrackerLocally();
-    }
 
     public boolean checkActiveWorkoutStatus() {
         return activeWorkoutStatus;
@@ -57,6 +65,29 @@ public class MainViewModel extends ViewModel {
         return workouts;
     }
 
+    private void initAllExercises() {
+        allExercises = getCustomExercises();
+
+        if (exercises == null) {
+            exercises = trainingTracker.getExercises();
+            loadExercises();
+        }
+
+        allExercises.addAll(exercises);
+
+    }
+
+    private void initAllWorkouts() {
+        allWorkouts = getCustomWorkouts();
+
+        if (workouts == null) {
+            workouts = trainingTracker.getWorkouts();
+            loadWorkouts();
+        }
+        allWorkouts.addAll(workouts);
+    }
+
+
     public ExerciseCategory getExerciseCategories() {
         return exerciseCategories;
     }
@@ -68,6 +99,52 @@ public class MainViewModel extends ViewModel {
     public List<Workout> getCustomWorkouts() {
         return trainingTracker.getCustomWorkouts();
     }
+
+    private void setCustomWorkouts(List<Workout> w){
+        trainingTracker.setCustomWorkouts(w);
+    }
+
+    private void setCustomExercises(List<Exercise> e){
+        trainingTracker.setCustomExercises(e);
+    }
+
+    public List<Exercise> getAllExercises() {
+        if (allExercises == null){
+            initAllExercises();
+        }
+        return allExercises;
+    }
+
+    public List<Workout> getAllWorkouts() {
+        if (allWorkouts == null) {
+            initAllWorkouts();
+        }
+        return allWorkouts;
+    }
+
+    public void loadUserCustomListsFromJson(String customWorkoutListJson, String customExerciseListJson){
+        Gson gson = new Gson();
+
+        Type workoutListType = new TypeToken<ArrayList<Workout>>(){}.getType();
+        Type exerciseListType = new TypeToken<ArrayList<Exercise>>(){}.getType();
+
+        List <Workout> w = gson.fromJson(customWorkoutListJson, workoutListType);
+        List <Exercise> e = gson.fromJson(customExerciseListJson, exerciseListType);
+
+        if (w == null){
+            w = new ArrayList<>();
+        }
+
+        if (e == null){
+            e = new ArrayList<>();
+        }
+
+        setCustomWorkouts(w);
+        setCustomExercises(e);
+
+    }
+
+
 
     // Methods for adding removing and editing custom Exercises
     public void addCustomExercise(String name, String description, String instructions, String unit, String category) {
