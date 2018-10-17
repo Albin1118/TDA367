@@ -45,6 +45,7 @@
 
     <string name="exercise_list_item_name">Exercise name</string>
     <string name="exercise_list_item_description">Exercise description</string>
+    <string name="exercise_list_item_unit">Amount + Reps</string>
 
     <string name="settings_tab">Settings</string>
     <string name="achievements_tab">Achievements</string>

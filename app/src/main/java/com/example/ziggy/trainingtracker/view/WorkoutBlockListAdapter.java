@@ -45,13 +45,14 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<WorkoutBlock> {
         exercisesInBlockLinearLayout.removeAllViews();
 
         for (Exercise e : currentBlock.getExercises()){
-            View child = LayoutInflater.from(mContext).inflate(R.layout.exercise_list_item, null);
+            View child = LayoutInflater.from(mContext).inflate(R.layout.exercise_list_item_unit, null);
 
             TextView name = (TextView)child.findViewById(R.id.exerciseNameTextView);
             name.setText(e.getName());
 
-            TextView description = (TextView)child.findViewById(R.id.exerciseDescriptionTextView);
-            description.setText(e.getDescription());
+            TextView unit = (TextView)child.findViewById(R.id.exerciseUnitTextView);
+            e.setNumberofUnit(50);
+            unit.setText(e.getAmountofUnit());
 
             exercisesInBlockLinearLayout.addView(child);
         }

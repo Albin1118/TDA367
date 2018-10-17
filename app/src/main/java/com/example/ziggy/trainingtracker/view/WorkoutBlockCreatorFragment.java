@@ -99,6 +99,8 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             public void onClick(View v) {
                 //Get the current WorkoutBlock
                 WorkoutBlock w = buildWorkoutBlock();
+                List<WorkoutBlock>workoutBlockList = new ArrayList<>();
+                workoutBlockList.add(w);
 
                 //Create the dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -106,13 +108,10 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
                 //Create a ListView to be displayed in the dialog
                 final ListView workoutBlockListView = new ListView(getContext());
-
-                List<WorkoutBlock>blockList = new ArrayList<>();
-                blockList.add(w);
-                WorkoutBlockListAdapter adapter = new WorkoutBlockListAdapter(getContext(), blockList);
-
+                WorkoutBlockListAdapter adapter = new WorkoutBlockListAdapter(getContext(), workoutBlockList);
                 workoutBlockListView.setAdapter(adapter);
 
+                //Set the main dialog view to display the list of blocks
                 builder.setView(workoutBlockListView);
 
                 // Set up the button
