@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseTabViewModel {
-    TrainingTracker model = TrainingTracker.getInstance();
+    private TrainingTracker model = TrainingTracker.getInstance();
     private List<Exercise> exercises = new ArrayList<>(model.getExercises());
 
     public ExerciseTabViewModel() {
@@ -30,7 +30,7 @@ public class ExerciseTabViewModel {
         return exercises;
     }
 
-    public List<Exercise> getFreshExercises() {
+    public List<Exercise> getAllExercises() {
         exercises.clear();
         exercises.addAll(model.getExercises());
         return exercises;

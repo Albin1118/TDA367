@@ -59,7 +59,7 @@ public class ExerciseTabFragment extends Fragment {
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
         searchCategoryButton = view.findViewById(R.id.searchCategoryButton);
 
-        adapter = new ArrayAdapter<Exercise>(getContext(), R.layout.exercise_list_item, R.id.exerciseNameTextView, viewModel.getFreshExercises()) {
+        adapter = new ArrayAdapter<Exercise>(getContext(), R.layout.exercise_list_item, R.id.exerciseNameTextView, viewModel.getAllExercises()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
