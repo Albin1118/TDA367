@@ -36,7 +36,7 @@ public class MainViewModel extends ViewModel {
 
 
     public MainViewModel() {
-        trainingTracker = new TrainingTracker();
+        trainingTracker = TrainingTracker.getInstance();
         activeWorkoutStatus = false;
         createCategoryList();
     }

@@ -6,18 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrainingTracker {
+    private static TrainingTracker instance = null;
     @SerializedName("trainingtracker_user")
-    private User user;
+    private User user = new User("Test", "Mr Test", 98.5, 210);
     @SerializedName("trainingtracker_workouts_list")
-    private List<Workout> workouts;
+    private List<Workout> workouts = new ArrayList<>();
     @SerializedName("trainingtracker_exercises_list")
-    private List<Exercise> exercises;
+    private List<Exercise> exercises = new ArrayList<>();
 
-    public TrainingTracker() {
-        user = new User("Test", "Mr Test", 98.5, 210);
-        exercises = new ArrayList<>();
-        workouts = new ArrayList<>();
+    public static TrainingTracker getInstance() {
+        if (instance == null) {
+            instance = new TrainingTracker();
+        }
+        return instance;
     }
+
+    private TrainingTracker() {}
 
     /**
      * Add an Exercise to the list of Exercises and store it among the users custom Exercises.
