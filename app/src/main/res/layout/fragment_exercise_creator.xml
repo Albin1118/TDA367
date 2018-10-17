@@ -28,6 +28,16 @@
         app:layout_constraintEnd_toStartOf="@+id/exerciseNameEditText"
         app:layout_constraintBottom_toBottomOf="@+id/exerciseNameEditText" />
 
+    <TextView
+        android:id="@+id/addedCategoriesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintEnd_toStartOf="@+id/exerciseNameEditText"
+        app:layout_constraintBottom_toBottomOf="@+id/exerciseNameEditText" />
+
     <EditText
         android:id="@+id/exerciseNameEditText"
         android:layout_width="match_parent"
@@ -92,8 +102,8 @@
         android:layout_height="125dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:background="?attr/colorBackgroundFloating"
+        android:layout_marginTop="128dp"
+        android:background="@color/colorTextArea"
         android:gravity="start"
         android:hint="@string/exercise_creator_description2"
         android:inputType="textCapSentences|textMultiLine"
@@ -161,4 +171,26 @@
         android:backgroundTint="@android:color/holo_green_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Spinner
+        android:id="@+id/exerciseCategorySpinner"
+        android:layout_width="152dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/darker_gray"
+        android:popupBackground="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseUnitEditText" />
+
+    <Button
+        android:id="@+id/addCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:layout_marginTop="4dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseUnitEditText" />
+
 </android.support.constraint.ConstraintLayout>
