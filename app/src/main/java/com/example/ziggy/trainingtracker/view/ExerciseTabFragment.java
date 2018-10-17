@@ -74,7 +74,7 @@ public class ExerciseTabFragment extends Fragment {
         addExerciseButton = view.findViewById(R.id.addExerciseButton);
         exerciseListView = view.findViewById(R.id.exerciseList);
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
-
+/*
        //Style and populate spinner
         ArrayList<String> categories = parentActivity.viewModel.getExerciseCategories().getAllCategoriesToString();
         ArrayAdapter<String> spinnerAdapter;
@@ -85,6 +85,7 @@ public class ExerciseTabFragment extends Fragment {
 
         //Attaching adapter to spinner
         exerciseCategorySpinner.setAdapter(spinnerAdapter);
+        */
     }
 
     private void initListeners() {
@@ -104,7 +105,7 @@ public class ExerciseTabFragment extends Fragment {
                 parentActivity.setFragmentContainerContent(fragment);
             }
         });
-
+/*
         exerciseCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -123,6 +124,7 @@ public class ExerciseTabFragment extends Fragment {
 
             }
         });
+        */
     }
 
     public void setExercises(List<Exercise> exercises) {

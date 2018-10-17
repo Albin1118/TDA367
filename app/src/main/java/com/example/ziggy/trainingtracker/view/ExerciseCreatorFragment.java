@@ -26,18 +26,21 @@ import com.example.ziggy.trainingtracker.model.Exercise;
 public class ExerciseCreatorFragment extends Fragment {
 
 
-    private Button createExerciseButton;
+    private TextView addedCategoriesTextView;
     private EditText exerciseNameEditText;
     private EditText exerciseUnitEditText;
     private EditText exerciseDescriptionEditText;
     private EditText exerciseInstructionsEditText;
     private Spinner exerciseCategorySpinner;
+    private Button createExerciseButton;
     private Button saveExerciseButton;
     private Button cancelEditExerciseButton;
+    private Button addCategoryButton;
 
     private MainActivity parentActivity;
     private View view;
 
+    private ArrayList<ExerciseCategory> categories = new ArrayList<>();
     private Exercise editableExercise = null;
 
     @Nullable
@@ -53,6 +56,7 @@ public class ExerciseCreatorFragment extends Fragment {
     }
 
     private void initViews() {
+        addedCategoriesTextView = view.findViewById(R.id.addedCategoriesTextView);
         exerciseNameEditText = view.findViewById(R.id.exerciseNameEditText);
         exerciseUnitEditText = view.findViewById(R.id.exerciseUnitEditText);
         exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);
@@ -60,13 +64,14 @@ public class ExerciseCreatorFragment extends Fragment {
         createExerciseButton = view.findViewById(R.id.createExerciseButton);
         saveExerciseButton = view.findViewById(R.id.saveExerciseButton);
         cancelEditExerciseButton = view.findViewById(R.id.cancelEditExerciseButton);
+        addCategoryButton = view.findViewById(R.id.addCategoryButton);
 
         if (editableExercise != null) {
             editMode();
         }
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
 
-        ArrayList<String> categories = parentActivity.viewModel.getExerciseCategories().getAllCategoriesToString();
+        ArrayList<String> categories = parentActivity.viewModel.getCategoriesToString();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.parentActivity, android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         exerciseCategorySpinner.setAdapter(adapter);
@@ -96,6 +101,15 @@ public class ExerciseCreatorFragment extends Fragment {
                 parentActivity.popBackStack();
             }
         });
+        addCategoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String category = exerciseCategorySpinner.getSelectedItem().toString();
+                addedCategoriesTextView.setText(addedCategoriesTextView.getText() + category);
+                categories.add(ExerciseCategory.valueOf(category));
+            }
+        });
+
     }
 
     private void createExercise() {
@@ -103,8 +117,7 @@ public class ExerciseCreatorFragment extends Fragment {
         String unit = exerciseUnitEditText.getText().toString();
         String description = exerciseDescriptionEditText.getText().toString();
         String instructions = exerciseInstructionsEditText.getText().toString();
-        String category = exerciseCategorySpinner.getSelectedItem().toString();
-        parentActivity.viewModel.addCustomExercise(name, unit, description, instructions, category);
+        parentActivity.viewModel.addCustomExercise(name, unit, description, instructions, categories);
     }
 
     private void saveExercise() {

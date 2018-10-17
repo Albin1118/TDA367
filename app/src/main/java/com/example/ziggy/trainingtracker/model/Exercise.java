@@ -2,6 +2,9 @@ package com.example.ziggy.trainingtracker.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Exercise {
 
     @SerializedName("exercise_name")
@@ -16,15 +19,15 @@ public class Exercise {
     private String unit;
     @SerializedName("exercise_has_weight")
     private boolean hasWeight;
-    private String category;
+    private List<ExerciseCategory> categories = new ArrayList<ExerciseCategory>();
 
 
-    public Exercise(String name, String description, String instructions, String unit, String category) {
+    public Exercise(String name, String description, String instructions, String unit, List<ExerciseCategory> categories) {
         this.name = name;
         this.description = description;
         this.instructions = instructions;
         this.unit = unit;
-        this.category = category;
+        this.categories = categories;
     }
 
     public String getName() {
@@ -41,6 +44,9 @@ public class Exercise {
     }
     public String getUnit() {
         return unit;
+    }
+    public List<ExerciseCategory> getCategories() {
+        return categories;
     }
     public String getAmountofUnit(){
         return numberofUnit + " " + unit;
@@ -61,6 +67,9 @@ public class Exercise {
     }
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+    public void setCategories(List<ExerciseCategory> categories) {
+        this.categories = categories;
     }
 
     @Override

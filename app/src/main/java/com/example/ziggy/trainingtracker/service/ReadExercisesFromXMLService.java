@@ -100,11 +100,17 @@ public class ReadExercisesFromXMLService {
             if (unit == null || unit.trim().isEmpty())
                 throw new IllegalArgumentException("An exercise needs a unit.");
 
-        String category = getTextValue(exerciseElement, "category");
-        if (category == null)
-            throw new IllegalArgumentException("An exercise needs a category");
+        List<ExerciseCategory> categories = new ArrayList<>();
 
-        return new Exercise(name, description, instructions, unit, category);
+        NodeList nl = exerciseElement.getElementsByTagName("categories");
+        if (nl != null && nl.getLength() > 0) {
+            for (int i = 0 ; i < nl.getLength();i++) {
+                Element element = (Element)nl.item(i);
+                ExerciseCategory category = getCategory(element);
+                categories.add(category);
+            }
+        }
+        return new Exercise(name, description, instructions, unit, categories);
     }
 
     /**
@@ -125,5 +131,11 @@ public class ReadExercisesFromXMLService {
             }
         }
         return textVal;
+    }
+
+    private ExerciseCategory getCategory(Element categoryElement) {
+        String s = categoryElement.getTextContent();
+        ExerciseCategory category = ExerciseCategory.valueOf(s);
+        return category;
     }
 }

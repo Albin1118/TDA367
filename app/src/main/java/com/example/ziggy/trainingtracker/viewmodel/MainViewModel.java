@@ -32,12 +32,13 @@ public class MainViewModel extends ViewModel {
     List<WorkoutBlock>workoutBlocks= new ArrayList<>();
 
     public Workout buildWorkout;
-    private ExerciseCategory exerciseCategories = new ExerciseCategory();
+    private List<ExerciseCategory> categories;
 
 
     public MainViewModel() {
         trainingTracker = new TrainingTracker();
         activeWorkoutStatus = false;
+        createCategoryList();
     }
 
 
@@ -100,6 +101,16 @@ public class MainViewModel extends ViewModel {
         return trainingTracker.getCustomWorkouts();
     }
 
+    public List<ExerciseCategory> getCategories() { return categories; }
+
+    public ArrayList<String> getCategoriesToString() {
+        ArrayList<String> categoriesToString = new ArrayList<>();
+        for(int i=0; i<getCategories().size(); i++) {
+            categoriesToString.add(getCategories().get(i).name());
+        }
+        return categoriesToString;
+    }
+
     private void setCustomWorkouts(List<Workout> w){
         trainingTracker.setCustomWorkouts(w);
     }
@@ -147,9 +158,8 @@ public class MainViewModel extends ViewModel {
 
 
     // Methods for adding removing and editing custom Exercises
-    public void addCustomExercise(String name, String description, String instructions, String unit, String category) {
-
-        Exercise e = new Exercise(name, description, instructions, unit, category);
+    public void addCustomExercise(String name, String description, String instructions, String unit,List<ExerciseCategory> categories) {
+        Exercise e = new Exercise(name, description, instructions, unit, categories);
         trainingTracker.addCustomExercise(e);
     }
 
@@ -165,18 +175,14 @@ public class MainViewModel extends ViewModel {
     }
 
     //Method for adding removing and editing custom Workouts
+    public void addCustomWorkout(Workout w){ trainingTracker.addCustomWorkout(w); }
 
-    public void addCustomWorkout(Workout w){
-        trainingTracker.addCustomWorkout(w);
-    }
     public void addCustomWorkout(String name, String description, List<WorkoutBlock> blocks){
         Workout w = new Workout(name, description, new ArrayList<>(blocks));
         trainingTracker.addCustomWorkout(w);
     }
 
-    public void removeCustomWorkout(Workout w) {
-        trainingTracker.removeCustomWorkout(w);
-    }
+    public void removeCustomWorkout(Workout w) { trainingTracker.removeCustomWorkout(w); }
 
     public void editCustomWorkout(Workout w, String name, String description, List<WorkoutBlock> blocks) {
         w.setName(name);
@@ -208,5 +214,13 @@ public class MainViewModel extends ViewModel {
 
     public void setBuildWorkout(Workout buildWorkout) {
         this.buildWorkout = buildWorkout;
+    }
+
+    private void createCategoryList() {
+        categories.add(ExerciseCategory.ARMS );
+        categories.add(ExerciseCategory.LEGS );
+        categories.add(ExerciseCategory.BACK );
+        categories.add(ExerciseCategory.CHEST);
+        categories.add(ExerciseCategory.ABS  );
     }
 }
