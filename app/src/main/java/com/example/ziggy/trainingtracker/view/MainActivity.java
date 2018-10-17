@@ -2,6 +2,7 @@ package com.example.ziggy.trainingtracker.view;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -13,14 +14,18 @@ import android.view.View;
 
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
-
+import com.google.gson.Gson;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNavBar;
-
     MainViewModel viewModel;
+
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String CUSTOM_EXERCISE_DATA = "customExerciseData";
+    public static final String CUSTOM_WORKOUT_DATA =  "customWorkoutData";
+    public static final String USER_DATA = "userData";
 
 
     @Override
@@ -32,7 +37,74 @@ public class MainActivity extends AppCompatActivity {
         initComponents();
         initStartingView();
         initListeners();
+        updateViewModelData();
+
     }
+
+
+    private void saveData(){
+        // Init sharedpreferences
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Create gson object for json functionality
+        Gson gson = new Gson();
+
+        // Get current state of trainingtracker
+        String customExerciseListJson = gson.toJson(viewModel.getCustomExercises());
+        String customWorkoutListJson = gson.toJson(viewModel.getCustomWorkouts());
+
+        // Add the Json strings to the shared prefs dir
+        editor.putString(CUSTOM_EXERCISE_DATA, customExerciseListJson);
+        editor.putString(CUSTOM_WORKOUT_DATA, customWorkoutListJson);
+        //Save changes
+        editor.apply();
+
+        /*
+        System.out.println("Saved following Data to Shared Preferences");
+        System.out.println(customExerciseListJson);
+        System.out.println(customWorkoutListJson);
+        */
+
+    }
+
+
+    private String loadCustomExerciseData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        Gson gson = new Gson();
+
+        // Retrieve json string from shared prefs, return null if string not found
+        String customExerciseListJson = sharedPreferences.getString(CUSTOM_EXERCISE_DATA, null);
+
+        System.out.println("LOADING DATA ");
+        System.out.println(customExerciseListJson);
+
+        return customExerciseListJson;
+
+    }
+
+
+    private String loadCustomWorkoutData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        Gson gson = new Gson();
+
+        // Retrieve json string from shared prefs, return null if string not found
+        String customWorkoutListJson = sharedPreferences.getString(CUSTOM_WORKOUT_DATA, null);
+
+        System.out.println("LOADING DATA ");
+        System.out.println(customWorkoutListJson);
+
+        return  customWorkoutListJson;
+    }
+
+
+
+
+    private void updateViewModelData(){
+        viewModel.loadUserCustomListsFromJson(loadCustomWorkoutData(), loadCustomExerciseData());
+    }
+
+
 
     private void initComponents() {
         mBottomNavBar = findViewById(R.id.bottom_navigation_bar);
@@ -91,20 +163,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*
-    @Override
-    public void onStop() {
-        super.onStop();
-        viewModel.saveAllData();
-    }
+    public void onPause() {
+        super.onPause();
+        saveData();
 
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModel.saveAllData();
     }
-    */
 
     public void hideBottomNavigationBar(){
         mBottomNavBar.setVisibility(View.INVISIBLE);

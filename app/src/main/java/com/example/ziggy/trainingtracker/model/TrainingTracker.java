@@ -68,6 +68,14 @@ public class TrainingTracker {
         return user.getCustomWorkouts();
     }
 
+    public void setCustomWorkouts(List<Workout> w){
+        user.setCustomWorkouts(w);
+    }
+
+    public void setCustomExercises(List<Exercise> e){
+        user.setCustomExercises(e);
+    }
+
     public User getUser() {
         return user;
     }

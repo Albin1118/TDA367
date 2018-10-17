@@ -1,7 +1,5 @@
 package com.example.ziggy.trainingtracker.model;
 
-import android.arch.lifecycle.MutableLiveData;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -73,12 +71,20 @@ public class User {
         return finishedWorkouts;
     }
 
-    List<Workout> getCustomWorkouts() {
+    public List<Workout> getCustomWorkouts() {
         return customWorkouts;
     }
 
-    List<Exercise> getCustomExercises() {
+    public List<Exercise> getCustomExercises() {
         return customExercises;
+    }
+
+    public void setCustomExercises(List<Exercise> customExercises) {
+        this.customExercises = customExercises;
+    }
+
+    public void setCustomWorkouts(List<Workout> customWorkouts) {
+        this.customWorkouts = customWorkouts;
     }
 
     //Weight might change
