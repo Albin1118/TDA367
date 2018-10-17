@@ -102,7 +102,7 @@ public class ReadExercisesFromXMLService {
 
         List<ExerciseCategory> categories = new ArrayList<>();
 
-        NodeList nl = exerciseElement.getElementsByTagName("categories");
+        NodeList nl = exerciseElement.getElementsByTagName("category");
         if (nl != null && nl.getLength() > 0) {
             for (int i = 0 ; i < nl.getLength();i++) {
                 Element element = (Element)nl.item(i);

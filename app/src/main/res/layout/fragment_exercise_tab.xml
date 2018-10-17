@@ -56,22 +56,33 @@
 
     <Spinner
         android:id="@+id/exerciseCategorySpinner"
-        android:layout_width="152dp"
+        android:layout_width="94dp"
         android:layout_height="33dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="52dp"
         android:background="@android:color/darker_gray"
         android:popupBackground="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/searchCategoryButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/chooseCategoryTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="94dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="32dp"
         android:text="Choose category"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ExercisesTabTitleTextView"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/searchCategoryButton"
+        android:layout_width="80dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="47dp"
+        android:text="Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textSize="12sp" />
 </android.support.constraint.ConstraintLayout>

@@ -32,7 +32,7 @@ public class MainViewModel extends ViewModel {
     List<WorkoutBlock>workoutBlocks= new ArrayList<>();
 
     public Workout buildWorkout;
-    private List<ExerciseCategory> categories;
+    private List<ExerciseCategory> categories = new ArrayList<>();
 
 
     public MainViewModel() {

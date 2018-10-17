@@ -5,37 +5,31 @@
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
-        <categories>
-            <exerciseCategory>ARMS</exerciseCategory>
-            <exerciseCategory>LEGS</exerciseCategory>
-        </categories>
+        <category>ARMS</category>
+        <category>LEGS</category>
     </exercise>
 
     <exercise name="pull-ups">
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
-        <categories>
-            <exerciseCategory>ARMS</exerciseCategory>
-            <exerciseCategory>BACK</exerciseCategory>
-        </categories>
+        <category>ARMS</category>
+        <category>BACK</category>
     </exercise>
 
     <exercise name="push-ups">
         <description>This is an example description for a push-up.</description>
         <instructions>This is the example instructions for a push-up</instructions>
         <unit>reps</unit>
-        <categories>
-            <exerciseCategory>ARMS</exerciseCategory>
-            <exerciseCategory>CHEST</exerciseCategory>
-        </categories>
+        <category>ARMS</category>
+        <category>CHEST</category>
     </exercise>
 
     <exercise name="running">
         <description>This is an example description for running.</description>
         <instructions>This is the example instructions for running</instructions>
         <unit>meters</unit>
-        <exerciseCategory>LEGS</exerciseCategory>
+        <category>LEGS</category>
     </exercise>
 
 
@@ -43,9 +37,7 @@
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
-        <categories>
-            <exerciseCategory>ABS</exerciseCategory>
-        </categories>
+        <category>ABS</category>
     </exercise>
 
 
@@ -53,9 +45,7 @@
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
-        <categories>
-            <exerciseCategory>LEGS</exerciseCategory>
-        </categories>
+        <category>LEGS</category>
     </exercise>
 
 
@@ -63,8 +53,6 @@
         <description></description>
         <instructions></instructions>
         <unit>meters</unit>
-        <categories>
-            <exerciseCategory>LEGS</exerciseCategory>
-        </categories>
+        <category>LEGS</category>
     </exercise>
 </exercises>

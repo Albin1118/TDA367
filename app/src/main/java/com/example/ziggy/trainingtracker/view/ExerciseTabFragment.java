@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +31,11 @@ public class ExerciseTabFragment extends Fragment {
 
     private FloatingActionButton addExerciseButton;
     private ListView exerciseListView;
-    private static ArrayAdapter<Exercise> adapter;
+    private ArrayAdapter<Exercise> adapter;
 
     private MainActivity parentActivity;
     private View view;
+    private Button searchCategoryButton;
     private Spinner exerciseCategorySpinner;
     private List<Exercise>exercises;
     private List<Exercise>customExercises;
@@ -43,9 +46,7 @@ public class ExerciseTabFragment extends Fragment {
         view  = inflater.inflate(R.layout.fragment_exercise_tab, container, false);
         parentActivity = ((MainActivity)getActivity());
         parentActivity.setNavBarState(R.id.nav_exercises);
-
-        exercises = parentActivity.viewModel.getAllExercises();
-
+        exercises = new ArrayList<>(parentActivity.viewModel.getExercises());
 
         initViews();
         initListeners();
@@ -74,9 +75,10 @@ public class ExerciseTabFragment extends Fragment {
         addExerciseButton = view.findViewById(R.id.addExerciseButton);
         exerciseListView = view.findViewById(R.id.exerciseList);
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
-/*
+        searchCategoryButton = view.findViewById(R.id.searchCategoryButton);
+
        //Style and populate spinner
-        ArrayList<String> categories = parentActivity.viewModel.getExerciseCategories().getAllCategoriesToString();
+        ArrayList<String> categories = parentActivity.viewModel.getCategoriesToString();
         ArrayAdapter<String> spinnerAdapter;
         spinnerAdapter = new ArrayAdapter<>(this.parentActivity, android.R.layout.simple_spinner_item, categories);
 
@@ -85,7 +87,6 @@ public class ExerciseTabFragment extends Fragment {
 
         //Attaching adapter to spinner
         exerciseCategorySpinner.setAdapter(spinnerAdapter);
-        */
     }
 
     private void initListeners() {
@@ -105,29 +106,25 @@ public class ExerciseTabFragment extends Fragment {
                 parentActivity.setFragmentContainerContent(fragment);
             }
         });
-/*
-        exerciseCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        searchCategoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String category = exerciseCategorySpinner.getSelectedItem().toString();
+            public void onClick(View v) {
+                ExerciseCategory category = ExerciseCategory.valueOf(exerciseCategorySpinner.getSelectedItem().toString());
                 List<Exercise> exercisesInCategory = new ArrayList<>();
                 for(int i=0; i<parentActivity.viewModel.getExercises().size(); i++) {
-                    if (parentActivity.viewModel.getExercises().get(i).getCategory().equals(category)) {
+                    if (parentActivity.viewModel.getExercises().get(i).getCategories().contains(category)) {
                         exercisesInCategory.add(parentActivity.viewModel.getExercises().get(i));
                     }
                 }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                setExercises(exercisesInCategory);
+                adapter.notifyDataSetChanged();
 
             }
         });
-        */
     }
 
     public void setExercises(List<Exercise> exercises) {
-        this.exercises = exercises;
+        this.exercises.clear();
+        this.exercises.addAll(exercises);
     }
 }

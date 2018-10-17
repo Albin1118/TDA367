@@ -105,7 +105,7 @@ public class ExerciseCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String category = exerciseCategorySpinner.getSelectedItem().toString();
-                addedCategoriesTextView.setText(addedCategoriesTextView.getText() + category);
+                addedCategoriesTextView.setText(addedCategoriesTextView.getText() + "  " + category);
                 categories.add(ExerciseCategory.valueOf(category));
             }
         });
