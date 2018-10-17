@@ -38,10 +38,14 @@ public class WorkoutTabFragment extends Fragment {
         view  = inflater.inflate(R.layout.fragment_workout_tab, container, false);
         parentActivity = (MainActivity)getActivity();
         parentActivity.setNavBarState(R.id.nav_workouts);
-        workouts = parentActivity.viewModel.getWorkouts();
-        customWorkouts = parentActivity.viewModel.getCustomWorkouts();
 
-        workouts.addAll(customWorkouts);
+        workouts = parentActivity.viewModel.getAllWorkouts();
+
+
+
+
+
+
         initViews();
         initListeners();
 

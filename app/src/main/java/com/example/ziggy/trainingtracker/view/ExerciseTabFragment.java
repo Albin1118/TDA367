@@ -43,15 +43,14 @@ public class ExerciseTabFragment extends Fragment {
         view  = inflater.inflate(R.layout.fragment_exercise_tab, container, false);
         parentActivity = ((MainActivity)getActivity());
         parentActivity.setNavBarState(R.id.nav_exercises);
-        exercises = parentActivity.viewModel.getExercises();
-        customExercises = parentActivity.viewModel.getCustomExercises();
 
-        exercises.addAll(customExercises);
+        exercises = parentActivity.viewModel.getAllExercises();
+
 
         initViews();
         initListeners();
 
-        //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, exercises);
+
         adapter = new ArrayAdapter<Exercise>(getContext(), R.layout.exercise_list_item, R.id.exerciseNameTextView, exercises) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -116,7 +115,7 @@ public class ExerciseTabFragment extends Fragment {
                         exercisesInCategory.add(parentActivity.viewModel.getExercises().get(i));
                     }
                 }
-                
+
             }
 
             @Override

@@ -19,25 +19,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
-    private TrainingTracker trainingTracker = new TrainingTracker();
+    private TrainingTracker trainingTracker;
+
     private List<Exercise> exercises;
     private List<Workout> workouts;
+
+    private List<Exercise> allExercises;
+    private List<Workout> allWorkouts;
+
     private boolean activeWorkoutStatus;
+
     List<WorkoutBlock>workoutBlocks= new ArrayList<>();
+
     public Workout buildWorkout;
     private ExerciseCategory exerciseCategories = new ExerciseCategory();
 
 
     public MainViewModel() {
-        //trainingTracker = new TrainingTracker();
+        trainingTracker = new TrainingTracker();
         activeWorkoutStatus = false;
     }
 
-
-    public void saveAllData(){
-        UserDataPersistenceService u = new UserDataPersistenceService(trainingTracker);
-        u.serializeTrainingTrackerLocally();
-    }
 
     public boolean checkActiveWorkoutStatus() {
         return activeWorkoutStatus;
@@ -63,6 +65,29 @@ public class MainViewModel extends ViewModel {
         return workouts;
     }
 
+    private void initAllExercises() {
+        allExercises = getCustomExercises();
+
+        if (exercises == null) {
+            exercises = trainingTracker.getExercises();
+            loadExercises();
+        }
+
+        allExercises.addAll(exercises);
+
+    }
+
+    private void initAllWorkouts() {
+        allWorkouts = getCustomWorkouts();
+
+        if (workouts == null) {
+            workouts = trainingTracker.getWorkouts();
+            loadWorkouts();
+        }
+        allWorkouts.addAll(workouts);
+    }
+
+
     public ExerciseCategory getExerciseCategories() {
         return exerciseCategories;
     }
@@ -83,7 +108,21 @@ public class MainViewModel extends ViewModel {
         trainingTracker.setCustomExercises(e);
     }
 
-    public void loadUserCustomListsFromJson(String customWorkoutListJson,  String customExerciseListJson){
+    public List<Exercise> getAllExercises() {
+        if (allExercises == null){
+            initAllExercises();
+        }
+        return allExercises;
+    }
+
+    public List<Workout> getAllWorkouts() {
+        if (allWorkouts == null) {
+            initAllWorkouts();
+        }
+        return allWorkouts;
+    }
+
+    public void loadUserCustomListsFromJson(String customWorkoutListJson, String customExerciseListJson){
         Gson gson = new Gson();
 
         Type workoutListType = new TypeToken<ArrayList<Workout>>(){}.getType();
