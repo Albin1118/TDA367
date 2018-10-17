@@ -117,7 +117,7 @@ public class ExerciseCreatorFragment extends Fragment {
         String unit = exerciseUnitEditText.getText().toString();
         String description = exerciseDescriptionEditText.getText().toString();
         String instructions = exerciseInstructionsEditText.getText().toString();
-        parentActivity.viewModel.addCustomExercise(name, unit, description, instructions, categories);
+        parentActivity.viewModel.addCustomExercise(name, description, instructions, unit, categories);
     }
 
     private void saveExercise() {
