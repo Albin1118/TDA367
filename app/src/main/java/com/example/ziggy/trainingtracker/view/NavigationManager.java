@@ -2,6 +2,7 @@ package com.example.ziggy.trainingtracker.view;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
 
 public interface NavigationManager {
@@ -29,7 +30,7 @@ public interface NavigationManager {
      * Navigate to the active workout tab with a selected workout.
      * @param workout The workout to activate
      */
-    void navigateActiveWorkout(Workout workout);
+    void navigateActiveWorkout(IWorkout workout);
 
     /**
      * Navigate to the exercises tab.
@@ -67,7 +68,7 @@ public interface NavigationManager {
      * Navigate to the workout editor.
      * @param workout The workout to be edited
      */
-    void navigateWorkoutEditor(Workout workout);
+    void navigateWorkoutEditor(IWorkout workout);
 
     /**
      * Navigate to the workout block creator.
@@ -78,7 +79,7 @@ public interface NavigationManager {
      * Navigate to the workout detail view.
      * @param workout The workout to show the details of
      */
-    void navigateWorkoutDetailView(Workout workout);
+    void navigateWorkoutDetailView(IWorkout workout);
 
     /**
      * Navigate to the statistics.

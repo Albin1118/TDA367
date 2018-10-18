@@ -10,7 +10,7 @@ public class TrainingTracker {
     @SerializedName("trainingtracker_user")
     private User user = new User("Test", "Mr Test", 98.5, 210);
     @SerializedName("trainingtracker_workouts_list")
-    private List<Workout> workouts = new ArrayList<>();
+    private List<IWorkout> workouts = new ArrayList<>();
     @SerializedName("trainingtracker_exercises_list")
     private List<IExercise> exercises = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class TrainingTracker {
      * Add a Workout to the list of Workouts and store it among the users custom Workouts.
      * @param w Workout to be added
      */
-    public void addCustomWorkout(Workout w) {
+    public void addCustomWorkout(IWorkout w) {
         workouts.add(w);
         user.addCustomWorkout(w);
     }
@@ -54,12 +54,12 @@ public class TrainingTracker {
      * Remove a Workout from the list of Workouts and discard it from the users custom Workouts.
      * @param w Workout to be removed
      */
-    public void removeCustomWorkout(Workout w) {
+    public void removeCustomWorkout(IWorkout w) {
         workouts.remove(w);
         user.removeCustomWorkout(w);
     }
 
-    public List<Workout> getWorkouts() {
+    public List<IWorkout> getWorkouts() {
         return workouts;
     }
     public List<IExercise> getExercises() {
@@ -68,11 +68,11 @@ public class TrainingTracker {
     public List<IExercise> getCustomExercises() {
         return user.getCustomExercises();
     }
-    public List<Workout> getCustomWorkouts() {
+    public List<IWorkout> getCustomWorkouts() {
         return user.getCustomWorkouts();
     }
 
-    public void setCustomWorkouts(List<Workout> w){
+    public void setCustomWorkouts(List<IWorkout> w){
         user.setCustomWorkouts(w);
     }
 

@@ -4,7 +4,7 @@ import java.util.Timer;
 
 public class ActiveWorkout {
 
-    private Workout workout;
+    private IWorkout workout;
     private Timer timer;
 
     private void startWorkout(){

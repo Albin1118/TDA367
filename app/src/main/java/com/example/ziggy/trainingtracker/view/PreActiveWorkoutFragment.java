@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
 
 import java.util.List;
@@ -26,9 +27,9 @@ public class PreActiveWorkoutFragment extends Fragment {
     private ListView preActiveWorkoutListView;
     private Button beginWorkoutButton;
 
-    private List<Workout> workouts;
-    private Workout selectedWorkout;
-    private ArrayAdapter<Workout> adapter;
+    private List<IWorkout> workouts;
+    private IWorkout selectedWorkout;
+    private ArrayAdapter<IWorkout> adapter;
 
     private MainActivity parentActivity;
     private NavigationManager navigationManager;

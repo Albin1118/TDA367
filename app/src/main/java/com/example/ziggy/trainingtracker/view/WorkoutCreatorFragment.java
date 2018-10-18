@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
@@ -41,7 +42,7 @@ public class WorkoutCreatorFragment extends Fragment {
     private View view;
 
     private boolean descriptionClosed;
-    private Workout editableWorkout = null;
+    private IWorkout editableWorkout = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -179,7 +180,7 @@ public class WorkoutCreatorFragment extends Fragment {
         createWorkoutButton.setVisibility(View.GONE);
     }
 
-    public void setEditableWorkout(Workout editableWorkout) {
+    public void setEditableWorkout(IWorkout editableWorkout) {
         this.editableWorkout = editableWorkout;
     }
 

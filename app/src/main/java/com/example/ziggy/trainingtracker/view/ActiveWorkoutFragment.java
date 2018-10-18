@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
@@ -31,7 +32,7 @@ public class ActiveWorkoutFragment extends Fragment {
     private TextView currentWorkoutName;
     private ListView currentWorkoutBlockListView;
 
-    private Workout currentWorkout;
+    private IWorkout currentWorkout;
     private List<WorkoutBlock> currentWorkoutBlocks;
 
     private MainActivity parentActivity;
@@ -162,7 +163,7 @@ public class ActiveWorkoutFragment extends Fragment {
     }
 
 
-    public void setCurrentWorkout(Workout currentWorkout) {
+    public void setCurrentWorkout(IWorkout currentWorkout) {
         this.currentWorkout = currentWorkout;
     }
 }

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
@@ -44,7 +45,7 @@ public class WorkoutDetailViewFragment extends Fragment {
     private View view;
 
     private boolean descriptionClosed;
-    private Workout workout;
+    private IWorkout workout;
 
     @Nullable
     @Override
@@ -131,7 +132,7 @@ public class WorkoutDetailViewFragment extends Fragment {
         }
     }
 
-    public void setWorkout(Workout workout) {
+    public void setWorkout(IWorkout workout) {
         this.workout = workout;
     }
 

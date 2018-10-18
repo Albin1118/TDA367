@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
 
 import java.util.List;
@@ -25,10 +26,10 @@ public class WorkoutTabFragment extends Fragment {
 
     private FloatingActionButton addWorkoutButton;
     private ListView workoutList;
-    private ArrayAdapter<Workout>adapter;
+    private ArrayAdapter<IWorkout>adapter;
 
-    private List <Workout> workouts;
-    private List <Workout> customWorkouts;
+    private List <IWorkout> workouts;
+    private List <IWorkout> customWorkouts;
 
     private MainActivity parentActivity;
     private NavigationManager navigationManager;

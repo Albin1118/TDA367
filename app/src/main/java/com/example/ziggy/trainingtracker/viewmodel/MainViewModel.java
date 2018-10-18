@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
@@ -24,17 +25,17 @@ public class MainViewModel extends ViewModel {
     private TrainingTracker trainingTracker;
 
     private List<IExercise> exercises;
-    private List<Workout> workouts;
+    private List<IWorkout> workouts;
 
     private List<IExercise> allExercises;
-    private List<Workout> allWorkouts;
+    private List<IWorkout> allWorkouts;
 
 
     private boolean activeWorkoutStatus;
 
     List<WorkoutBlock>workoutBlocks= new ArrayList<>();
 
-    public Workout buildWorkout;
+    public IWorkout buildWorkout;
     private List<ExerciseCategory> categories = new ArrayList<>();
 
 
@@ -61,7 +62,7 @@ public class MainViewModel extends ViewModel {
         return exercises;
     }
 
-    public List<Workout> getWorkouts() {
+    public List<IWorkout> getWorkouts() {
         if (workouts == null) {
             workouts = trainingTracker.getWorkouts();
             loadWorkouts();
@@ -96,7 +97,7 @@ public class MainViewModel extends ViewModel {
         return trainingTracker.getCustomExercises();
     }
 
-    public List<Workout> getCustomWorkouts() {
+    public List<IWorkout> getCustomWorkouts() {
         return trainingTracker.getCustomWorkouts();
     }
 
@@ -110,7 +111,7 @@ public class MainViewModel extends ViewModel {
         return categoriesToString;
     }
 
-    private void setCustomWorkouts(List<Workout> w){
+    private void setCustomWorkouts(List<IWorkout> w){
         trainingTracker.setCustomWorkouts(w);
     }
 
@@ -125,7 +126,7 @@ public class MainViewModel extends ViewModel {
         return allExercises;
     }
 
-    public List<Workout> getAllWorkouts() {
+    public List<IWorkout> getAllWorkouts() {
         if (allWorkouts == null) {
             initAllWorkouts();
         }
@@ -135,10 +136,10 @@ public class MainViewModel extends ViewModel {
     public void loadUserCustomListsFromJson(String customWorkoutListJson, String customExerciseListJson){
         Gson gson = new Gson();
 
-        Type workoutListType = new TypeToken<ArrayList<Workout>>(){}.getType();
+        Type workoutListType = new TypeToken<ArrayList<IWorkout>>(){}.getType();
         Type exerciseListType = new TypeToken<ArrayList<IExercise>>(){}.getType();
 
-        List <Workout> w = gson.fromJson(customWorkoutListJson, workoutListType);
+        List <IWorkout> w = gson.fromJson(customWorkoutListJson, workoutListType);
         List <IExercise> e = gson.fromJson(customExerciseListJson, exerciseListType);
 
         if (w == null){
@@ -175,16 +176,16 @@ public class MainViewModel extends ViewModel {
     }
 
     //Method for adding removing and editing custom Workouts
-    public void addCustomWorkout(Workout w){ trainingTracker.addCustomWorkout(w); }
+    public void addCustomWorkout(IWorkout w){ trainingTracker.addCustomWorkout(w); }
 
     public void addCustomWorkout(String name, String description, List<WorkoutBlock> blocks){
-        Workout w = new Workout(name, description, new ArrayList<>(blocks));
+        IWorkout w = new Workout(name, description, new ArrayList<>(blocks));
         trainingTracker.addCustomWorkout(w);
     }
 
-    public void removeCustomWorkout(Workout w) { trainingTracker.removeCustomWorkout(w); }
+    public void removeCustomWorkout(IWorkout w) { trainingTracker.removeCustomWorkout(w); }
 
-    public void editCustomWorkout(Workout w, String name, String description, List<WorkoutBlock> blocks) {
+    public void editCustomWorkout(IWorkout w, String name, String description, List<WorkoutBlock> blocks) {
         w.setName(name);
         w.setDescription(description);
         w.setBlocks(blocks);
@@ -212,7 +213,7 @@ public class MainViewModel extends ViewModel {
         trainingTracker.getUser().setWeight(weight);
     }
 
-    public void setBuildWorkout(Workout buildWorkout) {
+    public void setBuildWorkout(IWorkout buildWorkout) {
         this.buildWorkout = buildWorkout;
     }
 

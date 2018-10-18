@@ -18,13 +18,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
 public class ReadWorkoutsFromXMLService {
 
     private Document dom;
-    private Map<String, Workout> workouts;
+    private Map<String, IWorkout> workouts;
     private Map<String, IExercise> exercises;
 
     public ReadWorkoutsFromXMLService(List<IExercise> baseExercises) {
@@ -40,7 +41,7 @@ public class ReadWorkoutsFromXMLService {
      * and add them to the map of Workouts that gets returned.
      * @return A list of Workouts loaded from the XML.
      */
-    public List<Workout> readWorkouts() {
+    public List<IWorkout> readWorkouts() {
         parseXMLFile();
         parseDocument();
         return new ArrayList<>(workouts.values());
@@ -74,7 +75,7 @@ public class ReadWorkoutsFromXMLService {
                 Element element = (Element) nl.item(i);
                 try {
                     //get the Workout object
-                    Workout w = getWorkout(element);
+                    IWorkout w = getWorkout(element);
                     //add it to list
                     workouts.put(w.getName(), w);
                 } catch (IllegalArgumentException iae) {
@@ -91,7 +92,7 @@ public class ReadWorkoutsFromXMLService {
      * @param workoutElement A workout element.
      * @return A new Workout object.
      */
-    private Workout getWorkout(Element workoutElement) throws IllegalArgumentException {
+    private IWorkout getWorkout(Element workoutElement) throws IllegalArgumentException {
         String name = workoutElement.getAttribute("name");
         if (name.trim().equals("") || workouts.containsKey(name))
             throw new IllegalArgumentException("A workout cannot have an empty or duplicate name.");
