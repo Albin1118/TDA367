@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
@@ -22,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
-    private TrainingTracker trainingTracker;
+    private ITrainingTracker trainingTracker;
 
     private List<IExercise> exercises;
     private List<IWorkout> workouts;

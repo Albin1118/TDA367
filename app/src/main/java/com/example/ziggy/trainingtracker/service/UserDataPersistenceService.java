@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.google.gson.Gson;
@@ -23,14 +24,14 @@ import java.io.OutputStreamWriter;
 public class UserDataPersistenceService extends Service {
 
     private Gson gson;
-    private TrainingTracker trainingTracker;
-    private TrainingTracker deSerializedTrainingTracker;
+    private ITrainingTracker trainingTracker;
+    private ITrainingTracker deSerializedTrainingTracker;
     private String jsonData;
 
 
     private String fileName;
 
-    public UserDataPersistenceService(TrainingTracker trainingTracker) {
+    public UserDataPersistenceService(ITrainingTracker trainingTracker) {
         this.trainingTracker = trainingTracker;
         fileName = "serialized_data.txt";
         gson = new Gson();
@@ -91,7 +92,7 @@ public class UserDataPersistenceService extends Service {
         return jsonString;
     }
 
-    public TrainingTracker getDeSerializedTrainingTracker() {
+    public ITrainingTracker getDeSerializedTrainingTracker() {
         try {
             deSerializeTrainingTracker();
         }
