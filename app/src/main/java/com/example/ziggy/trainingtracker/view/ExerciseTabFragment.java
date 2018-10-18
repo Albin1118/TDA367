@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -39,7 +40,7 @@ public class ExerciseTabFragment extends Fragment {
         super.onCreate(savedInstanceState);
         parentActivity = ((MainActivity)getActivity());
         parentActivity.setNavBarState(R.id.nav_exercises);
-        viewModel = new ExerciseTabViewModel();
+        viewModel = ViewModelProviders.of(this).get(ExerciseTabViewModel.class);
     }
 
     @Nullable
