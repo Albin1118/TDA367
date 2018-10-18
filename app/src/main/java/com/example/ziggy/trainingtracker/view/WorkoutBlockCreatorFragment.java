@@ -161,7 +161,10 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Get the current WorkoutBlock
-                WorkoutBlock w = buildWorkoutBlock();
+                //WorkoutBlock w = buildWorkoutBlock();
+                int sets = Integer.parseInt(setsDisplay.getText().toString());
+                block.setMultiplier(sets);
+
                 List<WorkoutBlock>workoutBlockList = new ArrayList<>();
                 workoutBlockList.add(block);
 
@@ -193,7 +196,9 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                WorkoutBlock workoutBlock = buildWorkoutBlock();
+                //WorkoutBlock workoutBlock = buildWorkoutBlock();
+                int sets = Integer.parseInt(setsDisplay.getText().toString());
+                block.setMultiplier(sets);
 
                 parentActivity.viewModel.buildWorkout.addBlock(block);
                 parentActivity.popBackStack();

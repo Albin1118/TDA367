@@ -13,8 +13,6 @@ public class Exercise {
     private String description;
     @SerializedName("exercise_instructions")
     private String instructions;
-    @SerializedName("numberofUnit")
-    private int numberofUnit;
     @SerializedName("exercise_unit")
     private String unit;
     @SerializedName("exercise_has_weight")
@@ -39,17 +37,11 @@ public class Exercise {
     public String getInstructions() {
         return instructions;
     }
-    public int getNumberofUnit(){
-        return numberofUnit;
-    }
     public String getUnit() {
         return unit;
     }
     public List<ExerciseCategory> getCategories() {
         return categories;
-    }
-    public String getAmountofUnit(){
-        return numberofUnit + " " + unit;
     }
 
     public void setName(String name) {
@@ -60,9 +52,6 @@ public class Exercise {
     }
     public void setInstructions(String instructions) {
         this.instructions = instructions;
-    }
-    public void setNumberofUnit(int numberofUnit){
-        this.numberofUnit = numberofUnit;
     }
     public void setUnit(String unit) {
         this.unit = unit;
