@@ -162,19 +162,10 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
     }
 
     /**
-     * Sets the current displayed Fragment/content in the Fragment Container.
+     * Sets a fragment in the fragment container to be displayed on the screen.
      * @param f The fragment to set as the displayed fragment
      */
-
-    private void setFragmentContainerContentFromTab(Fragment f){
-        getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right)
-                .replace(R.id.fragment_container, f)
-                .addToBackStack(null)
-                .commit();
-    }
-
-    public void setFragmentContainerContent(Fragment f){
+    private void setFragmentContainerContent(Fragment f){
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_bottom, R.anim.exit_from_top)
                 .replace(R.id.fragment_container, f)
@@ -183,24 +174,36 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
     }
 
     /**
-     * Pop the fragment at the top of the back stack.
+     * Sets a fragment in the fragment container to be displayed on the screen with a special entry animation meant for the tabs in the navigation bar.
+     * @param f The fragment to set as the displayed fragment
+     */
+    private void setFragmentContainerContentFromTab(Fragment f){
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right)
+                .replace(R.id.fragment_container, f)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    /**
+     * Pops the fragment at the top of the back stack.
      */
     private void popBackStack() {
         getSupportFragmentManager().popBackStack();
     }
 
     /**
-     * Clear the back stack, back to the start page.
+     * Clears the back stack, back to the start page.
      */
     private void clearBackStack() {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     /**
-     * Set the state of the bottom navigation bar.
+     * Sets the state of the bottom navigation bar.
      * Gets called in each of the tab fragment's onCreateView methods to set the nav bar to
      * the corresponding item, for example when the back button is pressed.
-     * @param id Id of the menuItem to set checked
+     * @param id Id of the menuItem to set as selected
      */
     @Override
     public void setNavBarState(int id) {

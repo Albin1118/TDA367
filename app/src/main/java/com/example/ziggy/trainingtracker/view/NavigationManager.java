@@ -92,7 +92,7 @@ public interface NavigationManager {
 
     /**
      * Sets the state of the navigation bar to the menuItem with the specified id.
-     * @param id Id of the menuItem to set checked
+     * @param id Id of the menuItem to set as selected
      */
     void setNavBarState(int id);
 
