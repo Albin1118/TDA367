@@ -40,6 +40,7 @@ public class WorkoutDetailViewFragment extends Fragment {
     private Button removeWorkoutButton;
 
     private MainActivity parentActivity;
+    private NavigationManager navigationManager;
     private View view;
 
     private boolean descriptionClosed;
@@ -50,6 +51,7 @@ public class WorkoutDetailViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_workout_detail_view, container, false);
         parentActivity = ((MainActivity)getActivity());
+        navigationManager = (MainActivity)getActivity();
         initViews();
         initListeners();
         return view;
@@ -97,16 +99,14 @@ public class WorkoutDetailViewFragment extends Fragment {
         startWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.navigateActiveWorkout(workout);
+                navigationManager.navigateActiveWorkout(workout);
             }
         });
 
         editWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WorkoutCreatorFragment fragment = new WorkoutCreatorFragment();
-                fragment.setEditableWorkout(workout);
-                parentActivity.setFragmentContainerContent(fragment);
+                navigationManager.navigateWorkoutEditor(workout);
             }
         });
 
@@ -114,7 +114,7 @@ public class WorkoutDetailViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 parentActivity.viewModel.removeCustomWorkout(workout);
-                parentActivity.setFragmentContainerContent(new WorkoutTabFragment());
+                navigationManager.navigateWorkouts();
             }
         });
     }

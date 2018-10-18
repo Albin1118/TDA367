@@ -19,7 +19,6 @@ import com.example.ziggy.trainingtracker.model.Exercise;
  */
 public class ExerciseDetailViewFragment extends Fragment {
 
-    private MainActivity parentActivity;
 
     private TextView exerciseNameTextView;
     private TextView exerciseUnitTextView;
@@ -30,7 +29,10 @@ public class ExerciseDetailViewFragment extends Fragment {
     private Button removeExerciseButton;
     private Button editExerciseButton;
 
+    private MainActivity parentActivity;
+    private NavigationManager navigationManager;
     private View view;
+
     private Exercise exercise;
 
     @Nullable
@@ -38,6 +40,7 @@ public class ExerciseDetailViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_exercise_detail_view, container, false);
         parentActivity = ((MainActivity)getActivity());
+        navigationManager = (MainActivity)getActivity();
         initViews();
         initListeners();
 
@@ -70,16 +73,14 @@ public class ExerciseDetailViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 parentActivity.viewModel.removeCustomExercise(exercise);
-                parentActivity.goBack();
+                navigationManager.goBack();
             }
         });
 
         editExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExerciseCreatorFragment fragment = new ExerciseCreatorFragment();
-                fragment.setEditableExercise(exercise);
-                parentActivity.setFragmentContainerContent(fragment);
+                navigationManager.navigateExerciseEditor(exercise);
             }
         });
     }

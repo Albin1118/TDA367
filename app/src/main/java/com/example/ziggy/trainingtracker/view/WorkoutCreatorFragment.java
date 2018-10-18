@@ -37,6 +37,7 @@ public class WorkoutCreatorFragment extends Fragment {
     private Button cancelEditedWorkoutButton;
 
     private MainActivity parentActivity;
+    private NavigationManager navigationManager;
     private View view;
 
     private boolean descriptionClosed;
@@ -46,6 +47,7 @@ public class WorkoutCreatorFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         parentActivity = (MainActivity)getActivity();
+        navigationManager = (MainActivity)getActivity();
         initBuildWorkout();
     }
 
@@ -121,8 +123,7 @@ public class WorkoutCreatorFragment extends Fragment {
         addWorkoutBlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WorkoutBlockCreatorFragment fragment = new WorkoutBlockCreatorFragment();
-                parentActivity.setFragmentContainerContent(fragment);
+                navigationManager.navigateWorkoutBlockCreator();
             }
         });
 
@@ -130,7 +131,7 @@ public class WorkoutCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createWorkout();
-                parentActivity.goBack();
+                navigationManager.goBack();
                 Toast.makeText(getContext(), "New workout created!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -138,14 +139,14 @@ public class WorkoutCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 saveWorkout();
-                parentActivity.goBack();
+                navigationManager.goBack();
             }
         });
 
         cancelEditedWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.goBack();
+                navigationManager.goBack();
             }
         });
 

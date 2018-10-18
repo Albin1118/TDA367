@@ -35,6 +35,7 @@ public class ActiveWorkoutFragment extends Fragment {
     private List<WorkoutBlock> currentWorkoutBlocks;
 
     private MainActivity parentActivity;
+    private NavigationManager navigationManager;
     private View view;
 
     private ArrayAdapter<WorkoutBlock> adapter;
@@ -48,13 +49,13 @@ public class ActiveWorkoutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_active_workout, container, false);
         parentActivity = ((MainActivity)getActivity());
-        parentActivity.setNavBarState(R.id.nav_active_workout);
+        navigationManager = (MainActivity)getActivity();
+        navigationManager.setNavBarState(R.id.nav_active_workout);
+        navigationManager.hideNavigationBar();
 
         initViews();
         initListeners();
         showStartButton();
-
-        parentActivity.hideBottomNavigationBar();
 
         currentWorkoutName.setText(currentWorkout.getName());
 
@@ -65,6 +66,11 @@ public class ActiveWorkoutFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        navigationManager.showNavigationBar();
+    }
 
     private void initViews() {
         startButton = view.findViewById(R.id.begin_workout_button);
@@ -116,8 +122,7 @@ public class ActiveWorkoutFragment extends Fragment {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
-                        parentActivity.navigateHome();
-                        parentActivity.showBottomNavigationBar();
+                        navigationManager.navigateHome();
                         Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
 
                     }

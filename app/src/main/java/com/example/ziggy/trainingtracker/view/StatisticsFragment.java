@@ -26,6 +26,7 @@ import java.util.List;
 public class StatisticsFragment extends Fragment {
 
     private MainActivity parentActivity;
+    private NavigationManager navigationManager;
     private View view;
 
     private String workoutName;
@@ -41,7 +42,8 @@ public class StatisticsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_statistics, container, false);
         parentActivity = (MainActivity)getActivity();
-        parentActivity.setNavBarState(R.id.nav_more);
+        navigationManager = (MainActivity)getActivity();
+        navigationManager.setNavBarState(R.id.nav_more);
 
         //exercises = parentActivity.viewModel.getExercises();
 

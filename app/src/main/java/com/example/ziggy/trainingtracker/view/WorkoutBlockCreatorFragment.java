@@ -39,6 +39,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
     private View view;
     private MainActivity parentActivity;
+    private NavigationManager navigationManager;
     private ArrayAdapter<Exercise> adapter;
 
 
@@ -46,6 +47,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         parentActivity = ((MainActivity)getActivity());
+        navigationManager = (MainActivity)getActivity();
         view  = inflater.inflate(R.layout.fragment_workout_block_creator, container, false);
         exercises = parentActivity.viewModel.getExercises();
         block = new WorkoutBlock();
@@ -191,7 +193,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 block.setMultiplier(sets);
 
                 parentActivity.viewModel.buildWorkout.addBlock(block);
-                parentActivity.goBack();
+                navigationManager.goBack();
             }
         });
 

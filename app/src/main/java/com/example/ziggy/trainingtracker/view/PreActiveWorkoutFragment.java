@@ -22,18 +22,17 @@ import java.util.List;
 
 public class PreActiveWorkoutFragment extends Fragment {
 
-
-    private MainActivity parentActivity;
-    private View view;
-    private List<Workout> workouts;
-    private Workout selectedWorkout;
-
-    private ArrayAdapter<Workout>adapter;
-
     // Components
     private ListView preActiveWorkoutListView;
     private Button beginWorkoutButton;
 
+    private List<Workout> workouts;
+    private Workout selectedWorkout;
+    private ArrayAdapter<Workout> adapter;
+
+    private MainActivity parentActivity;
+    private NavigationManager navigationManager;
+    private View view;
 
 
     @Nullable
@@ -41,7 +40,8 @@ public class PreActiveWorkoutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_pre_active_workout, container, false);
         parentActivity = ((MainActivity)getActivity());
-        parentActivity.setNavBarState(R.id.nav_active_workout);
+        navigationManager = (MainActivity)getActivity();
+        navigationManager.setNavBarState(R.id.nav_active_workout);
         workouts = parentActivity.viewModel.getWorkouts();
 
         initViews();
@@ -70,7 +70,7 @@ public class PreActiveWorkoutFragment extends Fragment {
 
     private void startActiveWorkout(){
         if (selectedWorkout != null) {
-            parentActivity.navigateActiveWorkout(selectedWorkout);
+            navigationManager.navigateActiveWorkout(selectedWorkout);
         }
         else{
             Toast.makeText(getContext(), "You need to select a workout first", Toast.LENGTH_SHORT).show();

@@ -22,15 +22,15 @@ public class MoreTabFragment extends Fragment {
     private EditText weightEditText;
     private Button statisticsButton;
 
-    private MainActivity parentActivity;
+    private NavigationManager navigationManager;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_more_tab, container, false);
-        parentActivity = (MainActivity)getActivity();
-        parentActivity.setNavBarState(R.id.nav_more);
+        navigationManager = (MainActivity)getActivity();
+        navigationManager.setNavBarState(R.id.nav_more);
 
         initViews();
         initListeners();
@@ -48,7 +48,7 @@ public class MoreTabFragment extends Fragment {
         statisticsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.setFragmentContainerContent(new StatisticsFragment());
+                navigationManager.navigateStatistics();
             }
         });
     }

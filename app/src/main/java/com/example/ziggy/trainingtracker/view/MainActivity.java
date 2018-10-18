@@ -164,26 +164,8 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
 
     }
 
-    public void hideBottomNavigationBar(){
-        mBottomNavBar.setVisibility(View.INVISIBLE);
-    }
-
-    public void showBottomNavigationBar(){
-        mBottomNavBar.setVisibility(View.VISIBLE);
-    }
-
     public boolean onGoingActiveWorkout(){
         return viewModel.checkActiveWorkoutStatus();
-    }
-
-    /**
-     * Set the state of the bottom navigation bar.
-     * Gets called in each of the tab fragment's onCreateView methods to set the nav bar to
-     * the corresponding item, for example when the back button is pressed.
-     * @param id Id of the menuItem to set checked
-     */
-    public void setNavBarState(int id) {
-        mBottomNavBar.getMenu().findItem(id).setChecked(true);
     }
 
     /**
@@ -219,6 +201,27 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
      */
     private void clearBackStack() {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    /**
+     * Set the state of the bottom navigation bar.
+     * Gets called in each of the tab fragment's onCreateView methods to set the nav bar to
+     * the corresponding item, for example when the back button is pressed.
+     * @param id Id of the menuItem to set checked
+     */
+    @Override
+    public void setNavBarState(int id) {
+        mBottomNavBar.getMenu().findItem(id).setChecked(true);
+    }
+
+    @Override
+    public void hideNavigationBar(){
+        mBottomNavBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showNavigationBar(){
+        mBottomNavBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -267,31 +270,49 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
 
     @Override
     public void navigateExerciseCreator() {
-
+        setFragmentContainerContent(new ExerciseCreatorFragment());
     }
 
     @Override
     public void navigateExerciseEditor(Exercise exercise) {
-
+        ExerciseCreatorFragment fragment = new ExerciseCreatorFragment();
+        fragment.setEditableExercise(exercise);
+        setFragmentContainerContent(fragment);
     }
 
     @Override
     public void navigateExerciseDetailView(Exercise exercise) {
-
+        ExerciseDetailViewFragment fragment = new ExerciseDetailViewFragment();
+        fragment.setExercise(exercise);
+        setFragmentContainerContent(fragment);
     }
 
     @Override
     public void navigateWorkoutCreator() {
-
+        setFragmentContainerContent(new WorkoutCreatorFragment());
     }
 
     @Override
     public void navigateWorkoutEditor(Workout workout) {
+        WorkoutCreatorFragment fragment = new WorkoutCreatorFragment();
+        fragment.setEditableWorkout(workout);
+        setFragmentContainerContent(fragment);
+    }
 
+    @Override
+    public void navigateWorkoutBlockCreator() {
+        setFragmentContainerContent(new WorkoutBlockCreatorFragment());
     }
 
     @Override
     public void navigateWorkoutDetailView(Workout workout) {
+        WorkoutDetailViewFragment fragment = new WorkoutDetailViewFragment();
+        fragment.setWorkout(workout);
+        setFragmentContainerContent(fragment);
+    }
 
+    @Override
+    public void navigateStatistics() {
+        setFragmentContainerContent(new StatisticsFragment());
     }
 }

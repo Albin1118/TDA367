@@ -40,6 +40,7 @@ public class ExerciseCreatorFragment extends Fragment {
     private Button cancelEditExerciseButton;
 
     private MainActivity parentActivity;
+    private NavigationManager navigationManager;
     private View view;
     private ExerciseCreatorViewModel viewModel;
 
@@ -51,6 +52,7 @@ public class ExerciseCreatorFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         parentActivity = ((MainActivity)getActivity());
+        navigationManager = (MainActivity)getActivity();
         viewModel = ViewModelProviders.of(this).get(ExerciseCreatorViewModel.class);
     }
 
@@ -89,7 +91,7 @@ public class ExerciseCreatorFragment extends Fragment {
         }
 
         CategorySpinnerAdapter adapter;
-        adapter = new CategorySpinnerAdapter(this.parentActivity, 0, categories);
+        adapter = new CategorySpinnerAdapter(getContext(), 0, categories);
         exerciseCategorySpinner.setAdapter(adapter);
     }
 
@@ -98,7 +100,7 @@ public class ExerciseCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createExercise();
-                parentActivity.goBack();
+                navigationManager.goBack();
                 Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -107,14 +109,14 @@ public class ExerciseCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 saveExercise();
-                parentActivity.goBack();
+                navigationManager.goBack();
             }
         });
 
         cancelEditExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.goBack();
+                navigationManager.goBack();
             }
         });
     }

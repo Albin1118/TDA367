@@ -26,7 +26,7 @@ public interface NavigationManager {
 
     /**
      * Navigate to the active workout tab with a selected workout.
-     * @param workout the workout to activate
+     * @param workout The workout to activate
      */
     void navigateActiveWorkout(Workout workout);
 
@@ -47,13 +47,13 @@ public interface NavigationManager {
 
     /**
      * Navigate to the exercise editor.
-     * @param exercise the exercise to be edited
+     * @param exercise The exercise to be edited
      */
     void navigateExerciseEditor(Exercise exercise);
 
     /**
      * Navigate to the exercise detail view.
-     * @param exercise the exercise to show the details of
+     * @param exercise The exercise to show the details of
      */
     void navigateExerciseDetailView(Exercise exercise);
 
@@ -64,13 +64,39 @@ public interface NavigationManager {
 
     /**
      * Navigate to the workout editor.
-     * @param workout the workout to be edited
+     * @param workout The workout to be edited
      */
     void navigateWorkoutEditor(Workout workout);
 
     /**
+     * Navigate to the workout block creator.
+     */
+    void navigateWorkoutBlockCreator();
+
+    /**
      * Navigate to the workout detail view.
-     * @param workout the workout to show the details of
+     * @param workout The workout to show the details of
      */
     void navigateWorkoutDetailView(Workout workout);
+
+    /**
+     * Navigate to the statistics.
+     */
+    void navigateStatistics();
+
+    /**
+     * Set the state of the navigation bar.
+     * @param id Id of the menuItem to set checked
+     */
+    void setNavBarState(int id);
+
+    /**
+     * Hide the navigation bar.
+     */
+    void hideNavigationBar();
+
+    /**
+     * Un-hide the navigation bar.
+     */
+    void showNavigationBar();
 }

@@ -27,17 +27,20 @@ public class WorkoutTabFragment extends Fragment {
     private ListView workoutList;
     private ArrayAdapter<Workout>adapter;
 
-    private MainActivity parentActivity;
-    private View view;
     private List <Workout> workouts;
     private List <Workout> customWorkouts;
+
+    private MainActivity parentActivity;
+    private NavigationManager navigationManager;
+    private View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_workout_tab, container, false);
         parentActivity = (MainActivity)getActivity();
-        parentActivity.setNavBarState(R.id.nav_workouts);
+        navigationManager = (MainActivity)getActivity();
+        navigationManager.setNavBarState(R.id.nav_workouts);
 
         workouts = parentActivity.viewModel.getAllWorkouts();
 
@@ -81,17 +84,14 @@ public class WorkoutTabFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(), workouts.get(position).toString(), Toast.LENGTH_SHORT).show();
 
-                Workout w = workouts.get(position);
-                WorkoutDetailViewFragment fragment = new WorkoutDetailViewFragment();
-                fragment.setWorkout(w);
-                parentActivity.setFragmentContainerContent(fragment);
+                navigationManager.navigateWorkoutDetailView(workouts.get(position));
             }
         });
 
         addWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.setFragmentContainerContent(new WorkoutCreatorFragment());
+                navigationManager.navigateWorkoutCreator();
             }
         });
     }

@@ -31,15 +31,15 @@ public class ExerciseTabFragment extends Fragment {
 
     private ArrayAdapter<Exercise> adapter;
 
-    private MainActivity parentActivity;
+    private NavigationManager navigationManager;
     private View view;
     private ExerciseTabViewModel viewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        parentActivity = ((MainActivity)getActivity());
-        parentActivity.setNavBarState(R.id.nav_exercises);
+        navigationManager = (MainActivity)getActivity();
+        navigationManager.setNavBarState(R.id.nav_exercises);
         viewModel = ViewModelProviders.of(this).get(ExerciseTabViewModel.class);
     }
 
@@ -86,16 +86,14 @@ public class ExerciseTabFragment extends Fragment {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.setFragmentContainerContent(new ExerciseCreatorFragment());
+                navigationManager.navigateExerciseCreator();
             }
         });
 
         exerciseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ExerciseDetailViewFragment fragment = new ExerciseDetailViewFragment();
-                fragment.setExercise(viewModel.getExercises().get(position));
-                parentActivity.setFragmentContainerContent(fragment);
+                navigationManager.navigateExerciseDetailView(viewModel.getExercises().get(position));
             }
         });
 
