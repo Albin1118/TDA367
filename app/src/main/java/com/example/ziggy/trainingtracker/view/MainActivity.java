@@ -136,16 +136,7 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
                         navigateWorkouts();
                         break;
                     case R.id.nav_active_workout:
-                        navigatePreActiveWorkout();
-
-                        /*
-                        if (onGoingActiveWorkout()) {
-                            navigateActiveWorkout();
-                        }
-                        else {
-                            navigatePreActiveWorkout();
-                        }*/
-
+                        navigateActiveWorkout();
                         break;
                     case R.id.nav_exercises:
                         navigateExercises();
@@ -243,18 +234,25 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
     }
 
     @Override
-    public void navigatePreActiveWorkout() {
+    public void navigateActiveWorkout() {
         clearBackStack();
         setFragmentContainerContentFromTab(new PreActiveWorkoutFragment());
+
+        /* TODO: Allow user to navigate out of the active workout and later come back in by clicking on the active workout tab
+        if (onGoingActiveWorkout()) {
+            setFragmentContainerContentFromTab(new ActiveWorkoutFragment());
+        } else {
+            setFragmentContainerContentFromTab(new PreActiveWorkoutFragment());
+        }*/
     }
 
     @Override
     public void navigateActiveWorkout(IWorkout workout) {
         viewModel.setActiveWorkoutStatus(true);
-        ActiveWorkoutFragment f = new ActiveWorkoutFragment();
-        f.setCurrentWorkout(workout);
+        ActiveWorkoutFragment fragment = new ActiveWorkoutFragment();
+        fragment.setCurrentWorkout(workout);
         clearBackStack();
-        setFragmentContainerContentFromTab(f);
+        setFragmentContainerContentFromTab(fragment);
         Toast.makeText(this, "Workout selected!", Toast.LENGTH_SHORT).show();
     }
 

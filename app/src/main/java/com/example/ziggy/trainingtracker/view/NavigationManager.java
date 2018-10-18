@@ -5,100 +5,104 @@ import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
 
+/**
+ * Controls the navigation between the views and how they are created.
+ */
 public interface NavigationManager {
     /**
-     * Go back to the previous page.
+     * Goes back to the previous page.
      */
     void goBack();
 
     /**
-     * Navigate to the home page.
+     * Navigates to the home page.
      */
     void navigateHome();
 
     /**
-     * Navigate to the workouts tab.
+     * Navigates to the workouts tab.
      */
     void navigateWorkouts();
 
     /**
-     * Navigate to the active workout tab without a selected workout.
+     * Navigates to the active workout tab.
+     * A workout might not have been selected yet.
      */
-    void navigatePreActiveWorkout();
+    void navigateActiveWorkout();
 
     /**
-     * Navigate to the active workout tab with a selected workout.
+     * Navigates to the active workout tab with the specified workout as selected workout.
      * @param workout The workout to activate
      */
     void navigateActiveWorkout(IWorkout workout);
 
     /**
-     * Navigate to the exercises tab.
+     * Navigates to the exercises tab.
      */
     void navigateExercises();
 
     /**
-     * Navigate to the more tab.
+     * Navigates to the more tab.
      */
     void navigateMore();
 
     /**
-     * Navigate to the exercise creator.
+     * Navigates to the exercise creator.
      */
     void navigateExerciseCreator();
 
     /**
-     * Navigate to the exercise editor.
+     * Navigates to the exercise editor.
      * @param exercise The exercise to be edited
      */
     void navigateExerciseEditor(IExercise exercise);
 
     /**
-     * Navigate to the exercise detail view.
+     * Navigates to the exercise detail view showing the specified exercise.
      * @param exercise The exercise to show the details of
      */
     void navigateExerciseDetailView(IExercise exercise);
 
     /**
-     * Navigate to the workout creator.
+     * Navigates to the workout creator.
      */
     void navigateWorkoutCreator();
 
     /**
-     * Navigate to the workout editor.
+     * Navigates to the workout editor.
      * @param workout The workout to be edited
      */
     void navigateWorkoutEditor(IWorkout workout);
 
     /**
-     * Navigate to the workout block creator.
+     * Navigates to the workout block creator.
      */
     void navigateWorkoutBlockCreator();
 
     /**
-     * Navigate to the workout detail view.
+     * Navigates to the workout detail view showing the specified workout.
      * @param workout The workout to show the details of
      */
     void navigateWorkoutDetailView(IWorkout workout);
 
     /**
-     * Navigate to the statistics.
+     * Navigates to the statistics.
      */
     void navigateStatistics();
 
     /**
-     * Set the state of the navigation bar.
+     * Sets the state of the navigation bar to the menuItem with the specified id.
      * @param id Id of the menuItem to set checked
      */
     void setNavBarState(int id);
 
     /**
-     * Hide the navigation bar.
+     * Hides the navigation bar.
      */
     void hideNavigationBar();
 
     /**
-     * Un-hide the navigation bar.
+     * Un-hides the navigation bar.
      */
     void showNavigationBar();
 }
