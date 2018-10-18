@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ import java.util.List;
 
 public class WorkoutBlockCreatorFragment extends Fragment {
 
-    private List<Exercise> exercises;
+    private List<IExercise> exercises;
     private WorkoutBlock block;
 
     private Button decrementSetButton;
@@ -40,7 +42,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
     private View view;
     private MainActivity parentActivity;
     private NavigationManager navigationManager;
-    private ArrayAdapter<Exercise> adapter;
+    private ArrayAdapter<IExercise> adapter;
 
 
     @Nullable
@@ -98,7 +100,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Exercise e = exercises.get(position);
+                IExercise e = exercises.get(position);
 
                 if(selectExerciseListView.isItemChecked(position)){
 

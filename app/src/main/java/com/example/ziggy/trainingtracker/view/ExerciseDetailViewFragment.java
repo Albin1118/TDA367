@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.IExercise;
 
 /**
  * Fragment representing a view displaying contents of a selected exercise
@@ -33,7 +34,7 @@ public class ExerciseDetailViewFragment extends Fragment {
     private NavigationManager navigationManager;
     private View view;
 
-    private Exercise exercise;
+    private IExercise exercise;
 
     @Nullable
     @Override
@@ -101,7 +102,7 @@ public class ExerciseDetailViewFragment extends Fragment {
      * This method needs to be called before creating the view or there will be a NullPointerException in initViews.
      * @param e The Exercise to be displayed
      */
-    public void setExercise(Exercise e) {
+    public void setExercise(IExercise e) {
         this.exercise = e;
     }
 }

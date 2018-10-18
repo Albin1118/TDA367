@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<WorkoutBlock> {
             listItem = LayoutInflater.from(mContext).inflate(R.layout.workout_block_list_item,parent,false);
 
         WorkoutBlock currentBlock = workoutBlocks.get(position);
-        List<Exercise>exercises = currentBlock.getExercises();
+        List<IExercise>exercises = currentBlock.getExercises();
         List<Integer>amounts = currentBlock.getAmounts();
 
         TextView multiplierTextView = (TextView)listItem.findViewById(R.id.multiplierTextView);
@@ -49,7 +50,7 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<WorkoutBlock> {
         for (int i = 0; i < exercises.size(); i++){
             View child = LayoutInflater.from(mContext).inflate(R.layout.exercise_list_item_unit, null);
 
-            Exercise e = exercises.get(i);
+            IExercise e = exercises.get(i);
             int amount = amounts.get(i);
 
             TextView name = (TextView)child.findViewById(R.id.exerciseNameTextView);

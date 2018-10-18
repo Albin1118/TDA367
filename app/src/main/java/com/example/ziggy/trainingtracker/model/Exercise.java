@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Exercise {
+public class Exercise implements IExercise {
 
     @SerializedName("exercise_name")
     private String name;

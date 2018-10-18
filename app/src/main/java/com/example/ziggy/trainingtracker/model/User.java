@@ -13,7 +13,7 @@ public class User {
     @SerializedName("user_finished_workouts_list")
     private List<Workout> finishedWorkouts;
     @SerializedName("user_custom_exercises_list")
-    private List<Exercise> customExercises = new ArrayList<>();
+    private List<IExercise> customExercises = new ArrayList<>();
     @SerializedName("user_custom_workouts")
     private List<Workout> customWorkouts = new ArrayList<>();
 
@@ -35,11 +35,11 @@ public class User {
         this.height = height;
     }
 
-    void addCustomExercise(Exercise e) {
+    void addCustomExercise(IExercise e) {
         customExercises.add(e);
     }
 
-    void removeCustomExercise(Exercise e) {
+    void removeCustomExercise(IExercise e) {
         customExercises.remove(e);
     }
 
@@ -75,11 +75,11 @@ public class User {
         return customWorkouts;
     }
 
-    public List<Exercise> getCustomExercises() {
+    public List<IExercise> getCustomExercises() {
         return customExercises;
     }
 
-    public void setCustomExercises(List<Exercise> customExercises) {
+    public void setCustomExercises(List<IExercise> customExercises) {
         this.customExercises = customExercises;
     }
 

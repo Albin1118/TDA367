@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.ExerciseStatistic;
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
@@ -31,7 +32,7 @@ public class StatisticsFragment extends Fragment {
 
     private String workoutName;
     private List<ExerciseStatistic> exercises;
-    private Exercise chosenExercise;
+    private IExercise chosenExercise;
     private LineGraphSeries<DataPoint> exerciseDataSeries;
 
     private GraphView graph;
@@ -99,7 +100,7 @@ public class StatisticsFragment extends Fragment {
 
     }
 
-    public void setChosenExercise(Exercise chosenExercise) {
+    public void setChosenExercise(IExercise chosenExercise) {
         this.chosenExercise = chosenExercise;
     }
 }

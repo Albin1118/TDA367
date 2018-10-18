@@ -2,6 +2,7 @@ package com.example.ziggy.trainingtracker.service;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
+import com.example.ziggy.trainingtracker.model.IExercise;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -21,7 +22,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public class ReadExercisesFromXMLService {
 
     private Document dom;
-    private Map<String, Exercise> exercises;
+    private Map<String, IExercise> exercises;
 
     public ReadExercisesFromXMLService() {
         this.exercises = new LinkedHashMap<>();
@@ -32,7 +33,7 @@ public class ReadExercisesFromXMLService {
      * and add them to the map of Exercises that gets returned.
      * @return A list of Exercises loaded from the XML.
      */
-    public List<Exercise> readExercises() {
+    public List<IExercise> readExercises() {
         parseXMLFile();
         parseDocument();
         return new ArrayList<>(exercises.values());
@@ -66,7 +67,7 @@ public class ReadExercisesFromXMLService {
                 Element element = (Element) nl.item(i);
                 try {
                     //get the Exercise object
-                    Exercise e = getExercise(element);
+                    IExercise e = getExercise(element);
                     //add it to list
                     exercises.put(e.getName(), e);
                 } catch (IllegalArgumentException iae) {
@@ -83,7 +84,7 @@ public class ReadExercisesFromXMLService {
      * @param exerciseElement An exercise element.
      * @return A new Exercise object.
      */
-    private Exercise getExercise(Element exerciseElement) throws IllegalArgumentException {
+    private IExercise getExercise(Element exerciseElement) throws IllegalArgumentException {
         String name = exerciseElement.getAttribute("name");
         if (name.trim().isEmpty() || exercises.containsKey(name))
             throw new IllegalArgumentException("An exercise cannot have an empty or duplicate name.");

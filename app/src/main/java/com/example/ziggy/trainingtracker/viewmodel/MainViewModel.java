@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.content.SharedPreferences;
 
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
@@ -16,16 +17,18 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
     private TrainingTracker trainingTracker;
 
-    private List<Exercise> exercises;
+    private List<IExercise> exercises;
     private List<Workout> workouts;
 
-    private List<Exercise> allExercises;
+    private List<IExercise> allExercises;
     private List<Workout> allWorkouts;
+
 
     private boolean activeWorkoutStatus;
 
@@ -50,7 +53,7 @@ public class MainViewModel extends ViewModel {
         this.activeWorkoutStatus = activeWorkoutStatus;
     }
 
-    public List<Exercise> getExercises() {
+    public List<IExercise> getExercises() {
         if (exercises == null) {
             exercises = trainingTracker.getExercises();
             loadExercises();
@@ -89,7 +92,7 @@ public class MainViewModel extends ViewModel {
     }
 
 
-    public List<Exercise> getCustomExercises() {
+    public List<IExercise> getCustomExercises() {
         return trainingTracker.getCustomExercises();
     }
 
@@ -99,8 +102,8 @@ public class MainViewModel extends ViewModel {
 
     public List<ExerciseCategory> getCategories() { return categories; }
 
-    public ArrayList<String> getCategoriesToString() {
-        ArrayList<String> categoriesToString = new ArrayList<>();
+    public List<String> getCategoriesToString() {
+        List<String> categoriesToString = new ArrayList<>();
         for(int i=0; i<getCategories().size(); i++) {
             categoriesToString.add(getCategories().get(i).name());
         }
@@ -111,11 +114,11 @@ public class MainViewModel extends ViewModel {
         trainingTracker.setCustomWorkouts(w);
     }
 
-    private void setCustomExercises(List<Exercise> e){
+    private void setCustomExercises(List<IExercise> e){
         trainingTracker.setCustomExercises(e);
     }
 
-    public List<Exercise> getAllExercises() {
+    public List<IExercise> getAllExercises() {
         if (allExercises == null){
             initAllExercises();
         }
@@ -133,10 +136,10 @@ public class MainViewModel extends ViewModel {
         Gson gson = new Gson();
 
         Type workoutListType = new TypeToken<ArrayList<Workout>>(){}.getType();
-        Type exerciseListType = new TypeToken<ArrayList<Exercise>>(){}.getType();
+        Type exerciseListType = new TypeToken<ArrayList<IExercise>>(){}.getType();
 
         List <Workout> w = gson.fromJson(customWorkoutListJson, workoutListType);
-        List <Exercise> e = gson.fromJson(customExerciseListJson, exerciseListType);
+        List <IExercise> e = gson.fromJson(customExerciseListJson, exerciseListType);
 
         if (w == null){
             w = new ArrayList<>();
@@ -155,15 +158,15 @@ public class MainViewModel extends ViewModel {
 
     // Methods for adding removing and editing custom Exercises
     public void addCustomExercise(String name, String description, String instructions, String unit,List<ExerciseCategory> categories) {
-        Exercise e = new Exercise(name, description, instructions, unit, categories);
+        IExercise e = new Exercise(name, description, instructions, unit, categories);
         trainingTracker.addCustomExercise(e);
     }
 
-    public void removeCustomExercise(Exercise e) {
+    public void removeCustomExercise(IExercise e) {
         trainingTracker.removeCustomExercise(e);
     }
 
-    public  void editCustomExercise(Exercise e, String name, String description, String instructions, String unit, List<ExerciseCategory> categories) {
+    public  void editCustomExercise(IExercise e, String name, String description, String instructions, String unit, List<ExerciseCategory> categories) {
         e.setName(name);
         e.setDescription(description);
         e.setInstructions(instructions);
@@ -214,8 +217,6 @@ public class MainViewModel extends ViewModel {
     }
 
     private void createCategoryList() {
-        for (ExerciseCategory category : ExerciseCategory.values()) {
-            categories.add(category);
-        }
+        categories.addAll(Arrays.asList(ExerciseCategory.values()));
     }
 }

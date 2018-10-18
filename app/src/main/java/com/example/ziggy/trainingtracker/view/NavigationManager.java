@@ -1,6 +1,7 @@
 package com.example.ziggy.trainingtracker.view;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.Workout;
 
 public interface NavigationManager {
@@ -49,13 +50,13 @@ public interface NavigationManager {
      * Navigate to the exercise editor.
      * @param exercise The exercise to be edited
      */
-    void navigateExerciseEditor(Exercise exercise);
+    void navigateExerciseEditor(IExercise exercise);
 
     /**
      * Navigate to the exercise detail view.
      * @param exercise The exercise to show the details of
      */
-    void navigateExerciseDetailView(Exercise exercise);
+    void navigateExerciseDetailView(IExercise exercise);
 
     /**
      * Navigate to the workout creator.

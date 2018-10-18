@@ -12,7 +12,7 @@ import java.util.List;
 public class WorkoutBlock {
 
     @SerializedName("workout_block_exercises")
-    private List<Exercise> exercises = new ArrayList<>();
+    private List<IExercise> exercises = new ArrayList<>();
     @SerializedName("workout_block_amounts")
     private List<Integer> amounts = new ArrayList<>();
     /**
@@ -23,12 +23,12 @@ public class WorkoutBlock {
     public WorkoutBlock() {
     }
 
-    public void addExercise(Exercise exercise, Integer amount) {
+    public void addExercise(IExercise exercise, Integer amount) {
         exercises.add(exercise);
         amounts.add(amount);
     }
 
-    public void removeExercise(Exercise exercise){
+    public void removeExercise(IExercise exercise){
         int index = exercises.indexOf(exercise);
         exercises.remove(index);
         amounts.remove(index);
@@ -38,7 +38,7 @@ public class WorkoutBlock {
         multiplier = n;
     }
 
-    public List<Exercise> getExercises() {
+    public List<IExercise> getExercises() {
         return exercises;
     }
     public List<Integer> getAmounts() {

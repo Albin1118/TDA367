@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseCreatorViewModel;
 
 /**
@@ -44,9 +45,9 @@ public class ExerciseCreatorFragment extends Fragment {
     private View view;
     private ExerciseCreatorViewModel viewModel;
 
-    //private ArrayList<ExerciseCategory> categories = new ArrayList<>();
-    ArrayList<CategorySpinnerObject> categories = new ArrayList<>();
-    private Exercise editableExercise = null;
+
+    List<CategorySpinnerObject> categories = new ArrayList<>();
+    private IExercise editableExercise = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,7 +82,6 @@ public class ExerciseCreatorFragment extends Fragment {
         }
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
 
-        //categories = new ArrayList<>();
 
         for(int i=0; i<parentActivity.viewModel.getCategories().size(); i++) {
             CategorySpinnerObject categorySpinnerObject = new CategorySpinnerObject();
@@ -163,7 +163,7 @@ public class ExerciseCreatorFragment extends Fragment {
         exerciseUnitEditText.setText(editableExercise.getUnit());
     }
 
-    public void setEditableExercise(Exercise editableExercise) {
+    public void setEditableExercise(IExercise editableExercise) {
         this.editableExercise = editableExercise;
     }
 }

@@ -17,6 +17,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
@@ -24,12 +25,12 @@ public class ReadWorkoutsFromXMLService {
 
     private Document dom;
     private Map<String, Workout> workouts;
-    private Map<String, Exercise> exercises;
+    private Map<String, IExercise> exercises;
 
-    public ReadWorkoutsFromXMLService(List<Exercise> baseExercises) {
+    public ReadWorkoutsFromXMLService(List<IExercise> baseExercises) {
         this.workouts = new LinkedHashMap<>();
         this.exercises = new LinkedHashMap<>();
-        for (Exercise e : baseExercises) {
+        for (IExercise e : baseExercises) {
             this.exercises.put(e.getName(), e);
         }
     }
@@ -137,7 +138,7 @@ public class ReadWorkoutsFromXMLService {
                 //get the exercise element
                 Element element = (Element)nl.item(i);
                 //get the Exercise object
-                Exercise e = getExercise(element);
+                IExercise e = getExercise(element);
                 int amount;
                 try {
                     amount = Integer.parseInt(element.getAttribute("n"));
@@ -157,9 +158,9 @@ public class ReadWorkoutsFromXMLService {
      * @param exerciseElement An exercise element.
      * @return A new Exercise object.
      */
-    private Exercise getExercise(Element exerciseElement) throws IllegalArgumentException {
+    private IExercise getExercise(Element exerciseElement) throws IllegalArgumentException {
         String name = exerciseElement.getTextContent();
-        Exercise e = this.exercises.get(name);
+        IExercise e = this.exercises.get(name);
         if (e == null)
             throw new IllegalArgumentException("Cannot find Exercise: \"" + name + "\".");
         return e;

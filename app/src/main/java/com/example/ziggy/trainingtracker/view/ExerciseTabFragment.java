@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 
 /**
@@ -29,7 +30,7 @@ public class ExerciseTabFragment extends Fragment {
     private Button searchCategoryButton;
     private Spinner exerciseCategorySpinner;
 
-    private ArrayAdapter<Exercise> adapter;
+    private ArrayAdapter<IExercise> adapter;
 
     private NavigationManager navigationManager;
     private View view;
@@ -60,7 +61,7 @@ public class ExerciseTabFragment extends Fragment {
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
         searchCategoryButton = view.findViewById(R.id.searchCategoryButton);
 
-        adapter = new ArrayAdapter<Exercise>(getContext(), R.layout.exercise_list_item, R.id.exerciseNameTextView, viewModel.getAllExercises()) {
+        adapter = new ArrayAdapter<IExercise>(getContext(), R.layout.exercise_list_item, R.id.exerciseNameTextView, viewModel.getAllExercises()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);

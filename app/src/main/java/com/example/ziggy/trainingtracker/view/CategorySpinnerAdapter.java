@@ -11,15 +11,17 @@ import android.widget.CompoundButton;
 import android.view.LayoutInflater;
 import android.widget.CheckBox;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.example.ziggy.trainingtracker.R;
 
 public class CategorySpinnerAdapter extends ArrayAdapter<CategorySpinnerObject> {
 
     private Context mContext;
-    private ArrayList<CategorySpinnerObject> categories;
+    private List<CategorySpinnerObject> categories;
     private boolean isFromView = false;
 
-    public CategorySpinnerAdapter(Context context, int resource, ArrayList<CategorySpinnerObject> categories) {
+    public CategorySpinnerAdapter(Context context, int resource, List<CategorySpinnerObject> categories) {
         super(context, resource, categories);
         this.mContext = context;
         this.categories = categories;

@@ -12,7 +12,7 @@ public class TrainingTracker {
     @SerializedName("trainingtracker_workouts_list")
     private List<Workout> workouts = new ArrayList<>();
     @SerializedName("trainingtracker_exercises_list")
-    private List<Exercise> exercises = new ArrayList<>();
+    private List<IExercise> exercises = new ArrayList<>();
 
     public static TrainingTracker getInstance() {
         if (instance == null) {
@@ -27,7 +27,7 @@ public class TrainingTracker {
      * Add an Exercise to the list of Exercises and store it among the users custom Exercises.
      * @param e Exercise to be added
      */
-    public void addCustomExercise(Exercise e) {
+    public void addCustomExercise(IExercise e) {
         exercises.add(e);
         user.addCustomExercise(e);
     }
@@ -36,7 +36,7 @@ public class TrainingTracker {
      * Remove an Exercise from the list of Exercises and discard it from the users custom Exercises.
      * @param e Exercise to be removed
      */
-    public void removeCustomExercise(Exercise e) {
+    public void removeCustomExercise(IExercise e) {
         exercises.remove(e);
         user.removeCustomExercise(e);
     }
@@ -62,10 +62,10 @@ public class TrainingTracker {
     public List<Workout> getWorkouts() {
         return workouts;
     }
-    public List<Exercise> getExercises() {
+    public List<IExercise> getExercises() {
         return exercises;
     }
-    public List<Exercise> getCustomExercises() {
+    public List<IExercise> getCustomExercises() {
         return user.getCustomExercises();
     }
     public List<Workout> getCustomWorkouts() {
@@ -76,7 +76,7 @@ public class TrainingTracker {
         user.setCustomWorkouts(w);
     }
 
-    public void setCustomExercises(List<Exercise> e){
+    public void setCustomExercises(List<IExercise> e){
         user.setCustomExercises(e);
     }
 
