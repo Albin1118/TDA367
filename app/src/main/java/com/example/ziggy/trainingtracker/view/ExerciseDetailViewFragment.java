@@ -70,7 +70,7 @@ public class ExerciseDetailViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 parentActivity.viewModel.removeCustomExercise(exercise);
-                parentActivity.setFragmentContainerContent(new ExerciseTabFragment());
+                parentActivity.popBackStack();
             }
         });
 
