@@ -80,7 +80,7 @@ public class TrainingTracker implements ITrainingTracker{
         user.setCustomExercises(e);
     }
 
-    public User getUser() {
+    public IUser getUser() {
         return user;
     }
 }

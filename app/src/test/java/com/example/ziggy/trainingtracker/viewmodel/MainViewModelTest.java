@@ -3,6 +3,7 @@ package com.example.ziggy.trainingtracker.viewmodel;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.model.IUser;
 import com.example.ziggy.trainingtracker.model.User;
 import com.google.gson.Gson;
 
@@ -30,9 +31,9 @@ public class MainViewModelTest {
     @Test
     public void deSerialization_isCorrect() {
         Gson gson = new Gson();
-        User u = new User("Ree", "Pepe", 1337.0, 190);
+        IUser u = new User("Ree", "Pepe", 1337.0, 190);
         String json = gson.toJson(u);
-        User nu = gson.fromJson(json, User.class);
+        IUser nu = gson.fromJson(json, User.class);
         assertEquals(u.getHeight(), nu.getHeight());
 
     }
