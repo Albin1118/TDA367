@@ -150,10 +150,6 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                    block.removeExercise(e);
                 }
 
-
-
-
-
             }
         });
 

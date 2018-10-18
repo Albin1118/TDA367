@@ -163,11 +163,12 @@ public class MainViewModel extends ViewModel {
         trainingTracker.removeCustomExercise(e);
     }
 
-    public  void editCustomExercise(Exercise e, String name, String description, String instructions, String unit) {
+    public  void editCustomExercise(Exercise e, String name, String description, String instructions, String unit, List<ExerciseCategory> categories) {
         e.setName(name);
         e.setDescription(description);
         e.setInstructions(instructions);
         e.setUnit(unit);
+        e.setCategories(categories);
     }
 
     //Method for adding removing and editing custom Workouts
@@ -213,10 +214,8 @@ public class MainViewModel extends ViewModel {
     }
 
     private void createCategoryList() {
-        categories.add(ExerciseCategory.ARMS );
-        categories.add(ExerciseCategory.LEGS );
-        categories.add(ExerciseCategory.BACK );
-        categories.add(ExerciseCategory.CHEST);
-        categories.add(ExerciseCategory.ABS  );
+        for (ExerciseCategory category : ExerciseCategory.values()) {
+            categories.add(category);
+        }
     }
 }

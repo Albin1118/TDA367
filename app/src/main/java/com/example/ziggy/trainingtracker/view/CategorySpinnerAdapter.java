@@ -57,8 +57,9 @@ public class CategorySpinnerAdapter extends ArrayAdapter<CategorySpinnerObject> 
         holder.mCategoryCheckBox.setChecked(categories.get(position).isCategorySelected());
         isFromView = false;
 
+        //TODO Add start value to spinner and change the first holder.mCategory.. to INVISIBLE
         if ((position == 0)) {
-            holder.mCategoryCheckBox.setVisibility(View.INVISIBLE);
+            holder.mCategoryCheckBox.setVisibility(View.VISIBLE);
         } else {
             holder.mCategoryCheckBox.setVisibility(View.VISIBLE);
         }

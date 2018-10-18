@@ -19,6 +19,8 @@ import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseCreatorViewModel;
 
@@ -37,13 +39,13 @@ public class ExerciseCreatorFragment extends Fragment {
     private Button createExerciseButton;
     private Button saveExerciseButton;
     private Button cancelEditExerciseButton;
-    private Button addCategoryButton;
 
     private MainActivity parentActivity;
     private View view;
     private ExerciseCreatorViewModel viewModel;
 
-    private ArrayList<ExerciseCategory> categories = new ArrayList<>();
+    //private ArrayList<ExerciseCategory> categories = new ArrayList<>();
+    ArrayList<CategorySpinnerObject> categories = new ArrayList<>();
     private Exercise editableExercise = null;
 
     @Override
@@ -72,16 +74,23 @@ public class ExerciseCreatorFragment extends Fragment {
         createExerciseButton = view.findViewById(R.id.createExerciseButton);
         saveExerciseButton = view.findViewById(R.id.saveExerciseButton);
         cancelEditExerciseButton = view.findViewById(R.id.cancelEditExerciseButton);
-        addCategoryButton = view.findViewById(R.id.addCategoryButton);
 
         if (editableExercise != null) {
             editMode();
         }
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
 
-        ArrayList<String> categories = parentActivity.viewModel.getCategoriesToString();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.parentActivity, android.R.layout.simple_spinner_item, categories);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //categories = new ArrayList<>();
+
+        for(int i=0; i<parentActivity.viewModel.getCategories().size(); i++) {
+            CategorySpinnerObject categorySpinnerObject = new CategorySpinnerObject();
+            categorySpinnerObject.setCategoryName(parentActivity.viewModel.getCategoriesToString().get(i));
+            categorySpinnerObject.setCategorySelected(false);
+            categories.add(categorySpinnerObject);
+        }
+
+        CategorySpinnerAdapter adapter;
+        adapter = new CategorySpinnerAdapter(this.parentActivity, 0, categories);
         exerciseCategorySpinner.setAdapter(adapter);
     }
 
@@ -109,15 +118,6 @@ public class ExerciseCreatorFragment extends Fragment {
                 parentActivity.popBackStack();
             }
         });
-        addCategoryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String category = exerciseCategorySpinner.getSelectedItem().toString();
-                addedCategoriesTextView.setText(addedCategoriesTextView.getText() + "  " + category);
-                categories.add(ExerciseCategory.valueOf(category));
-            }
-        });
-
     }
 
     private void createExercise() {
@@ -125,6 +125,8 @@ public class ExerciseCreatorFragment extends Fragment {
         String unit = exerciseUnitEditText.getText().toString();
         String description = exerciseDescriptionEditText.getText().toString();
         String instructions = exerciseInstructionsEditText.getText().toString();
+        List<ExerciseCategory> categories = categoriesSelected();
+
         parentActivity.viewModel.addCustomExercise(name, description, instructions, unit, categories);
     }
 
@@ -133,7 +135,20 @@ public class ExerciseCreatorFragment extends Fragment {
         String unit = exerciseUnitEditText.getText().toString();
         String description = exerciseDescriptionEditText.getText().toString();
         String instructions = exerciseInstructionsEditText.getText().toString();
-        parentActivity.viewModel.editCustomExercise(editableExercise, name, description, instructions, unit);
+        List<ExerciseCategory> categories = categoriesSelected();
+
+        parentActivity.viewModel.editCustomExercise(editableExercise, name, description, instructions, unit, categories);
+    }
+
+    //Returns categories checked in the category spinner
+    private List<ExerciseCategory> categoriesSelected() {
+        List<ExerciseCategory> categoriesSelected = new ArrayList<>();
+        for(int i=0; i<categories.size(); i++) {
+            if(categories.get(i).isCategorySelected()) {
+                categoriesSelected.add(ExerciseCategory.valueOf(categories.get(i).getCategoryName()));
+            }
+        }
+        return categoriesSelected;
     }
 
     private void editMode() {
