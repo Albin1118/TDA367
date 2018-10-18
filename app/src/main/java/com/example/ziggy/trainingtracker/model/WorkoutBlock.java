@@ -28,6 +28,12 @@ public class WorkoutBlock {
         amounts.add(amount);
     }
 
+    public void removeExercise(Exercise exercise){
+        int index = exercises.indexOf(exercise);
+        exercises.remove(index);
+        amounts.remove(index);
+    }
+
     public void setMultiplier(int n) {
         multiplier = n;
     }

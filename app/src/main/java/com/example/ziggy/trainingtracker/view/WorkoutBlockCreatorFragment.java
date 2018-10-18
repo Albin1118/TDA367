@@ -34,6 +34,7 @@ import java.util.List;
 public class WorkoutBlockCreatorFragment extends Fragment {
 
     private List<Exercise> exercises;
+    private WorkoutBlock block;
 
     private Button decrementSetButton;
     private TextView setsDisplay;
@@ -53,6 +54,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
         parentActivity = ((MainActivity)getActivity());
         view  = inflater.inflate(R.layout.fragment_workout_block_creator, container, false);
         exercises = parentActivity.viewModel.getExercises();
+        block = new WorkoutBlock();
 
         initViews();
         initListeners();
@@ -100,8 +102,9 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Exercise e = exercises.get(position);
+
                 if(selectExerciseListView.isItemChecked(position)){
-                    Exercise e = exercises.get(position);
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle(e.getName());
@@ -126,7 +129,8 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             int numberofUnits = Integer.parseInt(numberofUnitEditText.getText().toString());
-                            e.setNumberofUnit(numberofUnits);
+                            //e.setNumberofUnit(numberofUnits);
+                            block.addExercise(e, numberofUnits);
                             dialog.cancel();
                         }
                     });
@@ -141,6 +145,9 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
                     builder.show();
                     numberofUnitEditText.requestFocus();
+
+                }else {
+                   block.removeExercise(e);
                 }
 
 
@@ -156,7 +163,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 //Get the current WorkoutBlock
                 WorkoutBlock w = buildWorkoutBlock();
                 List<WorkoutBlock>workoutBlockList = new ArrayList<>();
-                workoutBlockList.add(w);
+                workoutBlockList.add(block);
 
                 //Create the dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -188,7 +195,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
                 WorkoutBlock workoutBlock = buildWorkoutBlock();
 
-                parentActivity.viewModel.buildWorkout.addBlock(workoutBlock);
+                parentActivity.viewModel.buildWorkout.addBlock(block);
                 parentActivity.popBackStack();
             }
         });

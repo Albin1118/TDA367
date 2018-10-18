@@ -37,6 +37,8 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<WorkoutBlock> {
             listItem = LayoutInflater.from(mContext).inflate(R.layout.workout_block_list_item,parent,false);
 
         WorkoutBlock currentBlock = workoutBlocks.get(position);
+        List<Exercise>exercises = currentBlock.getExercises();
+        List<Integer>amounts = currentBlock.getAmounts();
 
         TextView multiplierTextView = (TextView)listItem.findViewById(R.id.multiplierTextView);
         multiplierTextView.setText(currentBlock.getMultiplierString());
@@ -44,15 +46,18 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<WorkoutBlock> {
         LinearLayout exercisesInBlockLinearLayout = (LinearLayout)listItem.findViewById(R.id.exercisesInBlockLinearLayout);
         exercisesInBlockLinearLayout.removeAllViews();
 
-        for (Exercise e : currentBlock.getExercises()){
+        for (int i = 0; i < exercises.size(); i++){
             View child = LayoutInflater.from(mContext).inflate(R.layout.exercise_list_item_unit, null);
+
+            Exercise e = exercises.get(i);
+            int amount = amounts.get(i);
 
             TextView name = (TextView)child.findViewById(R.id.exerciseNameTextView);
             name.setText(e.getName());
 
             TextView unit = (TextView)child.findViewById(R.id.exerciseUnitTextView);
            //e.setNumberofUnit(50);
-            unit.setText(e.getAmountofUnit());
+            unit.setText(String.valueOf(amount) + " " + e.getUnit());
 
             exercisesInBlockLinearLayout.addView(child);
         }
