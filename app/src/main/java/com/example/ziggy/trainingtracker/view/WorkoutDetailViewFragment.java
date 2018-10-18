@@ -97,12 +97,7 @@ public class WorkoutDetailViewFragment extends Fragment {
         startWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.viewModel.setActiveWorkoutStatus(true);
-                Fragment f = new ActiveWorkoutFragment();
-                ((ActiveWorkoutFragment) f).setCurrentWorkout(workout);
-                parentActivity.clearBackStack();
-                parentActivity.setFragmentContainerContentFromTab(f);
-                Toast.makeText(getContext(), "Workout started!", Toast.LENGTH_SHORT).show();
+                parentActivity.navigateActiveWorkout(workout);
             }
         });
 

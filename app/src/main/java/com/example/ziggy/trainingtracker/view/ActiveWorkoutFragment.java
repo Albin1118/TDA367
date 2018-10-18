@@ -116,7 +116,7 @@ public class ActiveWorkoutFragment extends Fragment {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
-                        parentActivity.clearBackStack();
+                        parentActivity.navigateHome();
                         parentActivity.showBottomNavigationBar();
                         Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
 

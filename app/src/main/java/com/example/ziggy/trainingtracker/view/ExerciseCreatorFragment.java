@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -99,7 +98,7 @@ public class ExerciseCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createExercise();
-                parentActivity.popBackStack();
+                parentActivity.goBack();
                 Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -108,14 +107,14 @@ public class ExerciseCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 saveExercise();
-                parentActivity.popBackStack();
+                parentActivity.goBack();
             }
         });
 
         cancelEditExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.popBackStack();
+                parentActivity.goBack();
             }
         });
     }

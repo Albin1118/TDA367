@@ -11,13 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
 import com.google.gson.Gson;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationManager {
 
     private BottomNavigationView mBottomNavBar;
     MainViewModel viewModel;
@@ -123,41 +126,33 @@ public class MainActivity extends AppCompatActivity {
         mBottomNavBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment selectedFragment = null;
                 switch (menuItem.getItemId()) {
                     case R.id.nav_dashboard:
-                        clearBackStack();
+                        navigateHome();
                         return true;
                     case R.id.nav_workouts:
-                        clearBackStack();
-                        selectedFragment = new WorkoutTabFragment();
+                        navigateWorkouts();
                         break;
                     case R.id.nav_active_workout:
-                        clearBackStack();
+                        navigatePreActiveWorkout();
 
                         /*
                         if (onGoingActiveWorkout()) {
-                            selectedFragment = new ActiveWorkoutFragment();
+                            navigateActiveWorkout();
                         }
                         else {
-                            selectedFragment = new PreActiveWorkoutFragment();
+                            navigatePreActiveWorkout();
                         }*/
-
-                        selectedFragment = new PreActiveWorkoutFragment();
 
                         break;
                     case R.id.nav_exercises:
-                        clearBackStack();
-                        selectedFragment = new ExerciseTabFragment();
+                        navigateExercises();
                         break;
                     case R.id.nav_more:
-                        clearBackStack();
-                        selectedFragment = new MoreTabFragment();
+                        navigateMore();
                         break;
 
                 }
-                setFragmentContainerContentFromTab(selectedFragment);
-
                 return true;
             }
         });
@@ -182,20 +177,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Pop the fragment at the top of the back stack.
-     */
-    public void popBackStack() {
-        getSupportFragmentManager().popBackStack();
-    }
-
-    /**
-     * Clear the back stack, back to the start page.
-     */
-    public void clearBackStack() {
-        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-    }
-
-    /**
      * Set the state of the bottom navigation bar.
      * Gets called in each of the tab fragment's onCreateView methods to set the nav bar to
      * the corresponding item, for example when the back button is pressed.
@@ -210,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
      * @param f The fragment to set as the displayed fragment
      */
 
-    public void setFragmentContainerContentFromTab(Fragment f){
+    private void setFragmentContainerContentFromTab(Fragment f){
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right)
                 .replace(R.id.fragment_container, f)
@@ -226,4 +207,91 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
+    /**
+     * Pop the fragment at the top of the back stack.
+     */
+    private void popBackStack() {
+        getSupportFragmentManager().popBackStack();
+    }
+
+    /**
+     * Clear the back stack, back to the start page.
+     */
+    private void clearBackStack() {
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    @Override
+    public void goBack() {
+        popBackStack();
+    }
+
+    @Override
+    public void navigateHome() {
+        clearBackStack();
+    }
+
+    @Override
+    public void navigateWorkouts() {
+        clearBackStack();
+        setFragmentContainerContentFromTab(new WorkoutTabFragment());
+    }
+
+    @Override
+    public void navigatePreActiveWorkout() {
+        clearBackStack();
+        setFragmentContainerContentFromTab(new PreActiveWorkoutFragment());
+    }
+
+    @Override
+    public void navigateActiveWorkout(Workout workout) {
+        viewModel.setActiveWorkoutStatus(true);
+        ActiveWorkoutFragment f = new ActiveWorkoutFragment();
+        f.setCurrentWorkout(workout);
+        clearBackStack();
+        setFragmentContainerContentFromTab(f);
+        Toast.makeText(this, "Workout selected!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void navigateExercises() {
+        clearBackStack();
+        setFragmentContainerContentFromTab(new ExerciseTabFragment());
+    }
+
+    @Override
+    public void navigateMore() {
+        clearBackStack();
+        setFragmentContainerContentFromTab(new MoreTabFragment());
+    }
+
+    @Override
+    public void navigateExerciseCreator() {
+
+    }
+
+    @Override
+    public void navigateExerciseEditor(Exercise exercise) {
+
+    }
+
+    @Override
+    public void navigateExerciseDetailView(Exercise exercise) {
+
+    }
+
+    @Override
+    public void navigateWorkoutCreator() {
+
+    }
+
+    @Override
+    public void navigateWorkoutEditor(Workout workout) {
+
+    }
+
+    @Override
+    public void navigateWorkoutDetailView(Workout workout) {
+
+    }
 }

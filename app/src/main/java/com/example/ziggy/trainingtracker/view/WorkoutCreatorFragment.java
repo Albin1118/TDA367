@@ -130,7 +130,7 @@ public class WorkoutCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createWorkout();
-                parentActivity.popBackStack();
+                parentActivity.goBack();
                 Toast.makeText(getContext(), "New workout created!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -138,14 +138,14 @@ public class WorkoutCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 saveWorkout();
-                parentActivity.popBackStack();
+                parentActivity.goBack();
             }
         });
 
         cancelEditedWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.popBackStack();
+                parentActivity.goBack();
             }
         });
 

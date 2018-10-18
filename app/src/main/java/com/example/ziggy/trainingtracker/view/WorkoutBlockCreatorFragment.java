@@ -1,31 +1,25 @@
 package com.example.ziggy.trainingtracker.view;
 
 import android.app.AlertDialog;
-import android.arch.lifecycle.Observer;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
-import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
 import java.util.ArrayList;
@@ -197,7 +191,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 block.setMultiplier(sets);
 
                 parentActivity.viewModel.buildWorkout.addBlock(block);
-                parentActivity.popBackStack();
+                parentActivity.goBack();
             }
         });
 

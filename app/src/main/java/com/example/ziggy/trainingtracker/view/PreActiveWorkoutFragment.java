@@ -70,11 +70,7 @@ public class PreActiveWorkoutFragment extends Fragment {
 
     private void startActiveWorkout(){
         if (selectedWorkout != null) {
-            parentActivity.viewModel.setActiveWorkoutStatus(true);
-            Fragment f = new ActiveWorkoutFragment();
-            ((ActiveWorkoutFragment) f).setCurrentWorkout(selectedWorkout);
-            parentActivity.clearBackStack();
-            parentActivity.setFragmentContainerContentFromTab(f);
+            parentActivity.navigateActiveWorkout(selectedWorkout);
         }
         else{
             Toast.makeText(getContext(), "You need to select a workout first", Toast.LENGTH_SHORT).show();
