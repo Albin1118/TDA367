@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 
 import java.util.ArrayList;
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.viewmodel.ExerciseCreatorViewModel;
 
 /**
  * Fragment representing a view where the user can create custom exercises
@@ -39,18 +41,24 @@ public class ExerciseCreatorFragment extends Fragment {
 
     private MainActivity parentActivity;
     private View view;
+    private ExerciseCreatorViewModel viewModel;
 
     private ArrayList<ExerciseCategory> categories = new ArrayList<>();
     private Exercise editableExercise = null;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        parentActivity = ((MainActivity)getActivity());
+        viewModel = ViewModelProviders.of(this).get(ExerciseCreatorViewModel.class);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        parentActivity =  ((MainActivity)getActivity());
         view  = inflater.inflate(R.layout.fragment_exercise_creator, container, false);
         initViews();
         initListeners();
-
 
         return view;
     }
