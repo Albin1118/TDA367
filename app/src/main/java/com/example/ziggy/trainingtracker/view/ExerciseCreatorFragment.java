@@ -1,13 +1,11 @@
 package com.example.ziggy.trainingtracker.view;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,20 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
-import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.ziggy.trainingtracker.model.Exercise;
-import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseCreatorViewModel;
 
 /**
  * Fragment representing a view where the user can create custom exercises
  */
 public class ExerciseCreatorFragment extends Fragment {
-
 
     private TextView addedCategoriesTextView;
     private EditText exerciseNameEditText;
@@ -40,21 +34,25 @@ public class ExerciseCreatorFragment extends Fragment {
     private Button saveExerciseButton;
     private Button cancelEditExerciseButton;
 
-    private MainActivity parentActivity;
-    private NavigationManager navigationManager;
     private View view;
     private ExerciseCreatorViewModel viewModel;
-
+    private NavigationManager navigator;
 
     List<CategorySpinnerObject> categories = new ArrayList<>();
-    private IExercise editableExercise = null;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        parentActivity = ((MainActivity)getActivity());
-        navigationManager = (MainActivity)getActivity();
-        viewModel = ViewModelProviders.of(this).get(ExerciseCreatorViewModel.class);
+    public static ExerciseCreatorFragment newInstance(ExerciseCreatorViewModel viewModel, NavigationManager navigator) {
+        ExerciseCreatorFragment fragment = new ExerciseCreatorFragment();
+        fragment.setViewModel(viewModel);
+        fragment.setNavigator(navigator);
+        return fragment;
+    }
+
+    public void setViewModel(ExerciseCreatorViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void setNavigator(NavigationManager navigator) {
+        this.navigator = navigator;
     }
 
     @Nullable
@@ -76,23 +74,17 @@ public class ExerciseCreatorFragment extends Fragment {
         createExerciseButton = view.findViewById(R.id.createExerciseButton);
         saveExerciseButton = view.findViewById(R.id.saveExerciseButton);
         cancelEditExerciseButton = view.findViewById(R.id.cancelEditExerciseButton);
-
-        if (editableExercise != null) {
-            editMode();
-        }
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
 
-
-        for(int i=0; i<parentActivity.viewModel.getCategories().size(); i++) {
-            CategorySpinnerObject categorySpinnerObject = new CategorySpinnerObject();
-            categorySpinnerObject.setCategoryName(parentActivity.viewModel.getCategoriesToString().get(i));
-            categorySpinnerObject.setCategorySelected(false);
-            categories.add(categorySpinnerObject);
+        for (String category : viewModel.getCategories()) {
+            categories.add(new CategorySpinnerObject(category));
         }
-
-        CategorySpinnerAdapter adapter;
-        adapter = new CategorySpinnerAdapter(getContext(), 0, categories);
+        CategorySpinnerAdapter adapter = new CategorySpinnerAdapter(getContext(), 0, categories);
         exerciseCategorySpinner.setAdapter(adapter);
+
+        if (viewModel.isEditMode()) {
+            editMode();
+        }
     }
 
     private void initListeners() {
@@ -101,10 +93,10 @@ public class ExerciseCreatorFragment extends Fragment {
             public void onClick(View v) {
                 if(NecessaryFieldsFilled()) {
                     createExercise();
-                    navigationManager.goBack();
+                    navigator.goBack();
                     Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getContext(), "Add both name and category", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "You need to choose name, unit and category", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -114,7 +106,7 @@ public class ExerciseCreatorFragment extends Fragment {
             public void onClick(View v) {
                 if(NecessaryFieldsFilled()) {
                     saveExercise();
-                    navigationManager.goBack();
+                    navigator.goBack();
                 } else {
                     Toast.makeText(getContext(), "Add both name and category", Toast.LENGTH_SHORT).show();
                 }
@@ -124,43 +116,9 @@ public class ExerciseCreatorFragment extends Fragment {
         cancelEditExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigationManager.goBack();
+                navigator.goBack();
             }
         });
-    }
-
-    private void createExercise() {
-        parentActivity.viewModel.addCustomExercise(createExerciseFromFields());
-    }
-
-    private void saveExercise() {
-        parentActivity.viewModel.editCustomExercise(editableExercise, createExerciseFromFields());
-    }
-
-    private boolean NecessaryFieldsFilled() {
-        return !exerciseNameEditText.getText().toString().isEmpty() && !categoriesSelected().isEmpty();
-    }
-
-    private IExercise createExerciseFromFields() {
-        String name = exerciseNameEditText.getText().toString();
-        String unit = exerciseUnitEditText.getText().toString();
-        String description = exerciseDescriptionEditText.getText().toString();
-        String instructions = exerciseInstructionsEditText.getText().toString();
-        List<ExerciseCategory> categories = categoriesSelected();
-        return new Exercise(name, unit, description, instructions, categories);
-    }
-
-
-
-    //Returns categories checked in the category spinner
-    private List<ExerciseCategory> categoriesSelected() {
-        List<ExerciseCategory> categoriesSelected = new ArrayList<>();
-        for(int i=0; i<categories.size(); i++) {
-            if(categories.get(i).isCategorySelected()) {
-                categoriesSelected.add(ExerciseCategory.valueOf(categories.get(i).getCategoryName()));
-            }
-        }
-        return categoriesSelected;
     }
 
     private void editMode() {
@@ -168,13 +126,47 @@ public class ExerciseCreatorFragment extends Fragment {
         cancelEditExerciseButton.setVisibility(View.VISIBLE);
         createExerciseButton.setVisibility(View.GONE);
 
-        exerciseNameEditText.setText(editableExercise.getName());
-        exerciseDescriptionEditText.setText(editableExercise.getDescription());
-        exerciseInstructionsEditText.setText(editableExercise.getInstructions());
-        exerciseUnitEditText.setText(editableExercise.getUnit());
+        exerciseNameEditText.setText(viewModel.getEditableExercise().getName());
+        exerciseDescriptionEditText.setText(viewModel.getEditableExercise().getDescription());
+        exerciseInstructionsEditText.setText(viewModel.getEditableExercise().getInstructions());
+        exerciseUnitEditText.setText(viewModel.getEditableExercise().getUnit());
     }
 
-    public void setEditableExercise(IExercise editableExercise) {
-        this.editableExercise = editableExercise;
+    private void createExercise() {
+        String name = exerciseNameEditText.getText().toString();
+        String description = exerciseDescriptionEditText.getText().toString();
+        String instructions = exerciseInstructionsEditText.getText().toString();
+        String unit = exerciseUnitEditText.getText().toString();
+        List<String> categories = categoriesSelected();
+
+        viewModel.createExercise(name, description, instructions, unit, categories);
+    }
+
+    private void saveExercise() {
+        String name = exerciseNameEditText.getText().toString();
+        String description = exerciseDescriptionEditText.getText().toString();
+        String instructions = exerciseInstructionsEditText.getText().toString();
+        String unit = exerciseUnitEditText.getText().toString();
+        List<String> categories = categoriesSelected();
+
+        viewModel.saveExercise(name, description, instructions, unit, categories);
+    }
+
+    /**
+     * Returns a list of the categories that are checked in the category spinner
+     * @return A list of Strings representing the selected categories
+     */
+    private List<String> categoriesSelected() {
+        List<String> categoriesSelected = new ArrayList<>();
+        for (CategorySpinnerObject categorySpinnerObject : categories) {
+            if (categorySpinnerObject.isCategorySelected()) {
+                categoriesSelected.add(categorySpinnerObject.getCategoryName());
+            }
+        }
+        return categoriesSelected;
+    }
+
+    private boolean NecessaryFieldsFilled() {
+        return !exerciseNameEditText.getText().toString().isEmpty() && !exerciseUnitEditText.getText().toString().isEmpty() && !categoriesSelected().isEmpty();
     }
 }
