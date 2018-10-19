@@ -13,10 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkout;
-import com.example.ziggy.trainingtracker.model.Workout;
+import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
 import com.google.gson.Gson;
@@ -42,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
         initComponents();
         initStartingView();
         initListeners();
-        updateViewModelData();
+        //TODO: Fix. This crashes
+        //updateViewModelData();
 
     }
 
@@ -261,8 +261,11 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
 
     @Override
     public void navigateExercises() {
+        ExerciseTabViewModel viewModel = ViewModelProviders.of(this).get(ExerciseTabViewModel.class);
+        viewModel.init(this.viewModel.getModel());
+
         clearBackStack();
-        setFragmentContainerContentFromTab(new ExerciseTabFragment());
+        setFragmentContainerContentFromTab(ExerciseTabFragment.newInstance(viewModel, this));
     }
 
     @Override

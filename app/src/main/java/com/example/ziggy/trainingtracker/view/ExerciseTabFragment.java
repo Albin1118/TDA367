@@ -1,6 +1,5 @@
 package com.example.ziggy.trainingtracker.view;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
-import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 
@@ -32,16 +30,23 @@ public class ExerciseTabFragment extends Fragment {
 
     private ArrayAdapter<IExercise> adapter;
 
-    private NavigationManager navigationManager;
     private View view;
     private ExerciseTabViewModel viewModel;
+    private NavigationManager navigator;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        navigationManager = (MainActivity)getActivity();
-        navigationManager.setNavBarState(R.id.nav_exercises);
-        viewModel = ViewModelProviders.of(this).get(ExerciseTabViewModel.class);
+    public static ExerciseTabFragment newInstance(ExerciseTabViewModel viewModel, NavigationManager navigator) {
+        ExerciseTabFragment fragment = new ExerciseTabFragment();
+        fragment.setViewModel(viewModel);
+        fragment.setNavigator(navigator);
+        return fragment;
+    }
+
+    public void setViewModel(ExerciseTabViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void setNavigator(NavigationManager navigator) {
+        this.navigator = navigator;
     }
 
     @Nullable
@@ -50,6 +55,7 @@ public class ExerciseTabFragment extends Fragment {
         view  = inflater.inflate(R.layout.fragment_exercise_tab, container, false);
         initViews();
         initListeners();
+        navigator.setNavBarState(R.id.nav_exercises);
 
         return view;
     }
@@ -87,14 +93,14 @@ public class ExerciseTabFragment extends Fragment {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigationManager.navigateExerciseCreator();
+                navigator.navigateExerciseCreator();
             }
         });
 
         exerciseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                navigationManager.navigateExerciseDetailView(viewModel.getExercises().get(position));
+                navigator.navigateExerciseDetailView(viewModel.getExercises().get(position));
             }
         });
 

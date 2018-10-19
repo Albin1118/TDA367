@@ -14,14 +14,8 @@ public class TrainingTracker implements ITrainingTracker{
     @SerializedName("trainingtracker_exercises_list")
     private List<IExercise> exercises = new ArrayList<>();
 
-    public static ITrainingTracker getInstance() {
-        if (instance == null) {
-            instance = new TrainingTracker();
-        }
-        return instance;
+    public TrainingTracker() {
     }
-
-    private TrainingTracker() {}
 
     /**
      * Add an Exercise to the list of Exercises and store it among the users custom Exercises.

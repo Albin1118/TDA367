@@ -2,18 +2,21 @@ package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
-import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
-import com.example.ziggy.trainingtracker.model.TrainingTracker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseTabViewModel extends ViewModel {
-    private ITrainingTracker model = TrainingTracker.getInstance();
-    private List<IExercise> exercises = new ArrayList<>(model.getExercises());
+    private ITrainingTracker model;
+    private List<IExercise> exercises;
+
+    public void init(ITrainingTracker model) {
+        this.model = model;
+        exercises = new ArrayList<>(model.getExercises());
+    }
 
     public void sortExercisesByCategory(String categoryString) {
         ExerciseCategory category = ExerciseCategory.valueOf(categoryString);

@@ -1,7 +1,6 @@
 package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
-import android.content.SharedPreferences;
 
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.model.IExercise;
@@ -11,9 +10,7 @@ import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
-import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
-import com.example.ziggy.trainingtracker.service.UserDataPersistenceService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -23,7 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
-    private ITrainingTracker trainingTracker;
+    private ITrainingTracker model;
 
     private List<IExercise> exercises;
     private List<IWorkout> workouts;
@@ -41,7 +38,7 @@ public class MainViewModel extends ViewModel {
 
 
     public MainViewModel() {
-        trainingTracker = TrainingTracker.getInstance();
+        model = new TrainingTracker();
         activeWorkoutStatus = false;
         createCategoryList();
     }
@@ -57,7 +54,7 @@ public class MainViewModel extends ViewModel {
 
     public List<IExercise> getExercises() {
         if (exercises == null) {
-            exercises = trainingTracker.getExercises();
+            exercises = model.getExercises();
             loadExercises();
         }
         return exercises;
@@ -65,7 +62,7 @@ public class MainViewModel extends ViewModel {
 
     public List<IWorkout> getWorkouts() {
         if (workouts == null) {
-            workouts = trainingTracker.getWorkouts();
+            workouts = model.getWorkouts();
             loadWorkouts();
         }
         return workouts;
@@ -75,7 +72,7 @@ public class MainViewModel extends ViewModel {
         allExercises = getCustomExercises();
 
         if (exercises == null) {
-            exercises = trainingTracker.getExercises();
+            exercises = model.getExercises();
             loadExercises();
         }
 
@@ -87,7 +84,7 @@ public class MainViewModel extends ViewModel {
         allWorkouts = getCustomWorkouts();
 
         if (workouts == null) {
-            workouts = trainingTracker.getWorkouts();
+            workouts = model.getWorkouts();
             loadWorkouts();
         }
         allWorkouts.addAll(workouts);
@@ -95,11 +92,11 @@ public class MainViewModel extends ViewModel {
 
 
     public List<IExercise> getCustomExercises() {
-        return trainingTracker.getCustomExercises();
+        return model.getCustomExercises();
     }
 
     public List<IWorkout> getCustomWorkouts() {
-        return trainingTracker.getCustomWorkouts();
+        return model.getCustomWorkouts();
     }
 
     public List<ExerciseCategory> getCategories() { return categories; }
@@ -113,11 +110,11 @@ public class MainViewModel extends ViewModel {
     }
 
     private void setCustomWorkouts(List<IWorkout> w){
-        trainingTracker.setCustomWorkouts(w);
+        model.setCustomWorkouts(w);
     }
 
     private void setCustomExercises(List<IExercise> e){
-        trainingTracker.setCustomExercises(e);
+        model.setCustomExercises(e);
     }
 
     public List<IExercise> getAllExercises() {
@@ -160,11 +157,11 @@ public class MainViewModel extends ViewModel {
 
     // Methods for adding removing and editing custom Exercises
     public void addCustomExercise(IExercise exercise) {
-        trainingTracker.addCustomExercise(exercise);
+        model.addCustomExercise(exercise);
     }
 
     public void removeCustomExercise(IExercise e) {
-        trainingTracker.removeCustomExercise(e);
+        model.removeCustomExercise(e);
     }
 
     public  void editCustomExercise(IExercise originalExercise, IExercise newExercise) {
@@ -176,14 +173,14 @@ public class MainViewModel extends ViewModel {
     }
 
     //Method for adding removing and editing custom Workouts
-    public void addCustomWorkout(IWorkout w){ trainingTracker.addCustomWorkout(w); }
+    public void addCustomWorkout(IWorkout w){ model.addCustomWorkout(w); }
 
     public void addCustomWorkout(String name, String description, List<WorkoutBlock> blocks){
         IWorkout w = new Workout(name, description, new ArrayList<>(blocks));
-        trainingTracker.addCustomWorkout(w);
+        model.addCustomWorkout(w);
     }
 
-    public void removeCustomWorkout(IWorkout w) { trainingTracker.removeCustomWorkout(w); }
+    public void removeCustomWorkout(IWorkout w) { model.removeCustomWorkout(w); }
 
     public void editCustomWorkout(IWorkout w, String name, String description, List<WorkoutBlock> blocks) {
         w.setName(name);
@@ -197,7 +194,7 @@ public class MainViewModel extends ViewModel {
     private void loadExercises() {
         System.out.println("Loading exercises...");
         ReadExercisesFromXMLService reader = new ReadExercisesFromXMLService();
-        trainingTracker.getExercises().addAll(reader.readExercises());
+        model.getExercises().addAll(reader.readExercises());
     }
 
     /**
@@ -206,11 +203,11 @@ public class MainViewModel extends ViewModel {
     private void loadWorkouts() {
         System.out.println("Loading workouts...");
         ReadWorkoutsFromXMLService reader = new ReadWorkoutsFromXMLService(getExercises());
-        trainingTracker.getWorkouts().addAll(reader.readWorkouts());
+        model.getWorkouts().addAll(reader.readWorkouts());
     }
 
     public void updateUserWeight(double weight){
-        trainingTracker.getUser().setWeight(weight);
+        model.getUser().setWeight(weight);
     }
 
     public void setBuildWorkout(IWorkout buildWorkout) {
@@ -219,5 +216,9 @@ public class MainViewModel extends ViewModel {
 
     private void createCategoryList() {
         categories.addAll(Arrays.asList(ExerciseCategory.values()));
+    }
+
+    public ITrainingTracker getModel() {
+        return model;
     }
 }
