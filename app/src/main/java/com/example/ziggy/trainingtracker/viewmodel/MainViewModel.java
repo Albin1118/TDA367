@@ -159,21 +159,20 @@ public class MainViewModel extends ViewModel {
 
 
     // Methods for adding removing and editing custom Exercises
-    public void addCustomExercise(String name, String description, String instructions, String unit,List<ExerciseCategory> categories) {
-        IExercise e = new Exercise(name, description, instructions, unit, categories);
-        trainingTracker.addCustomExercise(e);
+    public void addCustomExercise(IExercise exercise) {
+        trainingTracker.addCustomExercise(exercise);
     }
 
     public void removeCustomExercise(IExercise e) {
         trainingTracker.removeCustomExercise(e);
     }
 
-    public  void editCustomExercise(IExercise e, String name, String description, String instructions, String unit, List<ExerciseCategory> categories) {
-        e.setName(name);
-        e.setDescription(description);
-        e.setInstructions(instructions);
-        e.setUnit(unit);
-        e.setCategories(categories);
+    public  void editCustomExercise(IExercise originalExercise, IExercise newExercise) {
+        originalExercise.setName(newExercise.getName());
+        originalExercise.setDescription(newExercise.getDescription());
+        originalExercise.setInstructions(newExercise.getInstructions());
+        originalExercise.setUnit(newExercise.getUnit());
+        originalExercise.setCategories(newExercise.getCategories());
     }
 
     //Method for adding removing and editing custom Workouts

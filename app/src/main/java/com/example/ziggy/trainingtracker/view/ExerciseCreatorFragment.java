@@ -122,24 +122,23 @@ public class ExerciseCreatorFragment extends Fragment {
     }
 
     private void createExercise() {
-        String name = exerciseNameEditText.getText().toString();
-        String unit = exerciseUnitEditText.getText().toString();
-        String description = exerciseDescriptionEditText.getText().toString();
-        String instructions = exerciseInstructionsEditText.getText().toString();
-        List<ExerciseCategory> categories = categoriesSelected();
-
-        parentActivity.viewModel.addCustomExercise(name, description, instructions, unit, categories);
+        parentActivity.viewModel.addCustomExercise(createExerciseFromFields());
     }
 
     private void saveExercise() {
+        parentActivity.viewModel.editCustomExercise(editableExercise, createExerciseFromFields());
+    }
+
+    private IExercise createExerciseFromFields() {
         String name = exerciseNameEditText.getText().toString();
         String unit = exerciseUnitEditText.getText().toString();
         String description = exerciseDescriptionEditText.getText().toString();
         String instructions = exerciseInstructionsEditText.getText().toString();
         List<ExerciseCategory> categories = categoriesSelected();
-
-        parentActivity.viewModel.editCustomExercise(editableExercise, name, description, instructions, unit, categories);
+        return new Exercise(name, unit, description, instructions, categories);
     }
+
+
 
     //Returns categories checked in the category spinner
     private List<ExerciseCategory> categoriesSelected() {
