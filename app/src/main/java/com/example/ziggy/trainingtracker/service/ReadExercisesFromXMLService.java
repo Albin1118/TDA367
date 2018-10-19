@@ -89,6 +89,10 @@ public class ReadExercisesFromXMLService {
         if (name.trim().isEmpty() || exercises.containsKey(name))
             throw new IllegalArgumentException("An exercise cannot have an empty or duplicate name.");
 
+        String unit = getTextValue(exerciseElement, "unit");
+        if (unit == null || unit.trim().isEmpty())
+            throw new IllegalArgumentException("An exercise needs a unit.");
+
         String description = getTextValue(exerciseElement, "description");
         if (description == null || description.trim().isEmpty())
             description = "-no description-";
@@ -97,12 +101,7 @@ public class ReadExercisesFromXMLService {
         if (instructions == null || instructions.trim().isEmpty())
             instructions = "-no instructions-";
 
-        String unit = getTextValue(exerciseElement, "unit");
-            if (unit == null || unit.trim().isEmpty())
-                throw new IllegalArgumentException("An exercise needs a unit.");
-
         List<ExerciseCategory> categories = new ArrayList<>();
-
         NodeList nl = exerciseElement.getElementsByTagName("category");
         if (nl != null && nl.getLength() > 0) {
             for (int i = 0 ; i < nl.getLength();i++) {
@@ -111,7 +110,8 @@ public class ReadExercisesFromXMLService {
                 categories.add(category);
             }
         }
-        return new Exercise(name, description, instructions, unit, categories);
+
+        return new Exercise(name, unit, description, instructions, categories);
     }
 
     /**

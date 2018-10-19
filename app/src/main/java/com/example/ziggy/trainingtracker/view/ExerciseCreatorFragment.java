@@ -134,22 +134,22 @@ public class ExerciseCreatorFragment extends Fragment {
 
     private void createExercise() {
         String name = exerciseNameEditText.getText().toString();
+        String unit = exerciseUnitEditText.getText().toString();
         String description = exerciseDescriptionEditText.getText().toString();
         String instructions = exerciseInstructionsEditText.getText().toString();
-        String unit = exerciseUnitEditText.getText().toString();
         List<String> categories = categoriesSelected();
 
-        viewModel.createExercise(name, description, instructions, unit, categories);
+        viewModel.createExercise(name, unit, description, instructions, categories);
     }
 
     private void saveExercise() {
         String name = exerciseNameEditText.getText().toString();
+        String unit = exerciseUnitEditText.getText().toString();
         String description = exerciseDescriptionEditText.getText().toString();
         String instructions = exerciseInstructionsEditText.getText().toString();
-        String unit = exerciseUnitEditText.getText().toString();
         List<String> categories = categoriesSelected();
 
-        viewModel.saveExercise(name, description, instructions, unit, categories);
+        viewModel.saveExercise(name, unit, description, instructions, categories);
     }
 
     /**

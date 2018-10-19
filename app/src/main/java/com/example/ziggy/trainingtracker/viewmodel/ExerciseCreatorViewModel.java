@@ -50,37 +50,37 @@ public class ExerciseCreatorViewModel extends ViewModel {
     /**
      * Create a new exercise and add it to the list of custom exercises.
      * @param name Name for the new exercise
+     * @param unit Unit for the new exercise
      * @param description Description for the new exercise
      * @param instructions Instructions for the new exercise
-     * @param unit Unit for the new exercise
      * @param selectedCategories Categories for the new exercise
      */
-    public void createExercise(String name, String description, String instructions, String unit, List<String> selectedCategories) {
+    public void createExercise(String name, String unit, String description, String instructions, List<String> selectedCategories) {
         List<ExerciseCategory> exerciseCategories = new ArrayList<>();
         for (String selectedCategory : selectedCategories) {
             exerciseCategories.add(ExerciseCategory.valueOf(selectedCategory));
         }
-        IExercise exercise = new Exercise(name, description, instructions, unit, exerciseCategories);
+        IExercise exercise = new Exercise(name, unit, description, instructions, exerciseCategories);
         model.addCustomExercise(exercise);
     }
 
     /**
      * Edit an existing exercise.
      * @param name New name
+     * @param unit New unit
      * @param description New description
      * @param instructions New instructions
-     * @param unit New unit
      * @param selectedCategories New categories
      */
-    public void saveExercise(String name, String description, String instructions, String unit, List<String> selectedCategories) {
+    public void saveExercise(String name, String unit, String description, String instructions, List<String> selectedCategories) {
         List<ExerciseCategory> exerciseCategories = new ArrayList<>();
         for (String selectedCategory : selectedCategories) {
             exerciseCategories.add(ExerciseCategory.valueOf(selectedCategory));
         }
         editableExercise.setName(name);
+        editableExercise.setUnit(unit);
         editableExercise.setDescription(description);
         editableExercise.setInstructions(instructions);
-        editableExercise.setUnit(unit);
         editableExercise.setCategories(exerciseCategories);
     }
 

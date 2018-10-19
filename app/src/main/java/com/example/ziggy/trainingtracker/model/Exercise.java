@@ -9,18 +9,18 @@ public class Exercise implements IExercise {
 
     @SerializedName("exercise_name")
     private String name;
+    @SerializedName("exercise_unit")
+    private String unit;
     @SerializedName("exercise_description")
     private String description;
     @SerializedName("exercise_instructions")
     private String instructions;
-    @SerializedName("exercise_unit")
-    private String unit;
     @SerializedName("exercise_has_weight")
     private boolean hasWeight;
     private List<ExerciseCategory> categories = new ArrayList<ExerciseCategory>();
 
 
-    public Exercise(String name, String description, String instructions, String unit, List<ExerciseCategory> categories) {
+    public Exercise(String name, String unit, String description, String instructions, List<ExerciseCategory> categories) {
         this.name = name;
         this.description = description;
         this.instructions = instructions;

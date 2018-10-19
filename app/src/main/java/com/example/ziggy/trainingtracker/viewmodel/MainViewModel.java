@@ -166,9 +166,9 @@ public class MainViewModel extends ViewModel {
 
     public  void editCustomExercise(IExercise originalExercise, IExercise newExercise) {
         originalExercise.setName(newExercise.getName());
+        originalExercise.setUnit(newExercise.getUnit());
         originalExercise.setDescription(newExercise.getDescription());
         originalExercise.setInstructions(newExercise.getInstructions());
-        originalExercise.setUnit(newExercise.getUnit());
         originalExercise.setCategories(newExercise.getCategories());
     }
 
