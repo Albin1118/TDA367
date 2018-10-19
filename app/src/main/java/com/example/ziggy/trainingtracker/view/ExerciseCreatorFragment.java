@@ -99,17 +99,25 @@ public class ExerciseCreatorFragment extends Fragment {
         createExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createExercise();
-                navigationManager.goBack();
-                Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
+                if(NecessaryFieldsFilled()) {
+                    createExercise();
+                    navigationManager.goBack();
+                    Toast.makeText(getContext(), "New exercise created!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Add both name and category", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         saveExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveExercise();
-                navigationManager.goBack();
+                if(NecessaryFieldsFilled()) {
+                    saveExercise();
+                    navigationManager.goBack();
+                } else {
+                    Toast.makeText(getContext(), "Add both name and category", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -127,6 +135,10 @@ public class ExerciseCreatorFragment extends Fragment {
 
     private void saveExercise() {
         parentActivity.viewModel.editCustomExercise(editableExercise, createExerciseFromFields());
+    }
+
+    private boolean NecessaryFieldsFilled() {
+        return !exerciseNameEditText.getText().toString().isEmpty() && !categoriesSelected().isEmpty();
     }
 
     private IExercise createExerciseFromFields() {
