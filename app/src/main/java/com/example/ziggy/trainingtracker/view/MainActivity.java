@@ -324,7 +324,8 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
 
     @Override
     public void navigateWorkoutBlockCreator() {
-        setFragmentContainerContent(new WorkoutBlockCreatorFragment());
+        WorkoutCreatorViewModel viewModel = ViewModelProviders.of(this).get(WorkoutCreatorViewModel.class);
+        setFragmentContainerContent(WorkoutBlockCreatorFragment.newInstance(viewModel, this));
     }
 
     @Override

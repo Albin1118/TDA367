@@ -19,19 +19,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
-import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
-import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
+import com.example.ziggy.trainingtracker.viewmodel.WorkoutCreatorViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutBlockCreatorFragment extends Fragment {
-
-    private List<IExercise> exercises;
-    private IWorkoutBlock block;
 
     private Button decrementSetButton;
     private TextView setsDisplay;
@@ -40,28 +36,42 @@ public class WorkoutBlockCreatorFragment extends Fragment {
     private Button previewButton;
     private Button addWorkoutBlockButton;
 
-    private View view;
-    private MainActivity parentActivity;
-    private NavigationManager navigationManager;
     private ArrayAdapter<IExercise> adapter;
+
+    private View view;
+    private WorkoutCreatorViewModel viewModel;
+    private NavigationManager navigator;
+
+    private IWorkoutBlock block;
+
+    public static WorkoutBlockCreatorFragment newInstance(WorkoutCreatorViewModel viewModel, NavigationManager navigator) {
+        WorkoutBlockCreatorFragment fragment = new WorkoutBlockCreatorFragment();
+        fragment.setViewModel(viewModel);
+        fragment.setNavigator(navigator);
+        return fragment;
+    }
+
+    public void setViewModel(WorkoutCreatorViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void setNavigator(NavigationManager navigator) {
+        this.navigator = navigator;
+    }
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        parentActivity = ((MainActivity)getActivity());
-        navigationManager = (MainActivity)getActivity();
         view  = inflater.inflate(R.layout.fragment_workout_block_creator, container, false);
-        exercises = parentActivity.viewModel.getExercises();
-        block = new WorkoutBlock();
-
         initViews();
         initListeners();
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_multiple_choice, exercises);
+        block = new WorkoutBlock();
+
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_multiple_choice, viewModel.getExercises());
         selectExerciseListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         selectExerciseListView.setAdapter(adapter);
-
 
         return view;
     }
@@ -101,7 +111,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                IExercise e = exercises.get(position);
+                IExercise e = viewModel.getExercises().get(position);
 
                 if(selectExerciseListView.isItemChecked(position)){
 
@@ -195,8 +205,8 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 int sets = Integer.parseInt(setsDisplay.getText().toString());
                 block.setMultiplier(sets);
 
-                parentActivity.viewModel.buildWorkout.addBlock(block);
-                navigationManager.goBack();
+                viewModel.getBuildWorkout().addBlock(block);
+                navigator.goBack();
             }
         });
 
@@ -217,7 +227,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 if (checkedItems.valueAt(i)) {
                     //Exercise checkedExercise = (Exercise) selectExerciseListView.getAdapter().getItem(i);
                     int position = checkedItems.keyAt(i);
-                    workoutBlock.addExercise(exercises.get(position), 1);
+                    workoutBlock.addExercise(viewModel.getExercises().get(position), 1);
                 }
             }
         }

@@ -2,6 +2,7 @@ package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
@@ -43,14 +44,14 @@ public class WorkoutCreatorViewModel extends ViewModel {
     }
 
     /**
-     * Add the built workout to the list of custom workouts.
+     * Adds the built workout to the list of custom workouts.
      */
     public void createWorkout() {
         model.addCustomWorkout(buildWorkout);
     }
 
     /**
-     * Save the editable workout by getting the values from the built workout.
+     * Saves the editable workout by getting the values from the built workout.
      */
     public void saveWorkout() {
         editableWorkout.setName(buildWorkout.getName());
@@ -59,7 +60,7 @@ public class WorkoutCreatorViewModel extends ViewModel {
     }
 
     /**
-     * Check if editing an existing workout or creating a new one.
+     * Checks if editing an existing workout or creating a new one.
      * @return True if in edit mode, false if in create mode
      */
     public boolean isEditMode() {
@@ -67,10 +68,18 @@ public class WorkoutCreatorViewModel extends ViewModel {
     }
 
     /**
-     * Return the workout used to keep the state of the workout being dynamically built.
+     * Returns the workout used to keep the state of the workout being dynamically built.
      * @return The workout being built
      */
     public IWorkout getBuildWorkout() {
         return buildWorkout;
+    }
+
+    /**
+     * Returns all exercises from the model.
+     * @return A list of all the exercises
+     */
+    public List<IExercise> getExercises() {
+        return model.getExercises();
     }
 }

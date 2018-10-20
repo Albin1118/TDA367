@@ -16,11 +16,7 @@ import android.widget.Toast;
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
-import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutCreatorViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Fragment representing a view where the user can create custom workouts
