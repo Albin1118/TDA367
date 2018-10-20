@@ -76,6 +76,7 @@ public class ExerciseCreatorFragment extends Fragment {
         cancelEditExerciseButton = view.findViewById(R.id.cancelEditExerciseButton);
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
 
+        categories.add(new CategorySpinnerObject("Select category"));
         for (String category : viewModel.getCategories()) {
             categories.add(new CategorySpinnerObject(category));
         }
@@ -166,6 +167,10 @@ public class ExerciseCreatorFragment extends Fragment {
         return categoriesSelected;
     }
 
+    /**
+     * Checks if a name, a unit and a category has been selected
+     * @return True if all these have been filled in, false if not
+     */
     private boolean NecessaryFieldsFilled() {
         return !exerciseNameEditText.getText().toString().isEmpty() && !exerciseUnitEditText.getText().toString().isEmpty() && !categoriesSelected().isEmpty();
     }

@@ -27,7 +27,6 @@ public class CategorySpinnerAdapter extends ArrayAdapter<CategorySpinnerObject> 
         this.categories = categories;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         return customSpinnerView(position, convertView, parent);
@@ -38,7 +37,14 @@ public class CategorySpinnerAdapter extends ArrayAdapter<CategorySpinnerObject> 
         return customSpinnerView(position, convertView, parent);
     }
 
-
+    /**
+     * The custom spinner view containing both a TextView and a checkbox
+     * @param position Position of the current object in the spinners array of objects
+     * @param convertView the view holding the custom_spinner_item layout
+     * @param parent defines the parent view group which contains this view
+     * @return The modified convertView now using the custom spinner layout
+     * and containing a holder for holding the name and remembering the checkbox status
+     */
     private View customSpinnerView( int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         ViewHolder holder;
@@ -46,8 +52,8 @@ public class CategorySpinnerAdapter extends ArrayAdapter<CategorySpinnerObject> 
             LayoutInflater layoutInflater = LayoutInflater.from(mContext);
             convertView = layoutInflater.inflate(R.layout.category_spinner_item, parent,false);
             holder = new ViewHolder();
-            holder.mCategoryName = (TextView) convertView.findViewById(R.id.categoryTextView);
-            holder.mCategoryCheckBox = (CheckBox) convertView.findViewById(R.id.categoryCheckbox);
+            holder.mCategoryName = convertView.findViewById(R.id.categoryTextView);
+            holder.mCategoryCheckBox = convertView.findViewById(R.id.categoryCheckbox);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -59,9 +65,9 @@ public class CategorySpinnerAdapter extends ArrayAdapter<CategorySpinnerObject> 
         holder.mCategoryCheckBox.setChecked(categories.get(position).isCategorySelected());
         isFromView = false;
 
-        //TODO Add start value to spinner and change the first holder.mCategory.. to INVISIBLE
+
         if ((position == 0)) {
-            holder.mCategoryCheckBox.setVisibility(View.VISIBLE);
+            holder.mCategoryCheckBox.setVisibility(View.INVISIBLE);
         } else {
             holder.mCategoryCheckBox.setVisibility(View.VISIBLE);
         }
