@@ -1,6 +1,5 @@
 package com.example.ziggy.trainingtracker.view;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -13,14 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
-import com.example.ziggy.trainingtracker.model.Workout;
-import com.example.ziggy.trainingtracker.model.WorkoutBlock;
+import com.example.ziggy.trainingtracker.viewmodel.WorkoutDetailViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,25 +34,38 @@ public class WorkoutDetailViewFragment extends Fragment {
     private TextView workoutDescriptionTextView;
     private ListView workoutBlocksListView;
     private Button startWorkoutButton;
-
     private Button editWorkoutButton;
     private Button removeWorkoutButton;
 
-    private MainActivity parentActivity;
-    private NavigationManager navigationManager;
     private View view;
+    private WorkoutDetailViewModel viewModel;
+    private NavigationManager navigator;
 
     private boolean descriptionClosed;
-    private IWorkout workout;
+
+    public static WorkoutDetailViewFragment newInstance(WorkoutDetailViewModel viewModel, NavigationManager navigator) {
+        WorkoutDetailViewFragment fragment = new WorkoutDetailViewFragment();
+        fragment.setViewModel(viewModel);
+        fragment.setNavigator(navigator);
+        return fragment;
+    }
+
+    public void setViewModel(WorkoutDetailViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void setNavigator(NavigationManager navigator) {
+        this.navigator = navigator;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_workout_detail_view, container, false);
-        parentActivity = ((MainActivity)getActivity());
-        navigationManager = (MainActivity)getActivity();
+        navigator = (MainActivity)getActivity();
         initViews();
         initListeners();
+
         return view;
     }
 
@@ -71,12 +81,12 @@ public class WorkoutDetailViewFragment extends Fragment {
         removeWorkoutButton = view.findViewById(R.id.removeWorkoutButton);
         workoutBlocksListView.addHeaderView(header);
 
-        workoutNameTextView.setText(workout.getName());
-        workoutDescriptionTextView.setText(workout.getDescription());
-        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), workout.getBlocks());
+        workoutNameTextView.setText(viewModel.getWorkout().getName());
+        workoutDescriptionTextView.setText(viewModel.getWorkout().getDescription());
+        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getWorkout().getBlocks());
         workoutBlocksListView.setAdapter(adapter);
 
-        if(parentActivity.viewModel.getCustomWorkouts().contains(workout)) {
+        if(viewModel.isCustomWorkout()) {
             removeWorkoutButton.setVisibility(View.VISIBLE);
             editWorkoutButton.setVisibility(View.VISIBLE);
         }
@@ -101,22 +111,22 @@ public class WorkoutDetailViewFragment extends Fragment {
         startWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigationManager.navigateActiveWorkout(workout);
+                navigator.navigateActiveWorkout(viewModel.getWorkout());
             }
         });
 
         editWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigationManager.navigateWorkoutEditor(workout);
+                navigator.navigateWorkoutEditor(viewModel.getWorkout());
             }
         });
 
         removeWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.viewModel.removeCustomWorkout(workout);
-                navigationManager.navigateWorkouts();
+                viewModel.removeWorkout();
+                navigator.navigateWorkouts();
             }
         });
     }
@@ -132,9 +142,4 @@ public class WorkoutDetailViewFragment extends Fragment {
 
         }
     }
-
-    public void setWorkout(IWorkout workout) {
-        this.workout = workout;
-    }
-
 }

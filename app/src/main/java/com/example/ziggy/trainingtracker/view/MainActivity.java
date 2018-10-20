@@ -21,6 +21,7 @@ import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutCreatorViewModel;
+import com.example.ziggy.trainingtracker.viewmodel.WorkoutDetailViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutTabViewModel;
 import com.google.gson.Gson;
 
@@ -330,9 +331,10 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
 
     @Override
     public void navigateWorkoutDetailView(IWorkout workout) {
-        WorkoutDetailViewFragment fragment = new WorkoutDetailViewFragment();
-        fragment.setWorkout(workout);
-        setFragmentContainerContent(fragment);
+        WorkoutDetailViewModel viewModel = ViewModelProviders.of(this).get(WorkoutDetailViewModel.class);
+        viewModel.init(this.viewModel.getModel(), workout);
+
+        setFragmentContainerContent(WorkoutDetailViewFragment.newInstance(viewModel, this));
     }
 
     @Override
