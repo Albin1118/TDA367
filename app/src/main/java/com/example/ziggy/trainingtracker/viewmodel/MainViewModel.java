@@ -23,13 +23,6 @@ import java.util.List;
 public class MainViewModel extends ViewModel {
     private ITrainingTracker model;
 
-    private List<IExercise> exercises;
-    private List<IWorkout> workouts;
-
-    private List<IExercise> allExercises;
-    private List<IWorkout> allWorkouts;
-
-
     private boolean activeWorkoutStatus;
 
     List<IWorkoutBlock>workoutBlocks= new ArrayList<>();
@@ -40,6 +33,8 @@ public class MainViewModel extends ViewModel {
 
     public MainViewModel() {
         model = new TrainingTracker();
+        loadExercises();
+        loadWorkouts();
         activeWorkoutStatus = false;
         createCategoryList();
     }
@@ -54,43 +49,12 @@ public class MainViewModel extends ViewModel {
     }
 
     public List<IExercise> getExercises() {
-        if (exercises == null) {
-            exercises = model.getExercises();
-            loadExercises();
-        }
-        return exercises;
+        return model.getExercises();
     }
 
     public List<IWorkout> getWorkouts() {
-        if (workouts == null) {
-            workouts = model.getWorkouts();
-            loadWorkouts();
-        }
-        return workouts;
+        return model.getWorkouts();
     }
-
-    private void initAllExercises() {
-        allExercises = getCustomExercises();
-
-        if (exercises == null) {
-            exercises = model.getExercises();
-            loadExercises();
-        }
-
-        allExercises.addAll(exercises);
-
-    }
-
-    private void initAllWorkouts() {
-        allWorkouts = getCustomWorkouts();
-
-        if (workouts == null) {
-            workouts = model.getWorkouts();
-            loadWorkouts();
-        }
-        allWorkouts.addAll(workouts);
-    }
-
 
     public List<IExercise> getCustomExercises() {
         return model.getCustomExercises();
@@ -116,20 +80,6 @@ public class MainViewModel extends ViewModel {
 
     private void setCustomExercises(List<IExercise> e){
         model.setCustomExercises(e);
-    }
-
-    public List<IExercise> getAllExercises() {
-        if (allExercises == null){
-            initAllExercises();
-        }
-        return allExercises;
-    }
-
-    public List<IWorkout> getAllWorkouts() {
-        if (allWorkouts == null) {
-            initAllWorkouts();
-        }
-        return allWorkouts;
     }
 
     public void loadUserCustomListsFromJson(String customWorkoutListJson, String customExerciseListJson){
