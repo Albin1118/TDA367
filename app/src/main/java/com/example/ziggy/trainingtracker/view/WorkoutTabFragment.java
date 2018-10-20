@@ -11,13 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IWorkout;
-import com.example.ziggy.trainingtracker.model.Workout;
-
-import java.util.List;
+import com.example.ziggy.trainingtracker.viewmodel.WorkoutTabViewModel;
 
 /**
  * Fragment representing the workout-tab, where the list of workouts is displayed
@@ -26,50 +23,35 @@ public class WorkoutTabFragment extends Fragment {
 
     private FloatingActionButton addWorkoutButton;
     private ListView workoutList;
-    private ArrayAdapter<IWorkout>adapter;
 
-    private List <IWorkout> workouts;
-    private List <IWorkout> customWorkouts;
+    private ArrayAdapter<IWorkout> adapter;
 
-    private MainActivity parentActivity;
-    private NavigationManager navigationManager;
     private View view;
+    private WorkoutTabViewModel viewModel;
+    private NavigationManager navigator;
+
+    public static WorkoutTabFragment newInstance(WorkoutTabViewModel viewModel, NavigationManager navigator) {
+        WorkoutTabFragment fragment = new WorkoutTabFragment();
+        fragment.setViewModel(viewModel);
+        fragment.setNavigator(navigator);
+        return fragment;
+    }
+
+    public void setViewModel(WorkoutTabViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void setNavigator(NavigationManager navigator) {
+        this.navigator = navigator;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_workout_tab, container, false);
-        parentActivity = (MainActivity)getActivity();
-        navigationManager = (MainActivity)getActivity();
-        navigationManager.setNavBarState(R.id.nav_workouts);
-
-        workouts = parentActivity.viewModel.getAllWorkouts();
-
-
-
-
-
-
+        view = inflater.inflate(R.layout.fragment_workout_tab, container, false);
         initViews();
         initListeners();
-
-        //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, workouts);
-        adapter = new ArrayAdapter(getContext(), R.layout.workout_list_item, R.id.workoutNameTextView, workouts) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                TextView workoutNameTextView = (TextView) view.findViewById(R.id.workoutNameTextView);
-                TextView workoutDescriptionTextView = (TextView) view.findViewById(R.id.workoutDescriptionTextView);
-                TextView workoutBlocksTextView = (TextView) view.findViewById(R.id.workoutBlocksTextView);
-
-                workoutNameTextView.setText(workouts.get(position).getName());
-                workoutDescriptionTextView.setText(workouts.get(position).getDescription());
-                workoutBlocksTextView.setText(workouts.get(position).getNumberofBlocks());
-                return view;
-            }
-        };
-
-        workoutList.setAdapter(adapter);
+        navigator.setNavBarState(R.id.nav_workouts);
 
         return view;
     }
@@ -77,22 +59,36 @@ public class WorkoutTabFragment extends Fragment {
     private void initViews() {
         addWorkoutButton = view.findViewById(R.id.addWorkoutButton);
         workoutList = view.findViewById(R.id.workoutList);
+
+        adapter = new ArrayAdapter<IWorkout>(getContext(), R.layout.workout_list_item, R.id.workoutNameTextView, viewModel.getAllWorkouts()) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView workoutNameTextView = (TextView) view.findViewById(R.id.workoutNameTextView);
+                TextView workoutDescriptionTextView = (TextView) view.findViewById(R.id.workoutDescriptionTextView);
+                TextView workoutBlocksTextView = (TextView) view.findViewById(R.id.workoutBlocksTextView);
+
+                workoutNameTextView.setText(viewModel.getWorkouts().get(position).getName());
+                workoutDescriptionTextView.setText(viewModel.getWorkouts().get(position).getDescription());
+                workoutBlocksTextView.setText(viewModel.getWorkouts().get(position).getNumberofBlocks());
+                return view;
+            }
+        };
+        workoutList.setAdapter(adapter);
     }
 
     private void initListeners() {
         workoutList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), workouts.get(position).toString(), Toast.LENGTH_SHORT).show();
-
-                navigationManager.navigateWorkoutDetailView(workouts.get(position));
+                navigator.navigateWorkoutDetailView(viewModel.getWorkouts().get(position));
             }
         });
 
         addWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigationManager.navigateWorkoutCreator();
+                navigator.navigateWorkoutCreator();
             }
         });
     }
