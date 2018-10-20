@@ -24,7 +24,6 @@ import com.example.ziggy.trainingtracker.viewmodel.ExerciseCreatorViewModel;
  */
 public class ExerciseCreatorFragment extends Fragment {
 
-    private TextView addedCategoriesTextView;
     private EditText exerciseNameEditText;
     private EditText exerciseUnitEditText;
     private EditText exerciseDescriptionEditText;
@@ -66,7 +65,6 @@ public class ExerciseCreatorFragment extends Fragment {
     }
 
     private void initViews() {
-        addedCategoriesTextView = view.findViewById(R.id.addedCategoriesTextView);
         exerciseNameEditText = view.findViewById(R.id.exerciseNameEditText);
         exerciseUnitEditText = view.findViewById(R.id.exerciseUnitEditText);
         exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);
