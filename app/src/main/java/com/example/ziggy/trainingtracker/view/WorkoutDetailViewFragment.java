@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IWorkout;
+import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
@@ -28,7 +29,7 @@ import java.util.List;
  * Fragment representing a view displaying contents of a selected workout
  */
 public class WorkoutDetailViewFragment extends Fragment {
-    private List<WorkoutBlock>workoutBlocks = new ArrayList<>();
+    private List<IWorkoutBlock>workoutBlocks = new ArrayList<>();
 
     private TextView workoutNameTextView;
     private Button workoutDescriptionButton;
@@ -72,7 +73,7 @@ public class WorkoutDetailViewFragment extends Fragment {
 
         workoutNameTextView.setText(workout.getName());
         workoutDescriptionTextView.setText(workout.getDescription());
-        ArrayAdapter<WorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), workout.getBlocks());
+        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), workout.getBlocks());
         workoutBlocksListView.setAdapter(adapter);
 
         if(parentActivity.viewModel.getCustomWorkouts().contains(workout)) {

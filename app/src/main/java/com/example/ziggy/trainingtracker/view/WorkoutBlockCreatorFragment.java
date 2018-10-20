@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
@@ -30,7 +31,7 @@ import java.util.List;
 public class WorkoutBlockCreatorFragment extends Fragment {
 
     private List<IExercise> exercises;
-    private WorkoutBlock block;
+    private IWorkoutBlock block;
 
     private Button decrementSetButton;
     private TextView setsDisplay;
@@ -159,7 +160,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 int sets = Integer.parseInt(setsDisplay.getText().toString());
                 block.setMultiplier(sets);
 
-                List<WorkoutBlock>workoutBlockList = new ArrayList<>();
+                List<IWorkoutBlock>workoutBlockList = new ArrayList<>();
                 workoutBlockList.add(block);
 
                 //Create the dialog
@@ -202,9 +203,9 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
     }
 
-    private WorkoutBlock buildWorkoutBlock(){
+    private IWorkoutBlock buildWorkoutBlock(){
 
-        WorkoutBlock workoutBlock = new WorkoutBlock();
+        IWorkoutBlock workoutBlock = new WorkoutBlock();
 
         int sets = Integer.parseInt(setsDisplay.getText().toString());
         workoutBlock.setMultiplier(sets);

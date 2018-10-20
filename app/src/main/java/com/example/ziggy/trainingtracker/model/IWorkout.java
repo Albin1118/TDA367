@@ -6,14 +6,14 @@ public interface IWorkout {
 
     String toString();
 
-    void addBlock(WorkoutBlock block);
+    void addBlock(IWorkoutBlock block);
 
     String getName();
     String getDescription();
-    List<WorkoutBlock> getBlocks();
+    List<IWorkoutBlock> getBlocks();
     String getNumberofBlocks();
 
     void setName(String name);
     void setDescription(String description);
-    void setBlocks(List<WorkoutBlock> blocks);
+    void setBlocks(List<IWorkoutBlock> blocks);
 }

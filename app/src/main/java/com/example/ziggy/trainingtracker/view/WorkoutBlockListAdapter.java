@@ -14,17 +14,18 @@ import android.widget.TextView;
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkoutBlockListAdapter extends ArrayAdapter<WorkoutBlock> {
+public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
 
     private Context mContext;
-    private List<WorkoutBlock>workoutBlocks = new ArrayList<>();
+    private List<IWorkoutBlock>workoutBlocks = new ArrayList<>();
 
-    public WorkoutBlockListAdapter(@NonNull Context context, List<WorkoutBlock>list){
+    public WorkoutBlockListAdapter(@NonNull Context context, List<IWorkoutBlock>list){
         super(context, 0, list);
         mContext = context;
         workoutBlocks = list;
@@ -37,7 +38,7 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<WorkoutBlock> {
         if(listItem == null)
             listItem = LayoutInflater.from(mContext).inflate(R.layout.workout_block_list_item,parent,false);
 
-        WorkoutBlock currentBlock = workoutBlocks.get(position);
+        IWorkoutBlock currentBlock = workoutBlocks.get(position);
         List<IExercise>exercises = currentBlock.getExercises();
         List<Integer>amounts = currentBlock.getAmounts();
 

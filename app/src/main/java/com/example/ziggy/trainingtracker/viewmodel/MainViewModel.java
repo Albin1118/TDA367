@@ -6,6 +6,7 @@ import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
+import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
@@ -31,7 +32,7 @@ public class MainViewModel extends ViewModel {
 
     private boolean activeWorkoutStatus;
 
-    List<WorkoutBlock>workoutBlocks= new ArrayList<>();
+    List<IWorkoutBlock>workoutBlocks= new ArrayList<>();
 
     public IWorkout buildWorkout;
     private List<ExerciseCategory> categories = new ArrayList<>();
@@ -175,14 +176,14 @@ public class MainViewModel extends ViewModel {
     //Method for adding removing and editing custom Workouts
     public void addCustomWorkout(IWorkout w){ model.addCustomWorkout(w); }
 
-    public void addCustomWorkout(String name, String description, List<WorkoutBlock> blocks){
+    public void addCustomWorkout(String name, String description, List<IWorkoutBlock> blocks){
         IWorkout w = new Workout(name, description, new ArrayList<>(blocks));
         model.addCustomWorkout(w);
     }
 
     public void removeCustomWorkout(IWorkout w) { model.removeCustomWorkout(w); }
 
-    public void editCustomWorkout(IWorkout w, String name, String description, List<WorkoutBlock> blocks) {
+    public void editCustomWorkout(IWorkout w, String name, String description, List<IWorkoutBlock> blocks) {
         w.setName(name);
         w.setDescription(description);
         w.setBlocks(blocks);

@@ -19,6 +19,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkout;
+import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
@@ -101,14 +102,14 @@ public class ReadWorkoutsFromXMLService {
         if (description == null || description.trim().isEmpty())
             description = "-no description-";
 
-        List<WorkoutBlock> blocks = new ArrayList<>();
+        List<IWorkoutBlock> blocks = new ArrayList<>();
         NodeList nl = workoutElement.getElementsByTagName("block");
         if (nl != null && nl.getLength() > 0) {
             for (int i = 0 ; i < nl.getLength();i++) {
                 //get the block element
                 Element element = (Element)nl.item(i);
                 //get the WorkoutBlock object
-                WorkoutBlock wb = getBlock(element);
+                IWorkoutBlock wb = getBlock(element);
                 //add it to list
                 blocks.add(wb);
             }
@@ -122,7 +123,7 @@ public class ReadWorkoutsFromXMLService {
      * @param blockElement A block element.
      * @return A new WorkoutBlock object.
      */
-    private WorkoutBlock getBlock(Element blockElement) throws IllegalArgumentException {
+    private IWorkoutBlock getBlock(Element blockElement) throws IllegalArgumentException {
         int multiplier;
         try {
             multiplier = Integer.parseInt(blockElement.getAttribute("x"));
@@ -130,7 +131,7 @@ public class ReadWorkoutsFromXMLService {
             multiplier = 1;
         }
 
-        WorkoutBlock block = new WorkoutBlock();
+        IWorkoutBlock block = new WorkoutBlock();
         block.setMultiplier(multiplier);
 
         NodeList nl = blockElement.getElementsByTagName("exercise");

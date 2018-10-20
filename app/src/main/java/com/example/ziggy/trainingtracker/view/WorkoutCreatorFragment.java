@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IWorkout;
+import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
@@ -74,7 +75,7 @@ public class WorkoutCreatorFragment extends Fragment {
         } else {
             String name = editableWorkout.getName();
             String description = editableWorkout.getDescription();
-            List<WorkoutBlock> blocks = new ArrayList<>(editableWorkout.getBlocks());
+            List<IWorkoutBlock> blocks = new ArrayList<>(editableWorkout.getBlocks());
             parentActivity.viewModel.buildWorkout = new Workout(name, description, blocks);
         }
     }
@@ -96,7 +97,7 @@ public class WorkoutCreatorFragment extends Fragment {
 
         workoutNameEditText.setText(parentActivity.viewModel.buildWorkout.getName());
         workoutDescriptionEditText.setText(parentActivity.viewModel.buildWorkout.getDescription());
-        ArrayAdapter<WorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), parentActivity.viewModel.buildWorkout.getBlocks());
+        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), parentActivity.viewModel.buildWorkout.getBlocks());
         workoutBlocksListView.setAdapter(adapter);
 
         if (editableWorkout != null) {
@@ -162,7 +163,7 @@ public class WorkoutCreatorFragment extends Fragment {
         saveBuildWorkout();
         String name = parentActivity.viewModel.buildWorkout.getName();
         String description = parentActivity.viewModel.buildWorkout.getDescription();
-        List<WorkoutBlock> blocks = parentActivity.viewModel.buildWorkout.getBlocks();
+        List<IWorkoutBlock> blocks = parentActivity.viewModel.buildWorkout.getBlocks();
         parentActivity.viewModel.addCustomWorkout(name, description, blocks);
     }
 
@@ -170,7 +171,7 @@ public class WorkoutCreatorFragment extends Fragment {
         saveBuildWorkout();
         String name = parentActivity.viewModel.buildWorkout.getName();
         String description = parentActivity.viewModel.buildWorkout.getDescription();
-        List<WorkoutBlock> blocks = parentActivity.viewModel.buildWorkout.getBlocks();
+        List<IWorkoutBlock> blocks = parentActivity.viewModel.buildWorkout.getBlocks();
         parentActivity.viewModel.editCustomWorkout(editableWorkout, name, description, blocks);
     }
 

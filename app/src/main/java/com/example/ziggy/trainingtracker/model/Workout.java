@@ -12,9 +12,9 @@ public class Workout implements IWorkout{
     @SerializedName("workout_description")
     private String description;
     @SerializedName("workout_blocks")
-    private List<WorkoutBlock> blocks;
+    private List<IWorkoutBlock> blocks;
 
-    public Workout(String name, String description, List<WorkoutBlock> blocks) {
+    public Workout(String name, String description, List<IWorkoutBlock> blocks) {
         this.name = name;
         this.description = description;
         this.blocks = blocks;
@@ -25,7 +25,7 @@ public class Workout implements IWorkout{
         return name + " - " + description + " - " + blocks.size() + " blocks";
     }
 
-    public void addBlock(WorkoutBlock block) {
+    public void addBlock(IWorkoutBlock block) {
         blocks.add(block);
     }
 
@@ -35,7 +35,7 @@ public class Workout implements IWorkout{
     public String getDescription() {
         return description;
     }
-    public List<WorkoutBlock> getBlocks() {
+    public List<IWorkoutBlock> getBlocks() {
         return blocks;
     }
     public String getNumberofBlocks(){
@@ -48,7 +48,7 @@ public class Workout implements IWorkout{
     public void setDescription(String description) {
         this.description = description;
     }
-    public void setBlocks(List<WorkoutBlock> blocks) {
+    public void setBlocks(List<IWorkoutBlock> blocks) {
         this.blocks = blocks;
     }
 }

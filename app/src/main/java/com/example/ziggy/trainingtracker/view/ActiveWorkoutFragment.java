@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IWorkout;
+import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
@@ -33,13 +34,13 @@ public class ActiveWorkoutFragment extends Fragment {
     private ListView currentWorkoutBlockListView;
 
     private IWorkout currentWorkout;
-    private List<WorkoutBlock> currentWorkoutBlocks;
+    private List<IWorkoutBlock> currentWorkoutBlocks;
 
     private MainActivity parentActivity;
     private NavigationManager navigationManager;
     private View view;
 
-    private ArrayAdapter<WorkoutBlock> adapter;
+    private ArrayAdapter<IWorkoutBlock> adapter;
 
     private long lastPause;
 
@@ -61,7 +62,7 @@ public class ActiveWorkoutFragment extends Fragment {
         currentWorkoutName.setText(currentWorkout.getName());
 
 
-        ArrayAdapter<WorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), currentWorkout.getBlocks());
+        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), currentWorkout.getBlocks());
         currentWorkoutBlockListView.setAdapter(adapter);
 
         return view;

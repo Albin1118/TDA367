@@ -9,7 +9,7 @@ import java.util.List;
  * Holds a set of exercises together with their respective amount variables and has the variable
  * multiplier to represent how many times to repeat this block of exercises
  */
-public class WorkoutBlock {
+public class WorkoutBlock implements IWorkoutBlock {
 
     @SerializedName("workout_block_exercises")
     private List<IExercise> exercises = new ArrayList<>();
