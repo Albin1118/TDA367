@@ -50,6 +50,9 @@ public class WorkoutBlock implements IWorkoutBlock {
     public String getMultiplierString(){
         return "x" + multiplier;
     }
+    public Boolean isEmpty(){
+        return exercises.isEmpty();
+    }
 
     @Override
     public String toString() {

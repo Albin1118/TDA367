@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IExercise;
@@ -124,7 +125,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                     dialogTitle.setText("Enter amount of " + e.getUnit());
 
                     final EditText numberofUnitEditText = viewInflated.findViewById(R.id.numberofUnitEditText);
-                    numberofUnitEditText.setTextColor(Color.WHITE);
+                    //numberofUnitEditText.setTextColor(Color.WHITE);
 
                     final TextView unitTextView = viewInflated.findViewById(R.id.unitTextView);
                     unitTextView.setText(e.getUnit());
@@ -201,12 +202,19 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //WorkoutBlock workoutBlock = buildWorkoutBlock();
-                int sets = Integer.parseInt(setsDisplay.getText().toString());
-                block.setMultiplier(sets);
+                if(!block.isEmpty()){
+                    //Sets the multiplier of the block
+                    int sets = Integer.parseInt(setsDisplay.getText().toString());
+                    block.setMultiplier(sets);
 
-                viewModel.getBuildWorkout().addBlock(block);
-                navigator.goBack();
+                    //Adds the current WorkoutBlock to the Workout being built
+                    viewModel.getBuildWorkout().addBlock(block);
+                    navigator.goBack();
+
+                }else{
+                    Toast.makeText(getContext(), "You need to select at least one exercise!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

@@ -13,6 +13,7 @@ public interface IWorkoutBlock {
     List<Integer> getAmounts();
     int getMultiplier();
     String getMultiplierString();
+    Boolean isEmpty();
 
     String toString();
 }
