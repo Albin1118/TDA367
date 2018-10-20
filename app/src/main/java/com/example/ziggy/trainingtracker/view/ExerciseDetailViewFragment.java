@@ -12,8 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
-import com.example.ziggy.trainingtracker.model.Exercise;
-import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.viewmodel.ExerciseDetailViewModel;
 
 /**
  * Fragment representing a view displaying contents of a selected exercise
@@ -26,22 +25,32 @@ public class ExerciseDetailViewFragment extends Fragment {
     private TextView exerciseDescriptionTextView;
     private TextView exerciseInstructionsTextView;
     private TextView exerciseCategoryTextView;
-
     private Button removeExerciseButton;
     private Button editExerciseButton;
 
-    private MainActivity parentActivity;
-    private NavigationManager navigationManager;
     private View view;
+    private ExerciseDetailViewModel viewModel;
+    private NavigationManager navigator;
 
-    private IExercise exercise;
+    public static ExerciseDetailViewFragment newInstance(ExerciseDetailViewModel viewModel, NavigationManager navigator) {
+        ExerciseDetailViewFragment fragment = new ExerciseDetailViewFragment();
+        fragment.setViewModel(viewModel);
+        fragment.setNavigator(navigator);
+        return fragment;
+    }
+
+    public void setViewModel(ExerciseDetailViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void setNavigator(NavigationManager navigator) {
+        this.navigator = navigator;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_exercise_detail_view, container, false);
-        parentActivity = ((MainActivity)getActivity());
-        navigationManager = (MainActivity)getActivity();
         initViews();
         initListeners();
 
@@ -58,12 +67,12 @@ public class ExerciseDetailViewFragment extends Fragment {
         removeExerciseButton = view.findViewById(R.id.removeExerciseButton);
         editExerciseButton = view.findViewById(R.id.editExerciseButton);
 
-        exerciseNameTextView.setText(exercise.getName());
-        exerciseUnitTextView.setText(exercise.getUnit());
-        exerciseDescriptionTextView.setText(exercise.getDescription());
-        exerciseInstructionsTextView.setText(exercise.getInstructions());
+        exerciseNameTextView.setText(viewModel.getExercise().getName());
+        exerciseUnitTextView.setText(viewModel.getExercise().getUnit());
+        exerciseDescriptionTextView.setText(viewModel.getExercise().getDescription());
+        exerciseInstructionsTextView.setText(viewModel.getExercise().getInstructions());
 
-        if (parentActivity.viewModel.getCustomExercises().contains(exercise)) {
+        if (viewModel.isCustomExercise()) {
             removeExerciseButton.setVisibility(View.VISIBLE);
             editExerciseButton.setVisibility(View.VISIBLE);
         }
@@ -73,15 +82,15 @@ public class ExerciseDetailViewFragment extends Fragment {
         removeExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.viewModel.removeCustomExercise(exercise);
-                navigationManager.goBack();
+                viewModel.removeExercise();
+                navigator.goBack();
             }
         });
 
         editExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigationManager.navigateExerciseEditor(exercise);
+                navigator.navigateExerciseEditor(viewModel.getExercise());
             }
         });
     }
@@ -95,14 +104,5 @@ public class ExerciseDetailViewFragment extends Fragment {
             ft.setReorderingAllowed(false);
             ft.detach(this).attach(this).commit();
         }
-    }
-
-    /**
-     * Set Exercise to be displayed.
-     * This method needs to be called before creating the view or there will be a NullPointerException in initViews.
-     * @param e The Exercise to be displayed
-     */
-    public void setExercise(IExercise e) {
-        this.exercise = e;
     }
 }

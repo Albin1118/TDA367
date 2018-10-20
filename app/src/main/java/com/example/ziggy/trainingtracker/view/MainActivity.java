@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseCreatorViewModel;
+import com.example.ziggy.trainingtracker.viewmodel.ExerciseDetailViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
@@ -293,9 +294,10 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
 
     @Override
     public void navigateExerciseDetailView(IExercise exercise) {
-        ExerciseDetailViewFragment fragment = new ExerciseDetailViewFragment();
-        fragment.setExercise(exercise);
-        setFragmentContainerContent(fragment);
+        ExerciseDetailViewModel viewModel = ViewModelProviders.of(this).get(ExerciseDetailViewModel.class);
+        viewModel.init(this.viewModel.getModel(), exercise);
+
+        setFragmentContainerContent(ExerciseDetailViewFragment.newInstance(viewModel, this));
     }
 
     @Override
