@@ -16,6 +16,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class MainViewModelTest {
+    /*
     private MainViewModel viewModel = new MainViewModel();
 
     // First draft of json tests
@@ -94,5 +95,6 @@ public class MainViewModelTest {
         assertEquals(exercise.getUnit(), newUnit);
         assertEquals(exercise.getCategories(), newCategories);
     }
+    */
 }
 
