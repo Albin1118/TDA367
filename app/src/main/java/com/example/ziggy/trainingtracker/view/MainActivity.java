@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(getSharedPreferences("Themes", 0).getInt("theme", 0));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
