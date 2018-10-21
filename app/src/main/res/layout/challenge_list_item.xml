@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+
+    <TextView
+        android:id="@+id/challengeNameTextView"
+        android:layout_width="181dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="14dp"
+        android:text="@string/exercise_list_item_name"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/challengeScoreTextView"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/challengeNameTextView"
+        android:text="Score"
+        android:textAppearance="?attr/textAppearanceListItemSecondary"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/startChallengeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="15dp"
+        android:text="Start" />
+
+</RelativeLayout>

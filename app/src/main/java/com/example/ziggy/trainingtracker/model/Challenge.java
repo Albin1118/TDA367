@@ -1,17 +1,24 @@
 package com.example.ziggy.trainingtracker.model;
 
-public class Challenge {
+import java.util.ArrayList;
 
-    String challengeName;
-    String unit;
+public class Challenge implements IChallenge {
+
+    IExercise exercise;
     int score;
 
-    public String getChallengeName() {
-        return challengeName;
+    public Challenge() {
+        //Test variables
+        exercise = new Exercise("Name", "unit", "desc", "inst", new ArrayList<>());
+        score = 0;
+    }
+
+    public String getName() {
+        return exercise.getName();
     }
 
     public String getUnit() {
-        return unit;
+        return exercise.getUnit();
     }
 
     public int getScore() {

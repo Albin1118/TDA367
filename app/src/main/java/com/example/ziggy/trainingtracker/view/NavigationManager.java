@@ -1,6 +1,7 @@
 package com.example.ziggy.trainingtracker.view;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
+import com.example.ziggy.trainingtracker.model.IChallenge;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.Workout;
@@ -84,6 +85,8 @@ public interface NavigationManager {
      * @param workout The workout to show the details of
      */
     void navigateWorkoutDetailView(IWorkout workout);
+
+    void navigateActiveChallenge(IChallenge challenge);
 
     /**
      * Navigates to the statistics.

@@ -27,6 +27,7 @@ public interface ITrainingTracker {
     List<IExercise> getExercises();
     List<IExercise> getCustomExercises();
     List<IWorkout> getCustomWorkouts();
+    List<IChallenge> getChallenges();
 
     void setCustomWorkouts(List<IWorkout> w);
 

@@ -13,6 +13,7 @@ public class TrainingTracker implements ITrainingTracker{
     private List<IWorkout> workouts = new ArrayList<>();
     @SerializedName("trainingtracker_exercises_list")
     private List<IExercise> exercises = new ArrayList<>();
+    private List<IChallenge> challenges = new ArrayList<>();
 
     public TrainingTracker() {
     }
@@ -64,6 +65,9 @@ public class TrainingTracker implements ITrainingTracker{
     }
     public List<IWorkout> getCustomWorkouts() {
         return user.getCustomWorkouts();
+    }
+    public List<IChallenge> getChallenges() {
+        return challenges;
     }
 
     public void setCustomWorkouts(List<IWorkout> w){

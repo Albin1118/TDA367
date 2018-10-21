@@ -5,6 +5,8 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
+import com.example.ziggy.trainingtracker.model.Challenge;
+import com.example.ziggy.trainingtracker.model.IChallenge;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
@@ -14,6 +16,8 @@ import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
 import com.example.ziggy.trainingtracker.service.SharedPreferencesService;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
@@ -47,6 +51,7 @@ public class MainViewModel extends AndroidViewModel {
     private void loadWorkoutDataFromSharedPreferences(){
         SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
         model.setWorkouts(s.loadUserWorkoutList());
+        loadChallenges();
     }
 
     private void loadData(){
@@ -77,6 +82,14 @@ public class MainViewModel extends AndroidViewModel {
         System.out.println("Loading workouts...");
         ReadWorkoutsFromXMLService reader = new ReadWorkoutsFromXMLService(model.getExercises());
         model.getWorkouts().addAll(reader.readWorkouts());
+    }
+
+    private void loadChallenges() {
+        List<IChallenge> challenges = new ArrayList<>();
+        challenges.add(new Challenge());
+        challenges.add(new Challenge());
+        challenges.add(new Challenge());
+        model.getChallenges().addAll(challenges);
     }
 
     public List<IExercise> getCustomExercises() {

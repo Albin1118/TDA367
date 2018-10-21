@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.ziggy.trainingtracker.model.IChallenge;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkout;
+import com.example.ziggy.trainingtracker.viewmodel.ActiveChallengeViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.ActiveWorkoutViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseCreatorViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseDetailViewModel;
@@ -266,5 +268,14 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
     @Override
     public void navigateStatistics() {
         setFragmentContainerContent(new StatisticsFragment());
+    }
+
+    @Override
+    public void navigateActiveChallenge(IChallenge challenge) {
+        ActiveChallengeViewModel viewModel = ViewModelProviders.of(this).get(ActiveChallengeViewModel.class);
+        viewModel.init(challenge);
+
+        setFragmentContainerContent(ActiveChallengeFragment.newInstance(viewModel, this));
+
     }
 }

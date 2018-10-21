@@ -2,6 +2,8 @@ package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
+import com.example.ziggy.trainingtracker.model.Challenge;
+import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
@@ -12,9 +14,14 @@ import java.util.List;
 public class ExerciseTabViewModel extends ViewModel {
     private ITrainingTracker model;
     private List<IExercise> exercises;
+    private List<Challenge> challenges;
 
     public void init(ITrainingTracker model) {
         this.model = model;
+        challenges = new ArrayList<>();
+        challenges.add(new Challenge());
+        challenges.add(new Challenge());
+        challenges.add(new Challenge());
         exercises = new ArrayList<>(model.getExercises());
     }
 
@@ -46,5 +53,9 @@ public class ExerciseTabViewModel extends ViewModel {
             categories.add(category.name());
         }
         return categories;
+    }
+
+    public List<Challenge> getChallenges() {
+        return challenges;
     }
 }
