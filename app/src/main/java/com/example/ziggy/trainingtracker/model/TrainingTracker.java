@@ -16,6 +16,7 @@ public class TrainingTracker implements ITrainingTracker{
     private List<IChallenge> challenges = new ArrayList<>();
 
     public TrainingTracker() {
+
     }
 
     /**

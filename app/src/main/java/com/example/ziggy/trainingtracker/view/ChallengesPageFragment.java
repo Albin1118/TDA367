@@ -12,13 +12,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.Challenge;
 import com.example.ziggy.trainingtracker.model.IChallenge;
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 
 public class ChallengesPageFragment extends Fragment {
 
     private ListView challengeListView;
-
     private ArrayAdapter<IChallenge> adapter;
 
     private View view;
