@@ -13,7 +13,7 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomButtonLayout"
-        tools:listheader="@layout/fragment_workout_detail_view_header" />
+        tools:listheader="@layout/item_workoutdetailviewheader" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/bottomButtonLayout"

@@ -1,7 +1,6 @@
 package com.example.ziggy.trainingtracker.view;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,10 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
-import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
-import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +33,7 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItem = convertView;
         if(listItem == null)
-            listItem = LayoutInflater.from(mContext).inflate(R.layout.workout_block_list_item,parent,false);
+            listItem = LayoutInflater.from(mContext).inflate(R.layout.item_workoutblock,parent,false);
 
         IWorkoutBlock currentBlock = workoutBlocks.get(position);
         List<IExercise>exercises = currentBlock.getExercises();
@@ -49,7 +46,7 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
         exercisesInBlockLinearLayout.removeAllViews();
 
         for (int i = 0; i < exercises.size(); i++){
-            View child = LayoutInflater.from(mContext).inflate(R.layout.exercise_list_item_unit, null);
+            View child = LayoutInflater.from(mContext).inflate(R.layout.item_blockexercise, null);
 
             IExercise e = exercises.get(i);
             int amount = amounts.get(i);

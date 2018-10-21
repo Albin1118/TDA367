@@ -60,7 +60,7 @@ public class WorkoutCreatorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_workout_creator, container, false);
+        view  = inflater.inflate(R.layout.fragment_workoutcreator, container, false);
         initViews();
         initListeners();
 
@@ -75,8 +75,8 @@ public class WorkoutCreatorFragment extends Fragment {
 
     private void initViews() {
         workoutBlocksListView = view.findViewById(R.id.workoutBlocksListView);
-        View header = getLayoutInflater().inflate(R.layout.fragment_workout_creator_header, workoutBlocksListView, false);
-        View footer = getLayoutInflater().inflate(R.layout.fragment_workout_creator_footer, workoutBlocksListView, false);
+        View header = getLayoutInflater().inflate(R.layout.item_workoutcreatorheader, workoutBlocksListView, false);
+        View footer = getLayoutInflater().inflate(R.layout.item_workoutcreatorfooter, workoutBlocksListView, false);
 
         workoutNameEditText = header.findViewById(R.id.workoutNameEditText);
         workoutDescriptionButton = header.findViewById(R.id.workoutDescriptionButton);

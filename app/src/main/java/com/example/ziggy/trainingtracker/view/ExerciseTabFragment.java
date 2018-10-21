@@ -2,7 +2,6 @@ package com.example.ziggy.trainingtracker.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,15 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
-import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 
 /**
@@ -78,7 +70,7 @@ public class ExerciseTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_exercise_tab, container, false);
+        view  = inflater.inflate(R.layout.fragment_exercisetab, container, false);
         initViews();
         initListeners();
         navigator.setNavBarState(R.id.nav_exercises);

@@ -39,7 +39,7 @@ public class MoreTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_more_tab, container, false);
+        view  = inflater.inflate(R.layout.fragment_moretab, container, false);
         navigationManager = (MainActivity)getActivity();
         navigationManager.setNavBarState(R.id.nav_more);
 

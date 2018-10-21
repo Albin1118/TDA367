@@ -9,12 +9,12 @@
         android:id="@+id/startPageFragment"
         android:name="com.example.ziggy.trainingtracker.view.StartPageFragment"
         android:label="fragment_start_page"
-        tools:layout="@layout/fragment_start_page" ></fragment>
+        tools:layout="@layout/fragment_startpage" ></fragment>
     <fragment
         android:id="@+id/workoutTabFragment"
         android:name="com.example.ziggy.trainingtracker.view.WorkoutTabFragment"
         android:label="fragment_workout_tab"
-        tools:layout="@layout/fragment_workout_tab" />
+        tools:layout="@layout/fragment_workouttab" />
     <fragment
         android:id="@+id/exercisesFragment"
         android:name="com.example.ziggy.trainingtracker.view.ExercisesFragment"

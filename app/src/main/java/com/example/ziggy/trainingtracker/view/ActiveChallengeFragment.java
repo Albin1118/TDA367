@@ -42,7 +42,7 @@ public class ActiveChallengeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_active_challenge, container, false);
+        view = inflater.inflate(R.layout.fragment_activechallenge, container, false);
         initViews();
         initListeners();
 
