@@ -2,7 +2,7 @@ package com.example.ziggy.trainingtracker.model;
 
 import java.util.ArrayList;
 
-public class Challenge {
+public class Challenge implements IChallenge {
 
     IExercise exercise;
     int score;
