@@ -60,18 +60,8 @@ public class WorkoutTabFragment extends Fragment {
         addWorkoutButton = view.findViewById(R.id.addWorkoutButton);
         workoutList = view.findViewById(R.id.workoutList);
 
-        adapter = new ArrayAdapter<IWorkout>(getContext(), R.layout.item_workout, R.id.workoutNameTextView, viewModel.getAllWorkouts()) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                TextView workoutNameTextView = (TextView) view.findViewById(R.id.workoutNameTextView);
-                TextView workoutBlocksTextView = (TextView) view.findViewById(R.id.workoutBlocksTextView);
+        adapter = new WorkoutListAdapter(getContext(), viewModel.getAllWorkouts());
 
-                workoutNameTextView.setText(viewModel.getWorkouts().get(position).getName());
-                workoutBlocksTextView.setText(viewModel.getWorkouts().get(position).getNumberofBlocks());
-                return view;
-            }
-        };
         workoutList.setAdapter(adapter);
     }
 

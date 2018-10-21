@@ -63,19 +63,8 @@ public class PreActiveWorkoutFragment extends Fragment {
 
         preActiveWorkoutListView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
-        adapter = new ArrayAdapter<IWorkout>(getContext(), R.layout.item_workout, R.id.workoutNameTextView, viewModel.getWorkouts()) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
+        adapter = new WorkoutListAdapter(getContext(), viewModel.getWorkouts());
 
-                TextView workoutNameTextView = (TextView) view.findViewById(R.id.workoutNameTextView);
-                TextView workoutBlocksTextView = (TextView) view.findViewById(R.id.workoutBlocksTextView);
-
-                workoutNameTextView.setText(viewModel.getWorkouts().get(position).getName());
-                workoutBlocksTextView.setText(viewModel.getWorkouts().get(position).getNumberofBlocks());
-                return view;
-            }
-        };
         preActiveWorkoutListView.setAdapter(adapter);
     }
 

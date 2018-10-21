@@ -67,7 +67,7 @@ public class ExercisesPageFragment extends Fragment {
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
         searchCategoryButton = view.findViewById(R.id.searchCategoryButton);
 
-        ExerciseListAdapter adapter = new ExerciseListAdapter(getContext(), viewModel.getExercises());
+        adapter = new ExerciseListAdapter(getContext(), viewModel.getAllExercises());
 
         exerciseListView.setAdapter(adapter);
 
