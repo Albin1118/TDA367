@@ -8,7 +8,7 @@ public class Challenge implements IChallenge {
     int score;
 
     public Challenge() {
-        //Test parameters
+        //Test variables
         exercise = new Exercise("Name", "unit", "desc", "inst", new ArrayList<>());
     }
 

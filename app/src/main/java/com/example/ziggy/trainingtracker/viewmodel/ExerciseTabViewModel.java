@@ -49,7 +49,6 @@ public class ExerciseTabViewModel extends ViewModel {
         return categories;
     }
 
-
     public List<IChallenge> getChallenges() {
         return model.getChallenges();
     }

@@ -2,6 +2,8 @@ package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
+import com.example.ziggy.trainingtracker.model.Challenge;
+import com.example.ziggy.trainingtracker.model.IChallenge;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
@@ -22,6 +24,7 @@ public class MainViewModel extends ViewModel {
         model = new TrainingTracker();
         loadExercises();
         loadWorkouts();
+        loadChallenges();
     }
 
     /**
@@ -41,6 +44,14 @@ public class MainViewModel extends ViewModel {
         System.out.println("Loading workouts...");
         ReadWorkoutsFromXMLService reader = new ReadWorkoutsFromXMLService(model.getExercises());
         model.getWorkouts().addAll(reader.readWorkouts());
+    }
+
+    private void loadChallenges() {
+        List<IChallenge> challenges = new ArrayList<>();
+        challenges.add(new Challenge());
+        challenges.add(new Challenge());
+        challenges.add(new Challenge());
+        model.getChallenges().addAll(challenges);
     }
 
     public List<IExercise> getCustomExercises() {
