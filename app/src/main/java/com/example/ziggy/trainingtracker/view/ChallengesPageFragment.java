@@ -12,15 +12,14 @@ import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Challenge;
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 
 public class ChallengesPageFragment extends Fragment {
 
-    private ListView challengeListView;
-
-    private ArrayAdapter<Challenge> adapter;
-
     private View view;
+    private ListView exerciseListView;
+    private ArrayAdapter<Challenge> adapter;
     private ExerciseTabViewModel viewModel;
     private NavigationManager navigator;
 
@@ -50,18 +49,20 @@ public class ChallengesPageFragment extends Fragment {
     }
 
     private void initViews() {
-        challengeListView = view.findViewById(R.id.challengeListView);
+        exerciseListView = view.findViewById(R.id.exerciseList);
+
         adapter = new ArrayAdapter<Challenge>(getContext(), R.layout.challenge_list_item, R.id.challengeNameTextView, viewModel.getChallenges()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                TextView challengeNameTextView = view.findViewById(R.id.challengeNameTextView);
+                TextView exerciseNameTextView = (TextView) view.findViewById(R.id.challengeNameTextView);
 
-                challengeNameTextView.setText(viewModel.getChallenges().get(position).getName());
+                exerciseNameTextView.setText(viewModel.getExercises().get(position).getName());
+                //exerciseDescriptionTextView.setText(viewModel.getExercises().get(position).getDescription());
                 return view;
             }
         };
-        challengeListView.setAdapter(adapter);
+        exerciseListView.setAdapter(adapter);
     }
 
     private void initListeners() {
