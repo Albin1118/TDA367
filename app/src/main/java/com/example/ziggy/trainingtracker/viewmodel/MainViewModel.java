@@ -31,8 +31,8 @@ public class MainViewModel extends AndroidViewModel {
         model = new TrainingTracker();
         loadExercises();
         loadWorkouts();
- //       loadData();
-
+        loadChallenges();
+        //loadData();
     }
 
 
