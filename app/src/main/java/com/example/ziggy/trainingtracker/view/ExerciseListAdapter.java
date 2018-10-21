@@ -38,10 +38,8 @@ public class ExerciseListAdapter extends ArrayAdapter<IExercise> {
         IExercise currentExercise = exercises.get(position);
 
         TextView exerciseNameTextView = (TextView) listItem.findViewById(R.id.exerciseNameTextView);
-        TextView exerciseDescriptionTextView = (TextView) listItem.findViewById(R.id.exerciseDescriptionTextView);
 
         exerciseNameTextView.setText(currentExercise.getName());
-        exerciseDescriptionTextView.setText(currentExercise.getDescription());
 
         return listItem;
     }
