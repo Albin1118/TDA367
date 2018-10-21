@@ -1,5 +1,8 @@
 package com.example.ziggy.trainingtracker.model;
 
+/**
+ * Class representing an exercise based challenge, with a score
+ */
 public class Challenge implements IChallenge {
 
     IExercise exercise;

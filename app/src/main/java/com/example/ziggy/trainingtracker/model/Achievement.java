@@ -1,5 +1,9 @@
 package com.example.ziggy.trainingtracker.model;
 
+/**
+ * Class representing an achievement which the user can earn by accomplishing certain criteria
+ * for app usage and workout-completion
+ */
 public class Achievement implements IAchievement{
 
     String achievementName;

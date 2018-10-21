@@ -23,11 +23,21 @@ public class WorkoutBlock implements IWorkoutBlock {
     public WorkoutBlock() {
     }
 
+    /**
+     * Adds an exercise along with its amount to the block
+     * @param exercise exercise to be added to the block
+     * @param amount the amount connected to the exercise
+     */
     public void addExercise(IExercise exercise, Integer amount) {
         exercises.add(exercise);
         amounts.add(amount);
     }
 
+
+    /**
+     * Removes an exercise along with its amount from the block
+     * @param exercise exercise to be removed
+     */
     public void removeExercise(IExercise exercise){
         int index = exercises.indexOf(exercise);
         exercises.remove(index);
