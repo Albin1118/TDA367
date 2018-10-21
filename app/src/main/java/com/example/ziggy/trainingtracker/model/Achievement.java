@@ -1,6 +1,6 @@
 package com.example.ziggy.trainingtracker.model;
 
-public class Achievement {
+public class Achievement implements IAchievement{
 
     String achievementName;
     String achievementDescription;
