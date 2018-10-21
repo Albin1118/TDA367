@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,10 +16,12 @@ import com.example.ziggy.trainingtracker.model.Challenge;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 
+import org.w3c.dom.Text;
+
 public class ChallengesPageFragment extends Fragment {
 
     private View view;
-    private ListView exerciseListView;
+    private ListView challengeListView;
     private ArrayAdapter<Challenge> adapter;
     private ExerciseTabViewModel viewModel;
     private NavigationManager navigator;
@@ -49,23 +52,35 @@ public class ChallengesPageFragment extends Fragment {
     }
 
     private void initViews() {
-        exerciseListView = view.findViewById(R.id.exerciseList);
+        challengeListView = view.findViewById(R.id.challengeListView);
 
         adapter = new ArrayAdapter<Challenge>(getContext(), R.layout.challenge_list_item, R.id.challengeNameTextView, viewModel.getChallenges()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                TextView exerciseNameTextView = (TextView) view.findViewById(R.id.challengeNameTextView);
+                TextView challengeNameTextView = (TextView) view.findViewById(R.id.challengeNameTextView);
+                TextView challengeScoreTextView = (TextView) view.findViewById(R.id.challengeScoreTextView);
+                Button startChallengeButton = (Button) view.findViewById(R.id.startChallengeButton);
 
-                exerciseNameTextView.setText(viewModel.getExercises().get(position).getName());
-                //exerciseDescriptionTextView.setText(viewModel.getExercises().get(position).getDescription());
+                challengeNameTextView.setText(viewModel.getChallenges().get(position).getName());
+                challengeScoreTextView.setText(String.valueOf(viewModel.getChallenges().get(position).getScore()));
+
+                startChallengeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        navigator.navigateActiveChallenge(viewModel.getChallenges().get(position));
+                    }
+                });
+
+
                 return view;
             }
         };
-        exerciseListView.setAdapter(adapter);
+        challengeListView.setAdapter(adapter);
     }
 
     private void initListeners() {
+
 
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:layout_height="70dp"
     android:minHeight="?attr/listPreferredItemHeight"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
@@ -20,14 +20,23 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/ChallengeScoreTextView"
+        android:id="@+id/challengeScoreTextView"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/challengeNameTextView"
+        android:text="Score"
+        android:textAppearance="?attr/textAppearanceListItemSecondary"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/startChallengeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="147dp"
-        android:text="Score"
-        android:textAppearance="?attr/textAppearanceListItemSecondary"
-        android:textSize="16sp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="15dp"
+        android:text="Start" />
 
 </RelativeLayout>

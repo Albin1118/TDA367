@@ -10,6 +10,7 @@ public class Challenge implements IChallenge {
     public Challenge() {
         //Test variables
         exercise = new Exercise("Name", "unit", "desc", "inst", new ArrayList<>());
+        score = 0;
     }
 
     public String getName() {
