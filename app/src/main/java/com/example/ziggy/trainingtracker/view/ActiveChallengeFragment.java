@@ -16,6 +16,7 @@ import com.example.ziggy.trainingtracker.viewmodel.ActiveChallengeViewModel;
 
 
 public class ActiveChallengeFragment extends Fragment {
+
     TextView challengeNameTextView;
     EditText challengeScoreEditText;
     Button finishChallengeButton;

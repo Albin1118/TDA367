@@ -3,7 +3,10 @@ package com.example.ziggy.trainingtracker.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IExercise;
@@ -49,7 +53,7 @@ public class ExercisesPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_exercisetabexercises, container, false);
+        view  = inflater.inflate(R.layout.fragment_exercises_page, container, false);
         initViews();
         initListeners();
 
@@ -63,18 +67,8 @@ public class ExercisesPageFragment extends Fragment {
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
         searchCategoryButton = view.findViewById(R.id.searchCategoryButton);
 
-        adapter = new ArrayAdapter<IExercise>(getContext(), R.layout.item_exercise, R.id.exerciseNameTextView, viewModel.getAllExercises()) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                TextView exerciseNameTextView = (TextView) view.findViewById(R.id.exerciseNameTextView);
-                TextView exerciseDescriptionTextView = (TextView) view.findViewById(R.id.exerciseDescriptionTextView);
+        ExerciseListAdapter adapter = new ExerciseListAdapter(getContext(), viewModel.getExercises());
 
-                exerciseNameTextView.setText(viewModel.getExercises().get(position).getName());
-                exerciseDescriptionTextView.setText(viewModel.getExercises().get(position).getDescription());
-                return view;
-            }
-        };
         exerciseListView.setAdapter(adapter);
 
         //Style and populate spinner
