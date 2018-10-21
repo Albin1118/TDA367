@@ -43,77 +43,29 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
         setTheme(getSharedPreferences("Themes", 0).getInt("theme", 0));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        viewModel = new MainViewModel(getApplication());
+        //viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
         initComponents();
         initStartingView();
         initListeners();
-        //TODO: Fix. This crashes
-        //updateViewModelData();
-
+       // loadData();
     }
 
+
+
+
+
+
+
+
+
+    private void loadData(){
+        viewModel.loadData();
+    }
 
     private void saveData(){
-        // Init sharedpreferences
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        // Create gson object for json functionality
-        Gson gson = new Gson();
-
-        // Get current state of trainingtracker
-        String customExerciseListJson = gson.toJson(viewModel.getCustomExercises());
-        String customWorkoutListJson = gson.toJson(viewModel.getCustomWorkouts());
-
-        // Add the Json strings to the shared prefs dir
-        editor.putString(CUSTOM_EXERCISE_DATA, customExerciseListJson);
-        editor.putString(CUSTOM_WORKOUT_DATA, customWorkoutListJson);
-        //Save changes
-        editor.apply();
-
-        /*
-        System.out.println("Saved following Data to Shared Preferences");
-        System.out.println(customExerciseListJson);
-        System.out.println(customWorkoutListJson);
-        */
-
-    }
-
-
-    private String loadCustomExerciseData(){
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        Gson gson = new Gson();
-
-        // Retrieve json string from shared prefs, return null if string not found
-        String customExerciseListJson = sharedPreferences.getString(CUSTOM_EXERCISE_DATA, null);
-
-        System.out.println("LOADING DATA ");
-        System.out.println(customExerciseListJson);
-
-        return customExerciseListJson;
-
-    }
-
-
-    private String loadCustomWorkoutData(){
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        Gson gson = new Gson();
-
-        // Retrieve json string from shared prefs, return null if string not found
-        String customWorkoutListJson = sharedPreferences.getString(CUSTOM_WORKOUT_DATA, null);
-
-        System.out.println("LOADING DATA ");
-        System.out.println(customWorkoutListJson);
-
-        return  customWorkoutListJson;
-    }
-
-
-
-
-    private void updateViewModelData(){
-        viewModel.loadUserCustomListsFromJson(loadCustomWorkoutData(), loadCustomExerciseData());
+        viewModel.saveData();
     }
 
 
