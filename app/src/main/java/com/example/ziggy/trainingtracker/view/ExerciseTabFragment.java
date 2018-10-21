@@ -6,10 +6,16 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
@@ -74,6 +80,7 @@ public class ExerciseTabFragment extends Fragment {
         initViews();
         initListeners();
         navigator.setNavBarState(R.id.nav_exercises);
+        setHasOptionsMenu(true);
 
         return view;
     }
@@ -84,9 +91,26 @@ public class ExerciseTabFragment extends Fragment {
         viewPager = view.findViewById(R.id.viewPager);
 
         viewPager.setAdapter(pagerAdapter);
+        toolbar.inflateMenu(R.menu.menu_exercisetabexercises);
     }
 
     private void initListeners() {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                showSortMenu(toolbar);
+                return false;
+            }
+        });
+    }
+
+    private void showSortMenu(View v) {
+        PopupMenu popup = new PopupMenu(getContext(), v);
+        popup.setGravity(Gravity.END);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.btm_navigation, popup.getMenu());
+        popup.show();
     }
 }
