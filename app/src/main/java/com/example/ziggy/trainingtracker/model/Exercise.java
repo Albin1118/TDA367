@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing an exercise, with a name, unit, description...
+ */
 public class Exercise implements IExercise {
 
     @SerializedName("exercise_name")

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.CompoundButton;
 import android.view.LayoutInflater;
 import android.widget.CheckBox;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.example.ziggy.trainingtracker.R;
@@ -50,7 +50,7 @@ public class CategorySpinnerAdapter extends ArrayAdapter<CategorySpinnerObject> 
         ViewHolder holder;
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-            convertView = layoutInflater.inflate(R.layout.category_spinner_item, parent,false);
+            convertView = layoutInflater.inflate(R.layout.item_exercisecategory, parent,false);
             holder = new ViewHolder();
             holder.mCategoryName = convertView.findViewById(R.id.categoryTextView);
             holder.mCategoryCheckBox = convertView.findViewById(R.id.categoryCheckbox);

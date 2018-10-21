@@ -1,6 +1,5 @@
 package com.example.ziggy.trainingtracker.view;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -55,7 +54,7 @@ public class ActiveWorkoutFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_active_workout, container, false);
+        view  = inflater.inflate(R.layout.fragment_activeworkout, container, false);
         navigator.setNavBarState(R.id.nav_active_workout);
         //navigator.hideNavigationBar();
 

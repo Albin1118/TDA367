@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing the user of the application, containing data related to individual use such as
+ * the custom made exercises and workouts, the completed workouts and user info.
+ */
 public class User implements IUser{
 
     //Add achievements and goals

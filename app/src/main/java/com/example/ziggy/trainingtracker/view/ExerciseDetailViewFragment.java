@@ -50,7 +50,7 @@ public class ExerciseDetailViewFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_exercise_detail_view, container, false);
+        view  = inflater.inflate(R.layout.fragment_exercisedetailview, container, false);
         initViews();
         initListeners();
 

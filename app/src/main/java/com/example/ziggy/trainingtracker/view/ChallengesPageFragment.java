@@ -12,9 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
-import com.example.ziggy.trainingtracker.model.Challenge;
 import com.example.ziggy.trainingtracker.model.IChallenge;
-import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 
 public class ChallengesPageFragment extends Fragment {
@@ -44,7 +42,7 @@ public class ChallengesPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_challenges_page, container, false);
+        view  = inflater.inflate(R.layout.fragment_exercisetabchallenges, container, false);
         initViews();
         initListeners();
 
@@ -54,7 +52,7 @@ public class ChallengesPageFragment extends Fragment {
     private void initViews() {
         challengeListView = view.findViewById(R.id.challengeListView);
 
-        adapter = new ArrayAdapter<IChallenge>(getContext(), R.layout.challenge_list_item, R.id.challengeNameTextView, viewModel.getChallenges()) {
+        adapter = new ArrayAdapter<IChallenge>(getContext(), R.layout.item_challenge, R.id.challengeNameTextView, viewModel.getChallenges()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);

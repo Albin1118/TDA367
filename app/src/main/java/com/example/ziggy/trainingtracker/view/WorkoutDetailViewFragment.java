@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 
 import com.example.ziggy.trainingtracker.R;
-import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutDetailViewModel;
 
@@ -61,7 +60,7 @@ public class WorkoutDetailViewFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_workout_detail_view, container, false);
+        view  = inflater.inflate(R.layout.fragment_workoutdetailview, container, false);
         navigator = (MainActivity)getActivity();
         initViews();
         initListeners();
@@ -71,7 +70,7 @@ public class WorkoutDetailViewFragment extends Fragment {
 
     private void initViews() {
         workoutBlocksListView = view.findViewById(R.id.workoutBlocksListView);
-        View header = getLayoutInflater().inflate(R.layout.fragment_workout_detail_view_header, workoutBlocksListView, false);
+        View header = getLayoutInflater().inflate(R.layout.item_workoutdetailviewheader, workoutBlocksListView, false);
         workoutNameTextView = header.findViewById(R.id.workoutNameTextView);
         workoutDescriptionButton = header.findViewById(R.id.workoutDescriptionButton);
         workoutDescriptionLayout = header.findViewById(R.id.workoutDescriptionLayout);

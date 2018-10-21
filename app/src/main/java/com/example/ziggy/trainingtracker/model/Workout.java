@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing a Workout, with a name, a description and a list of WorkoutBlocks,
+ * containing exercises and their respective amounts
+ */
 public class Workout implements IWorkout{
 
     @SerializedName("workout_name")

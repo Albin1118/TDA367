@@ -48,7 +48,7 @@ public class WorkoutTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_workout_tab, container, false);
+        view = inflater.inflate(R.layout.fragment_workouttab, container, false);
         initViews();
         initListeners();
         navigator.setNavBarState(R.id.nav_workouts);
@@ -60,7 +60,7 @@ public class WorkoutTabFragment extends Fragment {
         addWorkoutButton = view.findViewById(R.id.addWorkoutButton);
         workoutList = view.findViewById(R.id.workoutList);
 
-        adapter = new ArrayAdapter<IWorkout>(getContext(), R.layout.workout_list_item, R.id.workoutNameTextView, viewModel.getAllWorkouts()) {
+        adapter = new ArrayAdapter<IWorkout>(getContext(), R.layout.item_workout, R.id.workoutNameTextView, viewModel.getAllWorkouts()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);

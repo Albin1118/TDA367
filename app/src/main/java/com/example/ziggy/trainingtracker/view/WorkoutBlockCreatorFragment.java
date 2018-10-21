@@ -2,7 +2,6 @@ package com.example.ziggy.trainingtracker.view;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -68,7 +67,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_workout_block_creator, container, false);
+        view  = inflater.inflate(R.layout.fragment_workoutblockcreator, container, false);
         initViews();
         initListeners();
 
@@ -124,9 +123,9 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle(e.getName());
 
-                    View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.input_reps_dialog, (ViewGroup) getView(), false);
+                    View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.dialog_inputreps, (ViewGroup) getView(), false);
 
-                    //Set the components of input_reps_dialog.xml
+                    //Set the components of dialog_inputreps.xml
                     final TextView dialogTitle = viewInflated.findViewById(R.id.dialogTitle);
                     dialogTitle.setText("Enter amount of " + e.getUnit());
 

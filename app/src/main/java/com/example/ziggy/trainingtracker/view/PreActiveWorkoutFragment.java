@@ -49,7 +49,7 @@ public class PreActiveWorkoutFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_pre_active_workout, container, false);
+        view  = inflater.inflate(R.layout.fragment_preactiveworkout, container, false);
         navigator.setNavBarState(R.id.nav_active_workout);
         initViews();
         initListeners();
@@ -63,7 +63,7 @@ public class PreActiveWorkoutFragment extends Fragment {
 
         preActiveWorkoutListView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
-        adapter = new ArrayAdapter<IWorkout>(getContext(), R.layout.workout_list_item, R.id.workoutNameTextView, viewModel.getWorkouts()) {
+        adapter = new ArrayAdapter<IWorkout>(getContext(), R.layout.item_workout, R.id.workoutNameTextView, viewModel.getWorkouts()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
