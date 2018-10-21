@@ -33,7 +33,7 @@ public class ExerciseListAdapter extends ArrayAdapter<IExercise> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItem = convertView;
         if(listItem == null)
-            listItem = LayoutInflater.from(mContext).inflate(R.layout.exercise_list_item, parent,false);
+            listItem = LayoutInflater.from(mContext).inflate(R.layout.item_exercise, parent,false);
 
         IExercise currentExercise = exercises.get(position);
 

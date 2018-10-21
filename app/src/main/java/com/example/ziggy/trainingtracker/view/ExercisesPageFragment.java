@@ -53,7 +53,7 @@ public class ExercisesPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_exercises_page, container, false);
+        view  = inflater.inflate(R.layout.fragment_exercisetabexercises, container, false);
         initViews();
         initListeners();
 
