@@ -11,11 +11,13 @@ public interface ITrainingTracker {
      */
     void removeCustomExercise(IExercise e);
 
+
     /**
      * Add a Workout to the list of Workouts and store it among the users custom Workouts.
      * @param w Workout to be added
      */
     void addCustomWorkout(IWorkout w);
+
 
     /**
      * Remove a Workout from the list of Workouts and discard it from the users custom Workouts.

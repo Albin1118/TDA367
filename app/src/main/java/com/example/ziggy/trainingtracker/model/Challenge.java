@@ -1,15 +1,12 @@
 package com.example.ziggy.trainingtracker.model;
 
-import java.util.ArrayList;
-
 public class Challenge implements IChallenge {
 
     IExercise exercise;
     int score;
 
-    public Challenge() {
-        //Test variables
-        exercise = new Exercise("Name", "unit", "desc", "inst", new ArrayList<>());
+    public Challenge(IExercise exercise) {
+        this.exercise = exercise;
         score = 0;
     }
 
@@ -23,5 +20,9 @@ public class Challenge implements IChallenge {
 
     public int getScore() {
         return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

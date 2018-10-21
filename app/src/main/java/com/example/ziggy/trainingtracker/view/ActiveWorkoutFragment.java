@@ -181,6 +181,7 @@ public class ActiveWorkoutFragment extends Fragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
+                viewModel.finishWorkout();
                 navigator.navigateHome();
                 viewModel.finishWorkout();
                 viewModel.clearElapsedTime();

@@ -13,16 +13,16 @@ import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Challenge;
+import com.example.ziggy.trainingtracker.model.IChallenge;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 
-import org.w3c.dom.Text;
-
 public class ChallengesPageFragment extends Fragment {
 
-    private View view;
     private ListView challengeListView;
-    private ArrayAdapter<Challenge> adapter;
+    private ArrayAdapter<IChallenge> adapter;
+
+    private View view;
     private ExerciseTabViewModel viewModel;
     private NavigationManager navigator;
 
@@ -54,7 +54,7 @@ public class ChallengesPageFragment extends Fragment {
     private void initViews() {
         challengeListView = view.findViewById(R.id.challengeListView);
 
-        adapter = new ArrayAdapter<Challenge>(getContext(), R.layout.challenge_list_item, R.id.challengeNameTextView, viewModel.getChallenges()) {
+        adapter = new ArrayAdapter<IChallenge>(getContext(), R.layout.challenge_list_item, R.id.challengeNameTextView, viewModel.getChallenges()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -80,7 +80,6 @@ public class ChallengesPageFragment extends Fragment {
     }
 
     private void initListeners() {
-
 
     }
 }

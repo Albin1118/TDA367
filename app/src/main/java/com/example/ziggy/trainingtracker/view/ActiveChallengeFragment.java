@@ -6,12 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.viewmodel.ActiveChallengeViewModel;
-import com.example.ziggy.trainingtracker.viewmodel.WorkoutTabViewModel;
+
 
 public class ActiveChallengeFragment extends Fragment {
+    TextView challengeNameTextView;
+    EditText challengeScoreEditText;
+    Button finishChallengeButton;
+
     private View view;
     private ActiveChallengeViewModel viewModel;
     private NavigationManager navigator;
@@ -42,10 +50,31 @@ public class ActiveChallengeFragment extends Fragment {
     }
 
     private void initViews() {
+        challengeNameTextView = view.findViewById(R.id.challengeNameTextView);
+        challengeScoreEditText = view.findViewById(R.id.challengeScoreEditText);
+        finishChallengeButton = view.findViewById(R.id.finishChallengeButton);
+
+        challengeNameTextView.setText(viewModel.getChallenge().getName());
 
     }
 
     private void initListeners() {
+        finishChallengeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                String scoreText = challengeScoreEditText.getText().toString();
+                try {
+                    Integer.parseInt(scoreText);
+                    int score = Integer.parseInt(challengeScoreEditText.getText().toString());
+                    if (viewModel.isNewHighScore(score)) {
+                        viewModel.getChallenge().setScore(score);
+                    }
+                    navigator.goBack();
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getContext(), "Give an integer input", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

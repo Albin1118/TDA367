@@ -18,4 +18,8 @@ public class ActiveChallengeViewModel extends ViewModel {
         }
         return false;
     }
+
+    public IChallenge getChallenge() {
+        return challenge;
+    }
 }

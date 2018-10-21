@@ -7,4 +7,5 @@ public interface IChallenge {
     String getName();
     String getUnit();
     int getScore();
+    void setScore(int score);
 }

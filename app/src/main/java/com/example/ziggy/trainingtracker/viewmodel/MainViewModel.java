@@ -12,13 +12,16 @@ import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
+import com.example.ziggy.trainingtracker.service.ReadLinesFromFileService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
 import com.example.ziggy.trainingtracker.service.SharedPreferencesService;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainViewModel extends AndroidViewModel {
     private ITrainingTracker model;
@@ -28,8 +31,8 @@ public class MainViewModel extends AndroidViewModel {
         model = new TrainingTracker();
         loadExercises();
         loadWorkouts();
- //       loadData();
-
+        loadChallenges();
+        //loadData();
     }
 
 
@@ -84,28 +87,24 @@ public class MainViewModel extends AndroidViewModel {
         model.getWorkouts().addAll(reader.readWorkouts());
     }
 
+    /**
+     * Creates a challenge for each exercise whose name is specified in the challenges.txt file and loads them as a list into the TrainingTracker.
+     * Exercises need to have been loaded first.
+     */
     private void loadChallenges() {
         List<IChallenge> challenges = new ArrayList<>();
-        challenges.add(new Challenge());
-        challenges.add(new Challenge());
-        challenges.add(new Challenge());
+        // Create an exercise map with the exercises' names as keys to easier reach exercises by name
+        Map<String, IExercise> exerciseMap = new HashMap<>();
+        for (IExercise e : model.getExercises()) {
+            exerciseMap.put(e.getName(), e);
+        }
+        ReadLinesFromFileService reader = new ReadLinesFromFileService("res/raw/challenges.txt", "UTF-8");
+        for (String line : reader.readLines()) {
+            if (exerciseMap.containsKey(line))
+                challenges.add(new Challenge(exerciseMap.get(line)));
+        }
+
         model.getChallenges().addAll(challenges);
-    }
-
-    public List<IExercise> getCustomExercises() {
-        return model.getCustomExercises();
-    }
-
-    public List<IWorkout> getCustomWorkouts() {
-        return model.getCustomWorkouts();
-    }
-
-    private void setCustomWorkouts(List<IWorkout> w){
-        model.setCustomWorkouts(w);
-    }
-
-    private void setCustomExercises(List<IExercise> e){
-        model.setCustomExercises(e);
     }
 
     public ITrainingTracker getModel() {
