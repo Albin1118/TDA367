@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.model.IUser;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 
+import com.example.ziggy.trainingtracker.model.User;
 import com.example.ziggy.trainingtracker.model.Workout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -80,6 +82,20 @@ public class SharedPreferencesService {
         editor.apply();
     }
 
+    public void saveUserDataToSharedPreferences(IUser iUser) {
+        // Init sharedpreferences
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        //Convert list to json
+        String listJsonString = userToJsonString(iUser);
+
+        // Add the Json string to the shared prefs dir
+        editor.putString(USER_DATA, listJsonString);
+
+        //Save changes
+        editor.apply();
+    }
+
     /**
      * @return Json string of what is found at the supplied directory, returns NULL if nothing is found
      */
@@ -104,11 +120,29 @@ public class SharedPreferencesService {
 
 
     /**
-     * @param list The list to convert to a json String
+     * @return Json string of what is found at the supplied directory, returns NULL if nothing is found
+     */
+    private String loadUserDataFromSharedPreferences(){
+        // Retrieve json string from shared prefs, return null if string not found
+        String jsonString = sharedPreferences.getString(CUSTOM_WORKOUT_DATA, null);
+
+        return  jsonString;
+    }
+
+    private String userToJsonString(IUser u){
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
+        String jsonString = gson.toJson(u);
+
+        return jsonString;
+    }
+
+
+    /**
+     * @param list The workout list to convert to a json String
      *
      * @return Json string of the list
      */
-
     private String workoutListToJsonString(List<IWorkout> list) {
         // Create gson object for json functionality
         Gson gson = new Gson();
@@ -119,6 +153,11 @@ public class SharedPreferencesService {
         return jsonString;
     }
 
+    /**
+     * @param list The exercise list to convert to a json String
+     *
+     * @return Json string of the list
+     */
     private String exerciseListToJsonString(List<IExercise> list) {
         // Create gson object for json functionality
         Gson gson = new Gson();
@@ -131,6 +170,11 @@ public class SharedPreferencesService {
 
     }
 
+
+    /**
+     * Loads the Exercise List in Json format from SharedPreferences and creates a List of IExercises
+     * @return An ArrayList<IExercise> with the saved Exercises
+     */
     public ArrayList <IExercise> loadUserExerciseList(){
 
         Gson gson = new Gson();
@@ -148,7 +192,18 @@ public class SharedPreferencesService {
         return iExerciseList;
     }
 
+    public User loadUserData(){
+        Gson gson = new Gson();
 
+        User user = gson.fromJson(loadUserDataFromSharedPreferences(), User.class);
+
+        return user;
+    }
+
+    /**
+     * Loads the Workout List in Json format from SharedPreferences and creates a List of IWorkouts
+     * @return An ArrayList<IWorkout> with the saved Workouts
+     */
     public ArrayList <IWorkout> loadUserWorkoutList(){
         Gson gson = new Gson();
 
@@ -164,6 +219,19 @@ public class SharedPreferencesService {
 
         return iWorkoutList;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Keeping for now
 

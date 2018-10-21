@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -12,22 +13,21 @@ import java.util.List;
 public class User implements IUser{
 
     //Add achievements and goals
-    @SerializedName("user_active_workout")
     private ActiveWorkout activeWorkout;
-    @SerializedName("user_finished_workouts_list")
     private List<IWorkout> finishedWorkouts;
-    @SerializedName("user_custom_exercises_list")
     private List<IExercise> customExercises = new ArrayList<>();
-    @SerializedName("user_custom_workouts")
     private List<IWorkout> customWorkouts = new ArrayList<>();
 
     private String username;
 
     //Data related to human qualities of user
+    @Expose
     @SerializedName("user_name")
     private String name;
+    @Expose
     @SerializedName("user_weight")
     private double weight;
+    @Expose
     @SerializedName("user_height")
     private int height;
 

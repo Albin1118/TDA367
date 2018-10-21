@@ -7,11 +7,8 @@ import java.util.List;
 
 public class TrainingTracker implements ITrainingTracker{
     private static ITrainingTracker instance = null;
-    @SerializedName("trainingtracker_user")
     private User user = new User("Test", "Mr Test", 98.5, 210);
-    @SerializedName("trainingtracker_workouts_list")
     private List<IWorkout> workouts = new ArrayList<>();
-    @SerializedName("trainingtracker_exercises_list")
     private List<IExercise> exercises = new ArrayList<>();
     private List<IChallenge> challenges = new ArrayList<>();
 
@@ -84,6 +81,10 @@ public class TrainingTracker implements ITrainingTracker{
 
     public void setExercises(List<IExercise> exercises) {
         this.exercises = exercises;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public IUser getUser() {

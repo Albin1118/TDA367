@@ -9,8 +9,10 @@ import com.example.ziggy.trainingtracker.model.Challenge;
 import com.example.ziggy.trainingtracker.model.IChallenge;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
+import com.example.ziggy.trainingtracker.model.IUser;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 
+import com.example.ziggy.trainingtracker.model.User;
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
 import com.example.ziggy.trainingtracker.service.ReadLinesFromFileService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
@@ -35,34 +37,65 @@ public class MainViewModel extends AndroidViewModel {
         //loadData();
     }
 
-
+    /**
+     * Saves a list to be saved to the SharedPreferences directory
+     * @param list the list to be saved
+     */
     private void saveExerciseData(List<IExercise> list){
         SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
         s.saveExerciseDataToSharedPreferences(list);
     }
 
+    /**
+     * Saves a list to be saved to the SharedPreferences directory
+     * @param list the list to be saved
+     */
     private void saveWorkoutData(List<IWorkout> list){
         SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
         s.saveWorkoutDataToSharedPreferences(list);
     }
 
+    private void saveUserData(IUser iUser){
+        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        s.saveUserDataToSharedPreferences(iUser);
+    }
+
+    /**
+     * Loads Exercises from SharedPreferences and sets them in the model
+     */
     private void loadExerciseDataFromSharedPreferences(){
         SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
         model.setExercises(s.loadUserExerciseList());
     }
 
+    /**
+     * Loads Workouts from SharedPreferences and sets them in the model
+     */
     private void loadWorkoutDataFromSharedPreferences(){
         SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
         model.setWorkouts(s.loadUserWorkoutList());
         loadChallenges();
     }
 
+    private void loadUserDataFromSharedPreferences(){
+        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        model.setUser(s.loadUserData());
+    }
+
+    /**
+     * Loads Exercises and Workouts from SharedPreferences
+     */
     private void loadData(){
+        loadUserDataFromSharedPreferences();
         loadExerciseDataFromSharedPreferences();
         loadWorkoutDataFromSharedPreferences();
     }
 
+    /**
+     * Saves Exercises and Workouts from SharedPreferences
+     */
     public void saveData(){
+        saveUserData(model.getUser());
         saveExerciseData(model.getExercises());
         saveWorkoutData(model.getWorkouts());
     }

@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ITrainingTracker {
@@ -40,4 +41,6 @@ public interface ITrainingTracker {
     void setExercises(List<IExercise> e);
 
     IUser getUser();
+
+    void setUser(User user);
 }
