@@ -19,7 +19,7 @@ import com.example.ziggy.trainingtracker.service.SharedPreferencesService;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -87,9 +87,14 @@ public class MainViewModel extends AndroidViewModel {
         model.getWorkouts().addAll(reader.readWorkouts());
     }
 
+    /**
+     * Creates a challenge for each exercise whose name is specified in the challenges.txt file and loads them as a list into the TrainingTracker.
+     * Exercises need to have been loaded first.
+     */
     private void loadChallenges() {
         List<IChallenge> challenges = new ArrayList<>();
-        Map<String, IExercise> exerciseMap = new LinkedHashMap<>();
+        // Create an exercise map with the exercises' names as keys to easier reach exercises by name
+        Map<String, IExercise> exerciseMap = new HashMap<>();
         for (IExercise e : model.getExercises()) {
             exerciseMap.put(e.getName(), e);
         }
@@ -100,22 +105,6 @@ public class MainViewModel extends AndroidViewModel {
         }
 
         model.getChallenges().addAll(challenges);
-    }
-
-    public List<IExercise> getCustomExercises() {
-        return model.getCustomExercises();
-    }
-
-    public List<IWorkout> getCustomWorkouts() {
-        return model.getCustomWorkouts();
-    }
-
-    private void setCustomWorkouts(List<IWorkout> w){
-        model.setCustomWorkouts(w);
-    }
-
-    private void setCustomExercises(List<IExercise> e){
-        model.setCustomExercises(e);
     }
 
     public ITrainingTracker getModel() {
