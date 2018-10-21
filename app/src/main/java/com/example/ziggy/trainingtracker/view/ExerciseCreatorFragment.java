@@ -68,9 +68,11 @@ public class ExerciseCreatorFragment extends Fragment {
         exerciseUnitEditText = view.findViewById(R.id.exerciseUnitEditText);
         exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);
         exerciseInstructionsEditText = view.findViewById(R.id.exerciseInstructionsEditText);
+
         createExerciseButton = view.findViewById(R.id.createExerciseButton);
         saveExerciseButton = view.findViewById(R.id.saveExerciseButton);
         cancelEditExerciseButton = view.findViewById(R.id.cancelEditExerciseButton);
+
         exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
 
         categories.add(new CategorySpinnerObject("Select category"));

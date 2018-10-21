@@ -27,6 +27,12 @@
     <string name="workout_list_item_description">Workout description</string>
     <string name="workout_list_item_blocks">n blocks</string>
 
+    <string name="current_active_workout_label">Current Workout</string>
+    <string name="start_active_workout_button">Start Workout</string>
+    <string name="active_workout_pause_button">Pause Workout (Hold to cancel workout)</string>
+
+
+
     //Exercise strings
     <string name="exercises_tab">Exercises</string>
 
@@ -40,8 +46,14 @@
     <string name="exercise_creator_instructions1">Instructions:</string>
     <string name="exercise_creator_instructions2">Instructions</string>
     <string name="exercise_creator_button">Create new exercise</string>
+    <string name="exercise_cancel_edit_button">Cancel</string>
+    <string name="exercise_save_button">Save</string>
+    <string name="exercise_edit_button">Edit</string>
+    <string name="exercise_remove_button">Remove</string>
 
     <string name="exercise_detail_view">Exercise name</string>
+    <string name="exercise_detail_view_category">Category</string>
+    <string name="exercise_detail_view_unit">Unit:</string>
 
     <string name="exercise_list_item_name">Exercise name</string>
     <string name="exercise_list_item_description">Exercise description</string>
@@ -53,6 +65,8 @@
     <string name="active_workout_tab">Current workout</string>
     <string name="user_statistics_tab">User Statistics</string>
     <string name="more_tab">More</string>
+
+    <string name="challenge_finish">Finish</string>
 
 
 

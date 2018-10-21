@@ -69,11 +69,9 @@ public class PreActiveWorkoutFragment extends Fragment {
                 View view = super.getView(position, convertView, parent);
 
                 TextView workoutNameTextView = (TextView) view.findViewById(R.id.workoutNameTextView);
-                TextView workoutDescriptionTextView = (TextView) view.findViewById(R.id.workoutDescriptionTextView);
                 TextView workoutBlocksTextView = (TextView) view.findViewById(R.id.workoutBlocksTextView);
 
                 workoutNameTextView.setText(viewModel.getWorkouts().get(position).getName());
-                workoutDescriptionTextView.setText(viewModel.getWorkouts().get(position).getDescription());
                 workoutBlocksTextView.setText(viewModel.getWorkouts().get(position).getNumberofBlocks());
                 return view;
             }

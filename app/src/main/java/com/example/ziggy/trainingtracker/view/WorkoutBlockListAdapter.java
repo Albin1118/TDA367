@@ -46,7 +46,7 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
         exercisesInBlockLinearLayout.removeAllViews();
 
         for (int i = 0; i < exercises.size(); i++){
-            View child = LayoutInflater.from(mContext).inflate(R.layout.item_blockexercise, null);
+            View child = LayoutInflater.from(mContext).inflate(R.layout.item_blockexercise, parent, false);
 
             IExercise e = exercises.get(i);
             int amount = amounts.get(i);
