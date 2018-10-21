@@ -62,6 +62,36 @@ EMOM means that you'll perform a round of the exercises at the start of every mi
             <exercise n="20">Push-ups</exercise>
         </block>
     </workout>
+    <workout name="ExampleWorkout4">
+        <description>This is an example description.</description>
+        <block x="1">
+            <exercise n="10">Push-ups</exercise>
+            <exercise n="1000">Running</exercise>
+        </block>
+        <block x="3">
+            <exercise n="20">Push-ups</exercise>
+        </block>
+    </workout>
+    <workout name="ExampleWorkout5">
+        <description>This is an example description.</description>
+        <block x="1">
+            <exercise n="10">Push-ups</exercise>
+            <exercise n="1000">Running</exercise>
+        </block>
+        <block x="3">
+            <exercise n="20">Push-ups</exercise>
+        </block>
+    </workout>
+    <workout name="ExampleWorkout6">
+        <description>This is an example description.</description>
+        <block x="1">
+            <exercise n="10">Push-ups</exercise>
+            <exercise n="1000">Running</exercise>
+        </block>
+        <block x="3">
+            <exercise n="20">Push-ups</exercise>
+        </block>
+    </workout>
     <workout name="Lunge Ball Burner">
         <description>For time.
 

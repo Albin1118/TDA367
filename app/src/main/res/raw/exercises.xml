@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <exercises>
+
+    <exercise name="Bench Press">
+        <description></description>
+        <instructions></instructions>
+        <unit>reps</unit>
+        <category>ARMS</category>
+    </exercise>
+
+    <exercise name="Burpees">
+        <description></description>
+        <instructions></instructions>
+        <unit>reps</unit>
+        <category>CARDIO</category>
+    </exercise>
+
+    <exercise name="Deadlift">
+        <description></description>
+        <instructions></instructions>
+        <unit>reps</unit>
+        <category>ABS</category>
+        <category>BACK</category>
+        <category>LEGS</category>
+    </exercise>
+
     <exercise name="Medicine Ball Cleans">
         <description></description>
         <instructions></instructions>
@@ -29,6 +53,7 @@
         <description>This is an example description for running.</description>
         <instructions>This is the example instructions for running</instructions>
         <unit>meters</unit>
+        <category>CARDIO</category>
         <category>LEGS</category>
     </exercise>
 
