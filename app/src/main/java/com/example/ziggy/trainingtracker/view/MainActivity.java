@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
         initComponents();
         initStartingView();
         initListeners();
-       // loadData();
+        loadData();
     }
 
 
@@ -67,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
     private void saveData(){
         viewModel.saveData();
     }
-
-
 
     private void initComponents() {
         mBottomNavBar = findViewById(R.id.bottom_navigation_bar);
