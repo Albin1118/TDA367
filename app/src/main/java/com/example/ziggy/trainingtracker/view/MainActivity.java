@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkout;
+import com.example.ziggy.trainingtracker.viewmodel.ActiveWorkoutViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseCreatorViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseDetailViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
@@ -163,10 +164,6 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
 
     }
 
-    public boolean onGoingActiveWorkout(){
-        return viewModel.checkActiveWorkoutStatus();
-    }
-
     /**
      * Sets a fragment in the fragment container to be displayed on the screen.
      * @param f The fragment to set as the displayed fragment
@@ -247,25 +244,24 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
 
     @Override
     public void navigateActiveWorkout() {
-        clearBackStack();
-        setFragmentContainerContentFromTab(new PreActiveWorkoutFragment());
+        ActiveWorkoutViewModel viewModel = ViewModelProviders.of(this).get(ActiveWorkoutViewModel.class);
+        viewModel.init(this.viewModel.getModel());
 
-        /* TODO: Allow user to navigate out of the active workout and later come back in by clicking on the active workout tab
-        if (onGoingActiveWorkout()) {
-            setFragmentContainerContentFromTab(new ActiveWorkoutFragment());
+        clearBackStack();
+        if (viewModel.isWorkoutActive()) {
+            setFragmentContainerContentFromTab(ActiveWorkoutFragment.newInstance(viewModel, this));
         } else {
-            setFragmentContainerContentFromTab(new PreActiveWorkoutFragment());
-        }*/
+            setFragmentContainerContentFromTab(PreActiveWorkoutFragment.newInstance(viewModel, this));
+        }
     }
 
     @Override
     public void navigateActiveWorkout(IWorkout workout) {
-        viewModel.setActiveWorkoutStatus(true);
-        ActiveWorkoutFragment fragment = new ActiveWorkoutFragment();
-        fragment.setCurrentWorkout(workout);
+        ActiveWorkoutViewModel viewModel = ViewModelProviders.of(this).get(ActiveWorkoutViewModel.class);
+        viewModel.init(this.viewModel.getModel(), workout);
+
         clearBackStack();
-        setFragmentContainerContentFromTab(fragment);
-        Toast.makeText(this, "Workout selected!", Toast.LENGTH_SHORT).show();
+        setFragmentContainerContentFromTab(ActiveWorkoutFragment.newInstance(viewModel, this));
     }
 
     @Override

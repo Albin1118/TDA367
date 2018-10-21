@@ -18,13 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
-import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
-import com.example.ziggy.trainingtracker.model.Workout;
-import com.example.ziggy.trainingtracker.model.WorkoutBlock;
-
-import java.util.List;
-
+import com.example.ziggy.trainingtracker.viewmodel.ActiveWorkoutViewModel;
 
 public class ActiveWorkoutFragment extends Fragment {
 
@@ -33,36 +28,40 @@ public class ActiveWorkoutFragment extends Fragment {
     private TextView currentWorkoutName;
     private ListView currentWorkoutBlockListView;
 
-    private IWorkout currentWorkout;
-    private List<IWorkoutBlock> currentWorkoutBlocks;
-
-    private MainActivity parentActivity;
-    private NavigationManager navigationManager;
     private View view;
-
-    private ArrayAdapter<IWorkoutBlock> adapter;
+    private ActiveWorkoutViewModel viewModel;
+    private NavigationManager navigator;
 
     private long lastPause;
-
     private Chronometer mChronometer;
+
+    public static ActiveWorkoutFragment newInstance(ActiveWorkoutViewModel viewModel, NavigationManager navigator) {
+        ActiveWorkoutFragment fragment = new ActiveWorkoutFragment();
+        fragment.setViewModel(viewModel);
+        fragment.setNavigator(navigator);
+        return fragment;
+    }
+
+    public void setViewModel(ActiveWorkoutViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void setNavigator(NavigationManager navigator) {
+        this.navigator = navigator;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_active_workout, container, false);
-        parentActivity = ((MainActivity)getActivity());
-        navigationManager = (MainActivity)getActivity();
-        navigationManager.setNavBarState(R.id.nav_active_workout);
-        navigationManager.hideNavigationBar();
+        navigator.setNavBarState(R.id.nav_active_workout);
+        navigator.hideNavigationBar();
 
         initViews();
         initListeners();
         showStartButton();
 
-        currentWorkoutName.setText(currentWorkout.getName());
-
-
-        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), currentWorkout.getBlocks());
+        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getActiveWorkout().getBlocks());
         currentWorkoutBlockListView.setAdapter(adapter);
 
         return view;
@@ -71,7 +70,7 @@ public class ActiveWorkoutFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        navigationManager.showNavigationBar();
+        navigator.showNavigationBar();
     }
 
     private void initViews() {
@@ -82,8 +81,7 @@ public class ActiveWorkoutFragment extends Fragment {
         mChronometer = view.findViewById(R.id.chronometer);
 
         currentWorkoutBlockListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-
+        currentWorkoutName.setText(viewModel.getActiveWorkout().getName());
     }
 
     private void initListeners() {
@@ -91,12 +89,11 @@ public class ActiveWorkoutFragment extends Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                viewModel.startWorkout();
 
                 if (lastPause != 0){
                     mChronometer.setBase(mChronometer.getBase() + SystemClock.elapsedRealtime() - lastPause);
-                }
-
-                else {
+                } else {
                     mChronometer.setBase(SystemClock.elapsedRealtime());
                 }
 
@@ -124,7 +121,8 @@ public class ActiveWorkoutFragment extends Fragment {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
-                        navigationManager.navigateHome();
+                        viewModel.finishWorkout();
+                        navigator.navigateHome();
                         Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
 
                     }
@@ -161,11 +159,6 @@ public class ActiveWorkoutFragment extends Fragment {
     private void showStartButton(){
         startButton.setVisibility(View.VISIBLE);
         pauseButton.setVisibility(View.INVISIBLE);
-    }
-
-
-    public void setCurrentWorkout(IWorkout currentWorkout) {
-        this.currentWorkout = currentWorkout;
     }
 }
 

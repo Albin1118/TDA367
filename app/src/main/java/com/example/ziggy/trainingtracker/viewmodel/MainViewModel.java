@@ -23,8 +23,6 @@ import java.util.List;
 public class MainViewModel extends ViewModel {
     private ITrainingTracker model;
 
-    private boolean activeWorkoutStatus;
-
     List<IWorkoutBlock>workoutBlocks= new ArrayList<>();
 
     public IWorkout buildWorkout;
@@ -35,17 +33,7 @@ public class MainViewModel extends ViewModel {
         model = new TrainingTracker();
         loadExercises();
         loadWorkouts();
-        activeWorkoutStatus = false;
         createCategoryList();
-    }
-
-
-    public boolean checkActiveWorkoutStatus() {
-        return activeWorkoutStatus;
-    }
-
-    public void setActiveWorkoutStatus(boolean activeWorkoutStatus) {
-        this.activeWorkoutStatus = activeWorkoutStatus;
     }
 
     public List<IExercise> getExercises() {
