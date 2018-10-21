@@ -132,8 +132,6 @@ public class SharedPreferencesService {
     }
 
     public ArrayList <IExercise> loadUserExerciseList(){
-        //Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(IExercise.class, new InterfaceAdapter<IExercise>())
-        //        .create();
 
         Gson gson = new Gson();
 
@@ -145,17 +143,13 @@ public class SharedPreferencesService {
             exerciseList = new ArrayList<>();
         }
 
-        ArrayList<IExercise> exerciseArrayList = new ArrayList<>(exerciseList);
+        ArrayList<IExercise> iExerciseList = new ArrayList<>(exerciseList);
 
-        return exerciseArrayList;
+        return iExerciseList;
     }
 
 
     public ArrayList <IWorkout> loadUserWorkoutList(){
-        //Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(IWorkout.class, new InterfaceAdapter<IWorkout>())
-        //        .setPrettyPrinting()
-        //        .create();
-
         Gson gson = new Gson();
 
         Type workoutListType = new TypeToken<ArrayList<Workout>>(){}.getType();
@@ -166,9 +160,9 @@ public class SharedPreferencesService {
             workoutList = new ArrayList<>();
         }
 
-        ArrayList<IWorkout> workoutArrayList = new ArrayList<>(workoutList);
+        ArrayList<IWorkout> iWorkoutList = new ArrayList<>(workoutList);
 
-        return workoutArrayList;
+        return iWorkoutList;
     }
 
     // Keeping for now
