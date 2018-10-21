@@ -135,8 +135,6 @@ public class ActiveWorkoutFragment extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 showExitDialog();
-                viewModel.finishWorkout();
-                navigator.navigateHome();
                 return true;
             }
         });
@@ -184,6 +182,7 @@ public class ActiveWorkoutFragment extends Fragment {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
                 navigator.navigateHome();
+                viewModel.finishWorkout();
                 viewModel.clearElapsedTime();
                 Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
             }
