@@ -32,5 +32,10 @@ public interface ITrainingTracker {
     void setCustomWorkouts(List<IWorkout> w);
 
     void setCustomExercises(List<IExercise> e);
+
+    void setWorkouts(List<IWorkout> w);
+
+    void setExercises(List<IExercise> e);
+
     IUser getUser();
 }

@@ -1,31 +1,69 @@
 package com.example.ziggy.trainingtracker.viewmodel;
 
-import android.arch.lifecycle.ViewModel;
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.example.ziggy.trainingtracker.model.Challenge;
 import com.example.ziggy.trainingtracker.model.IChallenge;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
+
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.example.ziggy.trainingtracker.service.SharedPreferencesService;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainViewModel extends ViewModel {
+public class MainViewModel extends AndroidViewModel {
     private ITrainingTracker model;
 
-    public MainViewModel() {
+    public MainViewModel(Application app) {
+        super(app);
         model = new TrainingTracker();
         loadExercises();
         loadWorkouts();
+ //       loadData();
+
+    }
+
+
+    private void saveExerciseData(List<IExercise> list){
+        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        s.saveExerciseDataToSharedPreferences(list);
+    }
+
+    private void saveWorkoutData(List<IWorkout> list){
+        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        s.saveWorkoutDataToSharedPreferences(list);
+    }
+
+    private void loadExerciseDataFromSharedPreferences(){
+        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        model.setExercises(s.loadUserExerciseList());
+    }
+
+    private void loadWorkoutDataFromSharedPreferences(){
+        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        model.setWorkouts(s.loadUserWorkoutList());
         loadChallenges();
     }
+
+    private void loadData(){
+        loadExerciseDataFromSharedPreferences();
+        loadWorkoutDataFromSharedPreferences();
+    }
+
+    public void saveData(){
+        saveExerciseData(model.getExercises());
+        saveWorkoutData(model.getWorkouts());
+    }
+
 
     /**
      * Loads a list of base exercises from an xml file into the TrainingTracker.
@@ -68,28 +106,6 @@ public class MainViewModel extends ViewModel {
 
     private void setCustomExercises(List<IExercise> e){
         model.setCustomExercises(e);
-    }
-
-    public void loadUserCustomListsFromJson(String customWorkoutListJson, String customExerciseListJson){
-        Gson gson = new Gson();
-
-        Type workoutListType = new TypeToken<ArrayList<IWorkout>>(){}.getType();
-        Type exerciseListType = new TypeToken<ArrayList<IExercise>>(){}.getType();
-
-        List <IWorkout> w = gson.fromJson(customWorkoutListJson, workoutListType);
-        List <IExercise> e = gson.fromJson(customExerciseListJson, exerciseListType);
-
-        if (w == null){
-            w = new ArrayList<>();
-        }
-
-        if (e == null){
-            e = new ArrayList<>();
-        }
-
-        setCustomWorkouts(w);
-        setCustomExercises(e);
-
     }
 
     public ITrainingTracker getModel() {

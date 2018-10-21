@@ -2,7 +2,7 @@ package com.example.ziggy.trainingtracker.view;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.SharedPreferences;
+
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.model.IChallenge;
 import com.example.ziggy.trainingtracker.model.IExercise;
@@ -26,7 +25,6 @@ import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutCreatorViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutDetailViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutTabViewModel;
-import com.google.gson.Gson;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationManager {
@@ -34,91 +32,23 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
     private BottomNavigationView mBottomNavBar;
     MainViewModel viewModel;
 
-    public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String CUSTOM_EXERCISE_DATA = "customExerciseData";
-    public static final String CUSTOM_WORKOUT_DATA =  "customWorkoutData";
-    public static final String USER_DATA = "userData";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(getSharedPreferences("Themes", 0).getInt("theme", 0));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        viewModel = new MainViewModel(getApplication());
 
         initComponents();
         initStartingView();
         initListeners();
-        //TODO: Fix. This crashes
-        //updateViewModelData();
-
     }
+
 
 
     private void saveData(){
-        // Init sharedpreferences
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        // Create gson object for json functionality
-        Gson gson = new Gson();
-
-        // Get current state of trainingtracker
-        String customExerciseListJson = gson.toJson(viewModel.getCustomExercises());
-        String customWorkoutListJson = gson.toJson(viewModel.getCustomWorkouts());
-
-        // Add the Json strings to the shared prefs dir
-        editor.putString(CUSTOM_EXERCISE_DATA, customExerciseListJson);
-        editor.putString(CUSTOM_WORKOUT_DATA, customWorkoutListJson);
-        //Save changes
-        editor.apply();
-
-        /*
-        System.out.println("Saved following Data to Shared Preferences");
-        System.out.println(customExerciseListJson);
-        System.out.println(customWorkoutListJson);
-        */
-
+        viewModel.saveData();
     }
-
-
-    private String loadCustomExerciseData(){
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        Gson gson = new Gson();
-
-        // Retrieve json string from shared prefs, return null if string not found
-        String customExerciseListJson = sharedPreferences.getString(CUSTOM_EXERCISE_DATA, null);
-
-        System.out.println("LOADING DATA ");
-        System.out.println(customExerciseListJson);
-
-        return customExerciseListJson;
-
-    }
-
-
-    private String loadCustomWorkoutData(){
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        Gson gson = new Gson();
-
-        // Retrieve json string from shared prefs, return null if string not found
-        String customWorkoutListJson = sharedPreferences.getString(CUSTOM_WORKOUT_DATA, null);
-
-        System.out.println("LOADING DATA ");
-        System.out.println(customWorkoutListJson);
-
-        return  customWorkoutListJson;
-    }
-
-
-
-
-    private void updateViewModelData(){
-        viewModel.loadUserCustomListsFromJson(loadCustomWorkoutData(), loadCustomExerciseData());
-    }
-
-
 
     private void initComponents() {
         mBottomNavBar = findViewById(R.id.bottom_navigation_bar);

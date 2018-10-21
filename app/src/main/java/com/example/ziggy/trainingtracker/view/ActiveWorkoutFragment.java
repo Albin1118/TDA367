@@ -1,11 +1,13 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +57,7 @@ public class ActiveWorkoutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_active_workout, container, false);
         navigator.setNavBarState(R.id.nav_active_workout);
-        navigator.hideNavigationBar();
+        //navigator.hideNavigationBar();
 
         initViews();
         initListeners();
@@ -70,6 +72,7 @@ public class ActiveWorkoutFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        saveViewModelElapsedTimeValue();
         navigator.showNavigationBar();
     }
 
@@ -79,10 +82,18 @@ public class ActiveWorkoutFragment extends Fragment {
         currentWorkoutName = view.findViewById(R.id.current_workout_name);
         currentWorkoutBlockListView = view.findViewById(R.id.active_workout_exercise_list_view);
         mChronometer = view.findViewById(R.id.chronometer);
-
         currentWorkoutBlockListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         currentWorkoutName.setText(viewModel.getActiveWorkout().getName());
+
+        // If there is a stored elapsed time value,
+        // set the chronometer starting time textview to a string formatted to that value
+        if (viewModel.getElapsedTime() != 0) {
+            mChronometer.setText(viewModel.getFormattedElapsedTime());
+        }
     }
+
+
+
 
     private void initListeners() {
 
@@ -91,13 +102,22 @@ public class ActiveWorkoutFragment extends Fragment {
             public void onClick(View view) {
                 viewModel.startWorkout();
 
-                if (lastPause != 0){
-                    mChronometer.setBase(mChronometer.getBase() + SystemClock.elapsedRealtime() - lastPause);
-                } else {
-                    mChronometer.setBase(SystemClock.elapsedRealtime());
+                // If there is not a stored elapsed time value in the viewmodel, start from default and use standard pause functionality
+                if (viewModel.getElapsedTime() == 0) {
+                    if (lastPause != 0) {
+                        mChronometer.setBase(mChronometer.getBase() + SystemClock.elapsedRealtime() - lastPause);
+                    } else {
+                        mChronometer.setBase(SystemClock.elapsedRealtime());
+                    }
+                }
+
+                // If there is a stored elapsed time value, set the base to count from that value
+                else{
+                    mChronometer.setBase(SystemClock.elapsedRealtime() - viewModel.getElapsedTime());
                 }
 
                 mChronometer.start();
+
                 showPauseButton();
             }
         });
@@ -114,28 +134,9 @@ public class ActiveWorkoutFragment extends Fragment {
         pauseButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle(R.string.app_name);
-                builder.setMessage("Are you sure you want to stop the current workout?");
-                builder.setIcon(R.drawable.ic_wb_incandescent_black_24dp);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                        viewModel.finishWorkout();
-                        navigator.navigateHome();
-                        Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-
-                AlertDialog alert = builder.create();
-                alert.show();
-
+                showExitDialog();
+                viewModel.finishWorkout();
+                navigator.navigateHome();
                 return true;
             }
         });
@@ -150,6 +151,54 @@ public class ActiveWorkoutFragment extends Fragment {
     }
 
 
+    // Adds a listener for a key event (in this case the back button)
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    //showExitDialog(); // Works, but for now the intent is to allow the user to switch tabs
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+
+    private void showExitDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(R.string.app_name);
+        builder.setMessage("Are you sure you want to stop the current workout?");
+        builder.setIcon(R.drawable.ic_wb_incandescent_black_24dp);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                navigator.navigateHome();
+                viewModel.clearElapsedTime();
+                Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+
     private void showPauseButton(){
         startButton.setVisibility(View.INVISIBLE);
         pauseButton.setVisibility(View.VISIBLE);
@@ -160,6 +209,13 @@ public class ActiveWorkoutFragment extends Fragment {
         startButton.setVisibility(View.VISIBLE);
         pauseButton.setVisibility(View.INVISIBLE);
     }
+
+    public void saveViewModelElapsedTimeValue(){
+        long elapsedTime = SystemClock.elapsedRealtime() - mChronometer.getBase();
+        viewModel.saveElapsedTime((int)elapsedTime);
+    }
+
+
 }
 
 
