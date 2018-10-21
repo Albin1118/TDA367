@@ -95,6 +95,6 @@ public class ExerciseTabFragment extends Fragment {
     }
 
     private void initListeners() {
-
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
 }
