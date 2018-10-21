@@ -116,6 +116,8 @@ public class ActiveWorkoutFragment extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 showExitDialog();
+                viewModel.finishWorkout();
+                navigator.navigateHome();
                 return true;
             }
         });

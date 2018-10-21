@@ -8,21 +8,12 @@ import android.support.annotation.RequiresApi;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
-import com.example.ziggy.trainingtracker.model.Workout;
-import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
-import com.example.ziggy.trainingtracker.service.InterfaceAdapter;
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
 import com.example.ziggy.trainingtracker.service.SharedPreferencesService;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
@@ -33,94 +24,41 @@ public class MainViewModel extends AndroidViewModel {
         model = new TrainingTracker();
         loadExercises();
         loadWorkouts();
+        loadData();
 
     }
 
 
     private void saveExerciseData(List<IExercise> list){
-        SharedPreferencesService sharedPreferencesService = new SharedPreferencesService(getApplication().getApplicationContext());
-        sharedPreferencesService.saveExerciseDataToSharedPreferences(list);
+        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        s.saveExerciseDataToSharedPreferences(list);
     }
 
     private void saveWorkoutData(List<IWorkout> list){
-        SharedPreferencesService sharedPreferencesService = new SharedPreferencesService(getApplication().getApplicationContext());
-        sharedPreferencesService.saveWorkoutDataToSharedPreferences(list);
+        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        s.saveWorkoutDataToSharedPreferences(list);
     }
 
-    private String loadExerciseData(){
-        SharedPreferencesService sharedPreferencesService = new SharedPreferencesService(getApplication().getApplicationContext());
-        String jsonData = sharedPreferencesService.loadExerciseDataFromSharedPreferences();
-        System.out.println(jsonData);
-
-        return jsonData;
+    private void loadExerciseDataFromSharedPreferences(){
+        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        model.setExercises(s.loadUserExerciseList());
     }
 
-    private String loadWorkoutData(){
-        SharedPreferencesService sharedPreferencesService = new SharedPreferencesService(getApplication().getApplicationContext());
-        String jsonData = sharedPreferencesService.loadWorkoutDataFromSharedPreferences();
-        System.out.println(jsonData);
-
-        return jsonData;
+    private void loadWorkoutDataFromSharedPreferences(){
+        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        model.setWorkouts(s.loadUserWorkoutList());
     }
 
-    private void loadUserExerciseList(){
-        Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(IExercise.class, new InterfaceAdapter<IExercise>())
-                .create();
-
-        Type exerciseListType = new TypeToken<ArrayList<IExercise>>(){}.getType();
-
-        ArrayList <IExercise> exerciseList = gson.fromJson(loadExerciseData(), exerciseListType);
-
-        if (exerciseList == null){
-            exerciseList = new ArrayList<>();
-        }
-
-        //setCustomExercises(convertToIExercise(exerciseList));
-    }
-
-
-    private void loadUserWorkoutList(){
-        Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(IWorkout.class, new InterfaceAdapter<IWorkout>())
-                .setPrettyPrinting()
-                .create();
-
-        //Gson gson = new Gson();
-
-        Type workoutListType = new TypeToken<ArrayList<IWorkout>>(){}.getType();
-
-        ArrayList <IWorkout> workoutList = gson.fromJson(loadWorkoutData(), workoutListType);
-
-        if (workoutList == null){
-            workoutList = new ArrayList<>();
-        }
-
-        //setCustomWorkouts(convertToIWorkout(workoutList));
-    }
-
-    /*
-    private List<IWorkout> convertToIWorkout(List<Workout> w){
-        ArrayList<IWorkout> iWorkouts = new ArrayList<>(w);
-
-        return iWorkouts;
-    }
-
-    private List<IExercise> convertToIExercise(List<Exercise> e){
-        ArrayList<IExercise> iExercises = new ArrayList<>(e);
-
-        return iExercises;
-    }
-
-    */
-
-    public void loadData(){
-        loadUserExerciseList();
-        loadUserWorkoutList();
+    private void loadData(){
+        loadExerciseDataFromSharedPreferences();
+        loadWorkoutDataFromSharedPreferences();
     }
 
     public void saveData(){
         saveExerciseData(model.getExercises());
         saveWorkoutData(model.getWorkouts());
     }
+
 
     /**
      * Loads a list of base exercises from an xml file into the TrainingTracker.

@@ -4,17 +4,17 @@ package com.example.ziggy.trainingtracker.service;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
-
+import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 
 import com.example.ziggy.trainingtracker.model.Workout;
-import com.example.ziggy.trainingtracker.model.Exercise;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -84,7 +84,7 @@ public class SharedPreferencesService {
      * @return Json string of what is found at the supplied directory, returns NULL if nothing is found
      */
 
-    public String loadExerciseDataFromSharedPreferences() {
+    private String loadExerciseDataFromSharedPreferences() {
         // Retrieve json string from shared prefs, return null if string not found
         String jsonString = sharedPreferences.getString(CUSTOM_EXERCISE_DATA, null);
 
@@ -95,7 +95,7 @@ public class SharedPreferencesService {
      * @return Json string of what is found at the supplied directory, returns NULL if nothing is found
      */
 
-    public String loadWorkoutDataFromSharedPreferences() {
+    private String loadWorkoutDataFromSharedPreferences() {
         // Retrieve json string from shared prefs, return null if string not found
         String jsonString = sharedPreferences.getString(CUSTOM_WORKOUT_DATA, null);
 
@@ -129,6 +129,46 @@ public class SharedPreferencesService {
         return jsonString;
 
 
+    }
+
+    public ArrayList <IExercise> loadUserExerciseList(){
+        //Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(IExercise.class, new InterfaceAdapter<IExercise>())
+        //        .create();
+
+        Gson gson = new Gson();
+
+        Type exerciseListType = new TypeToken<ArrayList<Exercise>>(){}.getType();
+
+        List <Exercise> exerciseList = gson.fromJson(loadExerciseDataFromSharedPreferences(), exerciseListType);
+
+        if (exerciseList == null){
+            exerciseList = new ArrayList<>();
+        }
+
+        ArrayList<IExercise> exerciseArrayList = new ArrayList<>(exerciseList);
+
+        return exerciseArrayList;
+    }
+
+
+    public ArrayList <IWorkout> loadUserWorkoutList(){
+        //Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(IWorkout.class, new InterfaceAdapter<IWorkout>())
+        //        .setPrettyPrinting()
+        //        .create();
+
+        Gson gson = new Gson();
+
+        Type workoutListType = new TypeToken<ArrayList<Workout>>(){}.getType();
+
+        List <Workout> workoutList = gson.fromJson(loadWorkoutDataFromSharedPreferences(), workoutListType);
+
+        if (workoutList == null){
+            workoutList = new ArrayList<>();
+        }
+
+        ArrayList<IWorkout> workoutArrayList = new ArrayList<>(workoutList);
+
+        return workoutArrayList;
     }
 
     // Keeping for now
@@ -166,6 +206,22 @@ public class SharedPreferencesService {
 
         return jsonString;
     }
+    */
+
+
+       /*
+    private List<IWorkout> convertToIWorkout(List<Workout> w){
+        ArrayList<IWorkout> iWorkouts = new ArrayList<>(w);
+
+        return iWorkouts;
+    }
+
+    private List<IExercise> convertToIExercise(List<Exercise> e){
+        ArrayList<IExercise> iExercises = new ArrayList<>(e);
+
+        return iExercises;
+    }
+
     */
 
 }

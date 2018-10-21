@@ -70,8 +70,15 @@ public class TrainingTracker implements ITrainingTracker{
         user.setCustomWorkouts(w);
     }
 
-    public void setCustomExercises(List<IExercise> e){
-        user.setCustomExercises(e);
+    public void setCustomExercises(List<IExercise> e){ user.setCustomExercises(e);
+    }
+
+    public void setWorkouts(List<IWorkout> workouts) {
+        this.workouts = workouts;
+    }
+
+    public void setExercises(List<IExercise> exercises) {
+        this.exercises = exercises;
     }
 
     public IUser getUser() {

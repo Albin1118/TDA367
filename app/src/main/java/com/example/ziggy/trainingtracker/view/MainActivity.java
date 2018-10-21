@@ -2,7 +2,7 @@ package com.example.ziggy.trainingtracker.view;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.SharedPreferences;
+
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkout;
@@ -24,7 +23,6 @@ import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutCreatorViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutDetailViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutTabViewModel;
-import com.google.gson.Gson;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationManager {
@@ -32,37 +30,19 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
     private BottomNavigationView mBottomNavBar;
     MainViewModel viewModel;
 
-    public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String CUSTOM_EXERCISE_DATA = "customExerciseData";
-    public static final String CUSTOM_WORKOUT_DATA =  "customWorkoutData";
-    public static final String USER_DATA = "userData";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(getSharedPreferences("Themes", 0).getInt("theme", 0));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewModel = new MainViewModel(getApplication());
-        //viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
         initComponents();
         initStartingView();
         initListeners();
-        loadData();
     }
 
 
-
-
-
-
-
-
-
-    private void loadData(){
-        viewModel.loadData();
-    }
 
     private void saveData(){
         viewModel.saveData();
