@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <exercises>
-    <exercise name="medicine-ball cleans">
+    <exercise name="Medicine Ball Cleans">
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
@@ -9,7 +9,7 @@
         <category>LEGS</category>
     </exercise>
 
-    <exercise name="pull-ups">
+    <exercise name="Pull-ups">
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
@@ -17,7 +17,7 @@
         <category>BACK</category>
     </exercise>
 
-    <exercise name="push-ups">
+    <exercise name="Push-ups">
         <description>This is an example description for a push-up.</description>
         <instructions>This is the example instructions for a push-up</instructions>
         <unit>reps</unit>
@@ -25,31 +25,28 @@
         <category>CHEST</category>
     </exercise>
 
-    <exercise name="running">
+    <exercise name="Running">
         <description>This is an example description for running.</description>
         <instructions>This is the example instructions for running</instructions>
         <unit>meters</unit>
         <category>LEGS</category>
     </exercise>
 
-
-    <exercise name="sit-ups">
+    <exercise name="Sit-ups">
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
         <category>ABS</category>
     </exercise>
 
-
-    <exercise name="squats">
+    <exercise name="Squats">
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
         <category>LEGS</category>
     </exercise>
 
-
-    <exercise name="walking lunges">
+    <exercise name="Walking Lunges">
         <description></description>
         <instructions></instructions>
         <unit>meters</unit>

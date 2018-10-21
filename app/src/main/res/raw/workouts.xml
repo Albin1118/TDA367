@@ -7,10 +7,10 @@ If the century mark proves to be too much, scale the pull-ups and push-ups down 
 
 Aim to finish in 20 minutes for a respectable mark, according to WODcalculator.com.</description>
         <block x="1">
-            <exercise n="100">pull-ups</exercise>
-            <exercise n="100">push-ups</exercise>
-            <exercise n="100">sit-ups</exercise>
-            <exercise n="100">squats</exercise>
+            <exercise n="100">Pull-ups</exercise>
+            <exercise n="100">Push-ups</exercise>
+            <exercise n="100">Sit-ups</exercise>
+            <exercise n="100">Squats</exercise>
         </block>
     </workout>
     <workout name="Candy">
@@ -18,9 +18,9 @@ Aim to finish in 20 minutes for a respectable mark, according to WODcalculator.c
 
 Complete 5 rounds of this workout as fast as possible. Beginners can aim to finish in 30 minutes, according to WODcalculator.com.</description>
         <block x="5">
-            <exercise n="20">pull-ups</exercise>
-            <exercise n="40">push-ups</exercise>
-            <exercise n="60">squats</exercise>
+            <exercise n="20">Pull-ups</exercise>
+            <exercise n="40">Push-ups</exercise>
+            <exercise n="60">Squats</exercise>
         </block>
     </workout>
     <workout name="Chelsea">
@@ -28,38 +28,38 @@ Complete 5 rounds of this workout as fast as possible. Beginners can aim to fini
 
 EMOM means that you'll perform a round of the exercises at the start of every minute, resting until the start of the next 60 seconds. That will get harder, and eventually you might not have any time to rest.</description>
         <block x="30">
-            <exercise n="5">pull-ups</exercise>
-            <exercise n="10">push-ups</exercise>
-            <exercise n="15">squats</exercise>
+            <exercise n="5">Pull-ups</exercise>
+            <exercise n="10">Push-ups</exercise>
+            <exercise n="15">Squats</exercise>
         </block>
     </workout>
     <workout name="ExampleWorkout1">
         <description>This is an example description.</description>
         <block x="1">
-            <exercise n="10">push-ups</exercise>
-            <exercise n="1000">running</exercise>
+            <exercise n="10">Push-ups</exercise>
+            <exercise n="1000">Running</exercise>
         </block>
         <block x="3">
-            <exercise n="20">push-ups</exercise>
+            <exercise n="20">Push-ups</exercise>
         </block>
     </workout>
     <workout name="ExampleWorkout2">
         <block x="1">
-            <exercise n="10">push-ups</exercise>
-            <exercise n="1000">running</exercise>
+            <exercise n="10">Push-ups</exercise>
+            <exercise n="1000">Running</exercise>
         </block>
         <block x="3">
-            <exercise n="20">push-ups</exercise>
+            <exercise n="20">Push-ups</exercise>
         </block>
     </workout>
     <workout name="ExampleWorkout3">
         <description>This is an example description.</description>
         <block x="1">
-            <exercise n="10">push-ups</exercise>
-            <exercise n="1000">running</exercise>
+            <exercise n="10">Push-ups</exercise>
+            <exercise n="1000">Running</exercise>
         </block>
         <block x="3">
-            <exercise n="20">push-ups</exercise>
+            <exercise n="20">Push-ups</exercise>
         </block>
     </workout>
     <workout name="Lunge Ball Burner">
@@ -67,11 +67,11 @@ EMOM means that you'll perform a round of the exercises at the start of every mi
 
 See how quickly you can finish the circuit using proper form. Shoot for a time under 30 minutes, according to feedback from the community on CrossFit.com.</description>
         <block x="1">
-            <exercise n="100">walking lunges</exercise>
-            <exercise n="100">push-ups</exercise>
-            <exercise n="100">medicine-ball cleans</exercise>
-            <exercise n="100">pull-ups</exercise>
-            <exercise n="100">walking lunges</exercise>
+            <exercise n="100">Walking Lunges</exercise>
+            <exercise n="100">Push-ups</exercise>
+            <exercise n="100">Medicine Ball Cleans</exercise>
+            <exercise n="100">Pull-ups</exercise>
+            <exercise n="100">Walking Lunges</exercise>
         </block>
     </workout>
 </workouts>
