@@ -12,13 +12,16 @@ import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
+import com.example.ziggy.trainingtracker.service.ReadLinesFromFileService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
 import com.example.ziggy.trainingtracker.model.TrainingTracker;
 import com.example.ziggy.trainingtracker.service.SharedPreferencesService;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainViewModel extends AndroidViewModel {
     private ITrainingTracker model;
@@ -86,9 +89,16 @@ public class MainViewModel extends AndroidViewModel {
 
     private void loadChallenges() {
         List<IChallenge> challenges = new ArrayList<>();
-        challenges.add(new Challenge());
-        challenges.add(new Challenge());
-        challenges.add(new Challenge());
+        Map<String, IExercise> exerciseMap = new LinkedHashMap<>();
+        for (IExercise e : model.getExercises()) {
+            exerciseMap.put(e.getName(), e);
+        }
+        ReadLinesFromFileService reader = new ReadLinesFromFileService("res/raw/challenges.txt", "UTF-8");
+        for (String line : reader.readLines()) {
+            if (exerciseMap.containsKey(line))
+                challenges.add(new Challenge(exerciseMap.get(line)));
+        }
+
         model.getChallenges().addAll(challenges);
     }
 
