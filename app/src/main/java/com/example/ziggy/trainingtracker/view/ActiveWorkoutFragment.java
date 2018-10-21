@@ -57,7 +57,7 @@ public class ActiveWorkoutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_active_workout, container, false);
         navigator.setNavBarState(R.id.nav_active_workout);
-        navigator.hideNavigationBar();
+        //navigator.hideNavigationBar();
 
         initViews();
         initListeners();
@@ -72,6 +72,7 @@ public class ActiveWorkoutFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        saveViewModelElapsedTimeValue();
         navigator.showNavigationBar();
     }
 
@@ -83,7 +84,16 @@ public class ActiveWorkoutFragment extends Fragment {
         mChronometer = view.findViewById(R.id.chronometer);
         currentWorkoutBlockListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         currentWorkoutName.setText(viewModel.getActiveWorkout().getName());
+
+        // If there is a stored elapsed time value,
+        // set the chronometer starting time textview to a string formatted to that value
+        if (viewModel.getElapsedTime() != 0) {
+            mChronometer.setText(viewModel.getFormattedElapsedTime());
+        }
     }
+
+
+
 
     private void initListeners() {
 
@@ -92,13 +102,22 @@ public class ActiveWorkoutFragment extends Fragment {
             public void onClick(View view) {
                 viewModel.startWorkout();
 
-                if (lastPause != 0){
-                    mChronometer.setBase(mChronometer.getBase() + SystemClock.elapsedRealtime() - lastPause);
-                } else {
-                    mChronometer.setBase(SystemClock.elapsedRealtime());
+                // If there is not a stored elapsed time value in the viewmodel, start from default and use standard pause functionality
+                if (viewModel.getElapsedTime() == 0) {
+                    if (lastPause != 0) {
+                        mChronometer.setBase(mChronometer.getBase() + SystemClock.elapsedRealtime() - lastPause);
+                    } else {
+                        mChronometer.setBase(SystemClock.elapsedRealtime());
+                    }
+                }
+
+                // If there is a stored elapsed time value, set the base to count from that value
+                else{
+                    mChronometer.setBase(SystemClock.elapsedRealtime() - viewModel.getElapsedTime());
                 }
 
                 mChronometer.start();
+
                 showPauseButton();
             }
         });
@@ -133,6 +152,7 @@ public class ActiveWorkoutFragment extends Fragment {
 
 
     // Adds a listener for a key event (in this case the back button)
+
     @Override
     public void onResume() {
         super.onResume();
@@ -146,7 +166,7 @@ public class ActiveWorkoutFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-                    showExitDialog();
+                    //showExitDialog(); // Works, but for now the intent is to allow the user to switch tabs
                     return true;
                 }
                 return false;
@@ -164,6 +184,7 @@ public class ActiveWorkoutFragment extends Fragment {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
                 navigator.navigateHome();
+                viewModel.clearElapsedTime();
                 Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
             }
         });
@@ -188,6 +209,13 @@ public class ActiveWorkoutFragment extends Fragment {
         startButton.setVisibility(View.VISIBLE);
         pauseButton.setVisibility(View.INVISIBLE);
     }
+
+    public void saveViewModelElapsedTimeValue(){
+        long elapsedTime = SystemClock.elapsedRealtime() - mChronometer.getBase();
+        viewModel.saveElapsedTime((int)elapsedTime);
+    }
+
+
 }
 
 
