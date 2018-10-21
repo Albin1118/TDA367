@@ -28,6 +28,10 @@ import com.example.ziggy.trainingtracker.viewmodel.WorkoutCreatorViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a view where the user can create a WorkoutBlock, by selecting a block-multiplier and
+ * one/several exercises, and then add the block to the workout currently being built.
+ */
 public class WorkoutBlockCreatorFragment extends Fragment {
 
     private Button decrementSetButton;
@@ -116,35 +120,35 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
                 if(selectExerciseListView.isItemChecked(position)){
 
+                    //Create a dialog and set the title
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle(e.getName());
 
                     View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.input_reps_dialog, (ViewGroup) getView(), false);
 
+                    //Set the components of input_reps_dialog.xml
                     final TextView dialogTitle = viewInflated.findViewById(R.id.dialogTitle);
                     dialogTitle.setText("Enter amount of " + e.getUnit());
 
                     final EditText numberofUnitEditText = viewInflated.findViewById(R.id.numberofUnitEditText);
-                    //numberofUnitEditText.setTextColor(Color.WHITE);
 
                     final TextView unitTextView = viewInflated.findViewById(R.id.unitTextView);
                     unitTextView.setText(e.getUnit());
 
-
                     //Set the content of the main dialog view
                     builder.setView(viewInflated);
 
-                    // Set up the button
+                    // Set up the OK-button
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             int numberofUnits = Integer.parseInt(numberofUnitEditText.getText().toString());
-                            //e.setNumberofUnit(numberofUnits);
                             block.addExercise(e, numberofUnits);
                             dialog.cancel();
                         }
                     });
 
+                    //Set up the Cancel-button
                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -166,8 +170,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
         previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Get the current WorkoutBlock
-                //WorkoutBlock w = buildWorkoutBlock();
+                //Set the multiplier of the WorkoutBlock
                 int sets = Integer.parseInt(setsDisplay.getText().toString());
                 block.setMultiplier(sets);
 

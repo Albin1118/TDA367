@@ -19,7 +19,8 @@ import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutCreatorViewModel;
 
 /**
- * Fragment representing a view where the user can create custom workouts
+ * Represents a view where the user can create custom workouts, by entering a title and description
+ * and adding one or several WorkoutBlocks
  */
 public class WorkoutCreatorFragment extends Fragment {
 
@@ -76,6 +77,7 @@ public class WorkoutCreatorFragment extends Fragment {
         workoutBlocksListView = view.findViewById(R.id.workoutBlocksListView);
         View header = getLayoutInflater().inflate(R.layout.fragment_workout_creator_header, workoutBlocksListView, false);
         View footer = getLayoutInflater().inflate(R.layout.fragment_workout_creator_footer, workoutBlocksListView, false);
+
         workoutNameEditText = header.findViewById(R.id.workoutNameEditText);
         workoutDescriptionButton = header.findViewById(R.id.workoutDescriptionButton);
         workoutDescriptionLayout = header.findViewById(R.id.workoutDescriptionLayout);
@@ -124,10 +126,15 @@ public class WorkoutCreatorFragment extends Fragment {
         createWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveBuildWorkout();
-                viewModel.createWorkout();
-                navigator.goBack();
-                Toast.makeText(getContext(), "New workout created!", Toast.LENGTH_SHORT).show();
+                if(necessaryFieldsFilled()){
+                    saveBuildWorkout();
+                    viewModel.createWorkout();
+                    navigator.goBack();
+                    Toast.makeText(getContext(), "New workout created!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), "A workout needs a name and at least one block!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         saveEditedWorkoutButton.setOnClickListener(new View.OnClickListener() {
@@ -156,5 +163,9 @@ public class WorkoutCreatorFragment extends Fragment {
         saveEditedWorkoutButton.setVisibility(View.VISIBLE);
         cancelEditedWorkoutButton.setVisibility(View.VISIBLE);
         createWorkoutButton.setVisibility(View.GONE);
+    }
+
+    private Boolean necessaryFieldsFilled(){
+        return !workoutNameEditText.getText().toString().equals("") && !workoutBlocksListView.getAdapter().isEmpty();
     }
 }
