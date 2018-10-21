@@ -19,6 +19,9 @@ public class ExerciseTabViewModel extends ViewModel {
     public void init(ITrainingTracker model) {
         this.model = model;
         challenges = new ArrayList<>();
+        challenges.add(new Challenge());
+        challenges.add(new Challenge());
+        challenges.add(new Challenge());
         exercises = new ArrayList<>(model.getExercises());
     }
 
