@@ -81,7 +81,6 @@ public class ActiveWorkoutFragment extends Fragment {
         currentWorkoutName = view.findViewById(R.id.current_workout_name);
         currentWorkoutBlockListView = view.findViewById(R.id.active_workout_exercise_list_view);
         mChronometer = view.findViewById(R.id.chronometer);
-
         currentWorkoutBlockListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         currentWorkoutName.setText(viewModel.getActiveWorkout().getName());
     }
@@ -116,28 +115,7 @@ public class ActiveWorkoutFragment extends Fragment {
         pauseButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle(R.string.app_name);
-                builder.setMessage("Are you sure you want to stop the current workout?");
-                builder.setIcon(R.drawable.ic_wb_incandescent_black_24dp);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                        viewModel.finishWorkout();
-                        navigator.navigateHome();
-                        Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-
-                AlertDialog alert = builder.create();
-                alert.show();
-
+                showExitDialog();
                 return true;
             }
         });
@@ -152,10 +130,10 @@ public class ActiveWorkoutFragment extends Fragment {
     }
 
 
+    // Adds a listener for a key event (in this case the back button)
     @Override
     public void onResume() {
         super.onResume();
-
         if(getView() == null){
             return;
         }
@@ -165,9 +143,8 @@ public class ActiveWorkoutFragment extends Fragment {
         getView().setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-                    onBackPressed();
+                    showExitDialog();
                     return true;
                 }
                 return false;
@@ -175,7 +152,8 @@ public class ActiveWorkoutFragment extends Fragment {
         });
     }
 
-    public void onBackPressed() {
+
+    private void showExitDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(R.string.app_name);
         builder.setMessage("Are you sure you want to stop the current workout?");
@@ -183,9 +161,8 @@ public class ActiveWorkoutFragment extends Fragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
-                navigationManager.navigateHome();
+                navigator.navigateHome();
                 Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
-
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
