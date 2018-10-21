@@ -28,7 +28,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="22dp"
-        android:text="Unit"
+        android:text="@string/exercise_detail_view_unit"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="22dp"
-        android:text="Category"
+        android:text="@string/exercise_detail_view_category"
         android:textColor="@color/colorAccent"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="72dp"
-        android:text="Remove"
+        android:text="@string/exercise_remove_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:backgroundTint="@android:color/holo_red_light" />
@@ -94,7 +94,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="72dp"
         android:backgroundTint="@android:color/holo_orange_light"
-        android:text="Edit"
+        android:text="@string/exercise_edit_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

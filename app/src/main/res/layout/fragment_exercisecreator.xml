@@ -145,7 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginStart="72dp"
-        android:text="Cancel"
+        android:text="@string/exercise_cancel_edit_button"
         android:backgroundTint="@android:color/holo_orange_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
@@ -157,7 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginEnd="72dp"
-        android:text="Save"
+        android:text="@string/exercise_save_button"
         android:backgroundTint="@android:color/holo_green_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
