@@ -108,14 +108,19 @@ public class ExerciseTabFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0) {
-                    tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary, getContext().getTheme()));
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary, getContext().getTheme()));
-                    getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark, getContext().getTheme()));
-                } else {
-                    tabLayout.setBackgroundColor(getResources().getColor(R.color.colorSecondary, getContext().getTheme()));
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorSecondary, getContext().getTheme()));
-                    getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorSecondaryDark, getContext().getTheme()));
+                switch (tab.getPosition()) {
+                    case 0:
+                        viewPager.setCurrentItem(0);
+                        tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary, getContext().getTheme()));
+                        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary, getContext().getTheme()));
+                        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark, getContext().getTheme()));
+                        break;
+                    case 1:
+                        viewPager.setCurrentItem(1);
+                        tabLayout.setBackgroundColor(getResources().getColor(R.color.colorSecondary, getContext().getTheme()));
+                        toolbar.setBackgroundColor(getResources().getColor(R.color.colorSecondary, getContext().getTheme()));
+                        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorSecondaryDark, getContext().getTheme()));
+                        break;
                 }
             }
 
