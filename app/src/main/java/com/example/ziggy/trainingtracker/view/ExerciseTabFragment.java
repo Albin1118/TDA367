@@ -143,9 +143,9 @@ public class ExerciseTabFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == 0) {
-                    viewModel.clearExerciseSorting();
+                    viewModel.clearSorting();
                 } else {
-                    viewModel.sortExercisesByCategory(viewModel.getCategories().get(item.getItemId()-1));
+                    viewModel.sortByExerciseCategory(viewModel.getCategories().get(item.getItemId()-1));
                 }
                 return true;
             }

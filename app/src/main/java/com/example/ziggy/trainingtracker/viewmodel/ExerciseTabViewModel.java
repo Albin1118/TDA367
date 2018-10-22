@@ -14,33 +14,49 @@ import java.util.List;
 
 public class ExerciseTabViewModel extends ViewModel {
     private ITrainingTracker model;
+    private List<IChallenge> challenges;
     private List<IExercise> exercises;
     private MutableLiveData<List<IExercise>> exercisesLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<IChallenge>> challengesLiveData = new MutableLiveData<>();
 
     public void init(ITrainingTracker model) {
         this.model = model;
 
+        challenges = new ArrayList<>(model.getChallenges());
         exercises = new ArrayList<>(model.getExercises());
         exercisesLiveData.setValue(exercises);
+        challengesLiveData.setValue(challenges);
     }
 
-    public void sortExercisesByCategory(String categoryString) {
+    public void sortByExerciseCategory(String categoryString) {
         ExerciseCategory category = ExerciseCategory.valueOf(categoryString);
 
         List<IExercise> sortedExercises = new ArrayList<>();
+        List<IChallenge> sortedChallenges = new ArrayList<>();
         for (IExercise e : model.getExercises()) {
-            if (e.getCategories().contains(category))
+            if (e.getCategories().contains(category)) {
                 sortedExercises.add(e);
+                for (IChallenge challenge : model.getChallenges()) {
+                    if (challenge.getName().equals(e.getName()))
+                        sortedChallenges.add(challenge);
+                }
+            }
         }
+        challenges.clear();
+        challenges.addAll(sortedChallenges);
         exercises.clear();
         exercises.addAll(sortedExercises);
         exercisesLiveData.setValue(exercises);
+        challengesLiveData.setValue(challenges);
     }
 
-    public void clearExerciseSorting() {
+    public void clearSorting() {
         exercises.clear();
         exercises.addAll(model.getExercises());
+        challenges.clear();
+        challenges.addAll(model.getChallenges());
         exercisesLiveData.setValue(exercises);
+        challengesLiveData.setValue(challenges);
     }
 
     public List<IExercise> getExercises() {
@@ -48,12 +64,16 @@ public class ExerciseTabViewModel extends ViewModel {
     }
 
     public List<IExercise> getAllExercises() {
-        clearExerciseSorting();
+        clearSorting();
         return exercises;
     }
 
     public LiveData<List<IExercise>> getExercisesLiveData() {
         return exercisesLiveData;
+    }
+
+    public LiveData<List<IChallenge>> getChallengesLiveData() {
+        return challengesLiveData;
     }
 
     public List<String> getCategories() {
@@ -65,6 +85,6 @@ public class ExerciseTabViewModel extends ViewModel {
     }
 
     public List<IChallenge> getChallenges() {
-        return model.getChallenges();
+        return challenges;
     }
 }

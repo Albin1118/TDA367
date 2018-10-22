@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IChallenge;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
+
+import java.util.List;
 
 public class ChallengesPageFragment extends Fragment {
 
@@ -78,6 +81,11 @@ public class ChallengesPageFragment extends Fragment {
     }
 
     private void initListeners() {
-
+        viewModel.getChallengesLiveData().observe(this, new Observer<List<IChallenge>>() {
+            @Override
+            public void onChanged(@Nullable List<IChallenge> challenges) {
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }
