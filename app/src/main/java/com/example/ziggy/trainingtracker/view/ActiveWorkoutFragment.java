@@ -163,7 +163,7 @@ public class ActiveWorkoutFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-                    //showExitDialog(); // Works, but for now the intent is to allow the user to switch tabs
+                    showExitDialog();
                     return true;
                 }
                 return false;
