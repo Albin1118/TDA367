@@ -33,7 +33,7 @@ public class ReadWorkoutsFromXMLService {
         this.workouts = new LinkedHashMap<>();
         this.exercises = new LinkedHashMap<>();
         for (IExercise e : baseExercises) {
-            this.exercises.put(e.getName(), e);
+            this.exercises.put(e.getName().toLowerCase(), e);
         }
     }
 
@@ -161,7 +161,7 @@ public class ReadWorkoutsFromXMLService {
      * @return A new Exercise object.
      */
     private IExercise getExercise(Element exerciseElement) throws IllegalArgumentException {
-        String name = exerciseElement.getTextContent();
+        String name = exerciseElement.getTextContent().toLowerCase();
         IExercise e = this.exercises.get(name);
         if (e == null)
             throw new IllegalArgumentException("Cannot find Exercise: \"" + name + "\".");

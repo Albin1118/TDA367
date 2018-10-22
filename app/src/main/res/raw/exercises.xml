@@ -7,6 +7,7 @@
         <instructions></instructions>
         <unit>reps</unit>
         <category>ARMS</category>
+        <category>CHEST</category>
     </exercise>
 
     <exercise name="Burpees">
