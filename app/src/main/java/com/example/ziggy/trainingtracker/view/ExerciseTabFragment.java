@@ -104,6 +104,31 @@ public class ExerciseTabFragment extends Fragment {
                 return true;
             }
         });
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0) {
+                    tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary, getContext().getTheme()));
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary, getContext().getTheme()));
+                    getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark, getContext().getTheme()));
+                } else {
+                    tabLayout.setBackgroundColor(getResources().getColor(R.color.colorSecondary, getContext().getTheme()));
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorSecondary, getContext().getTheme()));
+                    getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorSecondaryDark, getContext().getTheme()));
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     private void initSortMenu() {
