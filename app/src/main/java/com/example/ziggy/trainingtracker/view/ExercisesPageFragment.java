@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IExercise;
@@ -24,8 +22,6 @@ public class ExercisesPageFragment extends Fragment {
 
     private FloatingActionButton addExerciseButton;
     private ListView exerciseListView;
-    private Button searchCategoryButton;
-    private Spinner exerciseCategorySpinner;
 
     private ArrayAdapter<IExercise> adapter;
 
@@ -62,19 +58,9 @@ public class ExercisesPageFragment extends Fragment {
         //Initiate visual components by id
         addExerciseButton = view.findViewById(R.id.addExerciseButton);
         exerciseListView = view.findViewById(R.id.exerciseList);
-        exerciseCategorySpinner = view.findViewById(R.id.exerciseCategorySpinner);
-        searchCategoryButton = view.findViewById(R.id.searchCategoryButton);
 
         adapter = new ExerciseListAdapter(getContext(), viewModel.getAllExercises());
-
         exerciseListView.setAdapter(adapter);
-
-        //Style and populate spinner
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, viewModel.getCategories());
-        //Dropdown layout style
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Attaching adapter to spinner
-        exerciseCategorySpinner.setAdapter(spinnerAdapter);
     }
 
     private void initListeners() {
@@ -89,13 +75,6 @@ public class ExercisesPageFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 navigator.navigateExerciseDetailView(viewModel.getExercises().get(position));
-            }
-        });
-
-        searchCategoryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewModel.sortExercisesByCategory(exerciseCategorySpinner.getSelectedItem().toString());
             }
         });
 
