@@ -6,6 +6,7 @@ public interface IChallenge {
 
     String getName();
     String getUnit();
+    String getDescription();
     int getScore();
     void setScore(int score);
 }

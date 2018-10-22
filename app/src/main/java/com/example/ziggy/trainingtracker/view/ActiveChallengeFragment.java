@@ -18,6 +18,7 @@ import com.example.ziggy.trainingtracker.viewmodel.ActiveChallengeViewModel;
 public class ActiveChallengeFragment extends Fragment {
 
     TextView challengeNameTextView;
+    TextView challengeDescriptionTextView;
     EditText challengeScoreEditText;
     Button finishChallengeButton;
 
@@ -52,10 +53,15 @@ public class ActiveChallengeFragment extends Fragment {
 
     private void initViews() {
         challengeNameTextView = view.findViewById(R.id.challengeNameTextView);
+        challengeDescriptionTextView = view.findViewById(R.id.challengeDescriptionTextView);
         challengeScoreEditText = view.findViewById(R.id.challengeScoreEditText);
         finishChallengeButton = view.findViewById(R.id.finishChallengeButton);
 
+
+
         challengeNameTextView.setText(viewModel.getChallenge().getName());
+        challengeDescriptionTextView.setText(viewModel.getChallenge().getDescription());
+        challengeScoreEditText.setHint(viewModel.getChallenge().getUnit());
 
     }
 

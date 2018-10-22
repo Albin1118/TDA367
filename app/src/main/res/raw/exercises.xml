@@ -78,4 +78,11 @@
         <unit>meters</unit>
         <category>LEGS</category>
     </exercise>
+
+    <exercise name="Plank">
+        <description></description>
+        <instructions></instructions>
+        <unit>seconds</unit>
+        <category>ABS</category>
+    </exercise>
 </exercises>

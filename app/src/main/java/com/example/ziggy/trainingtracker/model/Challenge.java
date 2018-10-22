@@ -21,6 +21,10 @@ public class Challenge implements IChallenge {
         return exercise.getUnit();
     }
 
+    public String getDescription() {
+        return exercise.getDescription();
+    }
+
     public int getScore() {
         return score;
     }
