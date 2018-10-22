@@ -151,4 +151,11 @@ public class ExerciseTabFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //Reset status bar color
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark, getContext().getTheme()));
+    }
 }
