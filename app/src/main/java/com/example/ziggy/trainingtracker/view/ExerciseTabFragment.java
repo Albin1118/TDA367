@@ -11,11 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
@@ -29,6 +27,7 @@ public class ExerciseTabFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FragmentPagerAdapter pagerAdapter;
+    private PopupMenu sortMenu;
 
     private View view;
     private ExerciseTabViewModel viewModel;
@@ -92,6 +91,7 @@ public class ExerciseTabFragment extends Fragment {
 
         viewPager.setAdapter(pagerAdapter);
         toolbar.inflateMenu(R.menu.menu_exercisetabexercises);
+        initSortMenu();
     }
 
     private void initListeners() {
@@ -100,17 +100,30 @@ public class ExerciseTabFragment extends Fragment {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                showSortMenu(toolbar);
-                return false;
+                sortMenu.show();
+                return true;
             }
         });
     }
 
-    private void showSortMenu(View v) {
-        PopupMenu popup = new PopupMenu(getContext(), v);
-        popup.setGravity(Gravity.END);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.btm_navigation, popup.getMenu());
-        popup.show();
+    private void initSortMenu() {
+        sortMenu = new PopupMenu(getContext(), toolbar);
+        sortMenu.setGravity(Gravity.END);
+        sortMenu.getMenu().add(Menu.NONE, 0, 0, "ALL");
+        for (int i = 1; i <= viewModel.getCategories().size(); i++) {
+            sortMenu.getMenu().add(Menu.NONE, i, i, viewModel.getCategories().get(i-1));
+        }
+
+        sortMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == 0) {
+                    viewModel.clearExerciseSorting();
+                } else {
+                    viewModel.sortExercisesByCategory(viewModel.getCategories().get(item.getItemId()-1));
+                }
+                return true;
+            }
+        });
     }
 }

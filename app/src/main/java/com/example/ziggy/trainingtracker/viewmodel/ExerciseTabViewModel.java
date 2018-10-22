@@ -1,5 +1,7 @@
 package com.example.ziggy.trainingtracker.viewmodel;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
@@ -13,11 +15,13 @@ import java.util.List;
 public class ExerciseTabViewModel extends ViewModel {
     private ITrainingTracker model;
     private List<IExercise> exercises;
+    private MutableLiveData<List<IExercise>> exercisesLiveData = new MutableLiveData<>();
 
     public void init(ITrainingTracker model) {
         this.model = model;
 
         exercises = new ArrayList<>(model.getExercises());
+        exercisesLiveData.setValue(exercises);
     }
 
     public void sortExercisesByCategory(String categoryString) {
@@ -30,6 +34,13 @@ public class ExerciseTabViewModel extends ViewModel {
         }
         exercises.clear();
         exercises.addAll(sortedExercises);
+        exercisesLiveData.setValue(exercises);
+    }
+
+    public void clearExerciseSorting() {
+        exercises.clear();
+        exercises.addAll(model.getExercises());
+        exercisesLiveData.setValue(exercises);
     }
 
     public List<IExercise> getExercises() {
@@ -37,9 +48,12 @@ public class ExerciseTabViewModel extends ViewModel {
     }
 
     public List<IExercise> getAllExercises() {
-        exercises.clear();
-        exercises.addAll(model.getExercises());
+        clearExerciseSorting();
         return exercises;
+    }
+
+    public LiveData<List<IExercise>> getExercisesLiveData() {
+        return exercisesLiveData;
     }
 
     public List<String> getCategories() {
