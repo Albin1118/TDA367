@@ -129,11 +129,11 @@ public class MainViewModel extends AndroidViewModel {
         // Create an exercise map with the exercises' names as keys to easier reach exercises by name
         Map<String, IExercise> exerciseMap = new HashMap<>();
         for (IExercise e : model.getExercises()) {
-            exerciseMap.put(e.getName(), e);
+            exerciseMap.put(e.getName().toLowerCase(), e);
         }
         ReadLinesFromFileService reader = new ReadLinesFromFileService("res/raw/challenges.txt", "UTF-8");
         for (String line : reader.readLines()) {
-            if (exerciseMap.containsKey(line))
+            if (exerciseMap.containsKey(line.toLowerCase()))
                 challenges.add(new Challenge(exerciseMap.get(line)));
         }
 
