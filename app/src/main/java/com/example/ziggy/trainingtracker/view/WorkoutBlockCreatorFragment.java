@@ -73,7 +73,8 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
         block = new WorkoutBlock();
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_multiple_choice, viewModel.getExercises());
+        //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_multiple_choice, viewModel.getExercises());
+        adapter = new ExerciseCheckedListAdapter(getContext(), viewModel.getExercises());
         selectExerciseListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         selectExerciseListView.setAdapter(adapter);
 
