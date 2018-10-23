@@ -4,23 +4,24 @@ package com.example.ziggy.trainingtracker.model;
  * Class representing an achievement which the user can earn by accomplishing certain criteria
  * for app usage and workout-completion
  */
-public class Achievement implements IAchievement{
+public abstract class Achievement {
 
-    String achievementName;
-    String achievementDescription;
-    boolean achievementCompleted;
+    private String name;
+    private String description;
+    private boolean completed;
 
+    abstract void update(IUser user);
 
-    public String getAchievementName() {
-        return achievementName;
+    public String getName() {
+        return name;
     }
 
-    public String getAchievementDescription() {
-        return achievementDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public boolean isAchievementCompleted() {
-        return achievementCompleted;
+    public boolean isCompleted() {
+        return completed;
     }
 }
 

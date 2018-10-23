@@ -10,12 +10,13 @@ import java.util.List;
  * Class representing the user of the application, containing data related to individual use such as
  * the custom made exercises and workouts, the completed workouts and user info.
  */
-public class User implements IUser{
+public class User implements IUser {
 
     //Add achievements and goals
     private List<IWorkout> finishedWorkouts;
     private List<IExercise> customExercises = new ArrayList<>();
     private List<IWorkout> customWorkouts = new ArrayList<>();
+    private List<Achievement> achievements = new ArrayList<>();
 
     private String username;
 
@@ -80,6 +81,13 @@ public class User implements IUser{
 
     public List<IExercise> getCustomExercises() {
         return customExercises;
+    }
+
+    public List<Achievement> getAchievements() {
+        for (Achievement achievement : achievements) {
+            achievement.update(this);
+        }
+        return achievements;
     }
 
     public void setCustomExercises(List<IExercise> customExercises) {
