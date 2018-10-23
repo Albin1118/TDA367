@@ -85,7 +85,8 @@ public class User implements IUser {
 
     public List<Achievement> getAchievements() {
         for (Achievement achievement : achievements) {
-            achievement.update(this);
+            if (!achievement.isCompleted())
+                achievement.update(this);
         }
         return achievements;
     }

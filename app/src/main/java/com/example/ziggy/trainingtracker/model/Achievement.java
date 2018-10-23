@@ -7,17 +7,38 @@ package com.example.ziggy.trainingtracker.model;
 public abstract class Achievement {
 
     private String name;
-    private String description;
-    private boolean completed;
+    private String info;
+    private int requirement;
+    private int progress;
+    private boolean completed = false;
 
-    abstract void update(IUser user);
+    Achievement(int requirement, String name, String info) {
+        this.requirement = requirement;
+        this.name = name;
+        this.info = info;
+    }
+
+    void update(IUser user) {
+        progress = checkProgress(user);
+        completed = progress >= requirement;
+    }
+
+    protected abstract int checkProgress(IUser user);
 
     public String getName() {
         return name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getInfo() {
+        return info;
+    }
+
+    public int getRequirement() {
+        return requirement;
+    }
+
+    public int getProgress() {
+        return progress;
     }
 
     public boolean isCompleted() {
