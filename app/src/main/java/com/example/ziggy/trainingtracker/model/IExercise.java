@@ -9,6 +9,7 @@ public interface IExercise {
     String getInstructions();
     String getUnit();
     List<ExerciseCategory> getCategories();
+    String getCategoriesString();
 
     void setName(String name);
     void setDescription(String description);

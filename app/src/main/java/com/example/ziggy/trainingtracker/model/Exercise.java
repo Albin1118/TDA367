@@ -46,6 +46,19 @@ public class Exercise implements IExercise {
     public List<ExerciseCategory> getCategories() {
         return categories;
     }
+    public String getCategoriesString(){
+        String categoriesString = "";
+
+        for (int i = 0; i < categories.size(); i++){
+            if( i == 0 ){
+                categoriesString += categories.get(i).name();
+            }else{
+                categoriesString += " , " + categories.get(i).name();
+            }
+        }
+
+        return categoriesString;
+    }
 
     public void setName(String name) {
         this.name = name;
