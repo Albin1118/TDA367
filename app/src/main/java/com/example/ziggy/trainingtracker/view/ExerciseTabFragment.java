@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.animation.ArgbEvaluator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -97,11 +98,23 @@ public class ExerciseTabFragment extends Fragment {
     private void initListeners() {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            ArgbEvaluator argbEvaluator = new ArgbEvaluator();
             @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                sortMenu.show();
-                return true;
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                tabLayout.setBackgroundColor((int) argbEvaluator.evaluate((position + positionOffset), getColor(R.color.colorPrimary), getColor(R.color.colorSecondary)));
+                toolbar.setBackgroundColor((int) argbEvaluator.evaluate((position + positionOffset), getColor(R.color.colorPrimary), getColor(R.color.colorSecondary)));
+                getActivity().getWindow().setStatusBarColor((int) argbEvaluator.evaluate((position + positionOffset), getColor(R.color.colorPrimaryDark), getColor(R.color.colorSecondaryDark)));
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
             }
         });
 
@@ -109,17 +122,11 @@ public class ExerciseTabFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
-                    case 0:
+                    default:
                         viewPager.setCurrentItem(0);
-                        tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary, getContext().getTheme()));
-                        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary, getContext().getTheme()));
-                        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark, getContext().getTheme()));
                         break;
                     case 1:
                         viewPager.setCurrentItem(1);
-                        tabLayout.setBackgroundColor(getResources().getColor(R.color.colorSecondary, getContext().getTheme()));
-                        toolbar.setBackgroundColor(getResources().getColor(R.color.colorSecondary, getContext().getTheme()));
-                        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorSecondaryDark, getContext().getTheme()));
                         break;
                 }
             }
@@ -132,6 +139,14 @@ public class ExerciseTabFragment extends Fragment {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                sortMenu.show();
+                return true;
             }
         });
     }
@@ -157,10 +172,14 @@ public class ExerciseTabFragment extends Fragment {
         });
     }
 
+    private int getColor(int id) {
+        return getResources().getColor(id, getContext().getTheme());
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         //Reset status bar color
-        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark, getContext().getTheme()));
+        getActivity().getWindow().setStatusBarColor(getColor(R.color.colorPrimaryDark));
     }
 }
