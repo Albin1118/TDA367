@@ -29,6 +29,10 @@ dependencies {
     implementation 'com.jjoe64:graphview:4.2.2'
     // Serialization
     implementation 'com.google.code.gson:gson:2.8.5'
+
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.7'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.7'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
     // Navigation
     implementation "android.arch.navigation:navigation-fragment:$nav_version"
     implementation "android.arch.navigation:navigation-ui:$nav_version"

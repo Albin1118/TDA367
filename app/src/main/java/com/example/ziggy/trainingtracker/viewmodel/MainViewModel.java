@@ -13,6 +13,7 @@ import com.example.ziggy.trainingtracker.model.IUser;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 
 import com.example.ziggy.trainingtracker.model.User;
+import com.example.ziggy.trainingtracker.service.JacksonSerializationService;
 import com.example.ziggy.trainingtracker.service.ReadExercisesFromXMLService;
 import com.example.ziggy.trainingtracker.service.ReadLinesFromFileService;
 import com.example.ziggy.trainingtracker.service.ReadWorkoutsFromXMLService;
@@ -34,7 +35,7 @@ public class MainViewModel extends AndroidViewModel {
         loadExercises();
         loadWorkouts();
         loadChallenges();
-        //loadData();
+        loadData();
     }
 
     /**
@@ -64,7 +65,9 @@ public class MainViewModel extends AndroidViewModel {
      * Loads Exercises from SharedPreferences and sets them in the model
      */
     private void loadExerciseDataFromSharedPreferences(){
-        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        //SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        //model.setExercises(s.loadUserExerciseList());
+        JacksonSerializationService s = new JacksonSerializationService(getApplication().getApplicationContext());
         model.setExercises(s.loadUserExerciseList());
     }
 
@@ -72,10 +75,13 @@ public class MainViewModel extends AndroidViewModel {
      * Loads Workouts from SharedPreferences and sets them in the model
      */
     private void loadWorkoutDataFromSharedPreferences(){
-        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        //SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
+        //model.setWorkouts(s.loadUserWorkoutList());
+        JacksonSerializationService s = new JacksonSerializationService(getApplication().getApplicationContext());
         model.setWorkouts(s.loadUserWorkoutList());
         loadChallenges();
     }
+
 
     private void loadUserDataFromSharedPreferences(){
         SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
@@ -86,7 +92,7 @@ public class MainViewModel extends AndroidViewModel {
      * Loads Exercises and Workouts from SharedPreferences
      */
     private void loadData(){
-        loadUserDataFromSharedPreferences();
+        //loadUserDataFromSharedPreferences();
         loadExerciseDataFromSharedPreferences();
         loadWorkoutDataFromSharedPreferences();
     }

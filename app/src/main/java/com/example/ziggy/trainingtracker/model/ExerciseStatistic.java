@@ -9,18 +9,19 @@ public class ExerciseStatistic {
 
     private int reps;
     private int sets;
-    private String exerciseName;
+    private IExercise exercise;
 
     Calendar calendar;
     LinkedHashMap<Date, Integer> weightHistoryMap;
 
 
-    public ExerciseStatistic(int reps, int sets, String exerciseName) {
+    public ExerciseStatistic(int reps, int sets, IExercise exercise) {
         calendar = Calendar.getInstance();
         weightHistoryMap = new LinkedHashMap<>();
         this.reps = reps;
         this.sets = sets;
-        this.exerciseName = exerciseName;
+        this.exercise = exercise;
+
     }
 
 
@@ -30,7 +31,7 @@ public class ExerciseStatistic {
     }
 
     public String toString(){
-        return this.exerciseName + " " + sets + "x" + reps;
+        return exercise.getName() + " " + sets + "x" + reps;
     }
 
 
