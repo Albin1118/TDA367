@@ -71,7 +71,7 @@ public class User implements IUser {
         return height;
     }
 
-    List<IWorkout> getFinishedWorkouts() {
+    public List<IWorkout> getFinishedWorkouts() {
         return finishedWorkouts;
     }
 

@@ -13,9 +13,13 @@ public interface IUser {
 
     int getHeight();
 
+    List<IWorkout> getFinishedWorkouts();
+
     List<IWorkout> getCustomWorkouts();
 
     List<IExercise> getCustomExercises();
+
+    List<Achievement> getAchievements();
 
     void setCustomExercises(List<IExercise> customExercises);
 
