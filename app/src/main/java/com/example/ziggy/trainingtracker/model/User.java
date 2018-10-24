@@ -40,50 +40,62 @@ public class User implements IUser {
         this.height = height;
     }
 
+    @Override
     public void addCustomExercise(IExercise e) {
         customExercises.add(e);
     }
 
+    @Override
     public void removeCustomExercise(IExercise e) {
         customExercises.remove(e);
     }
 
+    @Override
     public void addCustomWorkout(IWorkout w) {
         customWorkouts.add(w);
     }
 
+    @Override
     public void removeCustomWorkout(IWorkout w) {
         customWorkouts.remove(w);
     }
 
+    @Override
     public void addAchievement(Achievement achievement) {
         achievements.add(achievement);
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public double getWeight() {
         return weight;
     }
 
+    @Override
     public int getHeight() {
         return height;
     }
 
+    @Override
     public List<IWorkout> getFinishedWorkouts() {
         return Collections.unmodifiableList(finishedWorkouts);
     }
 
+    @Override
     public List<IExercise> getCustomExercises() {
         return Collections.unmodifiableList(customExercises);
     }
 
+    @Override
     public List<IWorkout> getCustomWorkouts() {
         return Collections.unmodifiableList(customWorkouts);
     }
@@ -92,6 +104,7 @@ public class User implements IUser {
      * Updates the status of all the achievements before returning them.
      * @return the list all the achievements
      */
+    @Override
     public List<Achievement> getAchievements() {
         for (Achievement achievement : achievements) {
             achievement.update(this);
@@ -99,15 +112,18 @@ public class User implements IUser {
         return Collections.unmodifiableList(achievements);
     }
 
+    @Override
     public void setCustomExercises(List<IExercise> customExercises) {
         this.customExercises = customExercises;
     }
 
+    @Override
     public void setCustomWorkouts(List<IWorkout> customWorkouts) {
         this.customWorkouts = customWorkouts;
     }
 
     //Weight might change
+    @Override
     public void setWeight(double weight) {
         this.weight = weight;
     }

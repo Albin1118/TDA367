@@ -19,6 +19,7 @@ public class TrainingTracker implements ITrainingTracker{
      * Adds an Exercise to the user's list of custom exercises.
      * @param e Exercise to be added
      */
+    @Override
     public void addCustomExercise(IExercise e) {
         user.addCustomExercise(e);
     }
@@ -27,6 +28,7 @@ public class TrainingTracker implements ITrainingTracker{
      * Removes an Exercise from the user's list of custom Exercises.
      * @param e Exercise to be removed
      */
+    @Override
     public void removeCustomExercise(IExercise e) {
         user.removeCustomExercise(e);
     }
@@ -35,6 +37,7 @@ public class TrainingTracker implements ITrainingTracker{
      * Adds a Workout to the user's list of custom workouts.
      * @param w Workout to be added
      */
+    @Override
     public void addCustomWorkout(IWorkout w) {
         user.addCustomWorkout(w);
     }
@@ -43,6 +46,7 @@ public class TrainingTracker implements ITrainingTracker{
      * Removes a Workout from the user's list of custom Workouts.
      * @param w Workout to be removed
      */
+    @Override
     public void removeCustomWorkout(IWorkout w) {
         user.removeCustomWorkout(w);
     }
@@ -50,6 +54,7 @@ public class TrainingTracker implements ITrainingTracker{
     /**
      * @param baseExercises the list of exercises to add to the base exercises
      */
+    @Override
     public void loadBaseExercises(List<IExercise> baseExercises) {
         this.baseExercises.addAll(baseExercises);
     }
@@ -57,6 +62,7 @@ public class TrainingTracker implements ITrainingTracker{
     /**
      * @param baseWorkouts the list of workouts to add to the base workouts
      */
+    @Override
     public void loadBaseWorkouts(List<IWorkout> baseWorkouts) {
         this.baseWorkouts.addAll(baseWorkouts);
     }
@@ -64,6 +70,7 @@ public class TrainingTracker implements ITrainingTracker{
     /**
      * @param baseChallenges the list of challenges to add to the base challenges
      */
+    @Override
     public void loadBaseChallenges(List<IChallenge> baseChallenges) {
         this.baseChallenges.addAll(baseChallenges);
     }
@@ -73,6 +80,7 @@ public class TrainingTracker implements ITrainingTracker{
      * @param e Exercise to be checked
      * @return True if custom made
      */
+    @Override
     public boolean checkIfCustom(IExercise e) {
         return user.getCustomExercises().contains(e);
     }
@@ -82,6 +90,7 @@ public class TrainingTracker implements ITrainingTracker{
      * @param w Workout to be checked
      * @return True if custom made
      */
+    @Override
     public boolean checkIfCustom(IWorkout w) {
         return user.getCustomWorkouts().contains(w);
     }
@@ -89,6 +98,7 @@ public class TrainingTracker implements ITrainingTracker{
     /**
      * @return an unmodifiable list of the base exercises + the users custom exercises
      */
+    @Override
     public List<IExercise> getExercises() {
         List<IExercise> allExercises = new ArrayList<>(baseExercises);
         allExercises.addAll(user.getCustomExercises());
@@ -98,6 +108,7 @@ public class TrainingTracker implements ITrainingTracker{
     /**
      * @return an unmodifiable list of the base workouts + the users custom workouts
      */
+    @Override
     public List<IWorkout> getWorkouts() {
         List<IWorkout> allWorkouts = new ArrayList<>(baseWorkouts);
         allWorkouts.addAll(user.getCustomWorkouts());
@@ -107,29 +118,36 @@ public class TrainingTracker implements ITrainingTracker{
     /**
      * @return an unmodifiable list of the challenges
      */
+    @Override
     public List<IChallenge> getChallenges() {
         return Collections.unmodifiableList(baseChallenges);
     }
 
+    @Override
     public void setCustomWorkouts(List<IWorkout> w){
         user.setCustomWorkouts(w);
     }
 
+    @Override
     public void setCustomExercises(List<IExercise> e){ user.setCustomExercises(e);
     }
 
+    @Override
     public void setWorkouts(List<IWorkout> workouts) {
         this.baseWorkouts = workouts;
     }
 
+    @Override
     public void setExercises(List<IExercise> exercises) {
         this.baseExercises = exercises;
     }
 
+    @Override
     public void setUser(User user) {
         this.user = user;
     }
 
+    @Override
     public IUser getUser() {
         return user;
     }

@@ -31,21 +31,27 @@ public class Exercise implements IExercise {
         this.categories = categories;
     }
 
+    @Override
     public String getName() {
         return name;
     }
+    @Override
     public String getDescription() {
         return description;
     }
+    @Override
     public String getInstructions() {
         return instructions;
     }
+    @Override
     public String getUnit() {
         return unit;
     }
+    @Override
     public List<ExerciseCategory> getCategories() {
         return categories;
     }
+    @Override
     public String getCategoriesString(){
         String categoriesString = "";
 
@@ -60,18 +66,23 @@ public class Exercise implements IExercise {
         return categoriesString;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
+    @Override
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
+    @Override
     public void setUnit(String unit) {
         this.unit = unit;
     }
+    @Override
     public void setCategories(List<ExerciseCategory> categories) {
         this.categories = categories;
     }
