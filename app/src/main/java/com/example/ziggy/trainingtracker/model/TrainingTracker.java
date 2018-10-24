@@ -124,30 +124,6 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     @Override
-    public void setCustomWorkouts(List<IWorkout> w){
-        user.setCustomWorkouts(w);
-    }
-
-    @Override
-    public void setCustomExercises(List<IExercise> e){ user.setCustomExercises(e);
-    }
-
-    @Override
-    public void setWorkouts(List<IWorkout> workouts) {
-        this.baseWorkouts = workouts;
-    }
-
-    @Override
-    public void setExercises(List<IExercise> exercises) {
-        this.baseExercises = exercises;
-    }
-
-    @Override
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Override
     public IUser getUser() {
         return user;
     }

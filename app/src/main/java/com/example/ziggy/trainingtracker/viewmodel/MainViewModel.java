@@ -65,7 +65,7 @@ public class MainViewModel extends AndroidViewModel {
      */
     private void loadExerciseDataFromSharedPreferences(){
         SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
-        model.setExercises(s.loadUserExerciseList());
+        //model.setExercises(s.loadUserExerciseList());
     }
 
     /**
@@ -73,13 +73,13 @@ public class MainViewModel extends AndroidViewModel {
      */
     private void loadWorkoutDataFromSharedPreferences(){
         SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
-        model.setWorkouts(s.loadUserWorkoutList());
+        //model.setWorkouts(s.loadUserWorkoutList());
         loadChallenges();
     }
 
     private void loadUserDataFromSharedPreferences(){
         SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
-        model.setUser(s.loadUserData());
+        //model.setUser(s.loadUserData());
     }
 
     /**
