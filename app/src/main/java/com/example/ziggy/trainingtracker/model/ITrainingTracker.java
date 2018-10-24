@@ -6,30 +6,45 @@ import java.util.List;
 public interface ITrainingTracker {
 
     /**
-     * Adds an Exercise to the list of Exercises and stores it among the users custom Exercises.
+     * Adds an Exercise to the user's list of custom Exercises.
      * @param e Exercise to be added
      */
     void addCustomExercise(IExercise e);
 
     /**
-     * Removes an Exercise from the list of Exercises and discards it from the users custom Exercises.
+     * Removes an Exercise from the user's list of custom Exercises.
      * @param e Exercise to be removed
      */
     void removeCustomExercise(IExercise e);
 
 
     /**
-     * Adds a Workout to the list of Workouts and stores it among the users custom Workouts.
+     * Adds a Workout to the user's list of custom Workouts.
      * @param w Workout to be added
      */
     void addCustomWorkout(IWorkout w);
 
 
     /**
-     * Removes a Workout from the list of Workouts and discards it from the users custom Workouts.
+     * Removes a Workout from the user's list of custom Workouts.
      * @param w Workout to be removed
      */
     void removeCustomWorkout(IWorkout w);
+
+    /**
+     * @param baseExercises the list of exercises to add to the base exercises
+     */
+    void loadBaseExercises(List<IExercise> baseExercises);
+
+    /**
+     * @param baseWorkouts the list of workouts to add to the base workouts
+     */
+    void loadBaseWorkouts(List<IWorkout> baseWorkouts);
+
+    /**
+     * @param baseChallenges the list of challenges to add to the base challenges
+     */
+    void loadBaseChallenges(List<IChallenge> baseChallenges);
 
     /**
      * Checks if specified exercise is custom made by the user.
@@ -45,10 +60,16 @@ public interface ITrainingTracker {
      */
     boolean checkIfCustom(IWorkout w);
 
-    List<IWorkout> getWorkouts();
+    /**
+     * @return an unmodifiable list of the base exercises + the users custom exercises
+     */
     List<IExercise> getExercises();
-    List<IExercise> getCustomExercises();
-    List<IWorkout> getCustomWorkouts();
+
+    /**
+     * @return an unmodifiable list of the base workouts + the users custom workouts
+     */
+    List<IWorkout> getWorkouts();
+
     List<IChallenge> getChallenges();
 
     void setCustomWorkouts(List<IWorkout> w);

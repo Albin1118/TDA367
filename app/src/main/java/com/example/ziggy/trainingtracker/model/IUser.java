@@ -28,6 +28,10 @@ public interface IUser {
 
     List<IExercise> getCustomExercises();
 
+    /**
+     * Updates the status of all the achievements before returning them.
+     * @return the list all the achievements
+     */
     List<Achievement> getAchievements();
 
     void setCustomExercises(List<IExercise> customExercises);

@@ -107,7 +107,7 @@ public class MainViewModel extends AndroidViewModel {
     private void loadExercises() {
         System.out.println("Loading exercises...");
         ReadExercisesFromXMLService reader = new ReadExercisesFromXMLService();
-        model.getExercises().addAll(reader.readExercises());
+        model.loadBaseExercises(reader.readExercises());
     }
 
     /**
@@ -117,7 +117,7 @@ public class MainViewModel extends AndroidViewModel {
     private void loadWorkouts() {
         System.out.println("Loading workouts...");
         ReadWorkoutsFromXMLService reader = new ReadWorkoutsFromXMLService(model.getExercises());
-        model.getWorkouts().addAll(reader.readWorkouts());
+        model.loadBaseWorkouts(reader.readWorkouts());
     }
 
     /**
@@ -137,7 +137,7 @@ public class MainViewModel extends AndroidViewModel {
                 challenges.add(new Challenge(exerciseMap.get(line)));
         }
 
-        model.getChallenges().addAll(challenges);
+        model.loadBaseChallenges(challenges);
     }
 
     public ITrainingTracker getModel() {

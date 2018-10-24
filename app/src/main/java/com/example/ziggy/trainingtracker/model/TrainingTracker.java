@@ -1,55 +1,71 @@
 package com.example.ziggy.trainingtracker.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TrainingTracker implements ITrainingTracker{
     private static ITrainingTracker instance = null;
     private IUser user = new User("Test", "Mr Test", 98.5, 210);
-    private List<IWorkout> workouts = new ArrayList<>();
-    private List<IExercise> exercises = new ArrayList<>();
-    private List<IChallenge> challenges = new ArrayList<>();
+    private List<IWorkout> baseWorkouts = new ArrayList<>();
+    private List<IExercise> baseExercises = new ArrayList<>();
+    private List<IChallenge> baseChallenges = new ArrayList<>();
 
     public TrainingTracker() {
 
     }
 
     /**
-     * Adds an Exercise to the list of Exercises and stores it among the users custom Exercises.
+     * Adds an Exercise to the user's list of custom exercises.
      * @param e Exercise to be added
      */
     public void addCustomExercise(IExercise e) {
-        exercises.add(e);
         user.addCustomExercise(e);
     }
 
     /**
-     * Removes an Exercise from the list of Exercises and discards it from the users custom Exercises.
+     * Removes an Exercise from the user's list of custom Exercises.
      * @param e Exercise to be removed
      */
     public void removeCustomExercise(IExercise e) {
-        exercises.remove(e);
         user.removeCustomExercise(e);
     }
 
     /**
-     * Adds a Workout to the list of Workouts and stores it among the users custom Workouts.
+     * Adds a Workout to the user's list of custom workouts.
      * @param w Workout to be added
      */
     public void addCustomWorkout(IWorkout w) {
-        workouts.add(w);
         user.addCustomWorkout(w);
     }
 
     /**
-     * Removes a Workout from the list of Workouts and discards it from the users custom Workouts.
+     * Removes a Workout from the user's list of custom Workouts.
      * @param w Workout to be removed
      */
     public void removeCustomWorkout(IWorkout w) {
-        workouts.remove(w);
         user.removeCustomWorkout(w);
+    }
+
+    /**
+     * @param baseExercises the list of exercises to add to the base exercises
+     */
+    public void loadBaseExercises(List<IExercise> baseExercises) {
+        this.baseExercises.addAll(baseExercises);
+    }
+
+    /**
+     * @param baseWorkouts the list of workouts to add to the base workouts
+     */
+    public void loadBaseWorkouts(List<IWorkout> baseWorkouts) {
+        this.baseWorkouts.addAll(baseWorkouts);
+    }
+
+    /**
+     * @param baseChallenges the list of challenges to add to the base challenges
+     */
+    public void loadBaseChallenges(List<IChallenge> baseChallenges) {
+        this.baseChallenges.addAll(baseChallenges);
     }
 
     /**
@@ -70,20 +86,29 @@ public class TrainingTracker implements ITrainingTracker{
         return user.getCustomWorkouts().contains(w);
     }
 
-    public List<IWorkout> getWorkouts() {
-        return workouts;
-    }
+    /**
+     * @return an unmodifiable list of the base exercises + the users custom exercises
+     */
     public List<IExercise> getExercises() {
-        return exercises;
+        List<IExercise> allExercises = new ArrayList<>(baseExercises);
+        allExercises.addAll(user.getCustomExercises());
+        return Collections.unmodifiableList(allExercises);
     }
-    public List<IExercise> getCustomExercises() {
-        return user.getCustomExercises();
+
+    /**
+     * @return an unmodifiable list of the base workouts + the users custom workouts
+     */
+    public List<IWorkout> getWorkouts() {
+        List<IWorkout> allWorkouts = new ArrayList<>(baseWorkouts);
+        allWorkouts.addAll(user.getCustomWorkouts());
+        return Collections.unmodifiableList(allWorkouts);
     }
-    public List<IWorkout> getCustomWorkouts() {
-        return user.getCustomWorkouts();
-    }
+
+    /**
+     * @return an unmodifiable list of the challenges
+     */
     public List<IChallenge> getChallenges() {
-        return challenges;
+        return Collections.unmodifiableList(baseChallenges);
     }
 
     public void setCustomWorkouts(List<IWorkout> w){
@@ -94,11 +119,11 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     public void setWorkouts(List<IWorkout> workouts) {
-        this.workouts = workouts;
+        this.baseWorkouts = workouts;
     }
 
     public void setExercises(List<IExercise> exercises) {
-        this.exercises = exercises;
+        this.baseExercises = exercises;
     }
 
     public void setUser(User user) {

@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -76,22 +77,26 @@ public class User implements IUser {
     }
 
     public List<IWorkout> getFinishedWorkouts() {
-        return finishedWorkouts;
-    }
-
-    public List<IWorkout> getCustomWorkouts() {
-        return customWorkouts;
+        return Collections.unmodifiableList(finishedWorkouts);
     }
 
     public List<IExercise> getCustomExercises() {
-        return customExercises;
+        return Collections.unmodifiableList(customExercises);
     }
 
+    public List<IWorkout> getCustomWorkouts() {
+        return Collections.unmodifiableList(customWorkouts);
+    }
+
+    /**
+     * Updates the status of all the achievements before returning them.
+     * @return the list all the achievements
+     */
     public List<Achievement> getAchievements() {
         for (Achievement achievement : achievements) {
             achievement.update(this);
         }
-        return achievements;
+        return Collections.unmodifiableList(achievements);
     }
 
     public void setCustomExercises(List<IExercise> customExercises) {
