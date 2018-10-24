@@ -1,5 +1,7 @@
 package com.example.ziggy.trainingtracker.model;
 
+import com.example.ziggy.trainingtracker.model.Achievements.Achievement;
+
 import java.util.List;
 
 public interface IUser {

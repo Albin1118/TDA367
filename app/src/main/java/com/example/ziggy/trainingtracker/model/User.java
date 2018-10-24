@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.model;
 
+import com.example.ziggy.trainingtracker.model.Achievements.Achievement;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

@@ -1,4 +1,6 @@
-package com.example.ziggy.trainingtracker.model;
+package com.example.ziggy.trainingtracker.model.Achievements;
+
+import com.example.ziggy.trainingtracker.model.IUser;
 
 public class CreateExercisesAchievement extends Achievement {
     private static final String INFO = "Create your own exercises by clicking the \"+\" symbol in the exercises tab";
