@@ -12,6 +12,8 @@ import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.ExerciseStatistic;
 import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.viewmodel.StatisticViewModel;
+import com.example.ziggy.trainingtracker.viewmodel.WorkoutDetailViewModel;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
@@ -35,8 +37,27 @@ public class StatisticsFragment extends Fragment {
     private IExercise chosenExercise;
     private LineGraphSeries<DataPoint> exerciseDataSeries;
 
+    private StatisticViewModel viewModel;
+    private NavigationManager navigator;
+
     private GraphView graph;
     private Spinner exerciseSpinner;
+
+
+    public static StatisticsFragment newInstance(StatisticViewModel viewModel, NavigationManager navigator) {
+        StatisticsFragment fragment = new StatisticsFragment();
+        fragment.setViewModel(viewModel);
+        fragment.setNavigator(navigator);
+        return fragment;
+    }
+
+    public void setViewModel(StatisticViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void setNavigator(NavigationManager navigator) {
+        this.navigator = navigator;
+    }
 
     @Nullable
     @Override
