@@ -4,6 +4,14 @@ import java.util.List;
 
 public interface IUser {
 
+    void addCustomExercise(IExercise e);
+
+    void removeCustomExercise(IExercise e);
+
+    void addCustomWorkout(IWorkout w);
+
+    void removeCustomWorkout(IWorkout w);
+
     void addAchievement(Achievement achievement);
 
     String getUsername();

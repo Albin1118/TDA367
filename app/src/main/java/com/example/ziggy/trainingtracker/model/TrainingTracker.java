@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TrainingTracker implements ITrainingTracker{
     private static ITrainingTracker instance = null;
-    private User user = new User("Test", "Mr Test", 98.5, 210);
+    private IUser user = new User("Test", "Mr Test", 98.5, 210);
     private List<IWorkout> workouts = new ArrayList<>();
     private List<IExercise> exercises = new ArrayList<>();
     private List<IChallenge> challenges = new ArrayList<>();

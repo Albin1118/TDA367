@@ -39,19 +39,19 @@ public class User implements IUser {
         this.height = height;
     }
 
-    void addCustomExercise(IExercise e) {
+    public void addCustomExercise(IExercise e) {
         customExercises.add(e);
     }
 
-    void removeCustomExercise(IExercise e) {
+    public void removeCustomExercise(IExercise e) {
         customExercises.remove(e);
     }
 
-    void addCustomWorkout(IWorkout w) {
+    public void addCustomWorkout(IWorkout w) {
         customWorkouts.add(w);
     }
 
-    void removeCustomWorkout(IWorkout w) {
+    public void removeCustomWorkout(IWorkout w) {
         customWorkouts.remove(w);
     }
 
