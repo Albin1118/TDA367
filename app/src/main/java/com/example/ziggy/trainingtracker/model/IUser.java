@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface IUser {
 
+    void addAchievement(Achievement achievement);
 
     String getUsername();
 

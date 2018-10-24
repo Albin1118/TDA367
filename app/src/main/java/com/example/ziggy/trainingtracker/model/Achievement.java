@@ -19,11 +19,25 @@ public abstract class Achievement {
     }
 
     void update(IUser user) {
-        progress = checkProgress(user);
-        completed = progress >= requirement;
+        if (!completed) {
+            progress = checkProgress(user);
+            if (progress >= requirement) {
+                completed = true;
+                progress = requirement;
+                if (hasNextStage()) {
+                    Achievement nextAchievement = getNextAchievement();
+                    user.addAchievement(nextAchievement);
+                    nextAchievement.update(user);
+                }
+            }
+        }
     }
 
     protected abstract int checkProgress(IUser user);
+
+    protected abstract boolean hasNextStage();
+
+    protected abstract Achievement getNextAchievement();
 
     public String getName() {
         return name;

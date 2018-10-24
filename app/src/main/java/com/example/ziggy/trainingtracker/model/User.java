@@ -55,6 +55,10 @@ public class User implements IUser {
         customWorkouts.remove(w);
     }
 
+    public void addAchievement(Achievement achievement) {
+        achievements.add(achievement);
+    }
+
     public String getUsername() {
         return username;
     }
@@ -85,8 +89,7 @@ public class User implements IUser {
 
     public List<Achievement> getAchievements() {
         for (Achievement achievement : achievements) {
-            if (!achievement.isCompleted())
-                achievement.update(this);
+            achievement.update(this);
         }
         return achievements;
     }
