@@ -10,12 +10,14 @@ public interface IExercise {
     String getUnit();
     List<ExerciseCategory> getCategories();
     String getCategoriesString();
+    boolean isWeightBased();
 
     void setName(String name);
     void setDescription(String description);
     void setInstructions(String instructions);
     void setUnit(String unit);
     void setCategories(List<ExerciseCategory> categories);
+    void setWeightBased(boolean weightBased);
 
     String toString();
 }

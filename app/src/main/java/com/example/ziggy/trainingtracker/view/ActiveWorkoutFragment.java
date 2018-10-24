@@ -172,6 +172,7 @@ public class ActiveWorkoutFragment extends Fragment {
     }
 
 
+    //TODO remove the viewmodel.addFinishedWorkoutsUser as it is temporary
     private void showExitDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(R.string.app_name);
@@ -180,6 +181,7 @@ public class ActiveWorkoutFragment extends Fragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
+                viewModel.addFinishedWorkoutToUser();
                 viewModel.finishWorkout();
                 navigator.navigateHome();
                 viewModel.finishWorkout();

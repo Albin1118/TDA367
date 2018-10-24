@@ -19,8 +19,9 @@ public class Exercise implements IExercise {
     @SerializedName("exercise_instructions")
     private String instructions;
     @SerializedName("exercise_has_weight")
-    private boolean hasWeight;
+    private boolean weightBased;
     private List<ExerciseCategory> categories = new ArrayList<ExerciseCategory>();
+    private int weight;
 
 
     public Exercise(String name, String unit, String description, String instructions, List<ExerciseCategory> categories) {
@@ -51,6 +52,10 @@ public class Exercise implements IExercise {
     public List<ExerciseCategory> getCategories() {
         return categories;
     }
+    public boolean isWeightBased() { return weightBased; }
+
+    public int getWeight() { return weight; }
+
     @Override
     public String getCategoriesString(){
         String categoriesString = "";
@@ -86,6 +91,9 @@ public class Exercise implements IExercise {
     public void setCategories(List<ExerciseCategory> categories) {
         this.categories = categories;
     }
+    public void setWeightBased(boolean weightBased) { this.weightBased = weightBased; }
+
+    public void setWeight(int weight) { this.weight = weight; }
 
     @Override
     public String toString(){

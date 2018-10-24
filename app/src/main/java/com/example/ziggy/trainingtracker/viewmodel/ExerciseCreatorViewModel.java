@@ -55,12 +55,13 @@ public class ExerciseCreatorViewModel extends ViewModel {
      * @param instructions Instructions for the new exercise
      * @param selectedCategories Categories for the new exercise
      */
-    public void createExercise(String name, String unit, String description, String instructions, List<String> selectedCategories) {
+    public void createExercise(String name, String unit, String description, String instructions, List<String> selectedCategories, boolean weightBased) {
         List<ExerciseCategory> exerciseCategories = new ArrayList<>();
         for (String selectedCategory : selectedCategories) {
             exerciseCategories.add(ExerciseCategory.valueOf(selectedCategory));
         }
         IExercise exercise = new Exercise(name, unit, description, instructions, exerciseCategories);
+        exercise.setWeightBased(weightBased);
         model.addCustomExercise(exercise);
     }
 

@@ -31,6 +31,10 @@ public class ActiveWorkoutViewModel extends ViewModel {
         workoutActive = false;
     }
 
+    public void addFinishedWorkoutToUser() {
+        model.getUser().getFinishedWorkouts().add(activeWorkout);
+    }
+
     public IWorkout getActiveWorkout() {
         return activeWorkout;
     }

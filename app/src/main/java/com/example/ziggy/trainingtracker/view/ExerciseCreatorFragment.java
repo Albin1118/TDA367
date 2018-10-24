@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -27,10 +28,13 @@ public class ExerciseCreatorFragment extends Fragment {
     private EditText exerciseUnitEditText;
     private EditText exerciseDescriptionEditText;
     private EditText exerciseInstructionsEditText;
+
     private Spinner exerciseCategorySpinner;
     private Button createExerciseButton;
     private Button saveExerciseButton;
     private Button cancelEditExerciseButton;
+
+    private CheckBox exerciseHasWeightCheckBox;
 
     private View view;
     private ExerciseCreatorViewModel viewModel;
@@ -68,6 +72,7 @@ public class ExerciseCreatorFragment extends Fragment {
         exerciseUnitEditText = view.findViewById(R.id.exerciseUnitEditText);
         exerciseDescriptionEditText = view.findViewById(R.id.exerciseDescriptionEditText);
         exerciseInstructionsEditText = view.findViewById(R.id.exerciseInstructionsEditText);
+        exerciseHasWeightCheckBox = view.findViewById(R.id.exerciseHasWeightCheckBox);
 
         createExerciseButton = view.findViewById(R.id.createExerciseButton);
         saveExerciseButton = view.findViewById(R.id.saveExerciseButton);
@@ -138,8 +143,9 @@ public class ExerciseCreatorFragment extends Fragment {
         String description = exerciseDescriptionEditText.getText().toString();
         String instructions = exerciseInstructionsEditText.getText().toString();
         List<String> categories = categoriesSelected();
+        Boolean weightBased = exerciseHasWeightCheckBox.isChecked();
 
-        viewModel.createExercise(name, unit, description, instructions, categories);
+        viewModel.createExercise(name, unit, description, instructions, categories, weightBased);
     }
 
     private void saveExercise() {

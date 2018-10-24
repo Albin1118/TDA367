@@ -15,7 +15,7 @@ import java.util.List;
 public class User implements IUser {
 
     //Add achievements and goals
-    private List<IWorkout> finishedWorkouts;
+    private List<IWorkout> finishedWorkouts = new ArrayList<>();
     private List<IExercise> customExercises = new ArrayList<>();
     private List<IWorkout> customWorkouts = new ArrayList<>();
     private List<Achievement> achievements = new ArrayList<>();

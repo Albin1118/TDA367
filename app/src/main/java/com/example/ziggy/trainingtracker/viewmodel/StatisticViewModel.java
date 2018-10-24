@@ -13,7 +13,7 @@ import java.util.List;
 
 public class StatisticViewModel extends ViewModel {
     ITrainingTracker model;
-    List<ExerciseStatistic> exercises;
+    List<ExerciseStatistic> exercises = new ArrayList<>();
 
 
 
