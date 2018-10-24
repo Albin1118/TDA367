@@ -15,18 +15,18 @@ public class ExerciseDetailViewModel extends ViewModel {
     }
 
     /**
-     * Remove the current exercise from the custom exercises.
+     * Removes the current exercise from the custom exercises.
      */
     public void removeExercise() {
         model.removeCustomExercise(exercise);
     }
 
     /**
-     * Check if the current exercise is custom made or part of the base exercises.
+     * Checks if the current exercise is custom made or part of the base exercises.
      * @return True if custom, false if base exercise
      */
     public boolean isCustomExercise() {
-        return model.getCustomExercises().contains(exercise);
+        return model.checkIfCustom(exercise);
     }
 
     public IExercise getExercise() {

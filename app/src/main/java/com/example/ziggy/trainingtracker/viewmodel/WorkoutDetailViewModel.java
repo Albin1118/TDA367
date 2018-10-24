@@ -15,18 +15,18 @@ public class WorkoutDetailViewModel extends ViewModel {
     }
 
     /**
-     * Remove the current workout from the custom workouts.
+     * Removes the current workout from the custom workouts.
      */
     public void removeWorkout() {
         model.removeCustomWorkout(workout);
     }
 
     /**
-     * Check if the current workout is custom made or part of the base workouts.
+     * Checks if the current workout is custom made or part of the base workouts.
      * @return True if custom, false if base workout
      */
     public boolean isCustomWorkout() {
-        return model.getCustomWorkouts().contains(workout);
+        return model.checkIfCustom(workout);
     }
 
     public IWorkout getWorkout() {

@@ -17,7 +17,7 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
-     * Add an Exercise to the list of Exercises and store it among the users custom Exercises.
+     * Adds an Exercise to the list of Exercises and stores it among the users custom Exercises.
      * @param e Exercise to be added
      */
     public void addCustomExercise(IExercise e) {
@@ -26,7 +26,7 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
-     * Remove an Exercise from the list of Exercises and discard it from the users custom Exercises.
+     * Removes an Exercise from the list of Exercises and discards it from the users custom Exercises.
      * @param e Exercise to be removed
      */
     public void removeCustomExercise(IExercise e) {
@@ -35,7 +35,7 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
-     * Add a Workout to the list of Workouts and store it among the users custom Workouts.
+     * Adds a Workout to the list of Workouts and stores it among the users custom Workouts.
      * @param w Workout to be added
      */
     public void addCustomWorkout(IWorkout w) {
@@ -44,12 +44,30 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
-     * Remove a Workout from the list of Workouts and discard it from the users custom Workouts.
+     * Removes a Workout from the list of Workouts and discards it from the users custom Workouts.
      * @param w Workout to be removed
      */
     public void removeCustomWorkout(IWorkout w) {
         workouts.remove(w);
         user.removeCustomWorkout(w);
+    }
+
+    /**
+     * Checks if specified exercise is custom made by the user.
+     * @param e Exercise to be checked
+     * @return True if custom made
+     */
+    public boolean checkIfCustom(IExercise e) {
+        return user.getCustomExercises().contains(e);
+    }
+
+    /**
+     * Checks if specified workout is custom made by the user.
+     * @param w Workout to be checked
+     * @return True if custom made
+     */
+    public boolean checkIfCustom(IWorkout w) {
+        return user.getCustomWorkouts().contains(w);
     }
 
     public List<IWorkout> getWorkouts() {
