@@ -20,6 +20,7 @@ public class Exercise implements IExercise {
     private String instructions;
     @SerializedName("exercise_has_weight")
     private boolean hasWeight;
+    @SerializedName("exercise_category")
     private List<ExerciseCategory> categories = new ArrayList<ExerciseCategory>();
 
 
@@ -29,6 +30,9 @@ public class Exercise implements IExercise {
         this.instructions = instructions;
         this.unit = unit;
         this.categories = categories;
+    }
+
+    public Exercise() {
     }
 
     public String getName() {
@@ -61,6 +65,9 @@ public class Exercise implements IExercise {
     }
     public void setCategories(List<ExerciseCategory> categories) {
         this.categories = categories;
+    }
+    public void setHasWeight(boolean hasWeight) {
+        this.hasWeight = hasWeight;
     }
 
     @Override

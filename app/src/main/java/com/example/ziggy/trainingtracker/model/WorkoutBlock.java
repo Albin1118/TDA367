@@ -48,6 +48,13 @@ public class WorkoutBlock implements IWorkoutBlock {
         multiplier = n;
     }
 
+    public void setExercises(List<IExercise> exercises) {
+        this.exercises = exercises;
+    }
+    public void setAmounts(List<Integer> amounts) {
+        this.amounts = amounts;
+    }
+
     public List<IExercise> getExercises() {
         return exercises;
     }

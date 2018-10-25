@@ -1,5 +1,6 @@
 package com.example.ziggy.trainingtracker.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -55,9 +56,11 @@ public class TrainingTracker implements ITrainingTracker{
     public List<IWorkout> getWorkouts() {
         return workouts;
     }
+
     public List<IExercise> getExercises() {
         return exercises;
     }
+
     public List<IExercise> getCustomExercises() {
         return user.getCustomExercises();
     }

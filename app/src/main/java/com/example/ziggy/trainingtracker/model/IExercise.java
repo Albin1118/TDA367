@@ -1,7 +1,10 @@
 package com.example.ziggy.trainingtracker.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.util.List;
 
+@JsonDeserialize(contentAs=Exercise.class)
 public interface IExercise {
 
     String getName();

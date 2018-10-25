@@ -1,7 +1,11 @@
 package com.example.ziggy.trainingtracker.model;
 
+import com.example.ziggy.trainingtracker.service.IWorkoutDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.util.List;
 
+@JsonDeserialize(using = IWorkoutDeserializer.class)
 public interface IWorkout {
 
     String toString();

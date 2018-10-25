@@ -24,6 +24,9 @@ public class Workout implements IWorkout{
         this.blocks = blocks;
     }
 
+    public Workout() {
+    }
+
     @Override
     public String toString(){
         return name + " - " + description + " - " + blocks.size() + " blocks";
@@ -55,4 +58,5 @@ public class Workout implements IWorkout{
     public void setBlocks(List<IWorkoutBlock> blocks) {
         this.blocks = blocks;
     }
+
 }
