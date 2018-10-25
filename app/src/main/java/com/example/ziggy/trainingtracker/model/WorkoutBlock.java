@@ -73,6 +73,12 @@ public class WorkoutBlock implements IWorkoutBlock {
     }
 
     @Override
+    public void setExercises(List<IExercise> exercises, List<Integer> amounts) {
+        this.exercises = exercises;
+        this.amounts = amounts;
+    }
+
+    @Override
     public String toString() {
         return "WorkoutBlock{" +
                 "exercises=" + exercises +

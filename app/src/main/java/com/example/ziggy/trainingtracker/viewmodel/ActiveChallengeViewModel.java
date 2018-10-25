@@ -2,7 +2,6 @@ package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
-import com.example.ziggy.trainingtracker.model.Challenge;
 import com.example.ziggy.trainingtracker.model.IChallenge;
 
 public class ActiveChallengeViewModel extends ViewModel {

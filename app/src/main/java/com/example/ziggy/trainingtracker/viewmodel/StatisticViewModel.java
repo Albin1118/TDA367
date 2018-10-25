@@ -6,7 +6,6 @@ import com.example.ziggy.trainingtracker.model.ExerciseStatistic;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
-import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 
 import java.util.ArrayList;
 import java.util.List;

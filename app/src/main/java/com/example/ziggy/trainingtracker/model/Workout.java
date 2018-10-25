@@ -30,7 +30,10 @@ public class Workout implements IWorkout{
     }
 
     @Override
-    public void addBlock(IWorkoutBlock block) {
+    public void addBlock(int multiplier, List<IExercise> exercises, List<Integer> amounts) {
+        IWorkoutBlock block = new WorkoutBlock();
+        block.setMultiplier(multiplier);
+        block.setExercises(exercises, amounts);
         blocks.add(block);
     }
 

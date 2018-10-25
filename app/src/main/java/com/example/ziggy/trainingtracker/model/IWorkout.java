@@ -6,7 +6,7 @@ public interface IWorkout {
 
     String toString();
 
-    void addBlock(IWorkoutBlock block);
+    void addBlock(int multiplier, List<IExercise> exercises, List<Integer> amounts);
 
     String getName();
     String getDescription();

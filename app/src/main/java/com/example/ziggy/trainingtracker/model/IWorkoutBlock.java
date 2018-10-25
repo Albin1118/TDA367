@@ -15,5 +15,7 @@ public interface IWorkoutBlock {
     String getMultiplierString();
     Boolean isEmpty();
 
+    void setExercises(List<IExercise> exercises, List<Integer> amounts);
+
     String toString();
 }
