@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Date;
+import java.util.LinkedHashMap;
 
 /**
  * Class representing the user of the application, containing data related to individual use such as
@@ -15,6 +17,7 @@ public class User implements IUser {
 
     //Add achievements and goals
     private List<IWorkout> finishedWorkouts = new ArrayList<>();
+    private List<Date> finishedWorkoutsDates = new ArrayList<>();
     private List<IExercise> customExercises = new ArrayList<>();
     private List<IWorkout> customWorkouts = new ArrayList<>();
     private List<Achievement> achievements = new ArrayList<>();
@@ -89,7 +92,7 @@ public class User implements IUser {
 
     @Override
     public List<IWorkout> getFinishedWorkouts() {
-        return Collections.unmodifiableList(finishedWorkouts);
+        return (finishedWorkouts);
     }
 
     @Override
@@ -100,6 +103,10 @@ public class User implements IUser {
     @Override
     public List<IWorkout> getCustomWorkouts() {
         return Collections.unmodifiableList(customWorkouts);
+    }
+
+    public List<Date> getFinishedWorkoutsDates() {
+        return finishedWorkoutsDates;
     }
 
     /**

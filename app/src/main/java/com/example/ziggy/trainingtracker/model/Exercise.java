@@ -53,10 +53,10 @@ public class Exercise implements IExercise {
     public List<ExerciseCategory> getCategories() {
         return categories;
     }
+    @Override
     public boolean isWeightBased() { return weightBased; }
-
+    @Override
     public int getWeight() { return weight; }
-
     @Override
     public String getCategoriesString(){
         String categoriesString = "";
@@ -92,10 +92,10 @@ public class Exercise implements IExercise {
     public void setCategories(List<ExerciseCategory> categories) {
         this.categories = categories;
     }
+    @Override
     public void setWeightBased(boolean weightBased) { this.weightBased = weightBased; }
-
+    @Override
     public void setWeight(int weight) { this.weight = weight; }
-
     @Override
     public String toString(){
         return name + " - " + description;

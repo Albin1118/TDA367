@@ -1,5 +1,8 @@
 package com.example.ziggy.trainingtracker.model;
 
+import com.example.ziggy.trainingtracker.model.Achievements.Achievement;
+
+import java.util.Date;
 import java.util.List;
 
 public interface IUser {
@@ -27,6 +30,8 @@ public interface IUser {
     List<IWorkout> getCustomWorkouts();
 
     List<IExercise> getCustomExercises();
+
+    List<Date> getFinishedWorkoutsDates();
 
     /**
      * Updates the status of all the achievements before returning them.

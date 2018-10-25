@@ -11,6 +11,7 @@ public interface IExercise {
     List<ExerciseCategory> getCategories();
     String getCategoriesString();
     boolean isWeightBased();
+    int getWeight();
 
     void setName(String name);
     void setDescription(String description);
@@ -18,6 +19,7 @@ public interface IExercise {
     void setUnit(String unit);
     void setCategories(List<ExerciseCategory> categories);
     void setWeightBased(boolean weightBased);
+    void setWeight(int weight);
 
     String toString();
 }

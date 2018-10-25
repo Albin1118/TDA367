@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.ziggy.trainingtracker.R;
@@ -33,9 +35,11 @@ public class StatisticsFragment extends Fragment {
     private View view;
 
     private String workoutName;
+    private String workoutName1;
     private List<ExerciseStatistic> exercises;
-    private IExercise chosenExercise;
     private LineGraphSeries<DataPoint> exerciseDataSeries;
+    private EditText exerciseEditText, repEditText, setEditText;
+    private Button searchStatisticsButton;
 
     private StatisticViewModel viewModel;
     private NavigationManager navigator;
@@ -66,15 +70,17 @@ public class StatisticsFragment extends Fragment {
         parentActivity = (MainActivity)getActivity();
         navigationManager = (MainActivity)getActivity();
         navigationManager.setNavBarState(R.id.nav_more);
-
-        //exercises = parentActivity.viewModel.getExercises();
+        exerciseEditText = view.findViewById(R.id.exerciseEditText);
+        repEditText = view.findViewById(R.id.repEditText);
+        setEditText = view.findViewById(R.id.setEditText);
+        searchStatisticsButton = view.findViewById(R.id.searchStatisticsButton);
 
         workoutName = "Deadlift 3x10";
 
-
         initViews();
         initDataSeries();
-        initGraph(exerciseDataSeries);
+        initGraph(exerciseDataSeries ,workoutName);
+        initListeners();
 
         return view;
     }
@@ -84,44 +90,44 @@ public class StatisticsFragment extends Fragment {
 
     private void initViews(){
        graph = (GraphView) view.findViewById(R.id.graph);
-       graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+       //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
        graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
 
-
        exerciseSpinner = view.findViewById(R.id.exercise_spinner);
+    }
 
-
+    private void initListeners() {
+        searchStatisticsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                graph.removeAllSeries();
+                String name = exerciseEditText.getText().toString();
+                int reps = Integer.parseInt(repEditText.getText().toString());
+                int sets = Integer.parseInt(setEditText.getText().toString());
+                List<ExerciseStatistic> exerciseStatistics = viewModel.getStatisticsFromSearch(name, reps, sets);
+                initGraph(viewModel.DataPointsFromStatisticsList(exerciseStatistics), workoutName);
+            }
+        });
     }
 
     private void initDataSeries(){
          // Currently only sample data is created
-
-        Date date = new Date();
-        Date date2 = new Date();
-
-
-        exerciseDataSeries = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(date, 1),
-                new DataPoint(date2, 5),
-                new DataPoint(date2, 3),
-                new DataPoint(date2, 2),
-                new DataPoint(date2, 6)
-        });
-
+        exerciseDataSeries = new LineGraphSeries<>();
+        exerciseDataSeries.appendData(new DataPoint(1,1), true, 5);
+        exerciseDataSeries.appendData(new DataPoint(2,2), true, 5);
+        exerciseDataSeries.appendData(new DataPoint(3,3), true, 5);
+        exerciseDataSeries.appendData(new DataPoint(4,4), true, 5);
+        exerciseDataSeries.appendData(new DataPoint(5,5), true, 5);
     }
 
 
 
 
-    private void initGraph(LineGraphSeries<DataPoint> series){
+    private void initGraph(LineGraphSeries<DataPoint> series, String title){
 
-        graph.setTitle(workoutName);
+        graph.setTitle(title);
         graph.setTitleTextSize(100);
         graph.addSeries(series);
 
-    }
-
-    public void setChosenExercise(IExercise chosenExercise) {
-        this.chosenExercise = chosenExercise;
     }
 }
