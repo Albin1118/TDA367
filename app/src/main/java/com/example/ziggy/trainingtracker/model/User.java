@@ -1,6 +1,5 @@
 package com.example.ziggy.trainingtracker.model;
 
-import com.example.ziggy.trainingtracker.model.Achievements.Achievement;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -39,6 +38,8 @@ public class User implements IUser {
         this.name = name;
         this.weight = weight;
         this.height = height;
+        addAchievement(new CreatedExercisesAchievement());
+        addAchievement(new FinishedWorkoutsAchievement());
     }
 
     @Override

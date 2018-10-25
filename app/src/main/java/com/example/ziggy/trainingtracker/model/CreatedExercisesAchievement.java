@@ -1,6 +1,4 @@
-package com.example.ziggy.trainingtracker.model.Achievements;
-
-import com.example.ziggy.trainingtracker.model.IUser;
+package com.example.ziggy.trainingtracker.model;
 
 public class CreatedExercisesAchievement extends Achievement {
     private static final String INFO = "Create your own exercises by clicking the \"+\" symbol in the exercises tab.";
@@ -9,7 +7,7 @@ public class CreatedExercisesAchievement extends Achievement {
 
     private int stage;
 
-    public CreatedExercisesAchievement() {
+    CreatedExercisesAchievement() {
         super(START, "Create " + START + " Exercise" + (START > 1 ? "s" : ""), INFO);
         stage = 1;
     }

@@ -1,6 +1,4 @@
-package com.example.ziggy.trainingtracker.model.Achievements;
-
-import com.example.ziggy.trainingtracker.model.IUser;
+package com.example.ziggy.trainingtracker.model;
 
 /**
  * Class representing an achievement which the user can earn by accomplishing certain criteria
@@ -14,13 +12,13 @@ public abstract class Achievement {
     private int progress;
     private boolean completed = false;
 
-    Achievement(int requirement, String name, String info) {
+    protected Achievement(int requirement, String name, String info) {
         this.requirement = requirement;
         this.name = name;
         this.info = info;
     }
 
-    public void update(IUser user) {
+    void update(IUser user) {
         if (!completed) {
             progress = checkProgress(user);
             if (progress >= requirement) {

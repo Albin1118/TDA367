@@ -1,15 +1,12 @@
-package com.example.ziggy.trainingtracker.model.Achievements;
-
-import com.example.ziggy.trainingtracker.model.IUser;
+package com.example.ziggy.trainingtracker.model;
 
 public class FinishedWorkoutsAchievement extends Achievement {
     private static final String INFO = "Go to the workout tab, select a workout and click on start workout.";
     private static final int START = 1;
-    private static final int MAX = 10;
 
     private int stage;
 
-    public FinishedWorkoutsAchievement() {
+    FinishedWorkoutsAchievement() {
         super(START, "Finish " + START + " Workout" + (START > 1 ? "s" : ""), INFO);
         stage = 1;
     }
