@@ -48,14 +48,41 @@ public class WorkoutBlockTest {
 
     @Test public void removeExercise_isCorrect() {
 
+        createTestVariables();
+
         IWorkoutBlock block = new WorkoutBlock();
 
         block.addExercise(exercise1, amount1);
         block.addExercise(exercise2, amount2);
         block.addExercise(exercise3, amount3);
-        assertEquals(block.getExercises().get(0), exercise1);
+        assertEquals(block.getExercises().get(1), exercise2);
+        assertEquals(block.getAmounts().get(1), (Integer) amount2);
+
         block.removeExercise(exercise2);
         assertEquals(block.getExercises().size(), 2);
-        assertEquals(block.getExercises().get(0), exercise2);
+        assertEquals(block.getExercises().get(1), exercise3);
+        assertEquals(block.getAmounts().get(1), (Integer) amount3);
+    }
+
+    @Test public void isEmpty_isCorrect(){
+
+        createTestVariables();
+
+        IWorkoutBlock block = new WorkoutBlock();
+
+        assertTrue(block.isEmpty());
+
+        block.addExercise(exercise1, amount1);
+        block.addExercise(exercise2, amount2);
+        block.addExercise(exercise3, amount3);
+
+        assertFalse(block.isEmpty());
+
+        block.removeExercise(exercise1);
+        block.removeExercise(exercise2);
+        block.removeExercise(exercise3);
+
+        assertTrue(block.isEmpty());
+
     }
 }
