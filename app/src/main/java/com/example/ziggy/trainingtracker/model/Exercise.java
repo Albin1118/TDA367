@@ -24,12 +24,13 @@ public class Exercise implements IExercise {
     private int weight;
 
 
-    public Exercise(String name, String unit, String description, String instructions, List<ExerciseCategory> categories) {
+    public Exercise(String name, String unit, String description, String instructions, List<ExerciseCategory> categories, boolean weightBased) {
         this.name = name;
         this.description = description;
         this.instructions = instructions;
         this.unit = unit;
         this.categories = categories;
+        this.weightBased = weightBased;
     }
 
     @Override

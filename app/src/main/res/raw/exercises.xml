@@ -2,7 +2,7 @@
 
 <exercises>
 
-    <exercise name="Bench Press">
+    <exercise name="Bench Press" weightBased="true">
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
@@ -17,7 +17,7 @@
         <category>CARDIO</category>
     </exercise>
 
-    <exercise name="Deadlift">
+    <exercise name="Deadlift" weightBased="true">
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
@@ -26,12 +26,19 @@
         <category>LEGS</category>
     </exercise>
 
-    <exercise name="Medicine Ball Cleans">
+    <exercise name="Medicine Ball Cleans" weightBased="true">
         <description></description>
         <instructions></instructions>
         <unit>reps</unit>
         <category>ARMS</category>
         <category>LEGS</category>
+    </exercise>
+
+    <exercise name="Plank">
+        <description></description>
+        <instructions></instructions>
+        <unit>seconds</unit>
+        <category>ABS</category>
     </exercise>
 
     <exercise name="Pull-ups">
@@ -77,12 +84,5 @@
         <instructions></instructions>
         <unit>meters</unit>
         <category>LEGS</category>
-    </exercise>
-
-    <exercise name="Plank">
-        <description></description>
-        <instructions></instructions>
-        <unit>seconds</unit>
-        <category>ABS</category>
     </exercise>
 </exercises>

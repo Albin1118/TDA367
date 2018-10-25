@@ -2,7 +2,6 @@ package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
-import com.example.ziggy.trainingtracker.model.Exercise;
 import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
@@ -60,9 +59,7 @@ public class ExerciseCreatorViewModel extends ViewModel {
         for (String selectedCategory : selectedCategories) {
             exerciseCategories.add(ExerciseCategory.valueOf(selectedCategory));
         }
-        IExercise exercise = new Exercise(name, unit, description, instructions, exerciseCategories);
-        exercise.setWeightBased(weightBased);
-        model.addCustomExercise(exercise);
+        model.addCustomExercise(name, unit, description, instructions, exerciseCategories, weightBased);
     }
 
     /**

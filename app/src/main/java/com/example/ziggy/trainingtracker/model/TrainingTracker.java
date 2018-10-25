@@ -17,11 +17,16 @@ public class TrainingTracker implements ITrainingTracker{
 
     /**
      * Adds an Exercise to the user's list of custom exercises.
-     * @param e Exercise to be added
+     * @param name exercise name
+     * @param unit exercise unit
+     * @param description exercise description
+     * @param instructions exercise instructions
+     * @param categories exercise categories
+     * @param weightBased true if exercise is weight based
      */
     @Override
-    public void addCustomExercise(IExercise e) {
-        user.addCustomExercise(e);
+    public void addCustomExercise(String name, String unit, String description, String instructions, List<ExerciseCategory> categories, boolean weightBased) {
+        user.addCustomExercise(new Exercise(name, unit, description, instructions, categories, weightBased));
     }
 
     /**

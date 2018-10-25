@@ -7,9 +7,14 @@ public interface ITrainingTracker {
 
     /**
      * Adds an Exercise to the user's list of custom Exercises.
-     * @param e Exercise to be added
+     * @param name exercise name
+     * @param unit exercise unit
+     * @param description exercise description
+     * @param instructions exercise instructions
+     * @param categories exercise categories
+     * @param weightBased true if exercise is weight based
      */
-    void addCustomExercise(IExercise e);
+    void addCustomExercise(String name, String unit, String description, String instructions, List<ExerciseCategory> categories, boolean weightBased);
 
     /**
      * Removes an Exercise from the user's list of custom Exercises.

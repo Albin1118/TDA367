@@ -89,6 +89,8 @@ public class ReadExercisesFromXMLService {
         if (name.trim().isEmpty() || exercises.containsKey(name))
             throw new IllegalArgumentException("An exercise cannot have an empty or duplicate name.");
 
+        boolean weightBased = exerciseElement.getAttribute("weightBased").equals("true");
+
         String unit = getTextValue(exerciseElement, "unit");
         if (unit == null || unit.trim().isEmpty())
             throw new IllegalArgumentException("An exercise needs a unit.");
@@ -111,7 +113,7 @@ public class ReadExercisesFromXMLService {
             }
         }
 
-        return new Exercise(name, unit, description, instructions, categories);
+        return new Exercise(name, unit, description, instructions, categories, weightBased);
     }
 
     /**
