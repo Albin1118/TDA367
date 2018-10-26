@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_margin="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minHeight="?attr/listPreferredItemHeight"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
@@ -42,6 +41,7 @@
         android:layout_marginBottom="10dp"
         android:scaleY="3"
         style="?android:attr/progressBarStyleHorizontal"
+        android:progressTint="@android:color/holo_orange_dark"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

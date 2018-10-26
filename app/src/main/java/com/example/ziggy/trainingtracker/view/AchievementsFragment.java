@@ -39,7 +39,7 @@ public class AchievementsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_achievement, container, false);
+        view  = inflater.inflate(R.layout.fragment_achievements, container, false);
         initViews();
         initListeners();
 
