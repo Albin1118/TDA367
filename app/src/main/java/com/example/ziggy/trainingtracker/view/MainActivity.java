@@ -15,6 +15,7 @@ import android.view.View;
 import com.example.ziggy.trainingtracker.model.IChallenge;
 import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.model.IWorkout;
+import com.example.ziggy.trainingtracker.viewmodel.AchievementsViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.ActiveChallengeViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.ActiveWorkoutViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseCreatorViewModel;
@@ -209,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
     @Override
     public void navigateMore() {
         clearBackStack();
-        setFragmentContainerContentFromTab(new MoreTabFragment());
+        setFragmentContainerContentFromTab(MoreTabFragment.newInstance(this));
     }
 
     @Override
@@ -280,5 +281,12 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
 
         setFragmentContainerContent(ActiveChallengeFragment.newInstance(viewModel, this));
 
+    }
+
+    @Override
+    public void navigateAchievements() {
+        AchievementsViewModel viewModel = ViewModelProviders.of(this).get(AchievementsViewModel.class);
+        viewModel.init(this.viewModel.getModel());
+        setFragmentContainerContent(AchievementsFragment.newInstance(viewModel));
     }
 }

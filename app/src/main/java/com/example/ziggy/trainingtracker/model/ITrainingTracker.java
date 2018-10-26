@@ -75,7 +75,15 @@ public interface ITrainingTracker {
      */
     List<IWorkout> getWorkouts();
 
+    /**
+     * @return an unmodifiable list of the challenges
+     */
     List<IChallenge> getChallenges();
+
+    /**
+     * @return an unmodifiable list of the achievements
+     */
+    List<Achievement> getAchievements();
 
     IUser getUser();
 }

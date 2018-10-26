@@ -40,7 +40,6 @@ public class WorkoutCreatorFragment extends Fragment {
     private NavigationManager navigator;
 
     private boolean descriptionClosed;
-    private IWorkout editableWorkout = null;
 
     public static WorkoutCreatorFragment newInstance(WorkoutCreatorViewModel viewModel, NavigationManager navigator) {
         WorkoutCreatorFragment fragment = new WorkoutCreatorFragment();

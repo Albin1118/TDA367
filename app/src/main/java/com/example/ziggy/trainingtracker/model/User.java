@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -115,8 +116,8 @@ public class User implements IUser {
      */
     @Override
     public List<Achievement> getAchievements() {
-        for (Achievement achievement : achievements) {
-            achievement.update(this);
+        for (int i = 0; i < achievements.size(); i++) {
+            achievements.get(i).update(this);
         }
         return Collections.unmodifiableList(achievements);
     }

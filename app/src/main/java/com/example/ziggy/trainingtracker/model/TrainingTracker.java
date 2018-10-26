@@ -131,6 +131,14 @@ public class TrainingTracker implements ITrainingTracker{
         return Collections.unmodifiableList(baseChallenges);
     }
 
+    /**
+     * @return an unmodifiable list of the achievements
+     */
+    @Override
+    public List<Achievement> getAchievements() {
+        return Collections.unmodifiableList(user.getAchievements());
+    }
+
     @Override
     public IUser getUser() {
         return user;

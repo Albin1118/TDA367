@@ -24,11 +24,22 @@ public class MoreTabFragment extends Fragment {
     private EditText weightEditText;
     private Switch nightModeSwitch;
     private Button statisticsButton;
+    private Button achievementsButton;
 
     private View view;
-    private NavigationManager navigationManager;
+    private NavigationManager navigator;
 
     SharedPreferences themeSettings;
+
+    public static MoreTabFragment newInstance(NavigationManager navigator) {
+        MoreTabFragment fragment = new MoreTabFragment();
+        fragment.setNavigator(navigator);
+        return fragment;
+    }
+
+    public void setNavigator(NavigationManager navigator) {
+        this.navigator = navigator;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,8 +51,7 @@ public class MoreTabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_moretab, container, false);
-        navigationManager = (MainActivity)getActivity();
-        navigationManager.setNavBarState(R.id.nav_more);
+        navigator.setNavBarState(R.id.nav_more);
 
         initViews();
         initListeners();
@@ -53,6 +63,7 @@ public class MoreTabFragment extends Fragment {
         weightEditText = view.findViewById(R.id.weight_edit_text);
         nightModeSwitch = view.findViewById(R.id.night_mode_switch);
         statisticsButton = view.findViewById(R.id.statistics_button);
+        achievementsButton = view.findViewById(R.id.achievements_button);
 
         if (themeSettings.getInt("theme", 0) == R.style.DarkTheme) {
             nightModeSwitch.setChecked(true);
@@ -64,7 +75,14 @@ public class MoreTabFragment extends Fragment {
         statisticsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigationManager.navigateStatistics();
+                navigator.navigateStatistics();
+            }
+        });
+
+        achievementsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigator.navigateAchievements();
             }
         });
 

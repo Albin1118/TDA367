@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ListView
-            android:id="@+id/workoutList"
+            android:id="@+id/achievementsListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
