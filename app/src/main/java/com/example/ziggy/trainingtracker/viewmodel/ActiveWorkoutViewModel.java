@@ -31,14 +31,12 @@ public class ActiveWorkoutViewModel extends ViewModel {
         workoutActive = false;
     }
 
-    public void addFinishedWorkoutToUser() {
-        model.getUser().addActiveWorkoutToFinishedWorkouts();
-        Date date = new Date();
-        model.getUser().getFinishedWorkoutsDates().add(date);
-    }
-
     public IWorkout getActiveWorkout() {
         return model.getUser().getActiveWorkout();
+    }
+
+    public void addFinishedWorkoutToUser(){
+        model.getUser().addActiveWorkoutToFinishedWorkouts();
     }
 
     public boolean isWorkoutActive() {

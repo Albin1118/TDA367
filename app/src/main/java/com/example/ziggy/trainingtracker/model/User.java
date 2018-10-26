@@ -23,6 +23,8 @@ public class User implements IUser {
     private List<Achievement> achievements = new ArrayList<>();
     private List <ExerciseStatisticTEMP> exerciseStatistics = new ArrayList<>();
 
+    private List<IWorkout> finishedWorkouts = new ArrayList<>();
+
     private String username;
 
     private IWorkout activeWorkout;
@@ -49,6 +51,13 @@ public class User implements IUser {
     }
 
     //TODO Tests for the statistics functionality
+
+    //TODO probably move statistic functionality to TrainingTracker
+
+
+    public void addActiveWorkoutToFinishedWorkouts(){
+        finishedWorkouts.add(activeWorkout);
+    }
 
     public void addActiveWorkoutToStatistics(){
 
@@ -165,6 +174,11 @@ public class User implements IUser {
     @Override
     public List<IWorkout> getCustomWorkouts() {
         return Collections.unmodifiableList(customWorkouts);
+    }
+
+    @Override
+    public List<IWorkout> getFinishedWorkouts() {
+        return finishedWorkouts;
     }
 
     /**

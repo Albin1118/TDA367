@@ -1,12 +1,13 @@
 package com.example.ziggy.trainingtracker.model;
 
-import java.util.Date;
 import java.util.List;
 
 public interface IUser {
 
 
     void addActiveWorkoutToStatistics();
+
+    void addActiveWorkoutToFinishedWorkouts();
 
     void addCustomExercise(IExercise e);
 
@@ -30,7 +31,13 @@ public interface IUser {
 
     List<IWorkout> getCustomWorkouts();
 
+    List<IWorkout> getFinishedWorkouts();
+
     List<IExercise> getCustomExercises();
+
+
+
+
 
     /**
      * Updates the status of all the achievements before returning them.
