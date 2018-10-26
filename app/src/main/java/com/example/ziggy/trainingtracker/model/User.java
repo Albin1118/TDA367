@@ -22,7 +22,7 @@ public class User implements IUser {
     private List<IExercise> customExercises = new ArrayList<>();
     private List<IWorkout> customWorkouts = new ArrayList<>();
     private List<Achievement> achievements = new ArrayList<>();
-    private List <ExerciseStatisticTEMP> exerciseStatistics = new ArrayList<>();
+    private List <ExerciseStatistic> exerciseStatistics = new ArrayList<>();
 
     private List<IWorkout> finishedWorkouts = new ArrayList<>();
     private Map<String, IChallenge> finishedChallenges = new HashMap<>();
@@ -72,7 +72,7 @@ public class User implements IUser {
                 }
                 // If it is weightbased, create a new ExerciseStatistic object and add the stats to it
                 else if (e.isWeightBased()){
-                    exerciseStatistics.add(new ExerciseStatisticTEMP(e));
+                    exerciseStatistics.add(new ExerciseStatistic(e));
                     addToStatisticsList(e, w.getMultiplier(), w.getAmounts().get(exercisePosition++));
                 }
             }
@@ -81,7 +81,7 @@ public class User implements IUser {
 
 
     private void addToStatisticsList(IExercise e, int sets, int reps){
-        for (ExerciseStatisticTEMP statistic : exerciseStatistics){
+        for (ExerciseStatistic statistic : exerciseStatistics){
             if (statistic.getExercise().equals(e)){
                 statistic.addStatistics(sets, reps, 22.5); //TODO temp hardcoded weight until it is implemented in workoutblock
             }
@@ -89,7 +89,7 @@ public class User implements IUser {
     }
 
     private boolean previousStatisticsAvailable(IExercise e){
-        for (ExerciseStatisticTEMP previousStatistic : exerciseStatistics){
+        for (ExerciseStatistic previousStatistic : exerciseStatistics){
             if (previousStatistic.getExercise().equals(e)){
                 return true;
             }
@@ -102,7 +102,7 @@ public class User implements IUser {
     public LinkedHashMap<Date, Double> generateStatisticsForExercise(IExercise e, int sets, int reps) {
         //TODO depending on how the user accesses the statistics, change this implementation (i.e if we only show exercises which already has statistics available, or if we show them all and let the user select)
 
-        for (ExerciseStatisticTEMP previousStatistic : exerciseStatistics) {
+        for (ExerciseStatistic previousStatistic : exerciseStatistics) {
             if (previousStatistic.getExercise().equals(e)) {
 
                 try {

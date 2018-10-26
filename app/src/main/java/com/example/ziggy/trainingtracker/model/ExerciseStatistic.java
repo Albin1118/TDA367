@@ -1,77 +1,70 @@
 package com.example.ziggy.trainingtracker.model;
 
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.NoSuchElementException;
 
+//TODO Tests for this class
 
 public class ExerciseStatistic {
 
-    private String exerciseName;
-    private int reps;
-    private int sets;
     private IExercise exercise;
-    private Date date;
-    private Boolean weightBased;
-    private int weight;
+    private LinkedHashMap<SetRepsWeightContainer, Date> statisticHolder;
 
 
-
-    Calendar calendar;
-    LinkedHashMap<Date, Integer> weightHistoryMap;
-
-
-    public ExerciseStatistic(IExercise exercise, int reps, int sets) {
-        calendar = Calendar.getInstance();
-        weightHistoryMap = new LinkedHashMap<>();
-        this.reps = reps;
-        this.sets = sets;
-        setExerciseInformation(exercise);
+    ExerciseStatistic(IExercise exercise) {
+        this.exercise = exercise;
+        statisticHolder = new LinkedHashMap<>();
     }
 
-    public void setExerciseInformation(IExercise exercise) {
-        this.exerciseName = exercise.getName();
-        if(exercise.isWeightBased()) {
-            this.weightBased = true;
-            this.weight = exercise.getWeight();
+    void addStatistics(int sets, int reps, double weight){
+        statisticHolder.put(new SetRepsWeightContainer(sets, reps, weight), new Date());
+    }
+
+
+    LinkedHashMap<Date, Double> getStatisticForSpecificSetReps(int sets, int reps) throws NoSuchElementException {
+        LinkedHashMap<Date, Double> map = new LinkedHashMap<>();
+
+        for (SetRepsWeightContainer s : statisticHolder.keySet()){
+            if (s.getReps() == reps && s.getSets() == sets){
+                map.put(statisticHolder.get(s), s.getWeight());
+            }
         }
+
+        if (map.size() == 0){
+            throw new NoSuchElementException("There are no statistics available for the supplied sets/reps");
+        }
+
+        return map;
     }
 
-
-    public void addExerciseStats(int weight){
-        Date date = new Date();
-        weightHistoryMap.put(date, weight);
+    public IExercise getExercise() {
+        return exercise;
     }
 
-    public String toString(){
-        return this.exerciseName + " " + sets + "x" + reps;
-    }
+    private class SetRepsWeightContainer{
+        private int sets;
+        private int reps;
+        private double weight;
 
-    public int getReps() {
-        return reps;
-    }
+        SetRepsWeightContainer(int sets, int reps, double weight) {
+            this.sets = sets;
+            this.reps = reps;
+            this.weight = weight;
+        }
 
-    public Boolean getWeightBased() {
-        return weightBased;
-    }
 
-    public int getSets() {
-        return sets;
-    }
+        public double getWeight() {
+            return weight;
+        }
 
-    public int getWeight() {
-        return weight;
-    }
+        public int getSets() {
+            return sets;
+        }
 
-    public String getExerciseName() {
-        return exerciseName;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+        public int getReps() {
+            return reps;
+        }
     }
 }
