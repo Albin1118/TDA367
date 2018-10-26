@@ -13,22 +13,27 @@ public class Challenge implements IChallenge {
         score = 0;
     }
 
+    @Override
     public String getName() {
         return exercise.getName();
     }
 
+    @Override
     public String getUnit() {
         return exercise.getUnit();
     }
 
+    @Override
     public String getDescription() {
         return exercise.getDescription();
     }
 
+    @Override
     public int getScore() {
         return score;
     }
 
+    @Override
     public void setScore(int score) {
         this.score = score;
     }

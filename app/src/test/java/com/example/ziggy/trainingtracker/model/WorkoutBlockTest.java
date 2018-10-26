@@ -16,17 +16,17 @@ public class WorkoutBlockTest {
         String name1 = "Pushups", description1 = "Very hard", instructions1 = "Don´t hit your nose", unit1 = "reps";
         List<ExerciseCategory> categories1 = new ArrayList<>();
         categories1.add(ExerciseCategory.ARMS);
-        exercise1 = new Exercise(name1, unit1, description1, instructions1, categories1);
+        exercise1 = new Exercise(name1, unit1, description1, instructions1, categories1, false);
 
         String name2 = "Pullups", description2 = "Very very hard", instructions2 = "Don´t hit your head", unit2 = "reps^2";
         List<ExerciseCategory> categories2 = new ArrayList<>();
         categories2.add(ExerciseCategory.BACK);
-        exercise2 = new Exercise(name2, unit2, description2, instructions2, categories2);
+        exercise2 = new Exercise(name2, unit2, description2, instructions2, categories2, false);
 
         String name3 = "Situps", description3 = "Very very very hard", instructions3 = "Don´t hit your back", unit3 = "reps^3";
         List<ExerciseCategory> categories3 = new ArrayList<>();
         categories3.add(ExerciseCategory.ABS);
-        exercise3 = new Exercise(name3, unit3, description3, instructions3, categories3);
+        exercise3 = new Exercise(name3, unit3, description3, instructions3, categories3, false);
     }
 
 
@@ -48,14 +48,41 @@ public class WorkoutBlockTest {
 
     @Test public void removeExercise_isCorrect() {
 
+        createTestVariables();
+
         IWorkoutBlock block = new WorkoutBlock();
 
         block.addExercise(exercise1, amount1);
         block.addExercise(exercise2, amount2);
         block.addExercise(exercise3, amount3);
-        assertEquals(block.getExercises().get(0), exercise1);
+        assertEquals(block.getExercises().get(1), exercise2);
+        assertEquals(block.getAmounts().get(1), (Integer) amount2);
+
         block.removeExercise(exercise2);
         assertEquals(block.getExercises().size(), 2);
-        assertEquals(block.getExercises().get(0), exercise2);
+        assertEquals(block.getExercises().get(1), exercise3);
+        assertEquals(block.getAmounts().get(1), (Integer) amount3);
+    }
+
+    @Test public void isEmpty_isCorrect(){
+
+        createTestVariables();
+
+        IWorkoutBlock block = new WorkoutBlock();
+
+        assertTrue(block.isEmpty());
+
+        block.addExercise(exercise1, amount1);
+        block.addExercise(exercise2, amount2);
+        block.addExercise(exercise3, amount3);
+
+        assertFalse(block.isEmpty());
+
+        block.removeExercise(exercise1);
+        block.removeExercise(exercise2);
+        block.removeExercise(exercise3);
+
+        assertTrue(block.isEmpty());
+
     }
 }

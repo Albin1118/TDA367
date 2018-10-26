@@ -1,4 +1,4 @@
-push-ups
-pull-ups
-squats
 plank
+pull-ups
+push-ups
+squats

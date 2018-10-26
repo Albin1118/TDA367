@@ -12,7 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
+import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseDetailViewModel;
+
+import java.util.List;
 
 /**
  * Fragment representing a view displaying contents of a selected exercise
@@ -22,6 +25,7 @@ public class ExerciseDetailViewFragment extends Fragment {
 
     private TextView exerciseNameTextView;
     private TextView exerciseUnitTextView;
+    private TextView exercisesCategoryTextView;
     private TextView exerciseDescriptionTextView;
     private TextView exerciseInstructionsTextView;
     private TextView exerciseCategoryTextView;
@@ -60,6 +64,7 @@ public class ExerciseDetailViewFragment extends Fragment {
     private void initViews() {
         exerciseNameTextView = view.findViewById(R.id.exerciseNameTextView);
         exerciseUnitTextView = view.findViewById(R.id.exerciseUnitTextView);
+        exerciseCategoryTextView = view.findViewById(R.id.exerciseCategoryTextView);
         exerciseDescriptionTextView = view.findViewById(R.id.exerciseDescriptionTextView);
         exerciseDescriptionTextView.setMovementMethod(new ScrollingMovementMethod());
         exerciseInstructionsTextView = view.findViewById(R.id.exerciseInstructionsTextView);
@@ -69,6 +74,7 @@ public class ExerciseDetailViewFragment extends Fragment {
 
         exerciseNameTextView.setText(viewModel.getExercise().getName());
         exerciseUnitTextView.setText(viewModel.getExercise().getUnit());
+        exerciseCategoryTextView.setText(viewModel.getExercise().getCategoriesString());
         exerciseDescriptionTextView.setText(viewModel.getExercise().getDescription());
         exerciseInstructionsTextView.setText(viewModel.getExercise().getInstructions());
 
@@ -105,4 +111,5 @@ public class ExerciseDetailViewFragment extends Fragment {
             ft.detach(this).attach(this).commit();
         }
     }
+
 }

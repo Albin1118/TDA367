@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +19,7 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IExercise;
-import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
-import com.example.ziggy.trainingtracker.model.WorkoutBlock;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutCreatorViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents a view where the user can create a WorkoutBlock, by selecting a block-multiplier and
@@ -45,8 +39,6 @@ public class WorkoutBlockCreatorFragment extends Fragment {
     private View view;
     private WorkoutCreatorViewModel viewModel;
     private NavigationManager navigator;
-
-    private IWorkoutBlock block;
 
     public static WorkoutBlockCreatorFragment newInstance(WorkoutCreatorViewModel viewModel, NavigationManager navigator) {
         WorkoutBlockCreatorFragment fragment = new WorkoutBlockCreatorFragment();
@@ -71,9 +63,10 @@ public class WorkoutBlockCreatorFragment extends Fragment {
         initViews();
         initListeners();
 
-        block = new WorkoutBlock();
+        viewModel.resetWorkoutBlock();
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_multiple_choice, viewModel.getExercises());
+        //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_multiple_choice, viewModel.getExercises());
+        adapter = new ExerciseCheckedListAdapter(getContext(), viewModel.getExercises());
         selectExerciseListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         selectExerciseListView.setAdapter(adapter);
 
@@ -142,7 +135,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             int numberofUnits = Integer.parseInt(numberofUnitEditText.getText().toString());
-                            block.addExercise(e, numberofUnits);
+                            viewModel.addExercise(e, numberofUnits);
                             dialog.cancel();
                         }
                     });
@@ -160,13 +153,13 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                     numberofUnitEditText.requestFocus();
 
                 }else {
-                   block.removeExercise(e);
+                   viewModel.removeExercise(e);
                 }
 
             }
         });
 
-        previewButton.setOnClickListener(new View.OnClickListener() {
+        /*previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Set the multiplier of the WorkoutBlock
@@ -198,50 +191,22 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
                 builder.show();
             }
-        });
+        });*/
 
         addWorkoutBlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!block.isEmpty()){
-                    //Sets the multiplier of the block
-                    int sets = Integer.parseInt(setsDisplay.getText().toString());
-                    block.setMultiplier(sets);
-
-                    //Adds the current WorkoutBlock to the Workout being built
-                    viewModel.getBuildWorkout().addBlock(block);
-                    navigator.goBack();
-
-                }else{
+                if (viewModel.workoutBlockIsEmpty()) {
                     Toast.makeText(getContext(), "You need to select at least one exercise!", Toast.LENGTH_SHORT).show();
+                } else {
+                    viewModel.addWorkoutBlock(Integer.parseInt(setsDisplay.getText().toString()));
+                    navigator.goBack();
                 }
 
             }
         });
 
 
-    }
-
-    private IWorkoutBlock buildWorkoutBlock(){
-
-        IWorkoutBlock workoutBlock = new WorkoutBlock();
-
-        int sets = Integer.parseInt(setsDisplay.getText().toString());
-        workoutBlock.setMultiplier(sets);
-
-        SparseBooleanArray checkedItems = selectExerciseListView.getCheckedItemPositions();
-
-        if (checkedItems != null) {
-            for (int i=0; i<checkedItems.size(); i++) {
-                if (checkedItems.valueAt(i)) {
-                    //Exercise checkedExercise = (Exercise) selectExerciseListView.getAdapter().getItem(i);
-                    int position = checkedItems.keyAt(i);
-                    workoutBlock.addExercise(viewModel.getExercises().get(position), 1);
-                }
-            }
-        }
-
-        return workoutBlock;
     }
 }

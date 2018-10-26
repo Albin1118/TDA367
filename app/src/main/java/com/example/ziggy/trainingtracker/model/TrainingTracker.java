@@ -1,95 +1,137 @@
 package com.example.ziggy.trainingtracker.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TrainingTracker implements ITrainingTracker{
     private static ITrainingTracker instance = null;
-    private User user = new User("Test", "Mr Test", 98.5, 210);
-    private List<IWorkout> workouts = new ArrayList<>();
-    private List<IExercise> exercises = new ArrayList<>();
-    private List<IChallenge> challenges = new ArrayList<>();
+    private IUser user = new User("Test", "Mr Test", 98.5, 210);
+    private List<IWorkout> baseWorkouts = new ArrayList<>();
+    private List<IExercise> baseExercises = new ArrayList<>();
+    private List<IChallenge> baseChallenges = new ArrayList<>();
 
     public TrainingTracker() {
 
     }
 
     /**
-     * Add an Exercise to the list of Exercises and store it among the users custom Exercises.
-     * @param e Exercise to be added
+     * Adds an Exercise to the user's list of custom exercises.
+     * @param name exercise name
+     * @param unit exercise unit
+     * @param description exercise description
+     * @param instructions exercise instructions
+     * @param categories exercise categories
+     * @param weightBased true if exercise is weight based
      */
-    public void addCustomExercise(IExercise e) {
-        exercises.add(e);
-        user.addCustomExercise(e);
+    @Override
+    public void addCustomExercise(String name, String unit, String description, String instructions, List<ExerciseCategory> categories, boolean weightBased) {
+        user.addCustomExercise(new Exercise(name, unit, description, instructions, categories, weightBased));
     }
 
     /**
-     * Remove an Exercise from the list of Exercises and discard it from the users custom Exercises.
+     * Removes an Exercise from the user's list of custom Exercises.
      * @param e Exercise to be removed
      */
+    @Override
     public void removeCustomExercise(IExercise e) {
-        exercises.remove(e);
         user.removeCustomExercise(e);
     }
 
     /**
-     * Add a Workout to the list of Workouts and store it among the users custom Workouts.
+     * Adds a Workout to the user's list of custom workouts.
      * @param w Workout to be added
      */
+    @Override
     public void addCustomWorkout(IWorkout w) {
-        workouts.add(w);
         user.addCustomWorkout(w);
     }
 
     /**
-     * Remove a Workout from the list of Workouts and discard it from the users custom Workouts.
+     * Removes a Workout from the user's list of custom Workouts.
      * @param w Workout to be removed
      */
+    @Override
     public void removeCustomWorkout(IWorkout w) {
-        workouts.remove(w);
         user.removeCustomWorkout(w);
     }
 
-    public List<IWorkout> getWorkouts() {
-        return workouts;
+    /**
+     * Load a set of base exercises that can't be edited by the user
+     * @param baseExercises the list of exercises to add to the base exercises
+     */
+    @Override
+    public void loadBaseExercises(List<IExercise> baseExercises) {
+        this.baseExercises.addAll(baseExercises);
     }
 
+    /**
+     * Load a set of base workouts that can't be edited by the user
+     * @param baseWorkouts the list of workouts to add to the base workouts
+     */
+    @Override
+    public void loadBaseWorkouts(List<IWorkout> baseWorkouts) {
+        this.baseWorkouts.addAll(baseWorkouts);
+    }
+
+    /**
+     * Load a set of base challenges that can't be edited by the user
+     * @param baseChallenges the list of challenges to add to the base challenges
+     */
+    @Override
+    public void loadBaseChallenges(List<IChallenge> baseChallenges) {
+        this.baseChallenges.addAll(baseChallenges);
+    }
+
+    /**
+     * Checks if specified exercise is custom made by the user.
+     * @param e Exercise to be checked
+     * @return True if custom made
+     */
+    @Override
+    public boolean checkIfCustom(IExercise e) {
+        return user.getCustomExercises().contains(e);
+    }
+
+    /**
+     * Checks if specified workout is custom made by the user.
+     * @param w Workout to be checked
+     * @return True if custom made
+     */
+    @Override
+    public boolean checkIfCustom(IWorkout w) {
+        return user.getCustomWorkouts().contains(w);
+    }
+
+    /**
+     * @return an unmodifiable list of the base exercises + the users custom exercises
+     */
+    @Override
     public List<IExercise> getExercises() {
-        return exercises;
+        List<IExercise> allExercises = new ArrayList<>(baseExercises);
+        allExercises.addAll(user.getCustomExercises());
+        return Collections.unmodifiableList(allExercises);
     }
 
-    public List<IExercise> getCustomExercises() {
-        return user.getCustomExercises();
+    /**
+     * @return an unmodifiable list of the base workouts + the users custom workouts
+     */
+    @Override
+    public List<IWorkout> getWorkouts() {
+        List<IWorkout> allWorkouts = new ArrayList<>(baseWorkouts);
+        allWorkouts.addAll(user.getCustomWorkouts());
+        return Collections.unmodifiableList(allWorkouts);
     }
-    public List<IWorkout> getCustomWorkouts() {
-        return user.getCustomWorkouts();
-    }
+
+    /**
+     * @return an unmodifiable list of the challenges
+     */
+    @Override
     public List<IChallenge> getChallenges() {
-        return challenges;
+        return Collections.unmodifiableList(baseChallenges);
     }
 
-    public void setCustomWorkouts(List<IWorkout> w){
-        user.setCustomWorkouts(w);
-    }
-
-    public void setCustomExercises(List<IExercise> e){ user.setCustomExercises(e);
-    }
-
-    public void setWorkouts(List<IWorkout> workouts) {
-        this.workouts = workouts;
-    }
-
-    public void setExercises(List<IExercise> exercises) {
-        this.exercises = exercises;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    @Override
     public IUser getUser() {
         return user;
     }

@@ -1,11 +1,11 @@
 package com.example.ziggy.trainingtracker.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
-import android.support.v4.math.MathUtils;
 
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 
+import java.util.Date;
 import java.util.List;
 
 public class ActiveWorkoutViewModel extends ViewModel {
@@ -29,6 +29,12 @@ public class ActiveWorkoutViewModel extends ViewModel {
 
     public void finishWorkout() {
         workoutActive = false;
+    }
+
+    public void addFinishedWorkoutToUser() {
+        model.getUser().getFinishedWorkouts().add(activeWorkout);
+        Date date = new Date();
+        model.getUser().getFinishedWorkoutsDates().add(date);
     }
 
     public IWorkout getActiveWorkout() {

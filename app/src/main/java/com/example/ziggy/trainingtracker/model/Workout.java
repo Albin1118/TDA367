@@ -32,29 +32,40 @@ public class Workout implements IWorkout{
         return name + " - " + description + " - " + blocks.size() + " blocks";
     }
 
-    public void addBlock(IWorkoutBlock block) {
+    @Override
+    public void addBlock(int multiplier, List<IExercise> exercises, List<Integer> amounts) {
+        IWorkoutBlock block = new WorkoutBlock();
+        block.setMultiplier(multiplier);
+        block.setExercises(exercises, amounts);
         blocks.add(block);
     }
 
+    @Override
     public String getName() {
         return name;
     }
+    @Override
     public String getDescription() {
         return description;
     }
+    @Override
     public List<IWorkoutBlock> getBlocks() {
         return blocks;
     }
+    @Override
     public String getNumberofBlocks(){
         return blocks.size() + " blocks";
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
+    @Override
     public void setBlocks(List<IWorkoutBlock> blocks) {
         this.blocks = blocks;
     }

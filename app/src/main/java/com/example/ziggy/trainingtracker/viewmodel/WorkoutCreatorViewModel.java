@@ -17,6 +17,9 @@ public class WorkoutCreatorViewModel extends ViewModel {
     private IWorkout editableWorkout = null;
     private boolean editMode;
 
+    private List<IExercise> blockExercises = new ArrayList<>();
+    private List<Integer> blockAmounts = new ArrayList<>();
+
     /**
      * Init for creating mode.
      * @param model The model to work on
@@ -57,6 +60,39 @@ public class WorkoutCreatorViewModel extends ViewModel {
         editableWorkout.setName(buildWorkout.getName());
         editableWorkout.setDescription(buildWorkout.getDescription());
         editableWorkout.setBlocks(buildWorkout.getBlocks());
+    }
+
+    /**
+     * Stores the exercise coupled with its amount (e.g. amount of reps) in the workout block builder lists.
+     * @param exercise The exercise to store
+     * @param amount The amount associated with the exercise (e.g. 10 reps)
+     */
+    public void addExercise(IExercise exercise, int amount) {
+        this.blockExercises.add(exercise);
+        this.blockAmounts.add(amount);
+    }
+
+    /**
+     * Removes an exercise and its amount from the workout block builder lists.
+     * @param exercise
+     */
+    public void removeExercise(IExercise exercise) {
+        int index = this.blockExercises.indexOf(exercise);
+        this.blockExercises.remove(index);
+        this.blockAmounts.remove(index);
+    }
+
+    public boolean workoutBlockIsEmpty() {
+        return this.blockExercises.isEmpty();
+    }
+
+    public void addWorkoutBlock(int sets) {
+        buildWorkout.addBlock(sets, blockExercises, blockAmounts);
+    }
+
+    public void resetWorkoutBlock() {
+        blockExercises = new ArrayList<>();
+        blockAmounts = new ArrayList<>();
     }
 
     /**
