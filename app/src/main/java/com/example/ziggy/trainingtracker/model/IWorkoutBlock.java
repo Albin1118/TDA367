@@ -7,7 +7,8 @@ import java.util.List;
 @JsonDeserialize(contentAs=WorkoutBlock.class)
 public interface IWorkoutBlock {
 
-    void addExercise(IExercise exercise, Integer amount);
+    void addExercise(IExercise exercise, int amount);
+    void addExercise(IExercise exercise, int amount, double weight);
     void removeExercise(IExercise exercise);
     void setMultiplier(int n);
     void setExercises(List<IExercise> exercises);

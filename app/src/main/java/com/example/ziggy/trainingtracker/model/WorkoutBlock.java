@@ -31,10 +31,17 @@ public class WorkoutBlock implements IWorkoutBlock {
      * @param amount the amount connected to the exercise
      */
     @Override
-    public void addExercise(IExercise exercise, Integer amount) {
+    public void addExercise(IExercise exercise, int amount) {
         exercises.add(exercise);
         amounts.add(amount);
     }
+
+    public void addExercise(IExercise exercise, int amount, double weight) {
+        exercises.add(exercise);
+        amounts.add(amount);
+        weights.add(weight);
+    }
+
 
 
     /**

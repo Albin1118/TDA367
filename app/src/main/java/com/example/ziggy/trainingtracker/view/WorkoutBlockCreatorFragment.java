@@ -245,7 +245,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 int numberofUnits = Integer.parseInt(numberofUnitEditText.getText().toString());
                 double weight = Integer.parseInt(weightEditText.getText().toString());
-                viewModel.addExercise(e, numberofUnits);
+                viewModel.addExercise(e, numberofUnits); //TODO when we have fixed how to connect the three lists, pass weight here
                 dialog.cancel();
             }
         });
