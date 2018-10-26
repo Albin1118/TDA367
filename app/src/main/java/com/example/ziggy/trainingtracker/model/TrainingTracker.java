@@ -57,6 +57,7 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
+     * Load a set of base exercises that can't be edited by the user
      * @param baseExercises the list of exercises to add to the base exercises
      */
     @Override
@@ -65,6 +66,7 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
+     * Load a set of base workouts that can't be edited by the user
      * @param baseWorkouts the list of workouts to add to the base workouts
      */
     @Override
@@ -73,6 +75,7 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
+     * Load a set of base challenges that can't be edited by the user
      * @param baseChallenges the list of challenges to add to the base challenges
      */
     @Override
