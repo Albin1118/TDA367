@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.NoSuchElementException;
 
 /**
  * Class representing the user of the application, containing data related to individual use such as
@@ -17,13 +18,14 @@ import java.util.LinkedHashMap;
 public class User implements IUser {
 
     //Add achievements and goals
-    private List<IWorkout> finishedWorkouts = new ArrayList<>();
-    private List<Date> finishedWorkoutsDates = new ArrayList<>();
     private List<IExercise> customExercises = new ArrayList<>();
     private List<IWorkout> customWorkouts = new ArrayList<>();
     private List<Achievement> achievements = new ArrayList<>();
+    private List <ExerciseStatisticTEMP> exerciseStatistics = new ArrayList<>();
 
     private String username;
+
+    private IWorkout activeWorkout;
 
     //Data related to human qualities of user
     @Expose
@@ -44,6 +46,64 @@ public class User implements IUser {
         this.height = height;
         addAchievement(new CreatedExercisesAchievement());
         addAchievement(new FinishedWorkoutsAchievement());
+    }
+
+    //TODO Tests for the statistics functionality
+
+    public void addActiveWorkoutToStatistics(){
+
+        int exercisePosition = 0;
+        for (IWorkoutBlock w : activeWorkout.getBlocks()){
+            for (IExercise e: w.getExercises()){
+                if(previousStatisticsAvailable(e) && e.isWeightBased()){
+                    // Since the amount list and exercises in WorkoutBlock are linked by index positions, this is the way to access the correct amount for now
+                    addToStatisticsList(e, w.getMultiplier(), w.getAmounts().get(exercisePosition++));
+                }
+                // If it is weightbased, create a new ExerciseStatistic object and add the stats to it
+                else if (e.isWeightBased()){
+                    exerciseStatistics.add(new ExerciseStatisticTEMP(e));
+                    addToStatisticsList(e, w.getMultiplier(), w.getAmounts().get(exercisePosition++));
+                }
+            }
+        }
+    }
+
+
+    private void addToStatisticsList(IExercise e, int sets, int reps){
+        for (ExerciseStatisticTEMP statistic : exerciseStatistics){
+            if (statistic.getExercise().equals(e)){
+                statistic.addStatistics(sets, reps, 22.5); //TODO temp hardcoded weight until it is implemented in workoutblock
+            }
+        }
+    }
+
+    private boolean previousStatisticsAvailable(IExercise e){
+        for (ExerciseStatisticTEMP previousStatistic : exerciseStatistics){
+            if (previousStatistic.getExercise().equals(e)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    public LinkedHashMap<Date, Double> generateStatisticsForExercise(IExercise e, int sets, int reps) {
+        //TODO depending on how the user accesses the statistics, change this implementation (i.e if we only show exercises which already has statistics available, or if we show them all and let the user select)
+
+        for (ExerciseStatisticTEMP previousStatistic : exerciseStatistics) {
+            if (previousStatistic.getExercise().equals(e)) {
+
+                try {
+                    return previousStatistic.getStatisticForSpecificSetReps(sets, reps);
+                }
+                catch (NoSuchElementException exception){
+                    exception.printStackTrace();
+                }
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -92,9 +152,10 @@ public class User implements IUser {
     }
 
     @Override
-    public List<IWorkout> getFinishedWorkouts() {
-        return (finishedWorkouts);
+    public IWorkout getActiveWorkout() {
+        return activeWorkout;
     }
+
 
     @Override
     public List<IExercise> getCustomExercises() {
@@ -104,10 +165,6 @@ public class User implements IUser {
     @Override
     public List<IWorkout> getCustomWorkouts() {
         return Collections.unmodifiableList(customWorkouts);
-    }
-
-    public List<Date> getFinishedWorkoutsDates() {
-        return finishedWorkoutsDates;
     }
 
     /**
@@ -132,9 +189,13 @@ public class User implements IUser {
         this.customWorkouts = customWorkouts;
     }
 
-    //Weight might change
     @Override
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public void setActiveWorkout(IWorkout activeWorkout) {
+        this.activeWorkout = activeWorkout;
     }
 }
