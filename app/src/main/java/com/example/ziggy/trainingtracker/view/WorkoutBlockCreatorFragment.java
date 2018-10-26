@@ -263,47 +263,5 @@ public class WorkoutBlockCreatorFragment extends Fragment {
         numberofUnitEditText.requestFocus();
 
     }
-
-    private void selectWeightAndNumberOfReps(IExercise e, int position){
-        //Create a dialog and set the title
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(e.getName());
-
-        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.dialog_inputreps, (ViewGroup) getView(), false);
-
-        //Set the components of dialog_inputreps.xml
-        final TextView dialogTitle = viewInflated.findViewById(R.id.dialogTitle);
-        dialogTitle.setText("Enter amount of " + e.getUnit());
-
-        final EditText numberofUnitEditText = viewInflated.findViewById(R.id.numberofUnitEditText);
-
-        final TextView unitTextView = viewInflated.findViewById(R.id.unitTextView);
-        unitTextView.setText(e.getUnit());
-
-        //Set the content of the main dialog view
-        builder.setView(viewInflated);
-
-        // Set up the OK-button
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                int numberofUnits = Integer.parseInt(numberofUnitEditText.getText().toString());
-                viewModel.addExercise(e, numberofUnits);
-                dialog.cancel();
-            }
-        });
-
-        //Set up the Cancel-button
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                selectExerciseListView.setItemChecked(position, false);
-            }
-        });
-
-        builder.show();
-        numberofUnitEditText.requestFocus();
-
-    }
+    
 }
