@@ -19,7 +19,11 @@ import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.IExercise;
+import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutCreatorViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a view where the user can create a WorkoutBlock, by selecting a block-multiplier and
@@ -127,39 +131,50 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             }
         });
 
-        /*previewButton.setOnClickListener(new View.OnClickListener() {
+        previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Set the multiplier of the WorkoutBlock
-                int sets = Integer.parseInt(setsDisplay.getText().toString());
-                block.setMultiplier(sets);
 
-                List<IWorkoutBlock>workoutBlockList = new ArrayList<>();
-                workoutBlockList.add(block);
+                if(viewModel.workoutBlockIsEmpty()){
+                    Toast.makeText(getContext(), "No block to display", Toast.LENGTH_SHORT).show();
 
-                //Create the dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Preview");
+                } else {
+                    //Get the multiplier of the WorkoutBlock and add the block to the buildWorkout
+                    int sets = Integer.parseInt(setsDisplay.getText().toString());
+                    viewModel.addWorkoutBlock(sets);
 
-                //Create a ListView to be displayed in the dialog
-                final ListView workoutBlockListView = new ListView(getContext());
-                WorkoutBlockListAdapter adapter = new WorkoutBlockListAdapter(getContext(), workoutBlockList);
-                workoutBlockListView.setAdapter(adapter);
+                    //Create a list to be displayed and add the latest block
+                    List<IWorkoutBlock> workoutBlockList = new ArrayList<>();
+                    workoutBlockList.add(viewModel.getLatestBlock());
 
-                //Set the main dialog view to display the list of blocks
-                builder.setView(workoutBlockListView);
+                    //Create the dialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Preview");
 
-                // Set up the button
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+                    //Create a ListView to be displayed in the dialog
+                    final ListView workoutBlockListView = new ListView(getContext());
+                    WorkoutBlockListAdapter adapter = new WorkoutBlockListAdapter(getContext(), workoutBlockList);
+                    workoutBlockListView.setAdapter(adapter);
 
-                builder.show();
+                    //Set the main dialog view to display the list of blocks
+                    builder.setView(workoutBlockListView);
+
+                    // Set up the button
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Remove the WorkoutBlock after the preview
+                            viewModel.removeLatestBlock();
+                            dialog.cancel();
+                        }
+                    });
+
+                    builder.show();
+                }
+
+
             }
-        });*/
+        });
 
         addWorkoutBlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +183,8 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 if (viewModel.workoutBlockIsEmpty()) {
                     Toast.makeText(getContext(), "You need to select at least one exercise!", Toast.LENGTH_SHORT).show();
                 } else {
-                    viewModel.addWorkoutBlock(Integer.parseInt(setsDisplay.getText().toString()));
+                    int sets = Integer.parseInt(setsDisplay.getText().toString());
+                    viewModel.addWorkoutBlock(sets);
                     navigator.goBack();
                 }
 

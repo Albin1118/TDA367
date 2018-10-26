@@ -98,6 +98,17 @@ public class WorkoutCreatorViewModel extends ViewModel {
         buildWorkout.addBlock(sets, blockExercises, blockAmounts);
     }
 
+    public void removeLatestBlock(){
+        int index = buildWorkout.getBlockListSize() - 1;
+        buildWorkout.removeBlock(index);
+    }
+
+    public IWorkoutBlock getLatestBlock(){
+        int index = buildWorkout.getBlockListSize() - 1;
+        IWorkoutBlock block = buildWorkout.getBlocks().get(index);
+        return block;
+    }
+
     public void resetWorkoutBlock() {
         blockExercises = new ArrayList<>();
         blockAmounts = new ArrayList<>();

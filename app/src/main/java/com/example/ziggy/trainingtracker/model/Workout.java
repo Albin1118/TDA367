@@ -41,6 +41,11 @@ public class Workout implements IWorkout{
     }
 
     @Override
+    public void removeBlock(int index){
+        blocks.remove(index);
+    }
+
+    @Override
     public String getName() {
         return name;
     }
@@ -55,6 +60,10 @@ public class Workout implements IWorkout{
     @Override
     public String getNumberofBlocks(){
         return blocks.size() + " blocks";
+    }
+    @Override
+    public int getBlockListSize(){
+        return blocks.size();
     }
 
     @Override
