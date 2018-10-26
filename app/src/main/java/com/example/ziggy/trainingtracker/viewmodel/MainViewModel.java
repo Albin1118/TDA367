@@ -36,7 +36,7 @@ public class MainViewModel extends AndroidViewModel {
         loadExercises();
         loadWorkouts();
         loadChallenges();
-        loadData();
+        //loadData();
     }
 
     /**
@@ -72,7 +72,7 @@ public class MainViewModel extends AndroidViewModel {
             iExerciseArrayList = s.loadUserExerciseList();
 
             if (!iExerciseArrayList.isEmpty()) {
-                model.setExercises(iExerciseArrayList);
+                //model.setExercises(iExerciseArrayList);
             }
         }
 
@@ -95,7 +95,7 @@ public class MainViewModel extends AndroidViewModel {
             iWorkoutArrayList = s.loadUserWorkoutList();
 
             if (!iWorkoutArrayList.isEmpty()) {
-                model.setWorkouts(iWorkoutArrayList);
+                //model.setWorkouts(iWorkoutArrayList);
             }
         }
 
