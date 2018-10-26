@@ -62,11 +62,11 @@ public class User implements IUser {
     }
 
     public void addActiveWorkoutToStatistics(){
-
         int exercisePosition = 0;
+
         for (IWorkoutBlock w : activeWorkout.getBlocks()){
             for (IExercise e: w.getExercises()){
-                if(previousStatisticsAvailable(e) && e.isWeightBased()){
+                if (previousStatisticsAvailable(e) && e.isWeightBased()){
                     // Since the amount list and exercises in WorkoutBlock are linked by index positions, this is the way to access the correct amount for now
                     addToStatisticsList(e, w.getMultiplier(), w.getAmounts().get(exercisePosition++));
                 }

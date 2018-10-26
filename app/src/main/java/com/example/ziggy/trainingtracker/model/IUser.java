@@ -1,5 +1,7 @@
 package com.example.ziggy.trainingtracker.model;
 
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public interface IUser {
@@ -38,6 +40,8 @@ public interface IUser {
     List<IWorkout> getFinishedWorkouts();
 
     List<IChallenge> getFinishedChallenges();
+
+    LinkedHashMap<Date, Double> generateStatisticsForExercise(IExercise e, int sets, int reps);
 
 
 
