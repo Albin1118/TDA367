@@ -1,14 +1,18 @@
 package com.example.ziggy.trainingtracker.view;
 
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.Exercise;
@@ -38,14 +42,20 @@ public class StatisticsFragment extends Fragment {
     private String workoutName1;
     private List<ExerciseStatistic> exercises;
     private LineGraphSeries<DataPoint> exerciseDataSeries;
-    private EditText exerciseEditText, repEditText, setEditText;
-    private Button searchStatisticsButton;
+
+    private Button  showStatisticsButton;
 
     private StatisticViewModel viewModel;
     private NavigationManager navigator;
 
     private GraphView graph;
+
     private Spinner exerciseSpinner;
+    private Spinner repSpinner;
+    private Spinner setSpinner;
+
+    private int chosenSets;
+    private int chosenReps;
 
 
     public static StatisticsFragment newInstance(StatisticViewModel viewModel, NavigationManager navigator) {
@@ -70,10 +80,7 @@ public class StatisticsFragment extends Fragment {
         parentActivity = (MainActivity)getActivity();
         navigationManager = (MainActivity)getActivity();
         navigationManager.setNavBarState(R.id.nav_more);
-        exerciseEditText = view.findViewById(R.id.exerciseEditText);
-        repEditText = view.findViewById(R.id.repEditText);
-        setEditText = view.findViewById(R.id.setEditText);
-        searchStatisticsButton = view.findViewById(R.id.searchStatisticsButton);
+        showStatisticsButton = view.findViewById(R.id.showStatisticsButton);
 
         workoutName = "Deadlift 3x10";
 
@@ -93,31 +100,63 @@ public class StatisticsFragment extends Fragment {
        //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
        graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
 
-       exerciseSpinner = view.findViewById(R.id.exercise_spinner);
+        initSpinners();
+
+
+
     }
 
     private void initListeners() {
-        searchStatisticsButton.setOnClickListener(new View.OnClickListener() {
+
+        setSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                graph.removeAllSeries();
-                String name = exerciseEditText.getText().toString();
-                int reps = Integer.parseInt(repEditText.getText().toString());
-                int sets = Integer.parseInt(setEditText.getText().toString());
-                List<ExerciseStatistic> exerciseStatistics = viewModel.getStatisticsFromSearch(name, reps, sets);
-                initGraph(viewModel.DataPointsFromStatisticsList(exerciseStatistics), workoutName);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chosenSets = Integer.parseInt(setSpinner.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
+
+        repSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chosenReps = Integer.parseInt(repSpinner.getSelectedItem().toString());
+                System.out.println(chosenSets +  "   "  + chosenReps);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
+    private void initSpinners(){
+        exerciseSpinner = view.findViewById(R.id.exercise_spinner);
+        setSpinner = view.findViewById(R.id.set_spinner);
+        repSpinner = view.findViewById(R.id.reps_spinner);
+
+        ArrayAdapter<CharSequence> setSpinnerAdapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
+                R.array.set_spinner_values, android.R.layout.simple_spinner_item);
+        setSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter<CharSequence> repSpinnerAdapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
+                R.array.rep_spinner_values, android.R.layout.simple_spinner_item);
+        setSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+        setSpinner.setAdapter(setSpinnerAdapter);
+        repSpinner.setAdapter(repSpinnerAdapter);
+
     }
 
     private void initDataSeries(){
          // Currently only sample data is created
         exerciseDataSeries = new LineGraphSeries<>();
-        exerciseDataSeries.appendData(new DataPoint(1,1), true, 5);
-        exerciseDataSeries.appendData(new DataPoint(2,2), true, 5);
-        exerciseDataSeries.appendData(new DataPoint(3,3), true, 5);
-        exerciseDataSeries.appendData(new DataPoint(4,4), true, 5);
-        exerciseDataSeries.appendData(new DataPoint(5,5), true, 5);
     }
 
 
