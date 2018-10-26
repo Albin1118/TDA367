@@ -15,6 +15,8 @@ public class WorkoutBlock implements IWorkoutBlock {
     private List<IExercise> exercises = new ArrayList<>();
     @SerializedName("workout_block_amounts")
     private List<Integer> amounts = new ArrayList<>();
+    @SerializedName("workout_block_amounts")
+    private List<Double> weights = new ArrayList<>();
     /**
      * Amount of times to repeat the this block of exercises
      */
@@ -57,6 +59,9 @@ public class WorkoutBlock implements IWorkoutBlock {
     public void setAmounts(List<Integer> amounts) {
         this.amounts = amounts;
     }
+    public void setWeights(List<Double> weights) {
+        this.weights = weights;
+    }
 
     @Override
     public List<IExercise> getExercises() {
@@ -66,6 +71,11 @@ public class WorkoutBlock implements IWorkoutBlock {
     public List<Integer> getAmounts() {
         return amounts;
     }
+    @Override
+    public List<Double> getWeights() {
+        return weights;
+    }
+
     @Override
     public int getMultiplier() {
         return multiplier;

@@ -11,9 +11,12 @@ public interface IWorkoutBlock {
     void removeExercise(IExercise exercise);
     void setMultiplier(int n);
     void setExercises(List<IExercise> exercises);
-   void setAmounts(List<Integer> amounts);
+    void setAmounts(List<Integer> amounts);
+    void setWeights(List<Double> weights);
 
 
+
+    List<Double> getWeights();
     List<IExercise> getExercises();
     List<Integer> getAmounts();
     int getMultiplier();

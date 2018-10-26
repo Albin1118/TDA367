@@ -88,7 +88,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int sets = Integer.parseInt(setsDisplay.getText().toString());
-                if(sets > 1){
+                if (sets > 1) {
                     sets--;
                 }
                 setsDisplay.setText(String.valueOf(sets));
@@ -110,50 +110,18 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
                 IExercise e = viewModel.getExercises().get(position);
 
-                if(selectExerciseListView.isItemChecked(position)){
+                if (selectExerciseListView.isItemChecked(position)) {
 
-                    //Create a dialog and set the title
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle(e.getName());
+                    if (e.isWeightBased()) {
+                        selectNumberOfRepsAndWeight(e, position);
+                    }
+                    else{
+                        selectNumberOfReps(e, position);
+                    }
+                }
 
-                    View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.dialog_inputreps, (ViewGroup) getView(), false);
-
-                    //Set the components of dialog_inputreps.xml
-                    final TextView dialogTitle = viewInflated.findViewById(R.id.dialogTitle);
-                    dialogTitle.setText("Enter amount of " + e.getUnit());
-
-                    final EditText numberofUnitEditText = viewInflated.findViewById(R.id.numberofUnitEditText);
-
-                    final TextView unitTextView = viewInflated.findViewById(R.id.unitTextView);
-                    unitTextView.setText(e.getUnit());
-
-                    //Set the content of the main dialog view
-                    builder.setView(viewInflated);
-
-                    // Set up the OK-button
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            int numberofUnits = Integer.parseInt(numberofUnitEditText.getText().toString());
-                            viewModel.addExercise(e, numberofUnits);
-                            dialog.cancel();
-                        }
-                    });
-
-                    //Set up the Cancel-button
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                            selectExerciseListView.setItemChecked(position, false);
-                        }
-                    });
-
-                    builder.show();
-                    numberofUnitEditText.requestFocus();
-
-                }else {
-                   viewModel.removeExercise(e);
+                else {
+                    viewModel.removeExercise(e);
                 }
 
             }
@@ -207,6 +175,135 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             }
         });
 
+    }
+    private void selectNumberOfReps(IExercise e, int position){
+        //Create a dialog and set the title
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(e.getName());
+
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.dialog_inputreps, (ViewGroup) getView(), false);
+
+        //Set the components of dialog_inputreps.xml
+        final TextView dialogTitle = viewInflated.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Enter amount of " + e.getUnit());
+
+        final EditText numberofUnitEditText = viewInflated.findViewById(R.id.numberofUnitEditText);
+
+        final TextView unitTextView = viewInflated.findViewById(R.id.unitTextView);
+        unitTextView.setText(e.getUnit());
+
+        //Set the content of the main dialog view
+        builder.setView(viewInflated);
+
+        // Set up the OK-button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int numberofUnits = Integer.parseInt(numberofUnitEditText.getText().toString());
+                viewModel.addExercise(e, numberofUnits);
+                dialog.cancel();
+            }
+        });
+
+        //Set up the Cancel-button
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                selectExerciseListView.setItemChecked(position, false);
+            }
+        });
+
+        builder.show();
+        numberofUnitEditText.requestFocus();
+
+    }
+
+    private void selectNumberOfRepsAndWeight(IExercise e, int position){
+        //Create a dialog and set the title
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(e.getName());
+
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.dialog_inputrepsandweight, (ViewGroup) getView(), false);
+
+        //Set the components of dialog_inputreps.xml
+        final TextView dialogTitle = viewInflated.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Enter amount of " + e.getUnit());
+
+        final EditText numberofUnitEditText = viewInflated.findViewById(R.id.numberofUnitEditText);
+        final EditText weightEditText = viewInflated.findViewById(R.id.weightEditText);
+
+        final TextView unitTextView = viewInflated.findViewById(R.id.unitTextView);
+        unitTextView.setText(e.getUnit());
+
+        //Set the content of the main dialog view
+        builder.setView(viewInflated);
+
+        // Set up the OK-button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int numberofUnits = Integer.parseInt(numberofUnitEditText.getText().toString());
+                double weight = Integer.parseInt(weightEditText.getText().toString());
+                viewModel.addExercise(e, numberofUnits);
+                dialog.cancel();
+            }
+        });
+
+        //Set up the Cancel-button
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                selectExerciseListView.setItemChecked(position, false);
+            }
+        });
+
+        builder.show();
+        numberofUnitEditText.requestFocus();
+
+    }
+
+    private void selectWeightAndNumberOfReps(IExercise e, int position){
+        //Create a dialog and set the title
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(e.getName());
+
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.dialog_inputreps, (ViewGroup) getView(), false);
+
+        //Set the components of dialog_inputreps.xml
+        final TextView dialogTitle = viewInflated.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Enter amount of " + e.getUnit());
+
+        final EditText numberofUnitEditText = viewInflated.findViewById(R.id.numberofUnitEditText);
+
+        final TextView unitTextView = viewInflated.findViewById(R.id.unitTextView);
+        unitTextView.setText(e.getUnit());
+
+        //Set the content of the main dialog view
+        builder.setView(viewInflated);
+
+        // Set up the OK-button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int numberofUnits = Integer.parseInt(numberofUnitEditText.getText().toString());
+                viewModel.addExercise(e, numberofUnits);
+                dialog.cancel();
+            }
+        });
+
+        //Set up the Cancel-button
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                selectExerciseListView.setItemChecked(position, false);
+            }
+        });
+
+        builder.show();
+        numberofUnitEditText.requestFocus();
 
     }
 }

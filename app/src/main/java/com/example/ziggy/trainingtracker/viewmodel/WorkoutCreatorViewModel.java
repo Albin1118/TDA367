@@ -19,6 +19,7 @@ public class WorkoutCreatorViewModel extends ViewModel {
 
     private List<IExercise> blockExercises = new ArrayList<>();
     private List<Integer> blockAmounts = new ArrayList<>();
+    private List<Double> blockWeights = new ArrayList<>();
 
     /**
      * Init for creating mode.
@@ -70,6 +71,13 @@ public class WorkoutCreatorViewModel extends ViewModel {
     public void addExercise(IExercise exercise, int amount) {
         this.blockExercises.add(exercise);
         this.blockAmounts.add(amount);
+    }
+
+
+    public void addExercise(IExercise exercise, int amount, double weight) {
+        this.blockExercises.add(exercise);
+        this.blockAmounts.add(amount);
+        this.blockWeights.add(weight);
     }
 
     /**
