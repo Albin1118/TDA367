@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ActiveWorkoutViewModel extends ViewModel {
     private ITrainingTracker model;
-    private IWorkout activeWorkout;
+
     private boolean workoutActive;
     private int elapsedTime;
 
@@ -20,7 +20,7 @@ public class ActiveWorkoutViewModel extends ViewModel {
 
     public void init(ITrainingTracker model, IWorkout workout) {
         this.model = model;
-        this.activeWorkout = workout;
+        model.getUser().setActiveWorkout(workout);
     }
 
     public void startWorkout() {
@@ -32,13 +32,13 @@ public class ActiveWorkoutViewModel extends ViewModel {
     }
 
     public void addFinishedWorkoutToUser() {
-        model.getUser().getFinishedWorkouts().add(activeWorkout);
+        model.getUser().addActiveWorkoutToFinishedWorkouts();
         Date date = new Date();
         model.getUser().getFinishedWorkoutsDates().add(date);
     }
 
     public IWorkout getActiveWorkout() {
-        return activeWorkout;
+        return model.getUser().getActiveWorkout();
     }
 
     public boolean isWorkoutActive() {
@@ -61,6 +61,12 @@ public class ActiveWorkoutViewModel extends ViewModel {
         this.elapsedTime = elapsedTime;
     }
 
+    /**
+     * Due to the chronometer saving the elapsedtime in millis and the starting time chronometer TextView taking a string as input,
+     * we will have to do some conversions from millis to whole seconds and format a string using XX:XX format
+     *
+     * @return Formatted String suitable for the chronometer TextView
+     */
     public String getFormattedElapsedTime(){
         StringBuilder sb = new StringBuilder();
 
