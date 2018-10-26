@@ -13,13 +13,13 @@ public class TrainingTrackerTest {
         List<ExerciseCategory> categories = new ArrayList<>();
         categories.add(ExerciseCategory.ARMS);
         tracker.addCustomExercise(name, unit, description, instructions, categories, true);
-        assertEquals(tracker.getUser().getCustomExercises().size(), 1);
-        assertEquals(tracker.getUser().getCustomExercises().get(0).getName(), name);
-        assertEquals(tracker.getUser().getCustomExercises().get(0).getUnit(), unit);
-        assertEquals(tracker.getUser().getCustomExercises().get(0).getDescription(), description);
-        assertEquals(tracker.getUser().getCustomExercises().get(0).getInstructions(), instructions);
-        assertEquals(tracker.getUser().getCustomExercises().get(0).getCategories(), categories);
-        assertTrue(tracker.getUser().getCustomExercises().get(0).isWeightBased());
+        assertEquals(tracker.getExercises().size(), 1);
+        assertEquals(tracker.getExercises().get(0).getName(), name);
+        assertEquals(tracker.getExercises().get(0).getUnit(), unit);
+        assertEquals(tracker.getExercises().get(0).getDescription(), description);
+        assertEquals(tracker.getExercises().get(0).getInstructions(), instructions);
+        assertEquals(tracker.getExercises().get(0).getCategories(), categories);
+        assertTrue(tracker.getExercises().get(0).isWeightBased());
 
 
     }
@@ -31,9 +31,9 @@ public class TrainingTrackerTest {
         List<ExerciseCategory> categories = new ArrayList<>();
         categories.add(ExerciseCategory.ARMS);
         tracker.addCustomExercise(name, unit, description, instructions, categories, true);
-        assertEquals(tracker.getUser().getCustomExercises().size(), 1);
-        tracker.removeCustomExercise(tracker.getUser().getCustomExercises().get(0));
-        assertEquals(tracker.getUser().getCustomExercises().size(), 0);
+        assertEquals(tracker.getExercises().size(), 1);
+        tracker.removeCustomExercise(tracker.getExercises().get(0));
+        assertEquals(tracker.getExercises().size(), 0);
     }
 
     @Test
@@ -44,10 +44,10 @@ public class TrainingTrackerTest {
         blocks.add(new WorkoutBlock());
         IWorkout w = new Workout(name, description, blocks);
         tracker.addCustomWorkout(w);
-        assertEquals(tracker.getUser().getCustomWorkouts().size(), 1);
-        assertEquals(tracker.getUser().getCustomWorkouts().get(0).getName(), name);
-        assertEquals(tracker.getUser().getCustomWorkouts().get(0).getDescription(), description);
-        assertEquals(tracker.getUser().getCustomWorkouts().get(0).getBlocks(), blocks);
+        assertEquals(tracker.getWorkouts().size(), 1);
+        assertEquals(tracker.getWorkouts().get(0).getName(), name);
+        assertEquals(tracker.getWorkouts().get(0).getDescription(), description);
+        assertEquals(tracker.getWorkouts().get(0).getBlocks(), blocks);
     }
 
     @Test
@@ -58,9 +58,9 @@ public class TrainingTrackerTest {
         blocks.add(new WorkoutBlock());
         IWorkout w = new Workout(name, description, blocks);
         tracker.addCustomWorkout(w);
-        assertEquals(tracker.getUser().getCustomWorkouts().size(), 1);
+        assertEquals(tracker.getWorkouts().size(), 1);
         tracker.removeCustomWorkout(w);
-        assertEquals(tracker.getUser().getCustomWorkouts().size(), 0);
+        assertEquals(tracker.getWorkouts().size(), 0);
     }
 
     @Test
