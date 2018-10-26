@@ -69,6 +69,12 @@ public interface ITrainingTracker {
     boolean checkIfCustom(IWorkout w);
 
     /**
+     * Finish the workout adding it to the users list of finished workouts.
+     * @param workout The finished workout
+     */
+    void finishWorkout(IWorkout workout);
+
+    /**
      * Finish a challenge with the specified score.
      * If the new score is higher than the previous, set new score and add the challenge to users finished challenges (without duplicating).
      * @param challenge The finished challenge

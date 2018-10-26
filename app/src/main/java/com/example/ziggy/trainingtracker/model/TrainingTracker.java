@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TrainingTracker implements ITrainingTracker{
-    private static ITrainingTracker instance = null;
     private IUser user = new User("Test", "Mr Test", 98.5, 210);
     private List<IWorkout> baseWorkouts = new ArrayList<>();
     private List<IExercise> baseExercises = new ArrayList<>();
@@ -105,6 +104,14 @@ public class TrainingTracker implements ITrainingTracker{
     @Override
     public boolean checkIfCustom(IWorkout w) {
         return user.getCustomWorkouts().contains(w);
+    }
+
+    /**
+     * Finish the workout adding it to the users list of finished workouts.
+     * @param workout The finished workout
+     */
+    public void finishWorkout(IWorkout workout) {
+        user.addFinishedWorkout(workout);
     }
 
     /**

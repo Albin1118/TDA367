@@ -29,8 +29,6 @@ public class User implements IUser {
 
     private String username;
 
-    private IWorkout activeWorkout;
-
     //Data related to human qualities of user
     @Expose
     @SerializedName("user_name")
@@ -57,14 +55,14 @@ public class User implements IUser {
     //TODO probably move statistic functionality to TrainingTracker
 
 
-    public void addActiveWorkoutToFinishedWorkouts(){
-        finishedWorkouts.add(activeWorkout);
+    public void addFinishedWorkout(IWorkout finishedWorkout){
+        finishedWorkouts.add(finishedWorkout);
     }
 
-    public void addActiveWorkoutToStatistics(){
+    public void addWorkoutToStatistics(IWorkout workout){
         int exercisePosition = 0;
 
-        for (IWorkoutBlock w : activeWorkout.getBlocks()){
+        for (IWorkoutBlock w : workout.getBlocks()){
             for (IExercise e: w.getExercises()){
                 if (previousStatisticsAvailable(e) && e.isWeightBased()){
                     // Since the amount list and exercises in WorkoutBlock are linked by index positions, this is the way to access the correct amount for now
@@ -168,12 +166,6 @@ public class User implements IUser {
     }
 
     @Override
-    public IWorkout getActiveWorkout() {
-        return activeWorkout;
-    }
-
-
-    @Override
     public List<IExercise> getCustomExercises() {
         return Collections.unmodifiableList(customExercises);
     }
@@ -218,10 +210,5 @@ public class User implements IUser {
     @Override
     public void setWeight(double weight) {
         this.weight = weight;
-    }
-
-    @Override
-    public void setActiveWorkout(IWorkout activeWorkout) {
-        this.activeWorkout = activeWorkout;
     }
 }

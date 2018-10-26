@@ -5,11 +5,11 @@ import android.arch.lifecycle.ViewModel;
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
 
-import java.util.Date;
 import java.util.List;
 
 public class ActiveWorkoutViewModel extends ViewModel {
     private ITrainingTracker model;
+    private IWorkout activeWorkout;
 
     private boolean workoutActive;
     private int elapsedTime;
@@ -20,7 +20,7 @@ public class ActiveWorkoutViewModel extends ViewModel {
 
     public void init(ITrainingTracker model, IWorkout workout) {
         this.model = model;
-        model.getUser().setActiveWorkout(workout);
+        this.activeWorkout = workout;
     }
 
     public void startWorkout() {
@@ -29,14 +29,12 @@ public class ActiveWorkoutViewModel extends ViewModel {
 
     public void finishWorkout() {
         workoutActive = false;
+        model.finishWorkout(activeWorkout);
+        clearElapsedTime();
     }
 
     public IWorkout getActiveWorkout() {
-        return model.getUser().getActiveWorkout();
-    }
-
-    public void addFinishedWorkoutToUser(){
-        model.getUser().addActiveWorkoutToFinishedWorkouts();
+        return activeWorkout;
     }
 
     public boolean isWorkoutActive() {
@@ -51,7 +49,7 @@ public class ActiveWorkoutViewModel extends ViewModel {
         return elapsedTime;
     }
 
-    public void clearElapsedTime(){
+    private void clearElapsedTime(){
         elapsedTime = 0;
     }
 

@@ -7,9 +7,9 @@ import java.util.List;
 public interface IUser {
 
 
-    void addActiveWorkoutToStatistics();
+    void addWorkoutToStatistics(IWorkout workout);
 
-    void addActiveWorkoutToFinishedWorkouts();
+    void addFinishedWorkout(IWorkout finishedWorkout);
 
     void addCustomExercise(IExercise e);
 
@@ -31,8 +31,6 @@ public interface IUser {
 
     int getHeight();
 
-    IWorkout getActiveWorkout();
-
     List<IExercise> getCustomExercises();
 
     List<IWorkout> getCustomWorkouts();
@@ -43,10 +41,6 @@ public interface IUser {
 
     LinkedHashMap<Date, Double> generateStatisticsForExercise(IExercise e, int sets, int reps);
 
-
-
-
-
     /**
      * Updates the status of all the achievements before returning them.
      * @return the list all the achievements
@@ -56,8 +50,6 @@ public interface IUser {
     void setCustomExercises(List<IExercise> customExercises);
 
     void setCustomWorkouts(List<IWorkout> customWorkouts);
-
-    void setActiveWorkout(IWorkout activeWorkout);
 
     void setWeight(double weight);
 }

@@ -181,11 +181,8 @@ public class ActiveWorkoutFragment extends Fragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
-                viewModel.addFinishedWorkoutToUser();
                 viewModel.finishWorkout();
                 navigator.navigateHome();
-                viewModel.finishWorkout();
-                viewModel.clearElapsedTime();
                 Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
             }
         });
