@@ -2,14 +2,16 @@ package com.example.ziggy.trainingtracker.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TrainingTracker implements ITrainingTracker{
     private static ITrainingTracker instance = null;
     private IUser user = new User("Test", "Mr Test", 98.5, 210);
     private List<IWorkout> baseWorkouts = new ArrayList<>();
     private List<IExercise> baseExercises = new ArrayList<>();
-    private List<IChallenge> baseChallenges = new ArrayList<>();
+    private Map<String, IChallenge> baseChallenges = new LinkedHashMap<>();
 
     public TrainingTracker() {
 
@@ -57,7 +59,7 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
-     * Load a set of base exercises that can't be edited by the user
+     * Loads a set of base exercises that can't be edited by the user.
      * @param baseExercises the list of exercises to add to the base exercises
      */
     @Override
@@ -66,7 +68,7 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
-     * Load a set of base workouts that can't be edited by the user
+     * Loads a set of base workouts that can't be edited by the user.
      * @param baseWorkouts the list of workouts to add to the base workouts
      */
     @Override
@@ -75,12 +77,14 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
-     * Load a set of base challenges that can't be edited by the user
+     * Loads a set of base challenges.
      * @param baseChallenges the list of challenges to add to the base challenges
      */
     @Override
     public void loadBaseChallenges(List<IChallenge> baseChallenges) {
-        this.baseChallenges.addAll(baseChallenges);
+        for (IChallenge challenge : baseChallenges) {
+            this.baseChallenges.put(challenge.getName(), challenge);
+        }
     }
 
     /**
@@ -104,6 +108,20 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
+     * Finish a challenge with the specified score.
+     * If the new score is higher than the previous, set new score and add the challenge to users finished challenges (without duplicating).
+     * @param challenge The finished challenge
+     * @param newScore The new score
+     */
+    @Override
+    public void finishChallenge(IChallenge challenge, int newScore) {
+        if (newScore > challenge.getScore()) {
+            challenge.setScore(newScore);
+            user.addChallenge(challenge);
+        }
+    }
+
+    /**
      * @return an unmodifiable list of the base exercises + the users custom exercises
      */
     @Override
@@ -124,11 +142,16 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
-     * @return an unmodifiable list of the challenges
+     * @return a list of all the users finished challenges + all of the base challenges that are unfinished
      */
     @Override
     public List<IChallenge> getChallenges() {
-        return Collections.unmodifiableList(baseChallenges);
+        for (IChallenge challenge : user.getFinishedChallenges()) {
+            if (baseChallenges.containsKey(challenge.getName()) && challenge != baseChallenges.get(challenge.getName()))
+                baseChallenges.put(challenge.getName(), challenge);
+        }
+
+        return new ArrayList<>(baseChallenges.values());
     }
 
     /**

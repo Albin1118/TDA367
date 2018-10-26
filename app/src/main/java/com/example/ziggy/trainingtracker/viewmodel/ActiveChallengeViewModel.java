@@ -3,19 +3,19 @@ package com.example.ziggy.trainingtracker.viewmodel;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.ziggy.trainingtracker.model.IChallenge;
+import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 
 public class ActiveChallengeViewModel extends ViewModel {
+    private ITrainingTracker model;
     private IChallenge challenge;
 
-    public void init(IChallenge challenge) {
+    public void init(ITrainingTracker model, IChallenge challenge) {
+        this.model = model;
         this.challenge = challenge;
     }
 
-    public boolean isNewHighScore(int newScore) {
-        if (challenge.getScore() < newScore) {
-            return true;
-        }
-        return false;
+    public void finishChallenge(int newScore) {
+            model.finishChallenge(challenge, newScore);
     }
 
     public IChallenge getChallenge() {

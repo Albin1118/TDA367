@@ -69,14 +69,8 @@ public class ActiveChallengeFragment extends Fragment {
         finishChallengeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String scoreText = challengeScoreEditText.getText().toString();
                 try {
-                    Integer.parseInt(scoreText);
-                    int score = Integer.parseInt(challengeScoreEditText.getText().toString());
-                    if (viewModel.isNewHighScore(score)) {
-                        viewModel.getChallenge().setScore(score);
-                    }
+                    viewModel.finishChallenge(Integer.parseInt(challengeScoreEditText.getText().toString()));
                     navigator.goBack();
                 } catch (NumberFormatException e) {
                     Toast.makeText(getContext(), "Give an integer input", Toast.LENGTH_SHORT).show();

@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
     @Override
     public void navigateActiveChallenge(IChallenge challenge) {
         ActiveChallengeViewModel viewModel = ViewModelProviders.of(this).get(ActiveChallengeViewModel.class);
-        viewModel.init(challenge);
+        viewModel.init(this.viewModel.getModel(), challenge);
 
         setFragmentContainerContent(ActiveChallengeFragment.newInstance(viewModel, this));
 

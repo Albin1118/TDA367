@@ -5,10 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 /**
@@ -24,6 +25,7 @@ public class User implements IUser {
     private List <ExerciseStatisticTEMP> exerciseStatistics = new ArrayList<>();
 
     private List<IWorkout> finishedWorkouts = new ArrayList<>();
+    private Map<String, IChallenge> finishedChallenges = new HashMap<>();
 
     private String username;
 
@@ -141,6 +143,11 @@ public class User implements IUser {
     }
 
     @Override
+    public void addChallenge(IChallenge challenge) {
+        finishedChallenges.put(challenge.getName(), challenge);
+    }
+
+    @Override
     public String getUsername() {
         return username;
     }
@@ -179,6 +186,11 @@ public class User implements IUser {
     @Override
     public List<IWorkout> getFinishedWorkouts() {
         return finishedWorkouts;
+    }
+
+    @Override
+    public List<IChallenge> getFinishedChallenges() {
+        return new ArrayList<>(finishedChallenges.values());
     }
 
     /**

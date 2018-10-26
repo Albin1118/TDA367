@@ -19,6 +19,8 @@ public interface IUser {
 
     void addAchievement(Achievement achievement);
 
+    void addChallenge(IChallenge challenge);
+
     String getUsername();
 
     String getName();
@@ -29,11 +31,13 @@ public interface IUser {
 
     IWorkout getActiveWorkout();
 
+    List<IExercise> getCustomExercises();
+
     List<IWorkout> getCustomWorkouts();
 
     List<IWorkout> getFinishedWorkouts();
 
-    List<IExercise> getCustomExercises();
+    List<IChallenge> getFinishedChallenges();
 
 
 

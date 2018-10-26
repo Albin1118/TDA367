@@ -37,16 +37,19 @@ public interface ITrainingTracker {
     void removeCustomWorkout(IWorkout w);
 
     /**
+     * Loads a set of base exercises that can't be edited by the user.
      * @param baseExercises the list of exercises to add to the base exercises
      */
     void loadBaseExercises(List<IExercise> baseExercises);
 
     /**
+     * Loads a set of base workouts that can't be edited by the user.
      * @param baseWorkouts the list of workouts to add to the base workouts
      */
     void loadBaseWorkouts(List<IWorkout> baseWorkouts);
 
     /**
+     * Loads a set of base challenges.
      * @param baseChallenges the list of challenges to add to the base challenges
      */
     void loadBaseChallenges(List<IChallenge> baseChallenges);
@@ -66,6 +69,14 @@ public interface ITrainingTracker {
     boolean checkIfCustom(IWorkout w);
 
     /**
+     * Finish a challenge with the specified score.
+     * If the new score is higher than the previous, set new score and add the challenge to users finished challenges (without duplicating).
+     * @param challenge The finished challenge
+     * @param newScore The new score
+     */
+    void finishChallenge(IChallenge challenge, int newScore);
+
+    /**
      * @return an unmodifiable list of the base exercises + the users custom exercises
      */
     List<IExercise> getExercises();
@@ -76,7 +87,7 @@ public interface ITrainingTracker {
     List<IWorkout> getWorkouts();
 
     /**
-     * @return an unmodifiable list of the challenges
+     * @return a list of all the users finished challenges + all of the base challenges that are unfinished
      */
     List<IChallenge> getChallenges();
 
