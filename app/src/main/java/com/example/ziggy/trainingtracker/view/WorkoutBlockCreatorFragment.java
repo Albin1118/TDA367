@@ -115,13 +115,14 @@ public class WorkoutBlockCreatorFragment extends Fragment {
                 IExercise e = viewModel.getExercises().get(position);
 
                 if (selectExerciseListView.isItemChecked(position)) {
-
-                    if (e.isWeightBased()) {
+                    selectNumberOfReps(e, position);
+/*
+                    if (e.isWeightBased()) { //TODO change this back to get the input weight prompt on weighted exercises
                         selectNumberOfRepsAndWeight(e, position);
                     }
                     else{
                         selectNumberOfReps(e, position);
-                    }
+                    }*/
                 }
 
                 else {
