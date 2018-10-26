@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class representing an exercise, with a name, unit, description...
@@ -103,5 +104,24 @@ public class Exercise implements IExercise {
     @Override
     public String toString(){
         return name + " - " + description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Exercise exercise = (Exercise) o;
+        return weightBased == exercise.weightBased &&
+                weight == exercise.weight &&
+                Objects.equals(name, exercise.name) &&
+                Objects.equals(unit, exercise.unit) &&
+                Objects.equals(description, exercise.description) &&
+                Objects.equals(instructions, exercise.instructions) &&
+                Objects.equals(categories, exercise.categories);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, unit, description, instructions, weightBased, categories, weight);
     }
 }
