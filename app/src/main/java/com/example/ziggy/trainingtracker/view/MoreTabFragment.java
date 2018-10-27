@@ -96,6 +96,7 @@ public class MoreTabFragment extends Fragment {
                     themeSettingsEditor.putInt("theme", R.style.AppTheme);
                 }
                 themeSettingsEditor.apply();
+                setRetainInstance(true);
                 getActivity().recreate();
             }
         });
