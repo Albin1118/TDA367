@@ -63,6 +63,10 @@ public class ExerciseTabViewModel extends ViewModel {
         return exercises;
     }
 
+    public IExercise getExercise(int index){
+        return exercises.get(index);
+    }
+
     public List<IExercise> getAllExercises() {
         clearSorting();
         return exercises;

@@ -93,4 +93,20 @@ public class ExerciseCreatorViewModel extends ViewModel {
     public IExercise getEditableExercise() {
         return editableExercise;
     }
+
+    public String getEditableExerciseName(){
+        return editableExercise.getName();
+    }
+
+    public String getEditableExerciseDescription(){
+        return editableExercise.getDescription();
+    }
+
+    public String getEditableExerciseInstructions(){
+        return editableExercise.getInstructions();
+    }
+
+    public String getEditableExerciseUnit(){
+        return editableExercise.getUnit();
+    }
 }

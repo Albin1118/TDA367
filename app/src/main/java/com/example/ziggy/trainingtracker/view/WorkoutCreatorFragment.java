@@ -88,9 +88,9 @@ public class WorkoutCreatorFragment extends Fragment {
 
         workoutBlocksListView.addHeaderView(header);
         workoutBlocksListView.addFooterView(footer);
-        workoutNameEditText.setText(viewModel.getBuildWorkout().getName());
-        workoutDescriptionEditText.setText(viewModel.getBuildWorkout().getDescription());
-        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getBuildWorkout().getBlocks());
+        workoutNameEditText.setText(viewModel.getBuildWorkoutName());
+        workoutDescriptionEditText.setText(viewModel.getBuildWorkoutDescription());
+        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getBuildWorkoutBlocks());
         workoutBlocksListView.setAdapter(adapter);
 
         if (viewModel.isEditMode()) {
@@ -154,8 +154,8 @@ public class WorkoutCreatorFragment extends Fragment {
     }
 
     private void saveBuildWorkout() {
-        viewModel.getBuildWorkout().setName(workoutNameEditText.getText().toString());
-        viewModel.getBuildWorkout().setDescription(workoutDescriptionEditText.getText().toString());
+        viewModel.setBuildWorkoutName(workoutNameEditText.getText().toString());
+        viewModel.setBuildWorkoutDescription(workoutDescriptionEditText.getText().toString());
     }
 
     private void editMode() {

@@ -21,4 +21,16 @@ public class ActiveChallengeViewModel extends ViewModel {
     public IChallenge getChallenge() {
         return challenge;
     }
+
+    public String getChallengeName(){
+        return challenge.getName();
+    }
+
+    public String getChallengeDescription(){
+        return challenge.getDescription();
+    }
+
+    public String getChallengeUnit(){
+        return challenge.getUnit();
+    }
 }

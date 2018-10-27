@@ -112,7 +112,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                IExercise e = viewModel.getExercises().get(position);
+                IExercise e = viewModel.getExercise(position);
 
                 if (selectExerciseListView.isItemChecked(position)) {
                     selectNumberOfReps(e, position);
@@ -236,7 +236,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
     }
 
-    private void selectNumberOfRepsAndWeight(IExercise e, int position){
+    /*private void selectNumberOfRepsAndWeight(IExercise e, int position){
         //Create a dialog and set the title
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(e.getName());
@@ -279,6 +279,6 @@ public class WorkoutBlockCreatorFragment extends Fragment {
         builder.show();
         numberofUnitEditText.requestFocus();
 
-    }
+    }*/
     
 }

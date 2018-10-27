@@ -131,10 +131,10 @@ public class ExerciseCreatorFragment extends Fragment {
         cancelEditExerciseButton.setVisibility(View.VISIBLE);
         createExerciseButton.setVisibility(View.GONE);
 
-        exerciseNameEditText.setText(viewModel.getEditableExercise().getName());
-        exerciseDescriptionEditText.setText(viewModel.getEditableExercise().getDescription());
-        exerciseInstructionsEditText.setText(viewModel.getEditableExercise().getInstructions());
-        exerciseUnitEditText.setText(viewModel.getEditableExercise().getUnit());
+        exerciseNameEditText.setText(viewModel.getEditableExerciseName());
+        exerciseDescriptionEditText.setText(viewModel.getEditableExerciseDescription());
+        exerciseInstructionsEditText.setText(viewModel.getEditableExerciseInstructions());
+        exerciseUnitEditText.setText(viewModel.getEditableExerciseUnit());
     }
 
     private void createExercise() {

@@ -62,7 +62,7 @@ public class ActiveWorkoutFragment extends Fragment {
         initListeners();
         showStartButton();
 
-        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getActiveWorkout().getBlocks());
+        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getActiveWorkoutBlocks());
         currentWorkoutBlockListView.setAdapter(adapter);
 
         return view;
@@ -82,7 +82,7 @@ public class ActiveWorkoutFragment extends Fragment {
         currentWorkoutBlockListView = view.findViewById(R.id.active_workout_exercise_list_view);
         mChronometer = view.findViewById(R.id.chronometer);
         currentWorkoutBlockListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        currentWorkoutName.setText(viewModel.getActiveWorkout().getName());
+        currentWorkoutName.setText(viewModel.getActiveWorkoutName());
 
         // If there is a stored elapsed time value,
         // set the chronometer starting time textview to a string formatted to that value

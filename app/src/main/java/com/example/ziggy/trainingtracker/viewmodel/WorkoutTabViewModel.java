@@ -21,6 +21,10 @@ public class WorkoutTabViewModel extends ViewModel {
         return workouts;
     }
 
+    public IWorkout getWorkout(int index){
+        return workouts.get(index);
+    }
+
     public List<IWorkout> getAllWorkouts() {
         workouts.clear();
         workouts.addAll(model.getWorkouts());

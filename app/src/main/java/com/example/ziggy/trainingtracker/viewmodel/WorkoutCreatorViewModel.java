@@ -130,11 +130,35 @@ public class WorkoutCreatorViewModel extends ViewModel {
         return buildWorkout;
     }
 
+    public String getBuildWorkoutName(){
+        return buildWorkout.getName();
+    }
+
+    public String getBuildWorkoutDescription(){
+        return buildWorkout.getDescription();
+    }
+
+    public List<IWorkoutBlock> getBuildWorkoutBlocks(){
+        return buildWorkout.getBlocks();
+    }
+
+    public void setBuildWorkoutName(String name){
+        buildWorkout.setName(name);
+    }
+
+    public void setBuildWorkoutDescription(String description){
+        buildWorkout.setDescription(description);
+    }
+
     /**
      * Returns all exercises from the model.
      * @return A list of all the exercises
      */
     public List<IExercise> getExercises() {
         return model.getExercises();
+    }
+
+    public IExercise getExercise(int index){
+        return model.getExercises().get(index);
     }
 }

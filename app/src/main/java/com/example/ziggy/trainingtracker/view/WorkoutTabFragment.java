@@ -69,7 +69,7 @@ public class WorkoutTabFragment extends Fragment {
         workoutList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                navigator.navigateWorkoutDetailView(viewModel.getWorkouts().get(position));
+                navigator.navigateWorkoutDetailView(viewModel.getWorkout(position));
             }
         });
 

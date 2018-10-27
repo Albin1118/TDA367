@@ -86,7 +86,8 @@ public class PreActiveWorkoutFragment extends Fragment {
 
     private void startActiveWorkout(){
         if (preActiveWorkoutListView.getCheckedItemCount() > 0) {
-            navigator.navigateActiveWorkout(viewModel.getWorkouts().get(preActiveWorkoutListView.getCheckedItemPosition()));
+            int position = preActiveWorkoutListView.getCheckedItemPosition();
+            navigator.navigateActiveWorkout(viewModel.getWorkout(position));
         } else {
             Toast.makeText(getContext(), "You need to select a workout first", Toast.LENGTH_SHORT).show();
         }

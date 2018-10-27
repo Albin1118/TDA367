@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.ziggy.trainingtracker.model.ITrainingTracker;
 import com.example.ziggy.trainingtracker.model.IWorkout;
+import com.example.ziggy.trainingtracker.model.IWorkoutBlock;
 
 import java.util.List;
 
@@ -41,12 +42,24 @@ public class ActiveWorkoutViewModel extends ViewModel {
         return activeWorkout;
     }
 
+    public String getActiveWorkoutName(){
+        return activeWorkout.getName();
+    }
+
+    public List<IWorkoutBlock> getActiveWorkoutBlocks(){
+        return activeWorkout.getBlocks();
+    }
+
     public boolean isWorkoutActive() {
         return workoutActive;
     }
 
     public List<IWorkout> getWorkouts() {
         return model.getWorkouts();
+    }
+
+    public IWorkout getWorkout(int index){
+        return model.getWorkouts().get(index);
     }
 
     public int getElapsedTime() {

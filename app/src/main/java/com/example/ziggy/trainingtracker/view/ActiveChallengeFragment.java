@@ -59,9 +59,9 @@ public class ActiveChallengeFragment extends Fragment {
 
 
 
-        challengeNameTextView.setText(viewModel.getChallenge().getName());
-        challengeDescriptionTextView.setText(viewModel.getChallenge().getDescription());
-        challengeScoreEditText.setHint(viewModel.getChallenge().getUnit());
+        challengeNameTextView.setText(viewModel.getChallengeName());
+        challengeDescriptionTextView.setText(viewModel.getChallengeDescription());
+        challengeScoreEditText.setHint(viewModel.getChallengeUnit());
 
     }
 
@@ -70,7 +70,8 @@ public class ActiveChallengeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    viewModel.finishChallenge(Integer.parseInt(challengeScoreEditText.getText().toString()));
+                    int score = Integer.parseInt(challengeScoreEditText.getText().toString());
+                    viewModel.finishChallenge(score);
                     navigator.goBack();
                 } catch (NumberFormatException e) {
                     Toast.makeText(getContext(), "Give an integer input", Toast.LENGTH_SHORT).show();

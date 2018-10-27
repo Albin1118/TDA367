@@ -74,7 +74,7 @@ public class ExercisesPageFragment extends Fragment {
         exerciseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                navigator.navigateExerciseDetailView(viewModel.getExercises().get(position));
+                navigator.navigateExerciseDetailView(viewModel.getExercise(position));
             }
         });
 
