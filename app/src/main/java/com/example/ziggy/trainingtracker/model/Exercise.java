@@ -35,6 +35,13 @@ public class Exercise implements IExercise {
     }
 
     /**
+     * Empty constructor is necessary for Deserialization
+     */
+
+    public Exercise() {
+    }
+
+    /**
      * @return the name
      */
     @Override

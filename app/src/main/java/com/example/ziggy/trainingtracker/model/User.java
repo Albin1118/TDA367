@@ -141,6 +141,11 @@ public class User implements IUser {
         throw new NullPointerException("No statistics available");
     }
 
+    /**
+     * Gets the exercises that have statistics stored in exerciseStatistics
+     * @return List of exercises with available statistics
+     */
+
     public List <IExercise> getExercisesWithStatisticsAvailable(){
         ArrayList <IExercise> result = new ArrayList<>();
         for (ExerciseStatistic es : exerciseStatistics){

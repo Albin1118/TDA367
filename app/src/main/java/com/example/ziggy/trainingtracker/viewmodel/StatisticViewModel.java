@@ -24,6 +24,13 @@ public class StatisticViewModel extends ViewModel {
         this.model = model;
     }
 
+    /**
+     * Creates a LineGraphSeries of DataPoints for the corresponding Exercise, number of sets and rets
+     * @param e
+     * @param sets
+     * @param reps
+     * @return
+     */
 
     public LineGraphSeries<DataPoint> generateStatisticLineGraphData(IExercise e, int sets, int reps){
         LineGraphSeries<DataPoint> graphPoints = new LineGraphSeries<>();
