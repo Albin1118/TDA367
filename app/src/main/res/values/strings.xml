@@ -4,7 +4,7 @@
     //Bottom nav bar
     <string name="nav_bar_home">Home</string>
     <string name="nav_bar_workouts">Workouts</string>
-    <string name="nav_bar_train">TRAIN</string>
+    <string name="nav_bar_train">WORK OUT</string>
     <string name="nav_bar_exercises">Exercises</string>
     <string name="nav_bar_more">More</string>
 
