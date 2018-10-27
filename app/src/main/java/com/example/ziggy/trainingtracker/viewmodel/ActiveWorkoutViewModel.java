@@ -33,6 +33,10 @@ public class ActiveWorkoutViewModel extends ViewModel {
         clearElapsedTime();
     }
 
+    public void addWorkoutToStatistics(){
+        model.getUser().addWorkoutToStatistics(activeWorkout);
+    }
+
     public IWorkout getActiveWorkout() {
         return activeWorkout;
     }

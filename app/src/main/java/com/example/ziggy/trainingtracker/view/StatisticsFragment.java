@@ -10,11 +10,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.model.ExerciseStatistic;
+import com.example.ziggy.trainingtracker.model.IExercise;
 import com.example.ziggy.trainingtracker.viewmodel.StatisticViewModel;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -30,10 +33,7 @@ public class StatisticsFragment extends Fragment {
     private NavigationManager navigationManager;
     private View view;
 
-    private String workoutName;
-    private String workoutName1;
-    private List<ExerciseStatistic> exercises;
-    private LineGraphSeries<DataPoint> exerciseDataSeries;
+
 
     private Button  showStatisticsButton;
 
@@ -48,6 +48,7 @@ public class StatisticsFragment extends Fragment {
 
     private int chosenSets;
     private int chosenReps;
+    private IExercise chosenExercise;
 
 
     public static StatisticsFragment newInstance(StatisticViewModel viewModel, NavigationManager navigator) {
@@ -74,27 +75,40 @@ public class StatisticsFragment extends Fragment {
         navigationManager.setNavBarState(R.id.nav_more);
         showStatisticsButton = view.findViewById(R.id.showStatisticsButton);
 
-        workoutName = "Deadlift 3x10";
-
         initViews();
-        initDataSeries();
-        initGraph(exerciseDataSeries ,workoutName);
         initListeners();
 
         return view;
     }
 
 
-
-
     private void initViews(){
        graph = (GraphView) view.findViewById(R.id.graph);
-       //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+       graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
        graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
+       graph.getGridLabelRenderer().setNumVerticalLabels(8);
+       graph.getViewport().setMinY(0);
+       graph.getViewport().setMaxY(40);
+
 
         initSpinners();
 
+    }
 
+    private void updateGraph(){
+        LineGraphSeries<DataPoint> series = viewModel.generateStatisticLineGraphData(chosenExercise, chosenSets, chosenReps);
+
+        if (!series.isEmpty()) {
+            graph.setTitle(chosenExercise.toString() + " " + chosenSets + " x " + chosenReps);
+            graph.setTitleTextSize(100);
+            graph.addSeries(series);
+        }
+
+        else {
+            Toast.makeText(getActivity(), "No statistics available for the chosen combination",
+                    Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 
@@ -116,12 +130,30 @@ public class StatisticsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 chosenReps = Integer.parseInt(repSpinner.getSelectedItem().toString());
-                System.out.println(chosenSets +  "   "  + chosenReps);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        exerciseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chosenExercise = (IExercise) exerciseSpinner.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        showStatisticsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateGraph();
             }
         });
     }
@@ -141,24 +173,21 @@ public class StatisticsFragment extends Fragment {
         setSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
+        if (!viewModel.getAvailableExercisesWithStatistics().isEmpty()) {
+            ArrayAdapter<IExercise> exerciseSpinnerAdapter = new ArrayAdapter<IExercise>(
+                    getActivity(),
+                    android.R.layout.simple_spinner_item,
+                    viewModel.getAvailableExercisesWithStatistics()
+            );
+
+            exerciseSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            exerciseSpinner.setAdapter(exerciseSpinnerAdapter);
+
+        }
+
         setSpinner.setAdapter(setSpinnerAdapter);
         repSpinner.setAdapter(repSpinnerAdapter);
 
-    }
-
-    private void initDataSeries(){
-         // Currently only sample data is created
-        exerciseDataSeries = new LineGraphSeries<>();
-    }
-
-
-
-
-    private void initGraph(LineGraphSeries<DataPoint> series, String title){
-
-        graph.setTitle(title);
-        graph.setTitleTextSize(100);
-        graph.addSeries(series);
 
     }
 }
