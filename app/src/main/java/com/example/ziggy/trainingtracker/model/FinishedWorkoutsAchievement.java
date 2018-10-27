@@ -31,6 +31,9 @@ public class FinishedWorkoutsAchievement extends Achievement {
         return new FinishedWorkoutsAchievement(nextRequirement(), stage + 1);
     }
 
+    /**
+     * @return the requirement for the next achievement.
+     */
     private int nextRequirement() {
         switch (stage) {
             case 1:

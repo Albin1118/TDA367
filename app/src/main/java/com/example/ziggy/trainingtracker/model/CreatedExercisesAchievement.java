@@ -32,6 +32,9 @@ public class CreatedExercisesAchievement extends Achievement {
         return new CreatedExercisesAchievement(nextRequirement(), stage + 1);
     }
 
+    /**
+     * @return the requirement for the next achievement.
+     */
     private int nextRequirement() {
         switch (stage) {
             case 1:
