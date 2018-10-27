@@ -12,10 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ziggy.trainingtracker.R;
-import com.example.ziggy.trainingtracker.model.ExerciseCategory;
 import com.example.ziggy.trainingtracker.viewmodel.ExerciseDetailViewModel;
-
-import java.util.List;
 
 /**
  * Fragment representing a view displaying contents of a selected exercise
@@ -25,7 +22,6 @@ public class ExerciseDetailViewFragment extends Fragment {
 
     private TextView exerciseNameTextView;
     private TextView exerciseUnitTextView;
-    private TextView exercisesCategoryTextView;
     private TextView exerciseDescriptionTextView;
     private TextView exerciseInstructionsTextView;
     private TextView exerciseCategoryTextView;
@@ -72,11 +68,11 @@ public class ExerciseDetailViewFragment extends Fragment {
         removeExerciseButton = view.findViewById(R.id.removeExerciseButton);
         editExerciseButton = view.findViewById(R.id.editExerciseButton);
 
-        exerciseNameTextView.setText(viewModel.getExercise().getName());
-        exerciseUnitTextView.setText(viewModel.getExercise().getUnit());
-        exerciseCategoryTextView.setText(viewModel.getExercise().getCategoriesString());
-        exerciseDescriptionTextView.setText(viewModel.getExercise().getDescription());
-        exerciseInstructionsTextView.setText(viewModel.getExercise().getInstructions());
+        exerciseNameTextView.setText(viewModel.getExerciseName());
+        exerciseUnitTextView.setText(viewModel.getExerciseUnit());
+        exerciseCategoryTextView.setText(viewModel.getExerciseCategories());
+        exerciseDescriptionTextView.setText(viewModel.getExerciseDescription());
+        exerciseInstructionsTextView.setText(viewModel.getExerciseInstructions());
 
         if (viewModel.isCustomExercise()) {
             removeExerciseButton.setVisibility(View.VISIBLE);

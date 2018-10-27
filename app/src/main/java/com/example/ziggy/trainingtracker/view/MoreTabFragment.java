@@ -21,9 +21,8 @@ import com.example.ziggy.trainingtracker.R;
 public class MoreTabFragment extends Fragment {
 
 
-    private EditText weightEditText;
     private Switch nightModeSwitch;
-    private Button userinfoButton;
+    private Button userInfoButton;
     private Button statisticsButton;
     private Button achievementsButton;
 
@@ -61,9 +60,9 @@ public class MoreTabFragment extends Fragment {
     }
 
     private void initViews() {
-        weightEditText = view.findViewById(R.id.weight_edit_text);
+        
         nightModeSwitch = view.findViewById(R.id.night_mode_switch);
-        userinfoButton = view.findViewById(R.id.userinfo_button);
+        userInfoButton = view.findViewById(R.id.userinfo_button);
         statisticsButton = view.findViewById(R.id.statistics_button);
         achievementsButton = view.findViewById(R.id.achievements_button);
 
@@ -75,7 +74,7 @@ public class MoreTabFragment extends Fragment {
 
     private void initListeners() {
 
-        userinfoButton.setOnClickListener(new View.OnClickListener() {
+        userInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navigator.navigateUserInfo();
