@@ -57,7 +57,10 @@ public class User implements IUser {
 
     //TODO probably move statistic functionality to TrainingTracker
 
-
+    /**
+     * Add a finished workout to the list of finished workouts.
+     * @param finishedWorkout The workout to add
+     */
     public void addFinishedWorkout(IWorkout finishedWorkout){
         finishedWorkouts.add(finishedWorkout);
     }
@@ -146,71 +149,119 @@ public class User implements IUser {
         return result;
     }
 
+    /**
+     * Add a new exercise to the list of custom exercises.
+     * @param e The exercise to add
+     */
     @Override
     public void addCustomExercise(IExercise e) {
         customExercises.add(e);
     }
 
+    /**
+     * Remove a custom exercise.
+     * @param e The exercise to remove
+     */
     @Override
     public void removeCustomExercise(IExercise e) {
         customExercises.remove(e);
     }
 
+    /**
+     * Add a new workout to the list of custom workouts.
+     * @param w The workout to add
+     */
     @Override
     public void addCustomWorkout(IWorkout w) {
         customWorkouts.add(w);
     }
 
+    /**
+     * Remove a custom workout.
+     * @param w The workout to remove
+     */
     @Override
     public void removeCustomWorkout(IWorkout w) {
         customWorkouts.remove(w);
     }
 
+    /**
+     * Add a new achievement in progress
+     * @param achievement The new achievement
+     */
     @Override
     public void addAchievement(Achievement achievement) {
         achievements.add(achievement);
     }
 
+    /**
+     * Add a finished challenge to the list of finished challenges.
+     * @param challenge The challenge to add
+     */
     @Override
     public void addChallenge(IChallenge challenge) {
         finishedChallenges.put(challenge.getName(), challenge);
     }
 
+    /**
+     * @return the username
+     */
     @Override
     public String getUsername() {
         return username;
     }
 
+    /**
+     * @return the name
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * @return the user's weight
+     */
     @Override
     public double getWeight() {
         return weight;
     }
 
+    /**
+     * @return the user's height
+     */
     @Override
     public int getHeight() {
         return height;
     }
 
+    /**
+     * @return the custom exercises
+     */
     @Override
     public List<IExercise> getCustomExercises() {
         return Collections.unmodifiableList(customExercises);
     }
 
+    /**
+     * @return the custom workouts
+     */
     @Override
     public List<IWorkout> getCustomWorkouts() {
         return Collections.unmodifiableList(customWorkouts);
     }
 
+    /**
+     * @return the finished workouts
+     */
     @Override
     public List<IWorkout> getFinishedWorkouts() {
         return finishedWorkouts;
     }
 
+    /**
+     * @return the finished challenges
+     */
     @Override
     public List<ExerciseStatistic> getExerciseStatistics() {
         return exerciseStatistics;
@@ -223,7 +274,7 @@ public class User implements IUser {
 
     /**
      * Updates the status of all the achievements before returning them.
-     * @return the list all the achievements
+     * @return all the achievements
      */
     @Override
     public List<Achievement> getAchievements() {
@@ -243,6 +294,9 @@ public class User implements IUser {
         this.customWorkouts = customWorkouts;
     }
 
+    /**
+     * @param weight The user's new weight
+     */
     @Override
     public void setWeight(double weight) {
         this.weight = weight;
