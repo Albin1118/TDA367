@@ -103,7 +103,7 @@ public class Exercise implements IExercise {
     public void setWeight(int weight) { this.weight = weight; }
     @Override
     public String toString(){
-        return name + " - " + description;
+        return name;
     }
 
     @Override

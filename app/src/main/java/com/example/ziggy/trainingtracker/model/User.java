@@ -1,8 +1,11 @@
 package com.example.ziggy.trainingtracker.model;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -59,19 +62,33 @@ public class User implements IUser {
         finishedWorkouts.add(finishedWorkout);
     }
 
+    /**
+     * The IWorkout sent will be used to create a statistics object which will be stored in the exerciseStatistics list
+     * @param workout The workout to add to statistics
+     */
     public void addWorkoutToStatistics(IWorkout workout){
-        int exercisePosition = 0;
 
         for (IWorkoutBlock w : workout.getBlocks()){
             for (IExercise e: w.getExercises()){
-                if (previousStatisticsAvailable(e) && e.isWeightBased()){
+
+                if (previousStatisticsAvailable(e) && e.isWeightBased()) {
                     // Since the amount list and exercises in WorkoutBlock are linked by index positions, this is the way to access the correct amount for now
-                    addToStatisticsList(e, w.getMultiplier(), w.getAmounts().get(exercisePosition++));
+
+                    System.out.println("PREVIOUS STATISTICS AVAILABLE");
+                    addToStatisticsList(
+                            e,
+                            w.getMultiplier(),
+                            w.getAmounts().get(0));
                 }
                 // If it is weightbased, create a new ExerciseStatistic object and add the stats to it
+
                 else if (e.isWeightBased()){
+                    System.out.println("ADDING NEW EXERCISE : " + e.getName() + " SETS : " + w.getMultiplier() + " REPS : " + w.getAmounts().get(0) + " TO STATISTICS");
                     exerciseStatistics.add(new ExerciseStatistic(e));
-                    addToStatisticsList(e, w.getMultiplier(), w.getAmounts().get(exercisePosition++));
+
+                    addToStatisticsList(e,
+                            w.getMultiplier(),
+                            w.getAmounts().get(0));
                 }
             }
         }
@@ -92,12 +109,18 @@ public class User implements IUser {
                 return true;
             }
         }
-
         return false;
     }
 
+    /**
+     * @param e The exercise to get statistics for
+     * @param sets The set count to get statistics for
+     * @param reps The rep count to get statistics for
+     * @return A list of dates and weight statistics for the supplied exercise, sets and reps
+     */
 
-    public LinkedHashMap<Date, Double> generateStatisticsForExercise(IExercise e, int sets, int reps) {
+    @Nullable
+    public LinkedHashMap<Date, Double> generateStatisticsForExercise(IExercise e, int sets, int reps) throws NullPointerException {
         //TODO depending on how the user accesses the statistics, change this implementation (i.e if we only show exercises which already has statistics available, or if we show them all and let the user select)
 
         for (ExerciseStatistic previousStatistic : exerciseStatistics) {
@@ -108,11 +131,19 @@ public class User implements IUser {
                 }
                 catch (NoSuchElementException exception){
                     exception.printStackTrace();
+
                 }
             }
         }
+        throw new NullPointerException("No statistics available");
+    }
 
-        return null;
+    public List <IExercise> getExercisesWithStatisticsAvailable(){
+        ArrayList <IExercise> result = new ArrayList<>();
+        for (ExerciseStatistic es : exerciseStatistics){
+            result.add(es.getExercise());
+        }
+        return result;
     }
 
     @Override
@@ -178,6 +209,11 @@ public class User implements IUser {
     @Override
     public List<IWorkout> getFinishedWorkouts() {
         return finishedWorkouts;
+    }
+
+    @Override
+    public List<ExerciseStatistic> getExerciseStatistics() {
+        return exerciseStatistics;
     }
 
     @Override

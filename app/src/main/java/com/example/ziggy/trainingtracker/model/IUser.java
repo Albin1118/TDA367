@@ -39,6 +39,10 @@ public interface IUser {
 
     List<IChallenge> getFinishedChallenges();
 
+    List<ExerciseStatistic> getExerciseStatistics();
+
+    List <IExercise> getExercisesWithStatisticsAvailable();
+
     LinkedHashMap<Date, Double> generateStatisticsForExercise(IExercise e, int sets, int reps);
 
     /**

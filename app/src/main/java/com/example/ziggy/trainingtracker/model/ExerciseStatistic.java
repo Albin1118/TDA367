@@ -32,7 +32,7 @@ public class ExerciseStatistic {
             }
         }
 
-        if (map.size() == 0){
+        if (map.isEmpty()){
             throw new NoSuchElementException("There are no statistics available for the supplied sets/reps");
         }
 
