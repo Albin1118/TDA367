@@ -22,8 +22,7 @@ public class Exercise implements IExercise {
     @SerializedName("exercise_has_weight")
     private boolean weightBased;
     @SerializedName("exercise_category")
-    private List<ExerciseCategory> categories = new ArrayList<ExerciseCategory>();
-    private int weight;
+    private List<ExerciseCategory> categories;
 
 
     public Exercise(String name, String unit, String description, String instructions, List<ExerciseCategory> categories, boolean weightBased) {
@@ -35,33 +34,55 @@ public class Exercise implements IExercise {
         this.weightBased = weightBased;
     }
 
-    public Exercise() {
-    }
-
+    /**
+     * @return the name
+     */
     @Override
     public String getName() {
         return name;
     }
+
+    /**
+     * @return the description
+     */
     @Override
     public String getDescription() {
         return description;
     }
+
+    /**
+     * @return the instructions
+     */
     @Override
     public String getInstructions() {
         return instructions;
     }
+
+    /**
+     * @return the unit (e.g. reps, meters, seconds)
+     */
     @Override
     public String getUnit() {
         return unit;
     }
+
+    /**
+     * @return the exercise's muscle group categories
+     */
     @Override
     public List<ExerciseCategory> getCategories() {
         return categories;
     }
+
+    /**
+     * @return true if the exercise is weight based
+     */
     @Override
     public boolean isWeightBased() { return weightBased; }
-    @Override
-    public int getWeight() { return weight; }
+
+    /**
+     * @return the categories in string format
+     */
     @Override
     public String getCategoriesString(){
         String categoriesString = "";
@@ -77,30 +98,52 @@ public class Exercise implements IExercise {
         return categoriesString;
     }
 
+    /**
+     * @param name Name to set
+     */
     @Override
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * @param description Description to set
+     */
     @Override
     public void setDescription(String description) {
         this.description = description;
     }
+
+    /**
+     * @param instructions Instructions to set
+     */
     @Override
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
+
+    /**
+     * @param unit Unit to set (e.g. reps, meters, seconds)
+     */
     @Override
     public void setUnit(String unit) {
         this.unit = unit;
     }
+
+    /**
+     * @param categories Muscle group categories to set
+     */
     @Override
     public void setCategories(List<ExerciseCategory> categories) {
         this.categories = categories;
     }
+
+    /**
+     * @param weightBased Set if the exercise is weight based
+     */
     @Override
     public void setWeightBased(boolean weightBased) { this.weightBased = weightBased; }
-    @Override
-    public void setWeight(int weight) { this.weight = weight; }
+
     @Override
     public String toString(){
         return name;
@@ -112,7 +155,6 @@ public class Exercise implements IExercise {
         if (o == null || getClass() != o.getClass()) return false;
         Exercise exercise = (Exercise) o;
         return weightBased == exercise.weightBased &&
-                weight == exercise.weight &&
                 Objects.equals(name, exercise.name) &&
                 Objects.equals(unit, exercise.unit) &&
                 Objects.equals(description, exercise.description) &&
@@ -122,6 +164,6 @@ public class Exercise implements IExercise {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, unit, description, instructions, weightBased, categories, weight);
+        return Objects.hash(name, unit, description, instructions, weightBased, categories);
     }
 }
