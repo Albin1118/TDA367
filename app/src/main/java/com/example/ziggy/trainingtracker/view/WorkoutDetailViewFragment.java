@@ -80,10 +80,11 @@ public class WorkoutDetailViewFragment extends Fragment {
         removeWorkoutButton = view.findViewById(R.id.removeWorkoutButton);
         workoutBlocksListView.addHeaderView(header);
 
-        workoutNameTextView.setText(viewModel.getWorkoutName());
-        workoutDescriptionTextView.setText(viewModel.getWorkoutDescription());
-        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getWorkoutBlocks());
+        workoutNameTextView.setText(viewModel.getWorkout().getName());
+        workoutDescriptionTextView.setText(viewModel.getWorkout().getDescription());
+        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getWorkout().getBlocks(), true);
         workoutBlocksListView.setAdapter(adapter);
+
 
         if(viewModel.isCustomWorkout()) {
             removeWorkoutButton.setVisibility(View.VISIBLE);

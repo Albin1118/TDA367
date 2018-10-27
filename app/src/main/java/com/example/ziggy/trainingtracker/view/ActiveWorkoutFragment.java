@@ -62,8 +62,9 @@ public class ActiveWorkoutFragment extends Fragment {
         initListeners();
         showStartButton();
 
-        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getActiveWorkoutBlocks());
+        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getActiveWorkout().getBlocks(), false);
         currentWorkoutBlockListView.setAdapter(adapter);
+
 
         return view;
     }

@@ -154,7 +154,7 @@ public class WorkoutBlockCreatorFragment extends Fragment {
 
                     //Create a ListView to be displayed in the dialog
                     final ListView workoutBlockListView = new ListView(getContext());
-                    WorkoutBlockListAdapter adapter = new WorkoutBlockListAdapter(getContext(), workoutBlockList);
+                    WorkoutBlockListAdapter adapter = new WorkoutBlockListAdapter(getContext(), workoutBlockList, true);
                     workoutBlockListView.setAdapter(adapter);
 
                     //Set the main dialog view to display the list of blocks

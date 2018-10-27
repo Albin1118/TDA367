@@ -3,10 +3,13 @@ package com.example.ziggy.trainingtracker.view;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,12 +23,15 @@ import java.util.List;
 public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
 
     private Context mContext;
+    private EditText weight;
+    private Boolean hideWeightField;
     private List<IWorkoutBlock>workoutBlocks = new ArrayList<>();
 
-    public WorkoutBlockListAdapter(@NonNull Context context, List<IWorkoutBlock>list){
+    public WorkoutBlockListAdapter(@NonNull Context context, List<IWorkoutBlock>list, Boolean hideWeightField){
         super(context, 0, list);
         mContext = context;
         workoutBlocks = list;
+        this.hideWeightField = hideWeightField;
     }
 
     @NonNull
@@ -48,14 +54,40 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
         for (int i = 0; i < exercises.size(); i++){
             View child = LayoutInflater.from(mContext).inflate(R.layout.item_blockexercise, parent, false);
 
-            IExercise e = exercises.get(i);
+            IExercise exercise = exercises.get(i);
             int amount = amounts.get(i);
 
             TextView name = (TextView)child.findViewById(R.id.exerciseNameTextView);
-            name.setText(e.getName());
+            name.setText(exercise.getName());
 
             TextView unit = (TextView)child.findViewById(R.id.exerciseUnitTextView);
-            unit.setText(String.valueOf(amount) + " " + e.getUnit());
+            unit.setText(String.valueOf(amount) + " " + exercise.getUnit());
+
+            weight = (EditText) child.findViewById(R.id.weightEditText);
+            weight.setVisibility(View.INVISIBLE);
+
+            if(exercise.isWeightBased() && !hideWeightField) {
+                weight.setText(String.valueOf(exercise.getWeight()));
+                weight.setVisibility(View.VISIBLE);
+            }
+
+            weight.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable no) {
+                    if(no.length()>0)
+                    exercise.setWeight(Integer.parseInt(no.toString()));
+                }
+            });
 
             exercisesInBlockLinearLayout.addView(child);
         }
@@ -63,4 +95,5 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
 
         return listItem;
     }
+
 }
