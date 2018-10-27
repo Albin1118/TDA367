@@ -89,6 +89,11 @@ public interface NavigationManager {
     void navigateActiveChallenge(IChallenge challenge);
 
     /**
+     * Navigates to the user info page
+     */
+    void navigateUserInfo();
+
+    /**
      * Navigates to the statistics.
      */
     void navigateStatistics();

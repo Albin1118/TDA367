@@ -24,6 +24,7 @@ import com.example.ziggy.trainingtracker.viewmodel.ExerciseTabViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.MainViewModel;
 import com.example.ziggy.trainingtracker.R;
 import com.example.ziggy.trainingtracker.viewmodel.StatisticViewModel;
+import com.example.ziggy.trainingtracker.viewmodel.UserInfoViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutCreatorViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutDetailViewModel;
 import com.example.ziggy.trainingtracker.viewmodel.WorkoutTabViewModel;
@@ -288,5 +289,12 @@ public class MainActivity extends AppCompatActivity implements NavigationManager
         AchievementsViewModel viewModel = ViewModelProviders.of(this).get(AchievementsViewModel.class);
         viewModel.init(this.viewModel.getModel());
         setFragmentContainerContent(AchievementsFragment.newInstance(viewModel));
+    }
+
+    @Override
+    public void navigateUserInfo(){
+        UserInfoViewModel viewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
+        viewModel.init(this.viewModel.getModel());
+        setFragmentContainerContent(UserInfoFragment.newInstance(viewModel));
     }
 }

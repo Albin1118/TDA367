@@ -32,4 +32,25 @@ public class ExerciseDetailViewModel extends ViewModel {
     public IExercise getExercise() {
         return this.exercise;
     }
+
+    public String getExerciseName(){
+        return exercise.getName();
+    }
+
+    public String getExerciseUnit(){
+        return exercise.getUnit();
+    }
+
+    public String getExerciseCategories(){
+        return exercise.getCategoriesString();
+    }
+
+    public String getExerciseDescription(){
+        return exercise.getDescription();
+    }
+
+    public String getExerciseInstructions(){
+        return exercise.getInstructions();
+    }
+
 }
