@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">TrainingTracker</string>
 
+    //Bottom nav bar
+    <string name="nav_bar_home">Home</string>
+    <string name="nav_bar_workouts">Workouts</string>
+    <string name="nav_bar_train">TRAIN</string>
+    <string name="nav_bar_exercises">Exercises</string>
+    <string name="nav_bar_more">More</string>
+
     //Workout strings
     <string name="workout_tab">Workouts</string>
 
@@ -40,7 +47,7 @@
     <string name="exercise_creator_name1">Name:</string>
     <string name="exercise_creator_name2">Name</string>
     <string name="exercise_creator_unit1">Unit:</string>
-    <string name="exercise_creator_unit2">reps, meters, seconds...</string>
+    <string name="exercise_creator_unit2">reps, meters, seconds…</string>
     <string name="exercise_creator_description1">Description:</string>
     <string name="exercise_creator_description2">Description</string>
     <string name="exercise_creator_instructions1">Instructions:</string>
@@ -71,6 +78,6 @@
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Donec id tortor condimentum, tincidunt nunc eu, pellentesque metus. Sed et viverra lacus.
-        Aliquam quis urna vel nisi aliquet aliquam quis quis magna.</string>
+        Aliquam quis urna vel nisi aliquet aliquam quis magna.</string>
     
 </resources>
