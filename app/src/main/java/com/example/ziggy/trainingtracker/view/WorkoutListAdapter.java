@@ -40,7 +40,7 @@ public class WorkoutListAdapter extends ArrayAdapter<IWorkout> {
         TextView workoutBlocksTextView = (TextView) listItem.findViewById(R.id.workoutBlocksTextView);
 
         workoutNameTextView.setText(currentWorkout.getName());
-        workoutBlocksTextView.setText(currentWorkout.getNumberofBlocks());
+        workoutBlocksTextView.setText(currentWorkout.getNumberOfBlocks() + " blocks");
 
         return listItem;
     }

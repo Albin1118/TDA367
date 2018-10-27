@@ -99,12 +99,12 @@ public class WorkoutCreatorViewModel extends ViewModel {
     }
 
     public void removeLatestBlock(){
-        int index = buildWorkout.getBlockListSize() - 1;
+        int index = buildWorkout.getNumberOfBlocks() - 1;
         buildWorkout.removeBlock(index);
     }
 
     public IWorkoutBlock getLatestBlock(){
-        int index = buildWorkout.getBlockListSize() - 1;
+        int index = buildWorkout.getNumberOfBlocks() - 1;
         IWorkoutBlock block = buildWorkout.getBlocks().get(index);
         return block;
     }

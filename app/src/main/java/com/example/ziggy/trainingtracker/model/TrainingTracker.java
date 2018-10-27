@@ -169,6 +169,9 @@ public class TrainingTracker implements ITrainingTracker{
         return Collections.unmodifiableList(user.getAchievements());
     }
 
+    /**
+     * @return the active user
+     */
     @Override
     public IUser getUser() {
         return user;

@@ -1,6 +1,5 @@
 package com.example.ziggy.trainingtracker.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ITrainingTracker {
@@ -102,5 +101,8 @@ public interface ITrainingTracker {
      */
     List<Achievement> getAchievements();
 
+    /**
+     * @return the active user
+     */
     IUser getUser();
 }
