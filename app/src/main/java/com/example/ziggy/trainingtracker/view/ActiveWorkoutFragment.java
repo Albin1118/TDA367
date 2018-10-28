@@ -178,7 +178,7 @@ public class ActiveWorkoutFragment extends Fragment {
     private void showExitDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(R.string.app_name);
-        builder.setMessage("Are you sure you want to stop the current workout?");
+        builder.setMessage("Are you sure you want to complete the current workout?");
         builder.setIcon(R.drawable.ic_wb_incandescent_black_24dp);
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -186,7 +186,7 @@ public class ActiveWorkoutFragment extends Fragment {
                 viewModel.addWorkoutToStatistics();
                 viewModel.finishWorkout();
                 navigator.navigateHome();
-                Toast.makeText(getContext(), "Workout canceled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Workout Completed", Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
