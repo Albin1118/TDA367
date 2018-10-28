@@ -36,8 +36,8 @@ public class WorkoutBlockTest {
 
         IWorkoutBlock block = new WorkoutBlock();
 
-        block.addExercise(exercise1, amount1);
-        block.addExercise(exercise2, amount2);
+        block.addExercise(exercise1, amount1, 0);
+        block.addExercise(exercise2, amount2, 0);
         assertNotEquals(block.getExercises().get(0), block.getExercises().get(1));
         assertEquals(block.getAmounts().get(0), (Integer) amount1);
         assertEquals(block.getExercises().get(0), exercise1);
@@ -52,9 +52,9 @@ public class WorkoutBlockTest {
 
         IWorkoutBlock block = new WorkoutBlock();
 
-        block.addExercise(exercise1, amount1);
-        block.addExercise(exercise2, amount2);
-        block.addExercise(exercise3, amount3);
+        block.addExercise(exercise1, amount1, 0);
+        block.addExercise(exercise2, amount2, 0);
+        block.addExercise(exercise3, amount3, 0);
         assertEquals(block.getExercises().get(1), exercise2);
         assertEquals(block.getAmounts().get(1), (Integer) amount2);
 
@@ -72,9 +72,9 @@ public class WorkoutBlockTest {
 
         assertTrue(block.isEmpty());
 
-        block.addExercise(exercise1, amount1);
-        block.addExercise(exercise2, amount2);
-        block.addExercise(exercise3, amount3);
+        block.addExercise(exercise1, amount1, 0);
+        block.addExercise(exercise2, amount2, 0);
+        block.addExercise(exercise3, amount3, 0);
 
         assertFalse(block.isEmpty());
 
