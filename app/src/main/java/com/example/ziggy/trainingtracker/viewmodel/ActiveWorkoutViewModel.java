@@ -59,7 +59,7 @@ public class ActiveWorkoutViewModel extends ViewModel {
     }
 
     public IWorkout getWorkout(int index){
-        return model.getWorkouts().get(index);
+        return model.getWorkout(index);
     }
 
     public int getElapsedTime() {

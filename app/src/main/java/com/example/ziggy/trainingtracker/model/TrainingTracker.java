@@ -139,6 +139,18 @@ public class TrainingTracker implements ITrainingTracker{
     }
 
     /**
+     *
+     * @param index the index of the IExercise
+     * @return the IExercise at index
+     */
+    @Override
+    public IExercise getExercise(int index){
+        List<IExercise> allExercises = new ArrayList<>(baseExercises);
+        allExercises.addAll(user.getCustomExercises());
+        return allExercises.get(index);
+    }
+
+    /**
      * @return an unmodifiable list of the base workouts + the users custom workouts
      */
     @Override
@@ -146,6 +158,13 @@ public class TrainingTracker implements ITrainingTracker{
         List<IWorkout> allWorkouts = new ArrayList<>(baseWorkouts);
         allWorkouts.addAll(user.getCustomWorkouts());
         return Collections.unmodifiableList(allWorkouts);
+    }
+
+    @Override
+    public IWorkout getWorkout(int index){
+        List<IWorkout> allWorkouts = new ArrayList<>(baseWorkouts);
+        allWorkouts.addAll(user.getCustomWorkouts());
+        return allWorkouts.get(index);
     }
 
     /**

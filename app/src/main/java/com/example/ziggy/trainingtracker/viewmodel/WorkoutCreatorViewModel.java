@@ -159,6 +159,6 @@ public class WorkoutCreatorViewModel extends ViewModel {
     }
 
     public IExercise getExercise(int index){
-        return model.getExercises().get(index);
+        return model.getExercise(index);
     }
 }

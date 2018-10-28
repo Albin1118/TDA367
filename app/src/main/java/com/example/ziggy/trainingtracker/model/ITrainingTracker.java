@@ -87,9 +87,23 @@ public interface ITrainingTracker {
     List<IExercise> getExercises();
 
     /**
+     *
+     * @param index the index of the IExercise
+     * @return the IExercise at index
+     */
+    IExercise getExercise(int index);
+
+    /**
      * @return an unmodifiable list of the base workouts + the users custom workouts
      */
     List<IWorkout> getWorkouts();
+
+    /**
+     *
+     * @param index the index of the IWorkout
+     * @return the IWorkout at index
+     */
+    IWorkout getWorkout(int index);
 
     /**
      * @return a list of all the users finished challenges + all of the base challenges that are unfinished

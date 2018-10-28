@@ -55,7 +55,7 @@ public class ChallengesPageFragment extends Fragment {
     private void initViews() {
         challengeListView = view.findViewById(R.id.challengeListView);
 
-        adapter = new ArrayAdapter<IChallenge>(getContext(), R.layout.item_challenge, R.id.challengeNameTextView, viewModel.getChallenges()) {
+        /*adapter = new ArrayAdapter<IChallenge>(getContext(), R.layout.item_challenge, R.id.challengeNameTextView, viewModel.getChallenges()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -76,7 +76,9 @@ public class ChallengesPageFragment extends Fragment {
 
                 return view;
             }
-        };
+        };*/
+
+        adapter = new ChallengeListAdapter(getContext(), viewModel.getChallenges(), navigator);
         challengeListView.setAdapter(adapter);
     }
 
