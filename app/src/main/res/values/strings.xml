@@ -57,7 +57,7 @@
     <string name="exercise_remove_button">Remove</string>
 
     <string name="exercise_detail_view">Exercise name</string>
-    <string name="exercise_detail_view_category">Category</string>
+    <string name="exercise_detail_view_categories">Categories:</string>
     <string name="exercise_detail_view_unit">Unit:</string>
 
     <string name="exercise_list_item_name">Exercise name</string>

@@ -8,70 +8,100 @@
 
     <TextView
         android:id="@+id/exerciseNameTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="@string/exercise_detail_view"
         android:textColor="?attr/colorPrimary"
-        android:textSize="28sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/exerciseUnitTextView"
-        android:layout_width="match_parent"
+        android:id="@+id/textUnit"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginTop="22dp"
         android:text="@string/exercise_detail_view_unit"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textCategories"
         app:layout_constraintTop_toBottomOf="@+id/exerciseNameTextView" />
 
     <TextView
-        android:id="@+id/exerciseCategoryTextView"
-        android:layout_width="match_parent"
+        android:id="@+id/exerciseUnitTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/exercise_detail_view_unit"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textUnit"
+        app:layout_constraintTop_toTopOf="@+id/textUnit"
+        app:layout_constraintBottom_toBottomOf="@+id/textUnit"/>
+
+    <TextView
+        android:id="@+id/textCategories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="22dp"
-        android:text="@string/exercise_detail_view_category"
-        android:textColor="@color/colorAccent"
-        android:textSize="22sp"
+        android:text="@string/exercise_detail_view_categories"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseUnitTextView" />
+
+    <TextView
+        android:id="@+id/exerciseCategoryTextView"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/exercise_detail_view_categories"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@+id/textCategories"
+        app:layout_constraintTop_toTopOf="@+id/textCategories"
+        app:layout_constraintBottom_toBottomOf="@+id/textCategories"/>
+
     <TextView
         android:id="@+id/exerciseDescriptionTextView"
-        android:layout_width="match_parent"
-        android:layout_height="136dp"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
         android:layout_marginTop="84dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/lorem_ipsum"
         android:textSize="18sp"
         android:textStyle="bold"
         android:scrollbars="vertical"
         android:background="?attr/colorBackgroundFloating"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseUnitTextView" />
 
     <TextView
         android:id="@+id/exerciseInstructionsTextView"
-        android:layout_width="match_parent"
-        android:layout_height="136dp"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
         android:layout_marginTop="22dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/lorem_ipsum"
         android:textSize="18sp"
         android:textStyle="bold"
         android:scrollbars="vertical"
         android:background="?attr/colorBackgroundFloating"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseDescriptionTextView" />
 
     <Button
