@@ -53,9 +53,6 @@ public class User implements IUser {
         addAchievement(new FinishedWorkoutsAchievement());
     }
 
-    //TODO Tests for the statistics functionality
-
-    //TODO probably move statistic functionality to TrainingTracker
 
     /**
      * Add a finished workout to the list of finished workouts.
@@ -81,7 +78,8 @@ public class User implements IUser {
                     addToStatisticsList(
                             e,
                             w.getMultiplier(),
-                            w.getAmounts().get(0));
+                            w.getAmounts().get(0),
+                            w.getWeights().get(0));
                 }
                 // If it is weightbased, create a new ExerciseStatistic object and add the stats to it
 
@@ -91,17 +89,18 @@ public class User implements IUser {
 
                     addToStatisticsList(e,
                             w.getMultiplier(),
-                            w.getAmounts().get(0));
+                            w.getAmounts().get(0),
+                            w.getWeights().get(0));
                 }
             }
         }
     }
 
 
-    private void addToStatisticsList(IExercise e, int sets, int reps){
+    private void addToStatisticsList(IExercise e, int sets, int reps, double weight){
         for (ExerciseStatistic statistic : exerciseStatistics){
             if (statistic.getExercise().equals(e)){
-                statistic.addStatistics(sets, reps, 22.5); //TODO temp hardcoded weight until it is implemented in workoutblock
+                statistic.addStatistics(sets, reps, weight);
             }
         }
     }
@@ -124,7 +123,6 @@ public class User implements IUser {
 
     @Nullable
     public LinkedHashMap<Date, Double> generateStatisticsForExercise(IExercise e, int sets, int reps) throws NullPointerException {
-        //TODO depending on how the user accesses the statistics, change this implementation (i.e if we only show exercises which already has statistics available, or if we show them all and let the user select)
 
         for (ExerciseStatistic previousStatistic : exerciseStatistics) {
             if (previousStatistic.getExercise().equals(e)) {

@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 
-//TODO Tests for this class
-
 public class ExerciseStatistic {
 
     private IExercise exercise;
@@ -22,12 +20,20 @@ public class ExerciseStatistic {
         statisticHolder.put(new SetRepsWeightContainer(sets, reps, weight), new Date());
     }
 
+    /**
+     *
+     * @param sets The sets to find statistics for
+     * @param reps The reps to find statistics for
+     * @return List containing Date and weight data for the corresponding sets and reps
+     * @throws NoSuchElementException If it doesn't find any data for the supplied sets and reps
+     */
 
     LinkedHashMap<Date, Double> getStatisticForSpecificSetReps(int sets, int reps) throws NoSuchElementException {
         LinkedHashMap<Date, Double> map = new LinkedHashMap<>();
 
         for (SetRepsWeightContainer s : statisticHolder.keySet()){
             if (s.getReps() == reps && s.getSets() == sets){
+                // If sets and reps correspond with stored statistics, add the created date with get.(s) (they date is the key)
                 map.put(statisticHolder.get(s), s.getWeight());
             }
         }
