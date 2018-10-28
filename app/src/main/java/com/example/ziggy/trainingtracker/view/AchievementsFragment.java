@@ -50,7 +50,7 @@ public class AchievementsFragment extends Fragment {
     private void initViews() {
         achievementsListView = view.findViewById(R.id.achievementsListView);
 
-        achievementsListView.setAdapter(new ArrayAdapter<Achievement>(getContext(), R.layout.item_achievement, R.id.achievementNameTextView, viewModel.getAchievements()) {
+        /*achievementsListView.setAdapter(new ArrayAdapter<Achievement>(getContext(), R.layout.item_achievement, R.id.achievementNameTextView, viewModel.getAchievements()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -67,7 +67,10 @@ public class AchievementsFragment extends Fragment {
 
                 return view;
             }
-        });
+        });*/
+
+        AchievementListAdapter adapter = new AchievementListAdapter(getContext(), viewModel.getAchievements());
+        achievementsListView.setAdapter(adapter);
     }
 
     private void initListeners() {
