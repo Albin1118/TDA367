@@ -36,7 +36,7 @@
 
     <string name="current_active_workout_label">Current Workout</string>
     <string name="start_active_workout_button">Start Workout</string>
-    <string name="active_workout_pause_button">Pause Workout (Hold to cancel workout)</string>
+    <string name="active_workout_pause_button">Pause Workout (Hold to COMPLETE workout)</string>
 
     //Exercise strings
     <string name="exercises_tab">Exercises</string>
