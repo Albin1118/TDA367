@@ -33,10 +33,10 @@ public class MainViewModel extends AndroidViewModel {
     public MainViewModel(Application app) {
         super(app);
         model = new TrainingTracker();
+        //loadCustomData();
         loadExercises();
         loadWorkouts();
         loadChallenges();
-        //loadData();
     }
 
     /**
@@ -66,19 +66,18 @@ public class MainViewModel extends AndroidViewModel {
     private void loadExerciseDataFromSharedPreferences() {
         JacksonSerializationService s = new JacksonSerializationService(getApplication().getApplicationContext());
 
-        ArrayList<IExercise> iExerciseArrayList = new ArrayList<>();
+        ArrayList<IExercise> iExerciseArrayList;
 
         try {
             iExerciseArrayList = s.loadUserExerciseList();
-
             if (!iExerciseArrayList.isEmpty()) {
-                //model.setExercises(iExerciseArrayList);
+                model.getUser().setCustomExercises(iExerciseArrayList);
             }
         }
 
         catch (NullPointerException e){
             e.printStackTrace();
-            saveExerciseData(model.getExercises());
+            saveExerciseData(model.getUser().getCustomExercises());
         }
 
     }
@@ -89,51 +88,28 @@ public class MainViewModel extends AndroidViewModel {
     private void loadWorkoutDataFromSharedPreferences() {
         JacksonSerializationService s = new JacksonSerializationService(getApplication().getApplicationContext());
 
-        ArrayList<IWorkout> iWorkoutArrayList = new ArrayList<>();
+        ArrayList<IWorkout> iWorkoutArrayList;
 
         try {
             iWorkoutArrayList = s.loadUserWorkoutList();
-
             if (!iWorkoutArrayList.isEmpty()) {
-                //model.setWorkouts(iWorkoutArrayList);
+                model.getUser().setCustomWorkouts(iWorkoutArrayList);
             }
         }
 
         catch (NullPointerException e){
             e.printStackTrace();
-            saveExerciseData(model.getExercises());
+            saveWorkoutData(model.getWorkouts());
         }
 
     }
 
-
-    /**
-     * Loads Workouts from SharedPreferences and sets them in the model
-     */
-
-    /*
-    private void loadWorkoutDataFromSharedPreferences(){
-        //SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
-        //model.setWorkouts(s.loadUserWorkoutList());
-        JacksonSerializationService s = new JacksonSerializationService(getApplication().getApplicationContext());
-        model.setWorkouts(s.loadUserWorkoutList());
-        loadChallenges();
-    }
-
-
-    private void loadUserDataFromSharedPreferences(){
-        SharedPreferencesService s = new SharedPreferencesService(getApplication().getApplicationContext());
-        //model.setUser(s.loadUserData());
-    }
-    */
-
     /**
      * Loads Exercises and Workouts from SharedPreferences
      */
-    private void loadData(){
-        //loadUserDataFromSharedPreferences();
+    private void loadCustomData(){
         loadExerciseDataFromSharedPreferences();
-        loadWorkoutDataFromSharedPreferences();
+        //loadWorkoutDataFromSharedPreferences();
     }
 
     /**
@@ -141,9 +117,8 @@ public class MainViewModel extends AndroidViewModel {
      */
     public void saveData(){
         System.out.println("Saving model data to SharedPreferences....");
-        saveExerciseData(model.getExercises());
-        saveWorkoutData(model.getWorkouts());
-        //saveUserData(model.getUser());
+        saveExerciseData(model.getUser().getCustomExercises());
+        saveWorkoutData(model.getUser().getCustomWorkouts());
         System.out.println("Saved all available model data");
     }
 

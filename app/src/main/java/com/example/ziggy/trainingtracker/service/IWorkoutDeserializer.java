@@ -35,9 +35,9 @@ public class IWorkoutDeserializer extends JsonDeserializer<IWorkout> {
         String workoutDescription = node.get("description").toString();
         System.out.println(workoutDescription);
 
-        //for (JsonNode s : node.get("amounts")){
-        //    System.out.println(s.toString());
-        //}
+        for (JsonNode s : blockNode.get("amounts")){
+            System.out.println(s.toString());
+        }
 
 
         iWorkout.setName(workoutName);

@@ -86,10 +86,10 @@ public class StatisticsFragment extends Fragment {
        graph = (GraphView) view.findViewById(R.id.graph);
        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
        graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
-       graph.getGridLabelRenderer().setNumVerticalLabels(8);
+       graph.getGridLabelRenderer().setNumVerticalLabels(5);
        graph.getViewport().setMinY(0);
        graph.getViewport().setMaxY(40);
-
+       graph.getViewport().setYAxisBoundsManual(true);
 
         initSpinners();
 

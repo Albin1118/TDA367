@@ -78,6 +78,8 @@ public class JacksonSerializationService {
         // Add the Json string to the shared prefs dir
         editor.putString(CUSTOM_EXERCISE_DATA, listJsonString);
 
+        System.out.println("SAVED EXERCISE DATA : " + listJsonString);
+
         //Save changes
         editor.apply();
     }
