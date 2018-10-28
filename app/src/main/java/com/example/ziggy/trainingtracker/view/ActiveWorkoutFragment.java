@@ -66,6 +66,7 @@ public class ActiveWorkoutFragment extends Fragment {
         currentWorkoutBlockListView.setAdapter(adapter);
 
 
+
         return view;
     }
 

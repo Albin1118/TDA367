@@ -29,13 +29,8 @@ public class WorkoutBlock implements IWorkoutBlock {
      * Adds an exercise along with its amount to the block
      * @param exercise exercise to be added to the block
      * @param amount the amount connected to the exercise
+     * @param weight the weight connected to the exercise
      */
-    @Override
-    public void addExercise(IExercise exercise, int amount) {
-        exercises.add(exercise);
-        amounts.add(amount);
-    }
-
     public void addExercise(IExercise exercise, int amount, double weight) {
         exercises.add(exercise);
         amounts.add(amount);
@@ -53,6 +48,7 @@ public class WorkoutBlock implements IWorkoutBlock {
         int index = exercises.indexOf(exercise);
         exercises.remove(index);
         amounts.remove(index);
+        weights.remove(index);
     }
 
     @Override

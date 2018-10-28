@@ -27,6 +27,7 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
     private Boolean hideWeightField;
     private List<IWorkoutBlock>workoutBlocks = new ArrayList<>();
 
+
     public WorkoutBlockListAdapter(@NonNull Context context, List<IWorkoutBlock>list, Boolean hideWeightField){
         super(context, 0, list);
         mContext = context;
@@ -44,6 +45,7 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
         IWorkoutBlock currentBlock = workoutBlocks.get(position);
         List<IExercise>exercises = currentBlock.getExercises();
         List<Integer>amounts = currentBlock.getAmounts();
+        List<Double>weights = currentBlock.getWeights();
 
         TextView multiplierTextView = (TextView)listItem.findViewById(R.id.multiplierTextView);
         multiplierTextView.setText(currentBlock.getMultiplierString());
@@ -51,7 +53,8 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
         LinearLayout exercisesInBlockLinearLayout = (LinearLayout)listItem.findViewById(R.id.exercisesInBlockLinearLayout);
         exercisesInBlockLinearLayout.removeAllViews();
 
-        for (int i = 0; i < exercises.size(); i++){
+        int i;
+        for (i=0; i < exercises.size(); i++){
             View child = LayoutInflater.from(mContext).inflate(R.layout.item_blockexercise, parent, false);
 
             IExercise exercise = exercises.get(i);
@@ -67,9 +70,11 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
             weight.setVisibility(View.INVISIBLE);
 
             if(exercise.isWeightBased() && !hideWeightField) {
-                weight.setText(String.valueOf(exercise.getWeight()));
+                weight.setText(String.valueOf(weights.get(i)));
                 weight.setVisibility(View.VISIBLE);
             }
+
+            int indexOfCurrentExercise = i;
 
             weight.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -84,11 +89,18 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
 
                 @Override
                 public void afterTextChanged(Editable no) {
-                    if(no.length()>0)
-                    exercise.setWeight(Integer.parseInt(no.toString()));
+                    try {
+                        try {
+                            if (no.length() > 0)
+                                weights.set(indexOfCurrentExercise, Double.parseDouble(no.toString()));
+                        } catch (NumberFormatException e) {
+                            System.out.println("Wrong input");
+                        }
+                    } catch (IndexOutOfBoundsException i) {
+                        System.out.println("Out of bounds");
+                    }
                 }
             });
-
             exercisesInBlockLinearLayout.addView(child);
         }
 

@@ -148,7 +148,7 @@ public class ReadWorkoutsFromXMLService {
                     throw new IllegalArgumentException("Missing attribute n in the Exercise: \"" + e.getName() + "\".");
                 }
                 //add it to block
-                block.addExercise(e, amount);
+                block.addExercise(e, amount, 0);
             }
         }
 

@@ -68,11 +68,12 @@ public class WorkoutCreatorViewModel extends ViewModel {
      * @param exercise The exercise to store
      * @param amount The amount associated with the exercise (e.g. 10 reps)
      */
+    /*
     public void addExercise(IExercise exercise, int amount) {
         this.blockExercises.add(exercise);
         this.blockAmounts.add(amount);
     }
-
+*/
 
     public void addExercise(IExercise exercise, int amount, double weight) {
         this.blockExercises.add(exercise);
@@ -88,6 +89,7 @@ public class WorkoutCreatorViewModel extends ViewModel {
         int index = this.blockExercises.indexOf(exercise);
         this.blockExercises.remove(index);
         this.blockAmounts.remove(index);
+        this.blockWeights.remove(index);
     }
 
     public boolean workoutBlockIsEmpty() {
@@ -95,7 +97,7 @@ public class WorkoutCreatorViewModel extends ViewModel {
     }
 
     public void addWorkoutBlock(int sets) {
-        buildWorkout.addBlock(sets, blockExercises, blockAmounts);
+        buildWorkout.addBlock(sets, blockExercises, blockAmounts, blockWeights);
     }
 
     public void removeLatestBlock(){
@@ -112,6 +114,7 @@ public class WorkoutCreatorViewModel extends ViewModel {
     public void resetWorkoutBlock() {
         blockExercises = new ArrayList<>();
         blockAmounts = new ArrayList<>();
+        blockWeights = new ArrayList<>();
     }
 
     /**

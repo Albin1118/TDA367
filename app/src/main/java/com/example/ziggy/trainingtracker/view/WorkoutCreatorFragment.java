@@ -90,7 +90,7 @@ public class WorkoutCreatorFragment extends Fragment {
         workoutBlocksListView.addFooterView(footer);
         workoutNameEditText.setText(viewModel.getBuildWorkoutName());
         workoutDescriptionEditText.setText(viewModel.getBuildWorkoutDescription());
-        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getBuildWorkoutBlocks());
+        ArrayAdapter<IWorkoutBlock> adapter = new WorkoutBlockListAdapter(getContext(), viewModel.getBuildWorkoutBlocks(), true);
         workoutBlocksListView.setAdapter(adapter);
 
         if (viewModel.isEditMode()) {

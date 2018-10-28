@@ -14,7 +14,7 @@ public interface IWorkout {
      * @param exercises The block exercises
      * @param amounts The amounts for all the exercises
      */
-    void addBlock(int multiplier, List<IExercise> exercises, List<Integer> amounts);
+    void addBlock(int multiplier, List<IExercise> exercises, List<Integer> amounts, List<Double> weights);
 
     /**
      * Remove a block from the workout
