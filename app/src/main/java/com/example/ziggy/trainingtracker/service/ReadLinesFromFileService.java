@@ -8,9 +8,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This service reads each line of a file and can return what is found in two different ways:
+ * - readLines() which returns a list of all the lines in string format.
+ * - readTokenLines() which returns a list of all the lines, but each line is represented by its own
+ * list of strings containing one string for each item divided by a semicolon ";". For example,
+ * the line "token1;token2;token3" returns a list with the three strings "token1", "token2", "token3".
+ */
 public class ReadLinesFromFileService {
-    InputStream inputStream;
-    String charsetName;
+    private InputStream inputStream;
+    private String charsetName;
 
     /**
      * Creates an input stream from the specified file path.
