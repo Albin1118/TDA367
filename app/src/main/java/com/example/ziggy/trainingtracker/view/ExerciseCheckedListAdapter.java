@@ -21,7 +21,7 @@ public class ExerciseCheckedListAdapter extends ArrayAdapter<IExercise> {
     private Context mContext;
     private List<IExercise>exercises = new ArrayList<>();
 
-    public ExerciseCheckedListAdapter(@NonNull Context context, List<IExercise>list){
+    ExerciseCheckedListAdapter(@NonNull Context context, List<IExercise>list){
         super(context, 0, list);
         mContext = context;
         exercises = list;

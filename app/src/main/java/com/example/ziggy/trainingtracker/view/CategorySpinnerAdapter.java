@@ -21,7 +21,7 @@ public class CategorySpinnerAdapter extends ArrayAdapter<CategorySpinnerObject> 
     private List<CategorySpinnerObject> categories;
     private boolean isFromView = false;
 
-    public CategorySpinnerAdapter(Context context, int resource, List<CategorySpinnerObject> categories) {
+    CategorySpinnerAdapter(Context context, int resource, List<CategorySpinnerObject> categories) {
         super(context, resource, categories);
         this.mContext = context;
         this.categories = categories;

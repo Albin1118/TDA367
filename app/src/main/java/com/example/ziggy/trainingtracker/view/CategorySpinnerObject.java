@@ -1,6 +1,6 @@
 package com.example.ziggy.trainingtracker.view;
 
-public class CategorySpinnerObject {
+class CategorySpinnerObject {
     private String categoryName;
     private boolean categorySelected = false;
 
@@ -8,15 +8,15 @@ public class CategorySpinnerObject {
         this.categoryName = categoryName;
     }
 
-    public String getCategoryName() {
+    String getCategoryName() {
         return categoryName;
     }
 
-    public boolean isCategorySelected() {
+    boolean isCategorySelected() {
         return categorySelected;
     }
 
-    public void setCategorySelected(boolean categorySelected) {
+    void setCategorySelected(boolean categorySelected) {
         this.categorySelected = categorySelected;
     }
 }

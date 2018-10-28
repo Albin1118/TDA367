@@ -28,7 +28,7 @@ public class WorkoutBlockListAdapter extends ArrayAdapter<IWorkoutBlock> {
     private List<IWorkoutBlock>workoutBlocks = new ArrayList<>();
 
 
-    public WorkoutBlockListAdapter(@NonNull Context context, List<IWorkoutBlock>list, Boolean hideWeightField){
+    WorkoutBlockListAdapter(@NonNull Context context, List<IWorkoutBlock>list, Boolean hideWeightField){
         super(context, 0, list);
         mContext = context;
         workoutBlocks = list;

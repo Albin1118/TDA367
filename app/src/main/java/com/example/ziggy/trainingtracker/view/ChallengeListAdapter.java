@@ -24,7 +24,7 @@ public class ChallengeListAdapter extends ArrayAdapter<IChallenge> {
     private List<IChallenge>challenges = new ArrayList<>();
     private NavigationManager navigator;
 
-    public ChallengeListAdapter(@NonNull Context context, List<IChallenge>list, NavigationManager navigator){
+    ChallengeListAdapter(@NonNull Context context, List<IChallenge>list, NavigationManager navigator){
         super(context, 0, list);
         mContext = context;
         challenges = list;

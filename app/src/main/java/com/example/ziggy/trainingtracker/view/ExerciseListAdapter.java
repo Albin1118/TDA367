@@ -22,7 +22,7 @@ public class ExerciseListAdapter extends ArrayAdapter<IExercise> {
     private Context mContext;
     private List<IExercise>exercises = new ArrayList<>();
 
-    public ExerciseListAdapter(@NonNull Context context, List<IExercise>list){
+    ExerciseListAdapter(@NonNull Context context, List<IExercise>list){
         super(context, 0, list);
         mContext = context;
         exercises = list;

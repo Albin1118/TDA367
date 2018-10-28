@@ -22,7 +22,7 @@ public class AchievementListAdapter extends ArrayAdapter<Achievement> {
     private Context mContext;
     private List<Achievement>achievements = new ArrayList<>();
 
-    public AchievementListAdapter(@NonNull Context context, List<Achievement>list){
+    AchievementListAdapter(@NonNull Context context, List<Achievement>list){
         super(context, 0, list);
         mContext = context;
         achievements = list;

@@ -20,7 +20,7 @@ public class WorkoutListAdapter extends ArrayAdapter<IWorkout> {
     private Context mContext;
     private List<IWorkout>workouts = new ArrayList<>();
 
-    public WorkoutListAdapter(@NonNull Context context, List<IWorkout>list){
+    WorkoutListAdapter(@NonNull Context context, List<IWorkout>list){
         super(context, 0, list);
         mContext = context;
         workouts = list;
