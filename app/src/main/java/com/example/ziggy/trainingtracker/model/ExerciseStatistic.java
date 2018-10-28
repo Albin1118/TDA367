@@ -1,9 +1,16 @@
 package com.example.ziggy.trainingtracker.model;
 
 
+
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
+
+
+/**
+ * ExerciseStatistic holds weight values for an exercise, and keeps track of how many sets/reps the User completed with the weight.
+ * It also holds a date for each weight entry to keep track of when the weight was added
+ */
 
 public class ExerciseStatistic {
 
@@ -45,6 +52,9 @@ public class ExerciseStatistic {
         return map;
     }
 
+    /**
+     * @return The exercise that the ExerciseStatistics keeps track of sets/reps/weight for
+     */
     public IExercise getExercise() {
         return exercise;
     }
